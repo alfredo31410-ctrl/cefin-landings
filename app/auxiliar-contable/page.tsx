@@ -112,7 +112,7 @@ export default function LandingCEFIN() {
               ¿Quieres saber más de nosotros?
             </span>
             <div className="px-6 py-3 border-2 border-fuchsia-600/30 group-hover:border-fuchsia-600 rounded-full text-sm font-black uppercase italic tracking-tighter transition-all group-hover:bg-fuchsia-600/10 flex items-center gap-3">
-              Conoce nuestra oferta académica en CEFIN
+              Conoce más de lo que hacemos en CEFIN
               <svg 
                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"
