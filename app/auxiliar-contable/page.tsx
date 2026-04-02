@@ -89,13 +89,28 @@ export default function LandingCEFIN() {
 
             {/* AJUSTE AQUÍ: pt-24 para móviles empuja el botón fuera de la cara de Alfredo */}
             <div className="pt-24 lg:pt-8">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
-              >
-                <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
-                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
-              </button>
+              <div className="pt-24 lg:pt-8 flex flex-col items-center lg:items-start gap-4">
+  {/* Botón de Registro Principal */}
+  <button 
+    onClick={() => setIsModalOpen(true)}
+    className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
+  >
+    <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
+    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+  </button>
+
+  {/* Botón Secundario "Conócenos mejor" */}
+  <a 
+    href="https://cefin.mx" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="text-slate-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
+  >
+    <span>Para conocernos mejor</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+              
             </div>
           </div>
         </div>
