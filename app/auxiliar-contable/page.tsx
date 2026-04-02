@@ -1,240 +1,174 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Script from 'next/script';
 
 export default function LandingCEFIN() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Efecto para recargar el script de ActiveCampaign cada vez que se abre el modal
+  useEffect(() => {
+    if (isModalOpen) {
+      // 1. Limpieza preventiva: eliminamos scripts previos con el mismo ID
+      const oldScript = document.getElementById('ac-script-loader');
+      if (oldScript) oldScript.remove();
+
+      // 2. Creación del nuevo script
+      const script = document.createElement('script');
+      script.id = 'ac-script-loader';
+      script.src = 'https://cefincapacitacion.activehosted.com/f/embed.php?id=169';
+      script.type = 'text/javascript';
+      script.charset = 'utf-8';
+      script.async = true;
+
+      // 3. Lo inyectamos al cuerpo del documento
+      document.body.appendChild(script);
+    }
+  }, [isModalOpen]);
+
   return (
-<main className="h-screen w-full bg-[#0f172a] text-white relative font-sans overflow-y-auto overflow-x-hidden">
-  <div className="absolute inset-0 z-0">
-    <div
-      className="absolute top-[8%] left-[-15%] sm:left-[-8%] md:left-[-5%] w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[500px] lg:h-[500px] rounded-full blur-[90px] lg:blur-[120px] opacity-60 pointer-events-none"
-      style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
-    />
+    <main className="min-h-screen w-full bg-[#0f172a] text-white relative font-sans overflow-x-hidden flex flex-col">
+      
+      {/* 1. FONDO Y RESPLANDOR */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute top-[5%] left-[-10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full blur-[100px] opacity-40"
+          style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
+        />
+        {/* Máscara para suavizar el borde inferior de la imagen */}
+        <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
+          <Image
+            src="/alfredo.png"
+            alt="Mtro. Alfredo Cobos"
+            fill
+            priority
+            className="object-contain object-left-bottom scale-110 -translate-x-[15%] sm:-translate-x-[5%] opacity-90"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f172a]/10 to-[#0f172a] z-0" />
+      </div>
 
-    <Image
-      src="/alfredo.png"
-      alt="Mtro. Alfredo Cobos"
-      fill
-      priority
-      className="
-        object-contain object-left-bottom z-10
-        scale-[1.02] translate-x-[-22%]
-        sm:scale-[1.02] sm:translate-x-[-14%]
-        md:scale-[1.08] md:translate-x-[-10%]
-        lg:scale-[1.16] lg:translate-x-[-12%]
-        xl:scale-[1.22] xl:translate-x-[-14%]
-        pointer-events-none select-none
-      "
-    />
+      {/* 2. HEADER */}
+      <header className="relative z-30 flex justify-end px-6 py-6 lg:px-12">
+        <div className="text-right border-r-4 border-fuchsia-600 pr-4">
+          <p className="font-black text-2xl tracking-tighter leading-none">CEFIN</p>
+          <p className="text-[10px] uppercase font-bold text-slate-400">Mtro. Alfredo Cobos</p>
+        </div>
+      </header>
 
-    <div className="absolute inset-0 bg-[#0f172a]/25 z-0" />
-  </div>
-
-  <header className="relative z-20 flex justify-end px-4 sm:px-6 lg:px-8 pt-5 sm:pt-6 lg:pt-8">
-    <div className="text-right border-r-4 border-fuchsia-500 pr-4">
-      <p className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">CEFIN</p>
-      <p className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400">
-        Mtro. Alfredo Cobos
-      </p>
-    </div>
-  </header>
-
-      {/* CONTENIDO */}
- <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-4 pb-10 min-h-[calc(100vh-88px)] flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 xl:gap-6 items-center">
-          {/* IZQUIERDA */}
-          <div className="lg:col-start-4 lg:col-span-5 space-y-4 sm:space-y-5 text-center lg:text-left">
-            <div className="inline-block bg-fuchsia-600 text-white px-3 py-1 text-[10px] sm:text-[11px] font-black uppercase italic tracking-widest rounded-sm">
-              ¡Tu entrenamiento desde cero está listo!
+      {/* 3. CONTENIDO PRINCIPAL */}
+      <div className="relative z-20 max-w-7xl mx-auto px-6 flex-grow flex flex-col justify-center py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div className="lg:col-start-4 lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div className="inline-block bg-fuchsia-600 text-white px-4 py-1 text-[11px] font-black uppercase italic tracking-widest rounded-sm">
+              ¡Entrenamiento desde cero!
             </div>
-
-            <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-[80px] font-black leading-[0.85] uppercase italic tracking-tighter">
+            
+            <h1 className="text-6xl sm:text-7xl xl:text-[95px] font-black leading-[0.8] uppercase italic tracking-tighter">
               Auxiliar <br />
               <span className="text-yellow-400">Contable</span>
             </h1>
 
-            <div className="bg-blue-600 inline-block px-4 py-1.5 text-sm sm:text-base font-bold uppercase italic shadow-lg shadow-blue-900/50 rounded-sm">
-              Entrenamiento desde cero
+            <div className="bg-blue-600 inline-block px-5 py-2 text-sm font-bold uppercase italic shadow-lg">
+              Sesión 100% en vivo // Cupo Limitado
             </div>
 
-            <div className="pt-1 sm:pt-2">
-              <p className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-black text-fuchsia-500 leading-none uppercase italic drop-shadow-md">
+            <div className="pt-4">
+              <p className="text-4xl sm:text-6xl font-black text-fuchsia-500 leading-none uppercase italic drop-shadow-md">
                 MARTES 14 DE ABRIL
               </p>
-
-              <p className="text-base sm:text-lg md:text-xl font-bold text-white flex items-center justify-center lg:justify-start gap-3 mt-2">
-                11:00 AM - (CDMX) EN VIVO
+              <div className="text-xl font-bold mt-2 flex items-center justify-center lg:justify-start gap-3">
+                11:00 AM - (CDMX)
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-500 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-fuchsia-500"></span>
                 </span>
-              </p>
-            </div>
-          </div>
-
-          {/* DERECHA: FORMULARIO */}
-          <div className="lg:col-span-3 flex justify-center lg:justify-end">
-            <div className="w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[340px] bg-white rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-5 lg:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-slate-900 border-t-8 border-fuchsia-500 overflow-hidden">
-              <div className="ac-form-wrapper">
-                <div className="_form_169"></div>
               </div>
+            </div>
 
-              <Script
-                id="activecampaign-form-169"
-                src="https://cefincapacitacion.activehosted.com/f/embed.php?id=169"
-                strategy="afterInteractive"
-                charSet="utf-8"
-              />
-
-              <style jsx global>{`
-                .ac-form-wrapper,
-                .ac-form-wrapper ._form_169,
-                .ac-form-wrapper form,
-                .ac-form-wrapper ._form-content {
-                  overflow: visible !important;
-                  max-height: none !important;
-                }
-
-                .ac-form-wrapper ._form-content,
-                .ac-form-wrapper ._form_element,
-                .ac-form-wrapper ._button-wrapper,
-                .ac-form-wrapper input,
-                .ac-form-wrapper textarea,
-                .ac-form-wrapper select,
-                .ac-form-wrapper button {
-                  width: 100% !important;
-                  max-width: 100% !important;
-                  box-sizing: border-box !important;
-                }
-
-                .ac-form-wrapper ._form_169,
-                .ac-form-wrapper form {
-                  margin: 0 !important;
-                  padding: 0 !important;
-                  background: transparent !important;
-                  border: 0 !important;
-                  box-shadow: none !important;
-                }
-
-                .ac-form-wrapper ._form-title,
-                .ac-form-wrapper h1,
-                .ac-form-wrapper h2,
-                .ac-form-wrapper h3 {
-                  text-align: center !important;
-                  color: #0f172a !important;
-                }
-
-                .ac-form-wrapper ._form-title {
-                  font-weight: 900 !important;
-                  font-size: 1.2rem !important;
-                  line-height: 1.2 !important;
-                  text-transform: uppercase !important;
-                  font-style: italic !important;
-                  margin-bottom: 1rem !important;
-                }
-
-                .ac-form-wrapper ._form-label {
-                  font-weight: 700 !important;
-                  font-size: 0.875rem !important;
-                  color: #0f172a !important;
-                  margin-bottom: 0.4rem !important;
-                }
-
-                .ac-form-wrapper input[type='text'],
-                .ac-form-wrapper input[type='email'],
-                .ac-form-wrapper input[type='tel'],
-                .ac-form-wrapper textarea,
-                .ac-form-wrapper select {
-                  background: #f8fafc !important;
-                  border: 1px solid #e2e8f0 !important;
-                  border-radius: 0.85rem !important;
-                  padding: 0.9rem 1rem !important;
-                  font-size: 0.92rem !important;
-                  color: #0f172a !important;
-                  outline: none !important;
-                  box-shadow: none !important;
-                }
-
-                .ac-form-wrapper input:focus,
-                .ac-form-wrapper textarea:focus,
-                .ac-form-wrapper select:focus {
-                  border-color: #e6007e !important;
-                  box-shadow: 0 0 0 3px rgba(230, 0, 126, 0.12) !important;
-                }
-
-                .ac-form-wrapper ._submit,
-                .ac-form-wrapper button[type='submit'] {
-                  background: #e6007e !important;
-                  color: #000 !important;
-                  font-weight: 900 !important;
-                  text-transform: uppercase !important;
-                  border-radius: 0.9rem !important;
-                  padding: 1rem !important;
-                  font-size: 1rem !important;
-                  line-height: 1.1 !important;
-                  border: none !important;
-                  box-shadow: 0 8px 20px rgba(230, 0, 126, 0.28) !important;
-                }
-
-                .ac-form-wrapper ._submit:hover,
-                .ac-form-wrapper button[type='submit']:hover {
-                  background: #cc1a8a !important;
-                }
-
-                .ac-form-wrapper ._form-branding {
-                  margin-top: 0.75rem !important;
-                  text-align: center !important;
-                  font-size: 10px !important;
-                  color: #94a3b8 !important;
-                }
-
-                .ac-form-wrapper .sms_consent_checkbox,
-                .ac-form-wrapper ._form_element {
-                  margin-bottom: 0.9rem !important;
-                }
-
-                .ac-form-wrapper .sms_consent_message {
-                  font-size: 11px !important;
-                  line-height: 1.45 !important;
-                  color: #64748b !important;
-                }
-
-                @media (max-width: 1023px) {
-                  .ac-form-wrapper ._form-title {
-                    font-size: 1.1rem !important;
-                  }
-                }
-
-                @media (max-width: 640px) {
-                  .ac-form-wrapper ._form-title {
-                    font-size: 1rem !important;
-                    margin-bottom: 0.85rem !important;
-                  }
-
-                  .ac-form-wrapper input[type='text'],
-                  .ac-form-wrapper input[type='email'],
-                  .ac-form-wrapper input[type='tel'],
-                  .ac-form-wrapper textarea,
-                  .ac-form-wrapper select {
-                    padding: 0.85rem 0.95rem !important;
-                    font-size: 16px !important;
-                  }
-
-                  .ac-form-wrapper ._submit,
-                  .ac-form-wrapper button[type='submit'] {
-                    font-size: 0.95rem !important;
-                    padding: 0.95rem !important;
-                  }
-                }
-              `}</style>
+            {/* BOTÓN DISPARADOR */}
+            <div className="pt-8">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
+              >
+                <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+              </button>
             </div>
           </div>
         </div>
-        
       </div>
 
+      {/* 4. FOOTER */}
+      <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent">
+        <div className="max-w-4xl mx-auto px-6">
+           <div className="flex flex-wrap justify-center gap-8 opacity-50">
+              {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
+                <span key={item} className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200">
+                  {"// "} {item}
+                </span>
+              ))}
+           </div>
+        </div>
+      </footer>
+
+      {/* --- MODAL --- */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f172a]/95 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="relative bg-white w-full max-w-[480px] rounded-[2.5rem] p-8 shadow-[0_0_60px_rgba(230,0,126,0.4)] border-t-[10px] border-fuchsia-600 max-h-[90vh] overflow-y-auto">
+            
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl transition-colors"
+            >
+              ✕
+            </button>
+
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-black text-[#0f172a] italic uppercase leading-none">
+                Asegura tu <span className="text-fuchsia-600">Lugar</span>
+              </h2>
+              <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest">Entrenamiento 14 de Abril</p>
+            </div>
+
+            {/* Contenedor donde ActiveCampaign inyectará el formulario */}
+            <div className="ac-modal-wrapper min-h-[400px]">
+              <div className="_form_169"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ESTILOS GLOBALES */}
+      <style jsx global>{`
+        .ac-modal-wrapper ._form_169 { 
+          background: transparent !important; 
+          margin: 0 !important; 
+          padding: 0 !important;
+          width: 100% !important;
+        }
+        .ac-modal-wrapper ._form-title { display: none !important; }
+        .ac-modal-wrapper ._submit {
+          background: #e6007e !important;
+          color: white !important;
+          font-weight: 900 !important;
+          text-transform: uppercase !important;
+          border-radius: 14px !important;
+          padding: 1.2rem !important;
+          width: 100% !important;
+          font-size: 1.1rem !important;
+          margin-top: 10px !important;
+        }
+        .ac-modal-wrapper input {
+          background: #f1f5f9 !important;
+          border: 1px solid #e2e8f0 !important;
+          border-radius: 12px !important;
+          padding: 1rem !important;
+        }
+        .ac-modal-wrapper ._form-branding { display: none !important; }
+      `}</style>
     </main>
-    
   );
 }
