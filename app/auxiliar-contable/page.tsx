@@ -6,14 +6,17 @@ import Image from 'next/image';
 export default function LandingCEFIN() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Efecto para recargar el script de ActiveCampaign cada vez que se abre el modal
+  // Efecto para cambiar el nombre en la pestaña del navegador
+  useEffect(() => {
+    document.title = "Auxiliar Contable - Entrenamiento En Vivo | CEFIN";
+  }, []);
+
+  // Efecto para recargar el script de ActiveCampaign al abrir el modal
   useEffect(() => {
     if (isModalOpen) {
-      // 1. Limpieza preventiva: eliminamos scripts previos con el mismo ID
       const oldScript = document.getElementById('ac-script-loader');
       if (oldScript) oldScript.remove();
 
-      // 2. Creación del nuevo script
       const script = document.createElement('script');
       script.id = 'ac-script-loader';
       script.src = 'https://cefincapacitacion.activehosted.com/f/embed.php?id=169';
@@ -21,7 +24,6 @@ export default function LandingCEFIN() {
       script.charset = 'utf-8';
       script.async = true;
 
-      // 3. Lo inyectamos al cuerpo del documento
       document.body.appendChild(script);
     }
   }, [isModalOpen]);
@@ -29,13 +31,12 @@ export default function LandingCEFIN() {
   return (
     <main className="min-h-screen w-full bg-[#0f172a] text-white relative font-sans overflow-x-hidden flex flex-col">
       
-      {/* 1. FONDO Y RESPLANDOR */}
+      {/* FONDO Y RESPLANDOR */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div
           className="absolute top-[5%] left-[-10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full blur-[100px] opacity-40"
           style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
         />
-        {/* Máscara para suavizar el borde inferior de la imagen */}
         <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
           <Image
             src="/alfredo.png"
@@ -48,7 +49,7 @@ export default function LandingCEFIN() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f172a]/10 to-[#0f172a] z-0" />
       </div>
 
-      {/* 2. HEADER */}
+      {/* HEADER */}
       <header className="relative z-30 flex justify-end px-6 py-6 lg:px-12">
         <div className="text-right border-r-4 border-fuchsia-600 pr-4">
           <p className="font-black text-2xl tracking-tighter leading-none">CEFIN</p>
@@ -56,10 +57,9 @@ export default function LandingCEFIN() {
         </div>
       </header>
 
-      {/* 3. CONTENIDO PRINCIPAL */}
+      {/* CONTENIDO PRINCIPAL */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 flex-grow flex flex-col justify-center py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
           <div className="lg:col-start-4 lg:col-span-7 space-y-6 text-center lg:text-left">
             <div className="inline-block bg-fuchsia-600 text-white px-4 py-1 text-[11px] font-black uppercase italic tracking-widest rounded-sm">
               ¡Entrenamiento desde cero!
@@ -87,7 +87,6 @@ export default function LandingCEFIN() {
               </div>
             </div>
 
-            {/* BOTÓN DISPARADOR */}
             <div className="pt-8">
               <button 
                 onClick={() => setIsModalOpen(true)}
@@ -101,7 +100,7 @@ export default function LandingCEFIN() {
         </div>
       </div>
 
-      {/* 4. FOOTER */}
+      {/* FOOTER */}
       <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent">
         <div className="max-w-4xl mx-auto px-6">
            <div className="flex flex-wrap justify-center gap-8 opacity-50">
@@ -114,26 +113,22 @@ export default function LandingCEFIN() {
         </div>
       </footer>
 
-      {/* --- MODAL --- */}
+      {/* MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f172a]/95 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f172a]/95 backdrop-blur-md">
           <div className="relative bg-white w-full max-w-[480px] rounded-[2.5rem] p-8 shadow-[0_0_60px_rgba(230,0,126,0.4)] border-t-[10px] border-fuchsia-600 max-h-[90vh] overflow-y-auto">
-            
             <button 
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl transition-colors"
+              className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl"
             >
               ✕
             </button>
-
             <div className="text-center mb-8">
               <h2 className="text-2xl font-black text-[#0f172a] italic uppercase leading-none">
                 Asegura tu <span className="text-fuchsia-600">Lugar</span>
               </h2>
               <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest">Entrenamiento 14 de Abril</p>
             </div>
-
-            {/* Contenedor donde ActiveCampaign inyectará el formulario */}
             <div className="ac-modal-wrapper min-h-[400px]">
               <div className="_form_169"></div>
             </div>
@@ -143,30 +138,14 @@ export default function LandingCEFIN() {
 
       {/* ESTILOS GLOBALES */}
       <style jsx global>{`
-        .ac-modal-wrapper ._form_169 { 
-          background: transparent !important; 
-          margin: 0 !important; 
-          padding: 0 !important;
-          width: 100% !important;
-        }
+        .ac-modal-wrapper ._form_169 { background: transparent !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
         .ac-modal-wrapper ._form-title { display: none !important; }
         .ac-modal-wrapper ._submit {
-          background: #e6007e !important;
-          color: white !important;
-          font-weight: 900 !important;
-          text-transform: uppercase !important;
-          border-radius: 14px !important;
-          padding: 1.2rem !important;
-          width: 100% !important;
-          font-size: 1.1rem !important;
-          margin-top: 10px !important;
+          background: #e6007e !important; color: white !important; font-weight: 900 !important;
+          text-transform: uppercase !important; border-radius: 14px !important;
+          padding: 1.2rem !important; width: 100% !important; font-size: 1.1rem !important;
         }
-        .ac-modal-wrapper input {
-          background: #f1f5f9 !important;
-          border: 1px solid #e2e8f0 !important;
-          border-radius: 12px !important;
-          padding: 1rem !important;
-        }
+        .ac-modal-wrapper input { background: #f1f5f9 !important; border: 1px solid #e2e8f0 !important; border-radius: 12px !important; padding: 1rem !important; }
         .ac-modal-wrapper ._form-branding { display: none !important; }
       `}</style>
     </main>
