@@ -105,7 +105,7 @@ export default function LandingCEFIN() {
       <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent">
         <div className="max-w-4xl mx-auto px-6">
             <div className="flex flex-wrap justify-center gap-8 opacity-50">
-               {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
+               {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTES ESENCIALES'].map((item) => (
                 <span key={item} className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200">
                   {"// "} {item}
                 </span>
