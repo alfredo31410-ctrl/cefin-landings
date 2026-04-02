@@ -87,7 +87,8 @@ export default function LandingCEFIN() {
               </div>
             </div>
 
-            <div className="pt-8">
+            {/* AJUSTE AQUÍ: pt-24 para móviles empuja el botón fuera de la cara de Alfredo */}
+            <div className="pt-24 lg:pt-8">
               <button 
                 onClick={() => setIsModalOpen(true)}
                 className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
@@ -103,13 +104,13 @@ export default function LandingCEFIN() {
       {/* FOOTER */}
       <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent">
         <div className="max-w-4xl mx-auto px-6">
-           <div className="flex flex-wrap justify-center gap-8 opacity-50">
-              {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
+            <div className="flex flex-wrap justify-center gap-8 opacity-50">
+               {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
                 <span key={item} className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200">
                   {"// "} {item}
                 </span>
               ))}
-           </div>
+            </div>
         </div>
       </footer>
 
