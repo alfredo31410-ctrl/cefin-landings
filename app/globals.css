@@ -1,1 +1,19 @@
 @import "tailwindcss";
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+.ac-form-wrapper,
+.ac-form-wrapper ._form_169,
+.ac-form-wrapper form,
+.ac-form-wrapper ._form-content {
+  overflow: visible !important;
+  max-height: none !important;
+}
