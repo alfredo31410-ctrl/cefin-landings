@@ -6,12 +6,10 @@ import Image from 'next/image';
 export default function LandingCEFIN() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Efecto para cambiar el nombre en la pestaña del navegador
   useEffect(() => {
     document.title = "Auxiliar Contable - Entrenamiento En Vivo | CEFIN";
   }, []);
 
-  // Efecto para recargar el script de ActiveCampaign al abrir el modal
   useEffect(() => {
     if (isModalOpen) {
       const oldScript = document.getElementById('ac-script-loader');
@@ -23,7 +21,6 @@ export default function LandingCEFIN() {
       script.type = 'text/javascript';
       script.charset = 'utf-8';
       script.async = true;
-
       document.body.appendChild(script);
     }
   }, [isModalOpen]);
@@ -87,40 +84,48 @@ export default function LandingCEFIN() {
               </div>
             </div>
 
-            {/* AJUSTE AQUÍ: pt-24 para móviles empuja el botón fuera de la cara de Alfredo */}
-            <div className="pt-24 lg:pt-8">
-              <div className="pt-24 lg:pt-8 flex flex-col items-center lg:items-start gap-4">
-  {/* Botón de Registro Principal */}
-  <button 
-    onClick={() => setIsModalOpen(true)}
-    className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
-  >
-    <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
-    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
-  </button>
-
-  {/* Botón Secundario "Conócenos mejor" */}
-  <a 
-    href="https://cefin.mx" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="text-slate-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
-  >
-    <span>Para conocernos mejor</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </a>
-</div>
-              
+            <div className="pt-24 lg:pt-8 flex justify-center lg:justify-start">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
+              >
+                <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* FOOTER */}
-      <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent">
+      {/* FOOTER CON BOTÓN "CONOCER MÁS" INCORPORADO */}
+      <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent flex flex-col items-center">
+        
+        {/* Botón "Conoce más" centrado arriba de los tags */}
+        <div className="mb-10">
+          <a 
+            href="https://cefin.mx" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center gap-3 transition-all duration-300"
+          >
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-fuchsia-400 transition-colors">
+              ¿Quieres saber más de nosotros?
+            </span>
+            <div className="px-6 py-3 border-2 border-fuchsia-600/30 group-hover:border-fuchsia-600 rounded-full text-sm font-black uppercase italic tracking-tighter transition-all group-hover:bg-fuchsia-600/10 flex items-center gap-3">
+              Conoce nuestra oferta académica en CEFIN
+              <svg 
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+
         <div className="max-w-4xl mx-auto px-6">
             <div className="flex flex-wrap justify-center gap-8 opacity-50">
-               {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTES ESENCIALES'].map((item) => (
+               {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
                 <span key={item} className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200">
                   {"// "} {item}
                 </span>
@@ -133,12 +138,7 @@ export default function LandingCEFIN() {
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f172a]/95 backdrop-blur-md">
           <div className="relative bg-white w-full max-w-[480px] rounded-[2.5rem] p-8 shadow-[0_0_60px_rgba(230,0,126,0.4)] border-t-[10px] border-fuchsia-600 max-h-[90vh] overflow-y-auto">
-            <button 
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl"
-            >
-              ✕
-            </button>
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl">✕</button>
             <div className="text-center mb-8">
               <h2 className="text-2xl font-black text-[#0f172a] italic uppercase leading-none">
                 Asegura tu <span className="text-fuchsia-600">Lugar</span>
@@ -152,7 +152,6 @@ export default function LandingCEFIN() {
         </div>
       )}
 
-      {/* ESTILOS GLOBALES */}
       <style jsx global>{`
         .ac-modal-wrapper ._form_169 { background: transparent !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
         .ac-modal-wrapper ._form-title { display: none !important; }
