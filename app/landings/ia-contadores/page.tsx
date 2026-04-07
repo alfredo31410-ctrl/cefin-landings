@@ -28,7 +28,7 @@ export default function LandingIA() {
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/ia-contadores.png" 
+          src="/Inteligencia_Artificial.png" 
           alt="IA Background"
           fill
           className="object-cover object-center lg:object-right opacity-40 lg:opacity-80"
