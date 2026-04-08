@@ -91,7 +91,7 @@ export default function LandingIA() {
 
   {/* MOBILE (vertical) */}
   <img
-    src="/Inteligencia_Artificial_Vertical.png" // 👈 tu nueva imagen vertical
+    src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial_Vertical.png" // 👈 tu nueva imagen vertical
     alt="ABC de Inteligencia Artificial para Contadores"
     className="block lg:hidden absolute inset-0 h-full w-full object-cover object-[50%_50%] opacity-60"
   />
