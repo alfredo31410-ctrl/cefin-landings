@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function LandingIA() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,13 +26,11 @@ export default function LandingIA() {
       
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/Inteligencia_Artificial.png" 
-          alt="IA Background"
-          fill
-          className="object-cover object-center lg:object-right opacity-40 lg:opacity-80"
-          priority
-        />
+        <img
+  src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial.png"
+  alt="IA Background"
+  className="absolute inset-0 h-full w-full object-cover object-center lg:object-right opacity-40 lg:opacity-80"
+/>
         <div className="absolute inset-0 bg-gradient-to-b from-[#02040a] via-[#02040a]/80 to-[#02040a] lg:bg-gradient-to-r lg:from-[#02040a] lg:via-[#02040a]/90 lg:to-transparent" />
       </div>
 
@@ -118,9 +115,9 @@ export default function LandingIA() {
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #0a0c14; border-radius: 10px; }
-        ._form_169 { width: 100% !important; }
+        ._form_177 { width: 100% !important; }
         /* Ajuste para que el formulario no fuerce anchos extraños */
-        ._form_169 form { margin: 0 !important; width: 100% !important; }
+        ._form_177 form { margin: 0 !important; width: 100% !important; }
       `}</style>
     </main>
   );

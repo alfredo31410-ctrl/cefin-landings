@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function LandingCEFIN() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,13 +34,11 @@ export default function LandingCEFIN() {
           style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
         />
         <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
-          <Image
-            src="/alfredo.png"
-            alt="Mtro. Alfredo Cobos"
-            fill
-            priority
-            className="object-contain object-left-bottom scale-110 -translate-x-[15%] sm:-translate-x-[5%] opacity-90"
-          />
+<img
+  src="https://cefin-landings-z9uk.vercel.app/alfredo.png"
+  alt="Mtro. Alfredo Cobos"
+  className="absolute inset-0 h-full w-full object-contain object-left-bottom scale-110 -translate-x-[15%] sm:-translate-x-[5%] opacity-90"
+/>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f172a]/10 to-[#0f172a] z-0" />
       </div>
