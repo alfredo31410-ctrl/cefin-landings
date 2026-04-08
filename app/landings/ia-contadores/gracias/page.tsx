@@ -66,9 +66,9 @@ export default function GraciasIA() {
         />
       </noscript>
 
-      <main className="relative min-h-screen overflow-hidden bg-[#02040a] text-white">
+      <main className="relative min-h-screen overflow-y-auto overflow-x-hidden bg-[#02040a] text-white">
         {/* Fondo */}
-        <div className="absolute inset-0 z-0">
+        <div className="fixed inset-0 z-0">
           <img
             src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial.png"
             alt="IA Background"
@@ -79,12 +79,12 @@ export default function GraciasIA() {
           <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-lime-400/10 blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl items-center px-6 py-10 sm:px-10">
-          <div className="w-full rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl sm:p-10 lg:p-14">
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-5xl items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+          <div className="w-full rounded-3xl border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur-xl sm:p-8 lg:p-10">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-400/10">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-400/10 sm:h-20 sm:w-20">
                 <svg
-                  className="h-10 w-10 text-cyan-400"
+                  className="h-8 w-8 text-cyan-400 sm:h-10 sm:w-10"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -98,29 +98,29 @@ export default function GraciasIA() {
                 </svg>
               </div>
 
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 sm:px-4">
                 <span className="h-2 w-2 rounded-full bg-cyan-400" />
-                <span className="text-[11px] font-black uppercase tracking-[0.25em] text-cyan-300">
+                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">
                   Registro exitoso
                 </span>
               </div>
 
-              <h1 className="text-4xl font-black uppercase italic leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 className="text-3xl font-black uppercase italic leading-[0.95] tracking-tight sm:text-4xl lg:text-5xl">
                 Ya estás dentro de la
-                <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                <span className="mt-1 block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                   Master IA para Contadores
                 </span>
               </h1>
 
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base lg:text-lg">
                 Tu lugar quedó apartado correctamente. Ahora entra al grupo privado
                 de WhatsApp para recibir avisos, acceso, recordatorios y materiales
                 importantes de la sesión.
               </p>
 
-              <div className="mt-8 grid gap-4 rounded-2xl border border-white/10 bg-black/20 p-5 text-left sm:grid-cols-3">
+              <div className="mt-6 grid gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 text-left sm:mt-8 sm:gap-4 sm:p-5 sm:grid-cols-3">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-cyan-300">
+                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-300">
                     Paso 1
                   </p>
                   <p className="mt-2 text-sm font-semibold text-white">
@@ -129,7 +129,7 @@ export default function GraciasIA() {
                 </div>
 
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-cyan-300">
+                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-300">
                     Paso 2
                   </p>
                   <p className="mt-2 text-sm font-semibold text-white">
@@ -138,7 +138,7 @@ export default function GraciasIA() {
                 </div>
 
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-cyan-300">
+                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-cyan-300">
                     Paso 3
                   </p>
                   <p className="mt-2 text-sm font-semibold text-white">
@@ -147,7 +147,7 @@ export default function GraciasIA() {
                 </div>
               </div>
 
-              <div className="mt-10">
+              <div className="mt-8 sm:mt-10">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -157,14 +157,17 @@ export default function GraciasIA() {
                       content_name: "WhatsApp Grupo IA",
                     })
                   }
-                  className="group inline-flex items-center justify-center gap-3 bg-lime-400 px-8 py-4 text-base font-black uppercase italic text-black shadow-[0_0_30px_rgba(163,230,53,0.30)] transition-all duration-200 hover:bg-lime-300 active:scale-95 sm:px-10 sm:py-5 sm:text-lg"
+                  className="group inline-flex w-full max-w-full items-center justify-center gap-3 bg-lime-400 px-5 py-4 text-sm font-black uppercase italic text-black shadow-[0_0_30px_rgba(163,230,53,0.30)] transition-all duration-200 hover:bg-lime-300 active:scale-95 sm:w-auto sm:px-8 sm:text-base"
                   style={{ transform: "skewX(-12deg)" }}
                 >
-                  <span style={{ transform: "skewX(12deg)" }}>
+                  <span
+                    className="text-center leading-tight"
+                    style={{ transform: "skewX(12deg)" }}
+                  >
                     Entrar al grupo de WhatsApp
                   </span>
                   <svg
-                    className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                    className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1"
                     style={{ transform: "skewX(12deg)" }}
                     viewBox="0 0 24 24"
                     fill="none"
@@ -180,11 +183,11 @@ export default function GraciasIA() {
                 </a>
               </div>
 
-              <p className="mt-5 text-sm text-slate-400">
+              <p className="mt-5 text-xs sm:text-sm text-slate-400">
                 Si el botón no abre, entra aquí:
               </p>
 
-              <p className="mt-2 break-all text-sm text-cyan-300">
+              <p className="mt-2 break-all text-xs sm:text-sm text-cyan-300">
                 <Link
                   href={whatsappUrl}
                   target="_blank"
@@ -194,8 +197,8 @@ export default function GraciasIA() {
                 </Link>
               </p>
 
-              <div className="mt-10 rounded-2xl border border-cyan-400/15 bg-cyan-400/5 p-5 text-left">
-                <p className="text-[11px] font-black uppercase tracking-[0.25em] text-cyan-300">
+              <div className="mt-8 rounded-2xl border border-cyan-400/15 bg-cyan-400/5 p-4 text-left sm:mt-10 sm:p-5">
+                <p className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">
                   Importante
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
@@ -205,10 +208,10 @@ export default function GraciasIA() {
                 </p>
               </div>
 
-              <div className="mt-10 flex justify-center">
+              <div className="mt-8 flex justify-center sm:mt-10">
                 <Link
                   href="/landings/ia-contadores"
-                  className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 transition-colors hover:text-cyan-300"
+                  className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-slate-400 transition-colors hover:text-cyan-300"
                 >
                   Volver a la landing
                 </Link>
