@@ -120,18 +120,7 @@ export default function GraciasAuxiliar() {
                 Ahora mismo, el paso más importante para asegurar tu lugar es entrar al grupo privado de WhatsApp.
               </p>
 
-              <div className="mt-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-4 sm:p-5">
-                <p className="text-sm font-bold leading-relaxed text-white sm:text-base lg:text-lg">
-                  Ahí te compartiremos el acceso a la clase, recordatorios, avisos importantes y todo lo necesario para que no te pierdas nada.
-                </p>
-              </div>
-
-              <p className="mt-6 text-sm leading-relaxed text-slate-300 sm:text-base">
-                <span className="font-bold text-yellow-300">Importante:</span>{" "}
-                si no entras al grupo, podrías perderte información clave sobre tu inscripción y el acceso al entrenamiento.
-              </p>
-
-              <div className="mt-8 sm:mt-10">
+                            <div className="mt-8 sm:mt-10">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -159,6 +148,19 @@ export default function GraciasAuxiliar() {
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-yellow-300 sm:text-sm">
                 Da clic en el botón y completa tu inscripción
               </p>
+
+              <div className="mt-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-4 sm:p-5">
+                <p className="text-sm font-bold leading-relaxed text-white sm:text-base lg:text-lg">
+                  Ahí te compartiremos el acceso a la clase, recordatorios, avisos importantes y todo lo necesario para que no te pierdas nada.
+                </p>
+              </div>
+
+              <p className="mt-6 text-sm leading-relaxed text-slate-300 sm:text-base">
+                <span className="font-bold text-yellow-300">Importante:</span>{" "}
+                si no entras al grupo, podrías perderte información clave sobre tu inscripción y el acceso al entrenamiento.
+              </p>
+
+
 
               <div className="mt-8 grid gap-3 text-left sm:mt-10 sm:grid-cols-3">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
