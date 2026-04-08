@@ -1,7 +1,14 @@
 'use client';
 
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import Script from "next/script";
 import { useState, useEffect } from 'react';
+
+// Cambiamos el título y descripción aquí para que aparezcan en la pestaña
+export const metadata: Metadata = {
+  title: "Auxiliar Contable - Entrenamiento En Vivo | CEFIN",
+  description: "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
+};
 
 declare global {
   interface Window {
