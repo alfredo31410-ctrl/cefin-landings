@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 /*
 const geistSans = Geist({
@@ -12,11 +10,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 */
-// Cambiamos el título y descripción aquí para que aparezcan en la pestaña
-export const metadata: Metadata = {
-  title: "Auxiliar Contable - Entrenamiento En Vivo | CEFIN",
-  description: "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
-};
 
 export default function RootLayout({
   children,
@@ -25,9 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="min-h-full flex flex-col">
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

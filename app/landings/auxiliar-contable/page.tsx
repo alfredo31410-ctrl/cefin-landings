@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import Script from "next/script";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import type { Metadata } from "next";
 
 // Cambiamos el título y descripción aquí para que aparezcan en la pestaña
 export const metadata: Metadata = {
   title: "Auxiliar Contable - Entrenamiento En Vivo | CEFIN",
-  description: "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
+  description:
+    "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
 };
 
 declare global {
@@ -39,14 +40,15 @@ export default function LandingCEFIN() {
         content_name: "Auxiliar Contable - Entrenamiento En Vivo",
       });
 
-      const oldScript = document.getElementById('ac-script-loader');
+      const oldScript = document.getElementById("ac-script-loader");
       if (oldScript) oldScript.remove();
 
-      const script = document.createElement('script');
-      script.id = 'ac-script-loader';
-      script.src = 'https://cefincapacitacion.activehosted.com/f/embed.php?id=169';
-      script.type = 'text/javascript';
-      script.charset = 'utf-8';
+      const script = document.createElement("script");
+      script.id = "ac-script-loader";
+      script.src =
+        "https://cefincapacitacion.activehosted.com/f/embed.php?id=169";
+      script.type = "text/javascript";
+      script.charset = "utf-8";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -89,7 +91,10 @@ export default function LandingCEFIN() {
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div
             className="absolute top-[5%] left-[-10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full blur-[100px] opacity-40"
-            style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
+            style={{
+              background:
+                "radial-gradient(circle, #e6007e 0%, transparent 70%)",
+            }}
           />
           <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
             <img
@@ -104,8 +109,12 @@ export default function LandingCEFIN() {
         {/* HEADER */}
         <header className="relative z-30 flex justify-end px-6 py-6 lg:px-12">
           <div className="text-right border-r-4 border-fuchsia-600 pr-4">
-            <p className="font-black text-2xl tracking-tighter leading-none">CEFIN</p>
-            <p className="text-[10px] uppercase font-bold text-slate-400">Mtro. Alfredo Cobos</p>
+            <p className="font-black text-2xl tracking-tighter leading-none">
+              CEFIN
+            </p>
+            <p className="text-[10px] uppercase font-bold text-slate-400">
+              Mtro. Alfredo Cobos
+            </p>
           </div>
         </header>
 
@@ -149,7 +158,9 @@ export default function LandingCEFIN() {
                   }}
                   className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
                 >
-                  <span className="relative z-10">¡Registrarme Gratis Ahora!</span>
+                  <span className="relative z-10">
+                    ¡Registrarme Gratis Ahora!
+                  </span>
                   <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </button>
               </div>
@@ -186,8 +197,15 @@ export default function LandingCEFIN() {
 
           <div className="max-w-4xl mx-auto px-6">
             <div className="flex flex-wrap justify-center gap-8 opacity-50">
-              {['BASES CONTABLES', 'CONTROL DE FACTURAS', 'REPORTERÍA ESENCIAL'].map((item) => (
-                <span key={item} className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200">
+              {[
+                "BASES CONTABLES",
+                "CONTROL DE FACTURAS",
+                "REPORTERÍA ESENCIAL",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200"
+                >
                   {"// "} {item}
                 </span>
               ))}

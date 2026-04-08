@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+import { Metadata } from "next";
 import Script from "next/script";
 import { useEffect } from "react";
 
 // Cambiamos el título y descripción aquí para que aparezcan en la pestaña
 export const metadata: Metadata = {
   title: "Gracias | Auxiliar Contable - Entrenamiento En Vivo | CEFIN",
-  description: "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
+  description:
+    "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
 };
 
 declare global {
@@ -75,7 +76,10 @@ export default function GraciasAuxiliar() {
         <div className="fixed inset-0 z-0 pointer-events-none">
           <div
             className="absolute top-[5%] left-[-10%] h-[300px] w-[300px] rounded-full blur-[100px] opacity-40 sm:h-[500px] sm:w-[500px]"
-            style={{ background: 'radial-gradient(circle, #e6007e 0%, transparent 70%)' }}
+            style={{
+              background:
+                "radial-gradient(circle, #e6007e 0%, transparent 70%)",
+            }}
           />
           <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
             <img
@@ -124,10 +128,11 @@ export default function GraciasAuxiliar() {
                 <span className="font-bold text-white">
                   Ya completaste gran parte de tu registro.
                 </span>{" "}
-                Ahora mismo, el paso más importante para asegurar tu lugar es entrar al grupo privado de WhatsApp.
+                Ahora mismo, el paso más importante para asegurar tu lugar es
+                entrar al grupo privado de WhatsApp.
               </p>
 
-                            <div className="mt-8 sm:mt-10">
+              <div className="mt-8 sm:mt-10">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -158,16 +163,17 @@ export default function GraciasAuxiliar() {
 
               <div className="mt-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-4 sm:p-5">
                 <p className="text-sm font-bold leading-relaxed text-white sm:text-base lg:text-lg">
-                  Ahí te compartiremos el acceso a la clase, recordatorios, avisos importantes y todo lo necesario para que no te pierdas nada.
+                  Ahí te compartiremos el acceso a la clase, recordatorios,
+                  avisos importantes y todo lo necesario para que no te pierdas
+                  nada.
                 </p>
               </div>
 
               <p className="mt-6 text-sm leading-relaxed text-slate-300 sm:text-base">
                 <span className="font-bold text-yellow-300">Importante:</span>{" "}
-                si no entras al grupo, podrías perderte información clave sobre tu inscripción y el acceso al entrenamiento.
+                si no entras al grupo, podrías perderte información clave sobre
+                tu inscripción y el acceso al entrenamiento.
               </p>
-
-
 
               <div className="mt-8 grid gap-3 text-left sm:mt-10 sm:grid-cols-3">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
@@ -203,7 +209,9 @@ export default function GraciasAuxiliar() {
                   Nota importante
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                  El grupo de WhatsApp será el canal principal donde te compartiremos toda la información importante de este entrenamiento.{" "}
+                  El grupo de WhatsApp será el canal principal donde te
+                  compartiremos toda la información importante de este
+                  entrenamiento.{" "}
                   <span className="font-bold text-white">
                     Entra ahora para asegurar que recibas todo correctamente.
                   </span>
