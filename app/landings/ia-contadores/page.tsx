@@ -3,12 +3,7 @@
 import Script from "next/script";
 import { useState, useEffect } from 'react';
 
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Master IA para Contadores | CEFIN",
-  description: "Confirma tu registro y únete al grupo de WhatsApp para acceder a la clase.",
-};
 
 declare global {
   interface Window {

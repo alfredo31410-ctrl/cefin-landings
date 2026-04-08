@@ -2,14 +2,7 @@
 
 import Script from "next/script";
 import { useState, useEffect } from "react";
-import type { Metadata } from "next";
 
-// Cambiamos el título y descripción aquí para que aparezcan en la pestaña
-export const metadata: Metadata = {
-  title: "Auxiliar Contable - Entrenamiento En Vivo | CEFIN",
-  description:
-    "Entrenamiento gratuito para auxiliares contables con el Mtro. Alfredo Cobos.",
-};
 
 declare global {
   interface Window {
