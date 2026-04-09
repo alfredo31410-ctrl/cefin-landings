@@ -13,7 +13,7 @@ declare global {
 
 export default function GraciasAuxiliar() {
 
-  const whatsappUrl = "  https://chat.whatsapp.com/DECQCjwB9sAEiH3bHCZXQT";
+  const whatsappUrl = "https://chat.whatsapp.com/IXpWwLRJ8rcAMoHAbo39EX";
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.fbq) {
