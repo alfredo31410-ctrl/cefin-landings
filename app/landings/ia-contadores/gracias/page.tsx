@@ -10,7 +10,7 @@ declare global {
 }
 
 export default function GraciasIA() {
-  const whatsappUrl = "https://chat.whatsapp.com/ByraKaYM3IEI6AjqmIv6E4";
+  const whatsappUrl = "https://chat.whatsapp.com/KsYaaw00uyW13tyJwLtjpb?mode=gi_t";
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.fbq) {
