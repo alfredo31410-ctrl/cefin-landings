@@ -15,7 +15,7 @@ export default function AuxiliarContableRetargetingPage() {
 
   const PRODUCT_NAME = "Auxiliar Contable";
   const PRICE = "$ 3,387 MXN"; // <-- cambia esto
-  const OLD_PRICE = "$4,387 MXN"; // <-- cambia esto
+  const OLD_PRICE = "$6,707 MXN"; // <-- cambia esto
   const PRODUCT_VALUE = 3387; // <-- cambia esto si cambia el precio
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
