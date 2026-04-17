@@ -135,7 +135,7 @@ export default function ResicoPersonasFisicasPage() {
         {/* Imagen de fondo desktop */}
         <div className="pointer-events-none absolute inset-0 z-10 hidden lg:block">
           <img
-            src="/resico/marisol-resico.png"
+            src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
             alt="Marisol Galván"
             className="absolute bottom-0 right-[8%] h-[92%] w-auto max-w-none object-contain opacity-95"
           />
@@ -146,7 +146,7 @@ export default function ResicoPersonasFisicasPage() {
         {/* Imagen de fondo mobile/tablet */}
         <div className="pointer-events-none absolute inset-0 z-10 lg:hidden">
           <img
-            src="/resico/marisol-resico.png"
+            src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
             alt="Marisol Galván"
             className="absolute inset-0 h-full w-full object-cover object-[center_top] opacity-80"
           />

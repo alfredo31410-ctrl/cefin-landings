@@ -115,7 +115,7 @@ export default function GraciasResicoPage() {
 
         <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <img
-            src="/resico/marisol-resico.png"
+            src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
             alt="Marisol Galván"
             className="absolute bottom-0 right-[6%] h-[92%] w-auto max-w-none object-contain opacity-95"
           />
@@ -125,7 +125,7 @@ export default function GraciasResicoPage() {
 
         <div className="pointer-events-none absolute inset-0 z-0 lg:hidden">
           <img
-            src="/resico/marisol-resico.png"
+            src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
             alt="Marisol Galván"
             className="absolute inset-0 h-full w-full object-cover object-[center_top] opacity-75"
           />
