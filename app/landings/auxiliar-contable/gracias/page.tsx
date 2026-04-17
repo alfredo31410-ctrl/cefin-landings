@@ -13,7 +13,9 @@ declare global {
 
 export default function GraciasAuxiliar() {
 
+  //CAMBIO DE GRUPO DE WHATSAPP
   const whatsappUrl = "https://chat.whatsapp.com/CAw8p1TLqMMLdpZon2ZsoQ";
+
 
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
