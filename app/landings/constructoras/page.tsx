@@ -13,9 +13,9 @@ const META_PIXEL_ID = "1485908226564541";
 const ACTIVE_CAMPAIGN_FORM_ID = 999; // <-- cambialo
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/constructoras/ponente.png"; // <-- cambialo
+  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
 const BACKGROUND_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/constructoras/fondo-constructoras.png"; // <-- cambialo
+  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
 
 export default function ConstructorasLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
