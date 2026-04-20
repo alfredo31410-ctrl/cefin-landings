@@ -10,7 +10,7 @@ declare global {
 }
 
 const META_PIXEL_ID = "1485908226564541";
-const ACTIVE_CAMPAIGN_FORM_ID = 999; // <-- cambialo
+const ACTIVE_CAMPAIGN_FORM_ID = 185; // <-- cambialo
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
