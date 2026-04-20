@@ -59,17 +59,19 @@ export default function GraciasResicoPage() {
   useEffect(() => {
     document.title = "Registro completado | RESICO Personas Físicas | CEFIN";
 
-    trackEvent(
-      "CompleteRegistration",
-      {
-        content_name: "RESICO Personas Físicas | Registro completado",
-        content_category: "Clase gratuita",
-        status: "completed",
-      },
-      {
-        eventID: generateEventId("resico-complete-registration"),
-      }
-    );
+trackEvent(
+  "CompleteRegistration",
+  {
+    content_name: "RESICO Personas Físicas | Registro completado",
+    content_category: "Clase gratuita",
+    status: "completed",
+    value: 0,
+    currency: "MXN",
+  },
+  {
+    eventID: generateEventId("resico-complete-registration"),
+  }
+);
   }, []);
 
   const handleWhatsAppClick = () => {
