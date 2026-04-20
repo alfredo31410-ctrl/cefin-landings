@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -9,11 +9,13 @@ declare global {
   }
 }
 
+const PIXEL_ID = "1485908226564541";
 const ACTIVE_CAMPAIGN_FORM_ID = 183;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function ResicoPersonasFisicasPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const leadTrackedRef = useRef(false);
 
   const trackEvent = (
     event: string,
@@ -35,20 +37,55 @@ export default function ResicoPersonasFisicasPage() {
     window.fbq("track", event);
   };
 
+  const trackCustomEvent = (
+    event: string,
+    data?: Record<string, unknown>,
+    options?: Record<string, unknown>
+  ) => {
+    if (typeof window === "undefined" || !window.fbq) return;
+
+    if (data && options) {
+      window.fbq("trackCustom", event, data, options);
+      return;
+    }
+
+    if (data) {
+      window.fbq("trackCustom", event, data);
+      return;
+    }
+
+    window.fbq("trackCustom", event);
+  };
+
+  const generateEventId = (prefix: string) =>
+    `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+
   useEffect(() => {
     document.title = "RESICO Personas Físicas | Clase Gratuita en Vivo | CEFIN";
+
+    trackEvent("ViewContent", {
+      content_name: "RESICO Personas Físicas | Landing",
+      content_category: "Clase gratuita",
+    });
   }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
 
-    trackEvent("InitiateCheckout", {
+    leadTrackedRef.current = false;
+
+    trackCustomEvent("OpenForm", {
       content_name: "RESICO Personas Físicas | Apertura de formulario",
       content_category: "Clase gratuita",
     });
 
     const oldScript = document.getElementById("ac-script-loader");
     if (oldScript) oldScript.remove();
+
+    const existingFormNode = document.querySelector(`.${FORM_CLASS}`);
+    if (existingFormNode) {
+      existingFormNode.innerHTML = "";
+    }
 
     const script = document.createElement("script");
     script.id = "ac-script-loader";
@@ -57,25 +94,48 @@ export default function ResicoPersonasFisicasPage() {
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
+
+    const observer = new MutationObserver(() => {
+      if (leadTrackedRef.current) return;
+
+      const formWrapper = document.querySelector(`.${FORM_CLASS}`);
+      if (!formWrapper) return;
+
+      const successNode =
+        formWrapper.querySelector("._form-thank-you") ||
+        formWrapper.querySelector(".thank-you") ||
+        formWrapper.querySelector("[class*='thank']") ||
+        formWrapper.querySelector("[id*='thank']");
+
+      if (!successNode) return;
+
+      leadTrackedRef.current = true;
+
+      trackEvent(
+        "Lead",
+        {
+          content_name: "RESICO Personas Físicas | Registro exitoso",
+          content_category: "Clase gratuita",
+          status: "submitted",
+        },
+        {
+          eventID: generateEventId("resico-lead"),
+        }
+      );
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, [isModalOpen]);
 
   return (
     <>
-      <Script
-        id="meta-pixel-resico-landing"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            if (typeof fbq !== 'undefined') {
-              fbq('track', 'PageView');
-              fbq('trackCustom', 'ResicoLandingView', {
-                content_name: 'RESICO Personas Físicas | Landing'
-              });
-            }
-          `,
-        }}
-      />
-
       <Script
         id="meta-pixel-resico-landing-init"
         strategy="afterInteractive"
@@ -90,11 +150,8 @@ export default function ResicoPersonasFisicasPage() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '1485908226564541');
+            fbq('init', '${PIXEL_ID}');
             fbq('track', 'PageView');
-            fbq('trackCustom', 'ResicoLandingView', {
-              content_name: 'RESICO Personas Fisicas | Landing'
-            });
           `,
         }}
       />
@@ -104,7 +161,7 @@ export default function ResicoPersonasFisicasPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=1485908226564541&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>
