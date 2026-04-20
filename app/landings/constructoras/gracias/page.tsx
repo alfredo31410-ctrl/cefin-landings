@@ -10,7 +10,7 @@ declare global {
 }
 
 const META_PIXEL_ID = "1485908226564541";
-const WHATSAPP_URL = "https://chat.whatsapp.com/PEGA_AQUI_TU_LINK"; // <-- cambialo
+const WHATSAPP_URL = "https://chat.whatsapp.com/GX1pMpBQavMKVLFE0GUMNX"; // <-- cambialo
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
 const BACKGROUND_IMAGE_URL =
