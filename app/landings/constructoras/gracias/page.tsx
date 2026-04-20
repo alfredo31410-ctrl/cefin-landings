@@ -141,9 +141,9 @@ export default function GraciasConstructorasPage() {
           <img
             src={HERO_IMAGE_URL}
             alt="Ponente de constructoras"
-            className="absolute inset-0 h-full w-full object-cover object-[78%_18%] opacity-45"
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,10,9,0.66)_0%,rgba(10,12,11,0.80)_26%,rgba(11,13,12,0.94)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,10,9,0.45)_0%,rgba(10,12,11,0.6)_40%,rgba(11,13,12,0.8)_100%)]" />
         </div>
 
         <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">

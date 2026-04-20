@@ -144,9 +144,9 @@ export default function ConstructorasLandingPage() {
           <img
             src={HERO_IMAGE_URL}
             alt="Ponente de constructoras"
-            className="absolute inset-0 h-full w-full object-cover object-[78%_18%] opacity-40"
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,10,9,0.68)_0%,rgba(10,12,11,0.82)_26%,rgba(11,13,12,0.92)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,10,9,0.45)_0%,rgba(10,12,11,0.6)_40%,rgba(11,13,12,0.8)_100%)]" />
         </div>
 
         <header className="relative z-30">
