@@ -11,12 +11,12 @@ declare global {
 
 const META_PIXEL_ID = "733425513099672";
 const PAYMENT_URL =
-  "https://pay.hotmart.com/PEGA_AQUI_TU_LINK"; // <-- cambialo
+  "https://pay.hotmart.com/J105434552K?off=399ngaxa&checkoutMode=10&bid=1776798830168"; // <-- cambialo
 
 const PRODUCT_NAME = "EstrategIA Evolucion Contable";
-const PRICE = "$ 2,997 MXN"; // <-- cambialo
-const OLD_PRICE = "$5,997 MXN"; // <-- cambialo
-const PRODUCT_VALUE = 2997; // <-- cambialo
+const PRICE = "$ 3,387 MXN"; // <-- cambialo
+const OLD_PRICE = "$6,774 MXN"; // <-- cambialo
+const PRODUCT_VALUE = 3387; // <-- cambialo
 const DESKTOP_BG =
   "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
 const MOBILE_BG =
@@ -111,21 +111,28 @@ export default function IARetargetingPage() {
 
       <main className="min-h-screen w-full overflow-x-hidden bg-[#050713] text-white relative">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <img
-            src={DESKTOP_BG}
-            alt="EstrategIA Evolucion Contable"
-            className="hidden lg:block absolute inset-0 h-full w-full object-cover object-right opacity-35"
-          />
-          <img
-            src={MOBILE_BG}
-            alt="EstrategIA Evolucion Contable"
-            className="block lg:hidden absolute inset-0 h-full w-full object-cover object-[62%_50%] opacity-28"
-          />
+          <div className="hidden lg:block absolute inset-y-0 right-0 w-[56%]">
+            <img
+              src={DESKTOP_BG}
+              alt="EstrategIA Evolucion Contable"
+              className="absolute bottom-0 right-[-2%] h-[86%] w-auto max-w-none object-contain opacity-72 xl:h-[90%]"
+            />
+          </div>
+          <div className="block lg:hidden absolute inset-0">
+            <img
+              src={MOBILE_BG}
+              alt="EstrategIA Evolucion Contable"
+              className="absolute bottom-0 right-[-14%] h-[58%] w-auto max-w-none object-contain opacity-70"
+            />
+          </div>
 
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(4,8,20,0.78),rgba(4,8,20,0.88),#050713)] lg:bg-[linear-gradient(90deg,rgba(5,7,19,0.96)_0%,rgba(5,7,19,0.86)_42%,rgba(5,7,19,0.48)_72%,rgba(5,7,19,0.92)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(4,8,20,0.18),rgba(4,8,20,0.44),#050713)] lg:bg-[linear-gradient(90deg,rgba(5,7,19,0.88)_0%,rgba(5,7,19,0.72)_36%,rgba(5,7,19,0.18)_68%,rgba(5,7,19,0.56)_100%)]" />
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-[#050713]/86 via-[#050713]/54 to-transparent" />
+          <div className="block lg:hidden absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,7,19,0.22)_0%,rgba(5,7,19,0.22)_24%,rgba(5,7,19,0.46)_48%,rgba(5,7,19,0.82)_100%)]" />
           <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(70,226,255,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(70,226,255,0.22)_1px,transparent_1px)] [background-size:28px_28px]" />
           <div className="absolute left-[-4%] top-[12%] h-[340px] w-[340px] rounded-full bg-cyan-400/14 blur-[130px]" />
           <div className="absolute right-[-6%] bottom-[8%] h-[300px] w-[300px] rounded-full bg-lime-300/10 blur-[130px]" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#050713] via-[#050713]/68 to-transparent" />
 
         </div>
 
@@ -153,7 +160,7 @@ export default function IARetargetingPage() {
 
         <section className="relative z-20 mx-auto max-w-7xl px-6 pb-14 pt-6 lg:px-12 lg:pb-20 lg:pt-10">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
-            <div className="space-y-6 lg:col-span-7">
+            <div className="space-y-6 lg:col-span-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/18 bg-cyan-400/10 px-4 py-1.5">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -164,7 +171,7 @@ export default function IARetargetingPage() {
                 </p>
               </div>
 
-              <div className="max-w-4xl font-mono uppercase leading-[0.88] tracking-[-0.06em]">
+              <div className="max-w-3xl font-mono uppercase leading-[0.88] tracking-[-0.06em]">
                 <h1 className="text-[3.2rem] sm:text-[4.3rem] lg:text-[6.2rem] xl:text-[6.8rem]">
                   <span className="block text-cyan-300">
                     Estrateg<span className="text-lime-300">IA</span>
@@ -178,7 +185,7 @@ export default function IARetargetingPage() {
                 Condiciones especiales por tiempo limitado
               </div>
 
-              <p className="max-w-2xl text-lg leading-relaxed text-slate-200 sm:text-xl">
+              <p className="max-w-[42rem] text-lg leading-relaxed text-slate-200 sm:text-xl">
                 Si ya viste la clase gratuita y entendiste que la IA no es moda
                 sino ventaja competitiva, esta es tu oportunidad para entrar a la
                 version completa con una oferta especial y aplicarla de verdad a
@@ -215,7 +222,7 @@ export default function IARetargetingPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-6">
               <div
                 id="oferta"
                 className="rounded-[2rem] border border-cyan-400/15 bg-[#07101b]/85 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl"
