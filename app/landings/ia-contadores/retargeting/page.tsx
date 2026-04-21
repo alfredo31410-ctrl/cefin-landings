@@ -208,12 +208,7 @@ export default function IARetargetingPage() {
                   <span>Quiero entrar ahora</span>
                 </a>
 
-                <a
-                  href="#oferta"
-                  className="inline-flex items-center justify-center rounded-2xl border border-cyan-400/22 bg-white/5 px-8 py-5 text-lg font-black uppercase tracking-tight text-white transition hover:bg-cyan-400/10"
-                >
-                  Ver lo que incluye
-                </a>
+                
               </div>
 
               <div className="flex flex-wrap gap-4 pt-2 text-sm font-bold uppercase text-slate-300">
