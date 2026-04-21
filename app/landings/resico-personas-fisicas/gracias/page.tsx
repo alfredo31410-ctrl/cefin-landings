@@ -10,7 +10,7 @@ declare global {
 }
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/BvSFF4vN9EC95soZ06MbqF";
-const META_PIXEL_ID = "1485908226564541";
+const META_PIXEL_ID = "733425513099672";
 
 export default function GraciasResicoPage() {
   const trackEvent = (

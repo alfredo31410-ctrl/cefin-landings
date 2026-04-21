@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const META_PIXEL_ID = "1485908226564541";
+const META_PIXEL_ID = "733425513099672";
 const ACTIVE_CAMPAIGN_FORM_ID = 185; // <-- cambialo
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
