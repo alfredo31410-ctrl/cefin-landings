@@ -41,14 +41,14 @@ export default function ConstructorasLandingPage() {
   };
 
   useEffect(() => {
-    document.title = "ABC de Contabilidad e Impuestos para Constructoras | CEFIN";
+    document.title = "Asesor Fiscal para Constructoras | CEFIN";
   }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
 
     trackEvent("InitiateCheckout", {
-      content_name: "ABC de Contabilidad e Impuestos para Constructoras | Apertura de formulario",
+      content_name: "Asesor Fiscal para Constructoras | Apertura de formulario",
       content_category: "Clase gratuita",
     });
 
@@ -216,7 +216,7 @@ export default function ConstructorasLandingPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lime-300/15 text-xl text-lime-300">
-                    01
+                    05
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
