@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -9,7 +10,6 @@ declare global {
   }
 }
 
-const META_PIXEL_ID = "733425513099672";
 const PAYMENT_URL =
   "https://pay.hotmart.com/J105434552K?off=399ngaxa&checkoutMode=10&bid=1776798830168";
 
@@ -39,7 +39,7 @@ export default function IARetargetingPage() {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE,
-      currency: "MXN",
+      currency: META_CURRENCY,
     });
   };
 
@@ -50,7 +50,7 @@ export default function IARetargetingPage() {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE,
-      currency: "MXN",
+      currency: META_CURRENCY,
     });
   }, []);
 
@@ -99,7 +99,10 @@ export default function IARetargetingPage() {
             (window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${META_PIXEL_ID}');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}

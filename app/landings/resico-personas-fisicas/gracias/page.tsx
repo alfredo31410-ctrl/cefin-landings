@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -10,20 +11,10 @@ declare global {
 }
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/BvSFF4vN9EC95soZ06MbqF";
-const META_PIXEL_ID = "1485908226564541";
 
 export default function GraciasResicoPage() {
-  const trackEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
+  const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("track", event, data, options);
-      return;
-    }
 
     if (data) {
       window.fbq("track", event, data);
@@ -33,59 +24,19 @@ export default function GraciasResicoPage() {
     window.fbq("track", event);
   };
 
-  const trackCustomEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("trackCustom", event, data, options);
-      return;
-    }
-
-    if (data) {
-      window.fbq("trackCustom", event, data);
-      return;
-    }
-
-    window.fbq("trackCustom", event);
-  };
-
-  const generateEventId = (prefix: string) =>
-    `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-
   useEffect(() => {
-    document.title = "Registro completado | RESICO Personas Físicas | CEFIN";
+    document.title = "Registro completado | RESICO Personas FÃ­sicas | CEFIN";
 
-trackEvent(
-  "CompleteRegistration",
-  {
-    content_name: "RESICO Personas Físicas | Registro completado",
-    content_category: "Clase gratuita",
-    status: "completed",
-    value: 0,
-    currency: "MXN",
-  },
-  {
-    eventID: generateEventId("resico-complete-registration"),
-  }
-);
+    trackEvent("CompleteRegistration", {
+      content_name: "RESICO Personas FÃ­sicas | Registro completado",
+      content_category: "Clase gratuita",
+      status: "completed",
+      value: 0,
+      currency: META_CURRENCY,
+    });
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackEvent("Contact", {
-      content_name: "RESICO Personas Físicas | Click WhatsApp",
-      content_category: "WhatsApp Group",
-      destination: "WhatsApp Group",
-    });
-
-    trackCustomEvent("WhatsAppGroupClick", {
-      content_name: "RESICO Personas Físicas | Click WhatsApp",
-      destination: "WhatsApp Group",
-    });
-
     window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
   };
 
@@ -105,7 +56,10 @@ trackEvent(
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${META_PIXEL_ID}');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -131,7 +85,7 @@ trackEvent(
         <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol Galván"
+            alt="Marisol GalvÃ¡n"
             className="absolute bottom-0 right-[6%] h-[92%] w-auto max-w-none object-contain opacity-95"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#08080d] via-[#08080d]/62 to-transparent" />
@@ -141,7 +95,7 @@ trackEvent(
         <div className="pointer-events-none absolute inset-0 z-0 lg:hidden">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol Galván"
+            alt="Marisol GalvÃ¡n"
             className="absolute inset-0 h-full w-full object-cover object-[center_top] opacity-75"
           />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,6,12,0.56)_0%,rgba(8,8,16,0.62)_22%,rgba(10,10,18,0.58)_48%,rgba(9,9,15,0.84)_100%)]" />
@@ -157,20 +111,20 @@ trackEvent(
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-6xl xl:text-[5.5rem]">
               Ya casi
               <br />
-              estás dentro
+              estÃ¡s dentro
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
               Tu registro para la clase gratuita de{" "}
               <span className="font-black text-white">
-                RESICO Personas Físicas
+                RESICO Personas FÃ­sicas
               </span>{" "}
-              ya quedó.
+              ya quedÃ³.
             </p>
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-              Ahora entra al grupo de WhatsApp porque por ahí se comparte el
-              acceso, recordatorios y avisos importantes de la sesión.
+              Ahora entra al grupo de WhatsApp porque por ahÃ­ se comparte el
+              acceso, recordatorios y avisos importantes de la sesiÃ³n.
             </p>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
@@ -203,22 +157,22 @@ trackEvent(
                 </button>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
-                  Este es el paso más importante para no perder tu acceso.
+                  Este es el paso mÃ¡s importante para no perder tu acceso.
                 </p>
               </div>
             </div>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
-                "Te llegarán recordatorios",
-                "Recibirás el acceso a la sesión",
+                "Te llegarÃ¡n recordatorios",
+                "RecibirÃ¡s el acceso a la sesiÃ³n",
                 "Evitas perder avisos importantes",
               ].map((item) => (
                 <div
                   key={item}
                   className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium text-white/75"
                 >
-                  <span className="mr-2 text-fuchsia-400">•</span>
+                  <span className="mr-2 text-fuchsia-400">â€¢</span>
                   {item}
                 </div>
               ))}

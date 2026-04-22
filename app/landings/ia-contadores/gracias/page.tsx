@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -49,7 +50,10 @@ export default function GraciasIA() {
             (window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '733425513099672');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -60,7 +64,7 @@ export default function GraciasIA() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=733425513099672&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>
@@ -138,11 +142,6 @@ export default function GraciasIA() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() =>
-                    trackEvent("ViewContent", {
-                      content_name: "WhatsApp Grupo IA",
-                    })
-                  }
                   className="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-lime-400 px-6 py-5 text-center text-base font-black uppercase italic text-black shadow-[0_0_40px_rgba(163,230,53,0.45)] transition-all duration-200 hover:scale-[1.02] hover:bg-lime-300 active:scale-[0.98] sm:px-8 sm:py-6 sm:text-lg lg:text-xl"
                 >
                   <svg

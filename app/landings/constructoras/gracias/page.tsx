@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -9,7 +10,6 @@ declare global {
   }
 }
 
-const META_PIXEL_ID = "733425513099672";
 const WHATSAPP_URL = "https://chat.whatsapp.com/GX1pMpBQavMKVLFE0GUMNX"; // <-- cambialo
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
@@ -17,17 +17,8 @@ const BACKGROUND_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
 
 export default function GraciasConstructorasPage() {
-  const trackEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
+  const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("track", event, data, options);
-      return;
-    }
 
     if (data) {
       window.fbq("track", event, data);
@@ -40,42 +31,12 @@ export default function GraciasConstructorasPage() {
   useEffect(() => {
     document.title = "Registro completado | Constructoras | CEFIN";
 
-    trackEvent(
-      "Lead",
-      {
-        content_name: "Asesor Fiscal para Constructoras | Registro completado",
-        content_category: "Clase gratuita",
-        status: "completed",
-      },
-      { eventID: "constructoras-lead-thankyou" }
-    );
-
-    trackEvent(
-      "CompleteRegistration",
-      {
-        content_name: "Asesor Fiscal para Constructoras | Registro completado",
-        content_category: "Clase gratuita",
-        status: "completed",
-      },
-      { eventID: "constructoras-complete-registration" }
-    );
-  }, []);
-
-  const handleWhatsAppClick = () => {
-    trackEvent("Contact", {
-      content_name: "Asesor Fiscal para Constructoras | Click WhatsApp",
-      destination: "WhatsApp Group",
+    trackEvent("CompleteRegistration", {
+      content_name: "Asesor Fiscal para Constructoras | Registro completado",
+      content_category: "Clase gratuita",
+      status: "completed",
     });
-
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "WhatsAppGroupClick", {
-        content_name: "Asesor Fiscal para Constructoras | Click WhatsApp",
-        destination: "WhatsApp Group",
-      });
-    }
-
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
-  };
+  }, []);
 
   return (
     <>
@@ -93,7 +54,10 @@ export default function GraciasConstructorasPage() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${META_PIXEL_ID}');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -192,7 +156,9 @@ export default function GraciasConstructorasPage() {
 
               <div className="mt-6">
                 <button
-                  onClick={handleWhatsAppClick}
+                  onClick={() =>
+                    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")
+                  }
                   className="group inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
                 >
                   Entrar al grupo de WhatsApp

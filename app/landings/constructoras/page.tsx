@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -9,7 +10,6 @@ declare global {
   }
 }
 
-const META_PIXEL_ID = "733425513099672";
 const ACTIVE_CAMPAIGN_FORM_ID = 185; // <-- cambialo
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
@@ -20,37 +20,12 @@ const BACKGROUND_IMAGE_URL =
 export default function ConstructorasLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const trackEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("track", event, data, options);
-      return;
-    }
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   useEffect(() => {
     document.title = "Asesor Fiscal para Constructoras | CEFIN";
   }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
-
-    trackEvent("InitiateCheckout", {
-      content_name: "Asesor Fiscal para Constructoras | Apertura de formulario",
-      content_category: "Clase gratuita",
-    });
 
     const oldScript = document.getElementById("ac-script-loader");
     if (oldScript) oldScript.remove();
@@ -87,11 +62,11 @@ export default function ConstructorasLandingPage() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${META_PIXEL_ID}');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
-            fbq('trackCustom', 'ConstructorasLandingView', {
-              content_name: 'ABC de Contabilidad e Impuestos para Constructoras | Landing'
-            });
           `,
         }}
       />
@@ -241,12 +216,7 @@ export default function ConstructorasLandingPage() {
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <button
-                  onClick={() => {
-                    setIsModalOpen(true);
-                    trackEvent("Lead", {
-                      content_name: "ABC de Contabilidad e Impuestos para Constructoras",
-                    });
-                  }}
+                  onClick={() => setIsModalOpen(true)}
                   className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-base font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98] sm:text-lg"
                 >
                   Quiero mi lugar gratis

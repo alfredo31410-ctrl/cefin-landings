@@ -1,7 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -9,25 +10,14 @@ declare global {
   }
 }
 
-const PIXEL_ID = "1485908226564541";
 const ACTIVE_CAMPAIGN_FORM_ID = 183;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function ResicoPersonasFisicasPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const leadTrackedRef = useRef(false);
 
-  const trackEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
+  const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("track", event, data, options);
-      return;
-    }
 
     if (data) {
       window.fbq("track", event, data);
@@ -37,47 +27,17 @@ export default function ResicoPersonasFisicasPage() {
     window.fbq("track", event);
   };
 
-  const trackCustomEvent = (
-    event: string,
-    data?: Record<string, unknown>,
-    options?: Record<string, unknown>
-  ) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data && options) {
-      window.fbq("trackCustom", event, data, options);
-      return;
-    }
-
-    if (data) {
-      window.fbq("trackCustom", event, data);
-      return;
-    }
-
-    window.fbq("trackCustom", event);
-  };
-
-  const generateEventId = (prefix: string) =>
-    `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-
   useEffect(() => {
-    document.title = "RESICO Personas Físicas | Clase Gratuita en Vivo | CEFIN";
+    document.title = "RESICO Personas FÃ­sicas | Clase Gratuita en Vivo | CEFIN";
 
     trackEvent("ViewContent", {
-      content_name: "RESICO Personas Físicas | Landing",
+      content_name: "RESICO Personas FÃ­sicas | Landing",
       content_category: "Clase gratuita",
     });
   }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
-
-    leadTrackedRef.current = false;
-
-    trackCustomEvent("OpenForm", {
-      content_name: "RESICO Personas Físicas | Apertura de formulario",
-      content_category: "Clase gratuita",
-    });
 
     const oldScript = document.getElementById("ac-script-loader");
     if (oldScript) oldScript.remove();
@@ -94,44 +54,6 @@ export default function ResicoPersonasFisicasPage() {
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
-
-    const observer = new MutationObserver(() => {
-      if (leadTrackedRef.current) return;
-
-      const formWrapper = document.querySelector(`.${FORM_CLASS}`);
-      if (!formWrapper) return;
-
-      const successNode =
-        formWrapper.querySelector("._form-thank-you") ||
-        formWrapper.querySelector(".thank-you") ||
-        formWrapper.querySelector("[class*='thank']") ||
-        formWrapper.querySelector("[id*='thank']");
-
-      if (!successNode) return;
-
-      leadTrackedRef.current = true;
-
-      trackEvent(
-        "Lead",
-        {
-          content_name: "RESICO Personas Físicas | Registro exitoso",
-          content_category: "Clase gratuita",
-          status: "submitted",
-        },
-        {
-          eventID: generateEventId("resico-lead"),
-        }
-      );
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    return () => {
-      observer.disconnect();
-    };
   }, [isModalOpen]);
 
   return (
@@ -150,7 +72,10 @@ export default function ResicoPersonasFisicasPage() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '${PIXEL_ID}');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -161,7 +86,7 @@ export default function ResicoPersonasFisicasPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>
@@ -193,7 +118,7 @@ export default function ResicoPersonasFisicasPage() {
         <div className="pointer-events-none absolute inset-0 z-10 hidden lg:block">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol Galván"
+            alt="Marisol GalvÃ¡n"
             className="absolute bottom-0 right-[8%] h-[92%] w-auto max-w-none object-contain opacity-95"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#09090f] via-[#09090f]/58 to-transparent" />
@@ -204,7 +129,7 @@ export default function ResicoPersonasFisicasPage() {
         <div className="pointer-events-none absolute inset-0 z-10 lg:hidden">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol Galván"
+            alt="Marisol GalvÃ¡n"
             className="absolute inset-0 h-full w-full object-cover object-[center_top] opacity-80"
           />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,6,12,0.58)_0%,rgba(8,8,16,0.64)_22%,rgba(10,10,18,0.60)_48%,rgba(9,9,15,0.84)_100%)]" />
@@ -219,7 +144,7 @@ export default function ResicoPersonasFisicasPage() {
               <div>
                 <p className="text-2xl font-black tracking-tight">CEFIN</p>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">
-                  Formación contable y fiscal
+                  FormaciÃ³n contable y fiscal
                 </p>
               </div>
             </div>
@@ -246,23 +171,23 @@ export default function ResicoPersonasFisicasPage() {
               </h1>
 
               <h2 className="mt-[-6px] text-xl font-extrabold uppercase tracking-tight text-white sm:text-3xl lg:text-4xl xl:text-5xl">
-                Personas Físicas
+                Personas FÃ­sicas
               </h2>
 
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70 sm:text-base">
-                Impartido por Marisol Galván
+                Impartido por Marisol GalvÃ¡n
               </p>
 
               <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-                Una clase diseñada para contadores que necesitan entender con claridad
-                cómo aplicar RESICO en personas físicas, detectar errores comunes y
-                explicar este régimen con más seguridad frente a sus clientes.
+                Una clase diseÃ±ada para contadores que necesitan entender con claridad
+                cÃ³mo aplicar RESICO en personas fÃ­sicas, detectar errores comunes y
+                explicar este rÃ©gimen con mÃ¡s seguridad frente a sus clientes.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/20 text-xl">
-                    📅
+                    ðŸ“…
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
@@ -274,7 +199,7 @@ export default function ResicoPersonasFisicasPage() {
 
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-fuchsia-500/20 text-xl">
-                    ⏰
+                    â°
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
@@ -294,22 +219,22 @@ export default function ResicoPersonasFisicasPage() {
                 </button>
 
                 <p className="text-sm font-semibold text-white/65">
-                  Cupo limitado para la sesión en vivo.
+                  Cupo limitado para la sesiÃ³n en vivo.
                 </p>
               </div>
 
               <div className="grid gap-4 pt-2 sm:grid-cols-2">
                 {[
-                  "Entiende cuándo sí aplica RESICO PF y cuándo no.",
+                  "Entiende cuÃ¡ndo sÃ­ aplica RESICO PF y cuÃ¡ndo no.",
                   "Evita errores comunes que le cuestan dinero al cliente.",
                   "Aprende a explicarlo con criterio y seguridad.",
-                  "Llévate claridad práctica, no teoría suelta.",
+                  "LlÃ©vate claridad prÃ¡ctica, no teorÃ­a suelta.",
                 ].map((item) => (
                   <div
                     key={item}
                     className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium text-white/80 backdrop-blur"
                   >
-                    <span className="mr-2 text-fuchsia-400">●</span>
+                    <span className="mr-2 text-fuchsia-400">â—</span>
                     {item}
                   </div>
                 ))}
@@ -318,13 +243,13 @@ export default function ResicoPersonasFisicasPage() {
           </div>
         </section>
 
-        {/* Bloque de conexión */}
+        {/* Bloque de conexiÃ³n */}
         <section className="relative z-30 border-t border-white/10 bg-black/20">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
             <div className="grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <p className="text-sm font-black uppercase tracking-[0.25em] text-fuchsia-300">
-                  ¿Por qué entrar a esta clase?
+                  Â¿Por quÃ© entrar a esta clase?
                 </p>
                 <h3 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
                   Porque entender RESICO no es lo mismo que saber aplicarlo.
@@ -333,13 +258,13 @@ export default function ResicoPersonasFisicasPage() {
 
               <div className="space-y-5 lg:col-span-7">
                 <p className="text-lg leading-relaxed text-white/75">
-                  Muchos contadores han leído sobre el régimen, pero cuando llega
-                  el momento de revisar casos reales, dar una recomendación o
+                  Muchos contadores han leÃ­do sobre el rÃ©gimen, pero cuando llega
+                  el momento de revisar casos reales, dar una recomendaciÃ³n o
                   explicarle algo al cliente, aparece la duda.
                 </p>
                 <p className="text-lg leading-relaxed text-white/75">
-                  Esta clase está pensada para darte una base más clara, más
-                  práctica y más útil para trabajar RESICO Personas Físicas con
+                  Esta clase estÃ¡ pensada para darte una base mÃ¡s clara, mÃ¡s
+                  prÃ¡ctica y mÃ¡s Ãºtil para trabajar RESICO Personas FÃ­sicas con
                   criterio profesional.
                 </p>
               </div>
@@ -360,8 +285,8 @@ export default function ResicoPersonasFisicasPage() {
                     Clase gratuita en vivo para contadores
                   </h4>
                   <p className="mt-2 max-w-2xl text-white/70">
-                    Regístrate ahora y asegura tu acceso a la sesión de RESICO
-                    Personas Físicas.
+                    RegÃ­strate ahora y asegura tu acceso a la sesiÃ³n de RESICO
+                    Personas FÃ­sicas.
                   </p>
                 </div>
 
@@ -380,7 +305,7 @@ export default function ResicoPersonasFisicasPage() {
         <footer className="relative z-30 border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>Formación práctica para contadores que quieren trabajar con más seguridad.</p>
+            <p>FormaciÃ³n prÃ¡ctica para contadores que quieren trabajar con mÃ¡s seguridad.</p>
           </div>
         </footer>
 
@@ -393,7 +318,7 @@ export default function ResicoPersonasFisicasPage() {
                 className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
                 aria-label="Cerrar modal"
               >
-                ×
+                Ã—
               </button>
 
               <div className="shrink-0 px-5 pb-4 pt-7 text-center sm:px-8 sm:pb-5 sm:pt-8">
@@ -401,7 +326,7 @@ export default function ResicoPersonasFisicasPage() {
                   Clase gratuita
                 </p>
                 <h5 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  RESICO Personas Físicas
+                  RESICO Personas FÃ­sicas
                 </h5>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.

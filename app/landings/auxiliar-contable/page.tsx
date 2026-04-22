@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useState, useEffect } from "react";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 
 declare global {
@@ -13,26 +14,12 @@ declare global {
 export default function LandingCEFIN() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window !== "undefined" && window.fbq) {
-      if (data) {
-        window.fbq("track", event, data);
-      } else {
-        window.fbq("track", event);
-      }
-    }
-  };
-
   useEffect(() => {
     document.title = "Auxiliar Contable - Entrenamiento En Vivo | CEFIN";
   }, []);
 
   useEffect(() => {
     if (isModalOpen) {
-      trackEvent("InitiateCheckout", {
-        content_name: "Auxiliar Contable - Entrenamiento En Vivo",
-      });
-
       const oldScript = document.getElementById("ac-script-loader");
       if (oldScript) oldScript.remove();
 
@@ -63,7 +50,10 @@ export default function LandingCEFIN() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '733425513099672');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -74,7 +64,7 @@ export default function LandingCEFIN() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=733425513099672&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>
@@ -145,9 +135,6 @@ export default function LandingCEFIN() {
                 <button
                   onClick={() => {
                     setIsModalOpen(true);
-                    trackEvent("Lead", {
-                      content_name: "Auxiliar Contable - Entrenamiento En Vivo",
-                    });
                   }}
                   className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
                 >

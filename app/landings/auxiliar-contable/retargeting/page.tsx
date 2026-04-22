@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -33,7 +34,7 @@ export default function AuxiliarContableRetargetingPage() {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE, // <-- cambia si cambia el precio
-      currency: "MXN",
+      currency: META_CURRENCY,
     });
   };
 
@@ -44,7 +45,7 @@ export default function AuxiliarContableRetargetingPage() {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE, // <-- cambia si cambia el precio
-      currency: "MXN",
+      currency: META_CURRENCY,
     });
   }, []);
 
@@ -86,7 +87,10 @@ export default function AuxiliarContableRetargetingPage() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '733425513099672');
+            if (!window.__cefinMetaPixelInitialized) {
+              fbq('init', '${META_PIXEL_ID}');
+              window.__cefinMetaPixelInitialized = true;
+            }
             fbq('track', 'PageView');
           `,
         }}
@@ -97,7 +101,7 @@ export default function AuxiliarContableRetargetingPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=733425513099672&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           alt=""
         />
       </noscript>
