@@ -38,12 +38,12 @@ export default function GraciasConstructorasPage() {
   };
 
   useEffect(() => {
-    document.title = "Registro completado | ABC Constructoras | CEFIN";
+    document.title = "Registro completado | Constructoras | CEFIN";
 
     trackEvent(
       "Lead",
       {
-        content_name: "ABC de Contabilidad e Impuestos para Constructoras | Registro completado",
+        content_name: "Asesor Fiscal para Constructoras | Registro completado",
         content_category: "Clase gratuita",
         status: "completed",
       },
@@ -53,7 +53,7 @@ export default function GraciasConstructorasPage() {
     trackEvent(
       "CompleteRegistration",
       {
-        content_name: "ABC de Contabilidad e Impuestos para Constructoras | Registro completado",
+        content_name: "Asesor Fiscal para Constructoras | Registro completado",
         content_category: "Clase gratuita",
         status: "completed",
       },
@@ -63,13 +63,13 @@ export default function GraciasConstructorasPage() {
 
   const handleWhatsAppClick = () => {
     trackEvent("Contact", {
-      content_name: "ABC Constructoras | Click WhatsApp",
+      content_name: "Asesor Fiscal para Constructoras | Click WhatsApp",
       destination: "WhatsApp Group",
     });
 
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("trackCustom", "WhatsAppGroupClick", {
-        content_name: "ABC Constructoras | Click WhatsApp",
+        content_name: "Asesor Fiscal para Constructoras | Click WhatsApp",
         destination: "WhatsApp Group",
       });
     }
@@ -161,7 +161,7 @@ export default function GraciasConstructorasPage() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
               Tu registro para la clase gratuita de{" "}
               <span className="font-black text-lime-300">
-                ABC de Contabilidad e Impuestos para Constructoras
+                Asesor Fiscal para Constructoras
               </span>{" "}
               ya quedo.
             </p>
@@ -177,7 +177,7 @@ export default function GraciasConstructorasPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Fecha
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">Por definir</p>
+                  <p className="mt-1 text-xl font-black text-white">5 de mayo</p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">

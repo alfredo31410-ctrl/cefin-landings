@@ -198,7 +198,7 @@ export default function ConstructorasLandingPage() {
                 </div>
 
                 <h2 className="mt-4 max-w-3xl text-2xl font-black uppercase leading-tight tracking-[-0.03em] text-white sm:text-3xl lg:text-4xl">
-                  ABC de Contabilidad e Impuestos
+                  Asesor Fiscal
                 </h2>
               </div>
 
@@ -222,7 +222,7 @@ export default function ConstructorasLandingPage() {
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
                       Fecha
                     </p>
-                    <p className="text-lg font-black text-white">Por definir</p>
+                    <p className="text-lg font-black text-white">5 de mayo</p>
                   </div>
                 </div>
 
@@ -351,7 +351,7 @@ export default function ConstructorasLandingPage() {
                   Clase gratuita
                 </p>
                 <h5 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  ABC Constructoras
+                  Asesor Fiscal Constructoras
                 </h5>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.
