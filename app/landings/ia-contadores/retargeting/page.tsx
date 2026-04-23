@@ -11,7 +11,7 @@ declare global {
 }
 
 const PAYMENT_URL =
-  "https://pay.hotmart.com/J105434552K?off=399ngaxa&checkoutMode=10&bid=1776798830168";
+  "https://pay.hotmart.com/I105503339V?off=7l62yrr2&checkoutMode=10";
 
 const PRODUCT_NAME = "EstrategIA Evolucion Contable";
 const PRICE = "$ 3,387 MXN";
