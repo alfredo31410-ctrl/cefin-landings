@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -29,6 +29,8 @@ export default function GraciasIA() {
     trackEvent("CompleteRegistration", {
       content_name: "ABC de Inteligencia Artificial para Contadores",
       status: "registered",
+      value: 0,
+      currency: META_CURRENCY,
     });
   }, []);
 

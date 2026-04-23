@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 
 declare global {
@@ -34,6 +34,8 @@ export default function GraciasAuxiliar() {
     trackEvent("CompleteRegistration", {
       content_name: "Auxiliar Contable - Entrenamiento En Vivo",
       status: "registered",
+      value: 0,
+      currency: META_CURRENCY,
     });
   }, []);
 

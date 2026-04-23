@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
+import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
   interface Window {
@@ -35,6 +35,8 @@ export default function GraciasConstructorasPage() {
       content_name: "Asesor Fiscal para Constructoras | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
+      value: 0,
+      currency: META_CURRENCY,
     });
   }, []);
 
