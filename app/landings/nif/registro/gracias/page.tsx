@@ -30,7 +30,7 @@ export default function GraciasEstadosFinancierosPage() {
     document.title = "Registro completado | Estados Financieros con NIF | CEFIN";
 
     trackEvent("CompleteRegistration", {
-      content_name: "2 dias de Estados Financieros con NIF | Registro completado",
+      content_name: "Estados Financieros con NIF | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
     });
@@ -117,21 +117,14 @@ export default function GraciasEstadosFinancierosPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                    Dia 1
+                    Dia
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
                     12 de mayo
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                    Dia 2
-                  </p>
-                  <p className="mt-1 text-xl font-black text-white">
-                    Sorpresa
-                  </p>
-                </div>
+                
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">

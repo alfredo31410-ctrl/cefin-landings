@@ -30,10 +30,10 @@ export default function EstadosFinancierosLandingPage() {
   };
 
   useEffect(() => {
-    document.title = "2 dias de Estados Financieros con NIF | CEFIN";
+    document.title = "Estados Financieros con NIF | CEFIN";
 
     trackEvent("ViewContent", {
-      content_name: "2 dias de Estados Financieros con NIF",
+      content_name: "Estados Financieros con NIF",
       content_category: "Clase gratuita",
     });
   }, []);
@@ -62,22 +62,15 @@ export default function EstadosFinancierosLandingPage() {
     "Aprende a leer estados financieros con criterio contable.",
     "Conecta la informacion financiera con decisiones reales.",
     "Evita errores comunes al interpretar reportes.",
-    "Entra a 2 dias gratuitos, en vivo y enfocados en practica.",
   ];
 
-  const liveDays = [
+  const liveDay = [
     {
-      day: "Dia 1",
+      day: "Dia",
       date: "12 de mayo",
       title: "Estados financieros con NIF",
       detail: "La base para entender si una empresa gana, pierde o solo aparenta estar bien.",
-    },
-    {
-      day: "Dia 2",
-      date: "Sorpresa",
-      title: "La clase que conecta todo",
-      detail: "Un entrenamiento especial para llevar el criterio contable a decisiones reales.",
-    },
+    }
   ];
 
   const previewClasses = [
@@ -164,10 +157,6 @@ export default function EstadosFinancierosLandingPage() {
 
         <section className="relative z-30 mx-auto flex min-h-[calc(100vh-92px)] max-w-7xl items-center px-6 pb-14 pt-4 lg:px-10">
           <div className="max-w-5xl">
-            <p className="text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
-              2 dias gratuitos de entrenamiento
-            </p>
-
             <h1 className="mt-2 text-[5rem] font-black uppercase leading-[0.78] tracking-[-0.08em] text-white sm:text-[8rem] lg:text-[11rem] xl:text-[13rem]">
               NIF
             </h1>
@@ -181,7 +170,7 @@ export default function EstadosFinancierosLandingPage() {
             </p>
 
             <div className="mt-8 grid max-w-4xl gap-4 sm:grid-cols-2">
-              {liveDays.map((item) => (
+              {liveDay.map((item) => (
                 <div
                   key={item.day}
                   className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.07] p-5 backdrop-blur"
@@ -206,7 +195,7 @@ export default function EstadosFinancierosLandingPage() {
             <div className="mt-6 flex flex-col gap-2 text-xl font-black uppercase sm:text-3xl">
               <p>11:00 AM (CDMX)</p>
               <p>
-                2 dias - gratuito - en vivo{" "}
+                Gratuito - en vivo{" "}
                 <span className="text-violet-500">O</span>
               </p>
             </div>
@@ -271,9 +260,6 @@ export default function EstadosFinancierosLandingPage() {
                 <p className="text-[11px] font-black uppercase tracking-[0.3em] text-violet-600">
                   Registro gratuito
                 </p>
-                <h2 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  2 dias de NIF
-                </h2>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.
                 </p>
