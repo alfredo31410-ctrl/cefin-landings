@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/BvSFF4vN9EC95soZ06MbqF";
+const WHATSAPP_URL = "https://chat.whatsapp.com/FLIX0a5Ph0IEOxx7otDRE8";
 
 export default function GraciasResicoPage() {
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
