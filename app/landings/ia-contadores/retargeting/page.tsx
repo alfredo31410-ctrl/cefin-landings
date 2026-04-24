@@ -13,7 +13,7 @@ declare global {
 const PAYMENT_URL =
   "https://pay.hotmart.com/I105503339V?off=7l62yrr2&checkoutMode=10";
 
-const PRODUCT_NAME = "EstrategIA Evolucion Contable";
+const PRODUCT_NAME = "EstrategIA Evolución Contable";
 const PRICE = "$ 3,387 MXN";
 const OLD_PRICE = "$22,922 MXN";
 const PRODUCT_VALUE = 3387;
@@ -44,7 +44,7 @@ export default function IARetargetingPage() {
   };
 
   useEffect(() => {
-    document.title = "EstrategIA Evolucion Contable | Oferta Especial CEFIN";
+    document.title = "EstrategIA Evolución Contable | Oferta Especial CEFIN";
 
     trackEvent("ViewContent", {
       content_name: PRODUCT_NAME,
@@ -60,8 +60,8 @@ export default function IARetargetingPage() {
     "Acceso al curso de Estrategias y Beneficios Fiscales.",
     'Acceso al "Fiscalathor IA - Fiscal" (Agente IA).',
     'Acceso a "Norma - tu IA Contable" (Agente IA).',
-    "Reprograma tu Relacion con el dinero - Finanzas para contadores.",
-    "Mentoria FONACOT en vivo.",
+    "Reprograma tu Relación con el dinero - Finanzas para contadores.",
+    "Mentoría FONACOT en vivo.",
   ];
 
   const packageValues = [
@@ -70,13 +70,13 @@ export default function IARetargetingPage() {
     "Curso de Estrategias y Beneficios Fiscales - valor $4,387 MXN",
     "Fiscalathor IA - Fiscal (Agente IA) - valor $4,387 MXN",
     "Norma - tu IA Contable (Agente IA) - valor $4,387 MXN",
-    "Reprograma tu Relacion con el dinero - valor $1,527 MXN",
-    "Mentoria FONACOT en vivo - valor $1,527 MXN",
+    "Reprograma tu Relación con el dinero - valor $1,527 MXN",
+    "Mentoría FONACOT en vivo - valor $1,527 MXN",
   ];
 
   const valuePoints = [
-    "No compras una sola clase: compras una estructura completa de evolucion contable.",
-    "Tienes acceso a herramientas, sesiones y agentes IA que se complementan entre si.",
+    "No compras una sola clase: compras una estructura completa de evolución contable.",
+    "Tienes acceso a herramientas, sesiones y agentes IA que se complementan entre sí.",
     "Entras con condiciones especiales por tiempo limitado.",
     "Pagas $3,387 MXN por contenidos con valor acumulado de $22,922 MXN.",
   ];
@@ -123,7 +123,7 @@ export default function IARetargetingPage() {
           <div className="absolute inset-y-0 right-0 hidden w-[54%] lg:block">
             <img
               src={DESKTOP_BG}
-              alt="EstrategIA Evolucion Contable"
+              alt="EstrategIA Evolución Contable"
               className="absolute bottom-0 right-[3%] h-[78%] w-auto max-w-none object-contain object-right-bottom opacity-[0.92] xl:h-[86%]"
             />
           </div>
@@ -131,7 +131,7 @@ export default function IARetargetingPage() {
           <div className="absolute inset-0 lg:hidden">
             <img
               src={MOBILE_BG}
-              alt="EstrategIA Evolucion Contable"
+              alt="EstrategIA Evolución Contable"
               className="absolute bottom-[7%] right-[-6%] h-[48%] w-auto max-w-none object-contain object-right-bottom opacity-[0.88]"
             />
           </div>
@@ -153,7 +153,7 @@ export default function IARetargetingPage() {
             <div className="text-left leading-none">
               <p className="text-sm font-black tracking-tight text-white">CEFIN</p>
               <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">
-                Estrategia y evolucion contable
+                Estrategia y evolución contable
               </p>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default function IARetargetingPage() {
                   <span className="block text-cyan-300">
                     Estrateg<span className="text-lime-300">IA</span>
                   </span>
-                  <span className="mt-[-0.12em] block text-cyan-300">Evolucion</span>
+                  <span className="mt-[-0.12em] block text-cyan-300">Evolución</span>
                   <span className="mt-[-0.12em] block text-cyan-300">Contable</span>
                 </h1>
               </div>
@@ -197,9 +197,9 @@ export default function IARetargetingPage() {
               <p className="max-w-[42rem] text-lg leading-relaxed text-slate-200 sm:text-xl">
                 Si ya viste la clase gratuita y entendiste que la IA no es moda
                 sino ventaja competitiva, esta es tu oportunidad para entrar a la
-                version completa con una oferta especial que concentra sesiones,
+                versión completa con una oferta especial que concentra sesiones,
                 cursos, agentes IA y herramientas pensadas para acelerar y elevar
-                tu practica contable.
+                tu práctica contable.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
@@ -219,7 +219,7 @@ export default function IARetargetingPage() {
                   Acceso por 12 meses
                 </span>
                 <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
-                  Enfoque practico
+                  Enfoque práctico
                 </span>
                 <span className="rounded-full border border-cyan-400/16 bg-cyan-400/8 px-4 py-2 text-cyan-200">
                   Perfil contable + IA
@@ -242,8 +242,8 @@ export default function IARetargetingPage() {
 
                 <p className="mt-4 leading-relaxed text-slate-300">
                   Accede a un paquete completo de contenidos, sesiones en vivo y
-                  agentes IA pensados para contadores que quieren usar tecnologia
-                  con mas estructura, criterio y ventaja competitiva.
+                  agentes IA pensados para contadores que quieren usar tecnología
+                  con más estructura, criterio y ventaja competitiva.
                 </p>
 
                 <div className="mt-8">
@@ -290,7 +290,7 @@ export default function IARetargetingPage() {
                 </a>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-slate-400">
-                  Oferta dirigida a personas que ya mostraron interes en la clase
+                  Oferta dirigida a personas que ya mostraron interés en la clase
                   gratuita.
                 </p>
               </div>
@@ -313,10 +313,10 @@ export default function IARetargetingPage() {
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-slate-300">
                 Muchos contadores prueban herramientas, pero siguen perdiendo
-                tiempo, sin estructura, sin prompts utiles y sin una forma clara
-                de llevar la tecnologia a resultados reales. Esta oferta junta en
-                una sola inversion varios recursos que normalmente comprarias por
-                separado para ayudarte a avanzar mas rapido.
+                tiempo, sin estructura, sin prompts útiles y sin una forma clara
+                de llevar la tecnología a resultados reales. Esta oferta junta en
+                una sola inversión varios recursos que normalmente comprarías por
+                separado para ayudarte a avanzar más rápido.
               </p>
             </div>
           </div>
@@ -384,7 +384,7 @@ export default function IARetargetingPage() {
         <section className="relative z-20 mx-auto max-w-5xl px-6 pb-20 pt-8 lg:px-12">
           <div className="rounded-[2rem] border border-cyan-400/18 bg-gradient-to-br from-cyan-400/12 to-white/[0.03] p-8 text-center lg:p-12">
             <p className="font-mono text-sm font-black uppercase tracking-[0.24em] text-cyan-300">
-              Ultimo paso
+              Último paso
             </p>
 
             <h2 className="mt-4 text-3xl font-black uppercase leading-tight md:text-5xl">
@@ -395,8 +395,8 @@ export default function IARetargetingPage() {
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
               Si ya decidiste que quieres evolucionar como contador con ayuda de
-              IA, esta es una forma mucho mas inteligente de entrar: con una sola
-              inversion accedes a contenidos y herramientas con mucho mas valor
+              IA, esta es una forma mucho más inteligente de entrar: con una sola
+              inversión accedes a contenidos y herramientas con mucho más valor
               del que pagas hoy.
             </p>
 

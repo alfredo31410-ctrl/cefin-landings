@@ -28,10 +28,10 @@ export default function ResicoPersonasFisicasPage() {
   };
 
   useEffect(() => {
-    document.title = "RESICO Personas FÃ­sicas | Clase Gratuita en Vivo | CEFIN";
+    document.title = "RESICO Personas Físicas | Clase Gratuita en Vivo | CEFIN";
 
     trackEvent("ViewContent", {
-      content_name: "RESICO Personas FÃ­sicas | Landing",
+      content_name: "RESICO Personas Físicas | Landing",
       content_category: "Clase gratuita",
     });
   }, []);
@@ -92,7 +92,6 @@ export default function ResicoPersonasFisicasPage() {
       </noscript>
 
       <main className="relative min-h-screen overflow-x-hidden bg-[#09090f] text-white">
-        {/* Fondo base */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#09090f,#12111a,#09090f)]" />
           <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,0.10)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.10)_1px,transparent_1px)] [background-size:26px_26px]" />
@@ -114,29 +113,26 @@ export default function ResicoPersonasFisicasPage() {
           />
         </div>
 
-        {/* Imagen de fondo desktop */}
         <div className="pointer-events-none absolute inset-0 z-10 hidden lg:block">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol GalvÃ¡n"
+            alt="Marisol Galván"
             className="absolute bottom-0 right-[8%] h-[92%] w-auto max-w-none object-contain opacity-95"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#09090f] via-[#09090f]/58 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#09090f] via-[#09090f]/90 to-transparent" />
         </div>
 
-        {/* Imagen de fondo mobile/tablet */}
         <div className="pointer-events-none absolute inset-0 z-10 lg:hidden">
           <img
             src="https://cefin-landings-z9uk.vercel.app/resico/marisol-resico.png"
-            alt="Marisol GalvÃ¡n"
+            alt="Marisol Galván"
             className="absolute inset-0 h-full w-full object-cover object-[center_top] opacity-80"
           />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,6,12,0.58)_0%,rgba(8,8,16,0.64)_22%,rgba(10,10,18,0.60)_48%,rgba(9,9,15,0.84)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#09090f] via-[#09090f]/95 to-transparent" />
         </div>
 
-        {/* Header */}
         <header className="relative z-30">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
             <div className="flex items-center gap-3">
@@ -144,7 +140,7 @@ export default function ResicoPersonasFisicasPage() {
               <div>
                 <p className="text-2xl font-black tracking-tight">CEFIN</p>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-white/60">
-                  FormaciÃ³n contable y fiscal
+                  Formación contable y fiscal
                 </p>
               </div>
             </div>
@@ -158,7 +154,6 @@ export default function ResicoPersonasFisicasPage() {
           </div>
         </header>
 
-        {/* Hero */}
         <section className="relative z-30">
           <div className="mx-auto flex min-h-[calc(100vh-88px)] max-w-7xl items-center px-6 pb-12 pt-6 lg:px-10 lg:pb-16">
             <div className="w-full max-w-3xl space-y-6">
@@ -171,23 +166,23 @@ export default function ResicoPersonasFisicasPage() {
               </h1>
 
               <h2 className="mt-[-6px] text-xl font-extrabold uppercase tracking-tight text-white sm:text-3xl lg:text-4xl xl:text-5xl">
-                Personas FÃ­sicas
+                Personas Físicas
               </h2>
 
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70 sm:text-base">
-                Impartido por Marisol GalvÃ¡n
+                Impartido por Marisol Galván
               </p>
 
               <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-                Una clase diseÃ±ada para contadores que necesitan entender con claridad
-                cÃ³mo aplicar RESICO en personas fÃ­sicas, detectar errores comunes y
-                explicar este rÃ©gimen con mÃ¡s seguridad frente a sus clientes.
+                Una clase diseñada para contadores que necesitan entender con claridad
+                cómo aplicar RESICO en personas físicas, detectar errores comunes y
+                explicar este régimen con más seguridad frente a sus clientes.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/20 text-xl">
-                    ðŸ“…
+                    📅
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
@@ -199,7 +194,7 @@ export default function ResicoPersonasFisicasPage() {
 
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-fuchsia-500/20 text-xl">
-                    â°
+                    ⏰
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
@@ -219,22 +214,22 @@ export default function ResicoPersonasFisicasPage() {
                 </button>
 
                 <p className="text-sm font-semibold text-white/65">
-                  Cupo limitado para la sesiÃ³n en vivo.
+                  Cupo limitado para la sesión en vivo.
                 </p>
               </div>
 
               <div className="grid gap-4 pt-2 sm:grid-cols-2">
                 {[
-                  "Entiende cuÃ¡ndo sÃ­ aplica RESICO PF y cuÃ¡ndo no.",
+                  "Entiende cuándo sí aplica RESICO PF y cuándo no.",
                   "Evita errores comunes que le cuestan dinero al cliente.",
                   "Aprende a explicarlo con criterio y seguridad.",
-                  "LlÃ©vate claridad prÃ¡ctica, no teorÃ­a suelta.",
+                  "Llévate claridad práctica, no teoría suelta.",
                 ].map((item) => (
                   <div
                     key={item}
                     className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium text-white/80 backdrop-blur"
                   >
-                    <span className="mr-2 text-fuchsia-400">â—</span>
+                    <span className="mr-2 text-fuchsia-400">●</span>
                     {item}
                   </div>
                 ))}
@@ -243,13 +238,12 @@ export default function ResicoPersonasFisicasPage() {
           </div>
         </section>
 
-        {/* Bloque de conexiÃ³n */}
         <section className="relative z-30 border-t border-white/10 bg-black/20">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
             <div className="grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <p className="text-sm font-black uppercase tracking-[0.25em] text-fuchsia-300">
-                  Â¿Por quÃ© entrar a esta clase?
+                  ¿Por qué entrar a esta clase?
                 </p>
                 <h3 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
                   Porque entender RESICO no es lo mismo que saber aplicarlo.
@@ -258,13 +252,13 @@ export default function ResicoPersonasFisicasPage() {
 
               <div className="space-y-5 lg:col-span-7">
                 <p className="text-lg leading-relaxed text-white/75">
-                  Muchos contadores han leÃ­do sobre el rÃ©gimen, pero cuando llega
-                  el momento de revisar casos reales, dar una recomendaciÃ³n o
+                  Muchos contadores han leído sobre el régimen, pero cuando llega
+                  el momento de revisar casos reales, dar una recomendación o
                   explicarle algo al cliente, aparece la duda.
                 </p>
                 <p className="text-lg leading-relaxed text-white/75">
-                  Esta clase estÃ¡ pensada para darte una base mÃ¡s clara, mÃ¡s
-                  prÃ¡ctica y mÃ¡s Ãºtil para trabajar RESICO Personas FÃ­sicas con
+                  Esta clase está pensada para darte una base más clara, más
+                  práctica y más útil para trabajar RESICO Personas Físicas con
                   criterio profesional.
                 </p>
               </div>
@@ -272,7 +266,6 @@ export default function ResicoPersonasFisicasPage() {
           </div>
         </section>
 
-        {/* CTA final */}
         <section className="relative z-30">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
             <div className="rounded-[2rem] border border-white/10 bg-gradient-to-r from-white/[0.07] to-white/[0.03] p-8 shadow-2xl backdrop-blur md:p-10">
@@ -285,8 +278,8 @@ export default function ResicoPersonasFisicasPage() {
                     Clase gratuita en vivo para contadores
                   </h4>
                   <p className="mt-2 max-w-2xl text-white/70">
-                    RegÃ­strate ahora y asegura tu acceso a la sesiÃ³n de RESICO
-                    Personas FÃ­sicas.
+                    Regístrate ahora y asegura tu acceso a la sesión de RESICO
+                    Personas Físicas.
                   </p>
                 </div>
 
@@ -301,15 +294,13 @@ export default function ResicoPersonasFisicasPage() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="relative z-30 border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>FormaciÃ³n prÃ¡ctica para contadores que quieren trabajar con mÃ¡s seguridad.</p>
+            <p>Formación práctica para contadores que quieren trabajar con más seguridad.</p>
           </div>
         </footer>
 
-        {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#05050a]/85 p-3 backdrop-blur-md sm:p-4">
             <div className="relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
@@ -318,7 +309,7 @@ export default function ResicoPersonasFisicasPage() {
                 className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
                 aria-label="Cerrar modal"
               >
-                Ã—
+                ×
               </button>
 
               <div className="shrink-0 px-5 pb-4 pt-7 text-center sm:px-8 sm:pb-5 sm:pt-8">
@@ -326,7 +317,7 @@ export default function ResicoPersonasFisicasPage() {
                   Clase gratuita
                 </p>
                 <h5 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  RESICO Personas FÃ­sicas
+                  RESICO Personas Físicas
                 </h5>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.

@@ -10,11 +10,11 @@ declare global {
   }
 }
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/GX1pMpBQavMKVLFE0GUMNX"; // <-- cambialo
+const WHATSAPP_URL = "https://chat.whatsapp.com/GX1pMpBQavMKVLFE0GUMNX"; // <-- cámbialo
 const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
+  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 const BACKGROUND_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
+  "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 
 export default function GraciasConstructorasPage() {
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
@@ -121,7 +121,7 @@ export default function GraciasConstructorasPage() {
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-6xl xl:text-[5.5rem]">
               Ya casi
               <br />
-              estas dentro
+              estás dentro
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -129,12 +129,12 @@ export default function GraciasConstructorasPage() {
               <span className="font-black text-lime-300">
                 Asesor Fiscal para Constructoras
               </span>{" "}
-              ya quedo.
+              ya quedó.
             </p>
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-              Ahora entra al grupo de WhatsApp porque por ahi se comparte el
-              acceso, recordatorios y avisos importantes de la sesion.
+              Ahora entra al grupo de WhatsApp porque por ahí se comparte el
+              acceso, recordatorios y avisos importantes de la sesión.
             </p>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
@@ -167,22 +167,22 @@ export default function GraciasConstructorasPage() {
                 </button>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
-                  Este es el paso mas importante para no perder tu acceso.
+                  Este es el paso más importante para no perder tu acceso.
                 </p>
               </div>
             </div>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
-                "Te llegaran recordatorios",
-                "Recibiras el acceso a la sesion",
+                "Te llegarán recordatorios",
+                "Recibirás el acceso a la sesión",
                 "Evitas perder avisos importantes",
               ].map((item) => (
                 <div
                   key={item}
                   className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium text-white/75"
                 >
-                  <span className="mr-2 text-lime-300">●</span>
+                  <span className="mr-2 text-lime-300">•</span>
                   {item}
                 </div>
               ))}

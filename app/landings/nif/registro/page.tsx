@@ -60,13 +60,13 @@ export default function EstadosFinancierosLandingPage() {
 
   const bullets = [
     "Aprende a leer estados financieros con criterio contable.",
-    "Conecta la informacion financiera con decisiones reales.",
+    "Conecta la información financiera con decisiones reales.",
     "Evita errores comunes al interpretar reportes.",
   ];
 
   const liveDay = [
     {
-      day: "Dia",
+      day: "Día",
       date: "12 de mayo",
       title: "Estados financieros con NIF",
       detail: "La base para entender si una empresa gana, pierde o solo aparenta estar bien.",
@@ -75,10 +75,10 @@ export default function EstadosFinancierosLandingPage() {
 
   const previewClasses = [
     "Base y mentalidad NIF",
-    "Postulados basicos aplicados",
-    "Registro contable con logica real",
-    "Estados financieros que si sirven",
-    "De contador operativo a asesor estrategico",
+    "Postulados básicos aplicados",
+    "Registro contable con lógica real",
+    "Estados financieros que sí sirven",
+    "De contador operativo a asesor estratégico",
   ];
 
   return (
@@ -162,7 +162,7 @@ export default function EstadosFinancierosLandingPage() {
             </h1>
 
             <div className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_60px_rgba(255,255,255,0.16)] sm:text-xl">
-              El entrenamiento gratuito para dejar de hacer numeros a ciegas
+              El entrenamiento gratuito para dejar de hacer números a ciegas
             </div>
 
             <p className="mt-5 text-sm font-black uppercase tracking-[0.16em] text-white/70">
@@ -239,7 +239,7 @@ export default function EstadosFinancierosLandingPage() {
                 Quiero registrarme gratis
               </button>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/60">
-                Cupo limitado para la sesion en vivo
+                Cupo limitado para la sesión en vivo
               </p>
             </div>
           </div>
@@ -253,7 +253,7 @@ export default function EstadosFinancierosLandingPage() {
                 className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
                 aria-label="Cerrar modal"
               >
-                x
+                ×
               </button>
 
               <div className="shrink-0 px-5 pb-4 pt-7 text-center sm:px-8 sm:pb-5 sm:pt-8">

@@ -99,7 +99,7 @@ export default function GraciasEstadosFinancierosPage() {
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-6xl xl:text-[5.5rem]">
               Ya casi
               <br />
-              estas dentro
+              estás dentro
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -107,19 +107,19 @@ export default function GraciasEstadosFinancierosPage() {
               <span className="font-black text-violet-300">
                 Estados Financieros con NIF
               </span>{" "}
-              ya quedo.
+              ya quedó.
             </p>
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
               Entra al grupo de WhatsApp para recibir acceso, recordatorios y
-              avisos importantes de la sesion.
+              avisos importantes de la sesión.
             </p>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                    Dia
+                    Día
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
                     12 de mayo

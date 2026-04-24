@@ -51,9 +51,9 @@ export default function RetoNifSalesPage() {
 
   const includes = [
     "5 clases en vivo de 2 horas cada una.",
-    "Aplicacion real de NIF, no teoria suelta.",
+    "Aplicación real de NIF, no teoría suelta.",
     "Criterio profesional para interpretar estados financieros.",
-    "Ruta para pasar de contador operativo a asesor estrategico.",
+    "Ruta para pasar de contador operativo a asesor estratégico.",
   ];
 
   const syllabus = [
@@ -62,46 +62,46 @@ export default function RetoNifSalesPage() {
       title: "El verdadero juego de las NIF",
       accent: "from-blue-500 to-cyan-300",
       objective:
-        "Romper paradigmas y entender por que las NIF cambian tu valor en el mercado.",
+        "Romper paradigmas y entender por qué las NIF cambian tu valor en el mercado.",
       topics: [
         "El error del contador tradicional: enfoque solo fiscal.",
-        "Contador operativo vs asesor estrategico.",
-        "Que son las NIF y para que sirven realmente.",
+        "Contador operativo vs asesor estratégico.",
+        "Qué son las NIF y para qué sirven realmente.",
         "Contabilidad financiera vs fiscal.",
-        "Informacion para SAT vs informacion para decisiones.",
+        "Información para SAT vs información para decisiones.",
         "Principios de contabilidad, NIF y convergencia internacional.",
         "Estructura de las NIF y marco conceptual NIF A-1.",
       ],
       practice:
-        "Identificacion de errores comunes y ejercicio para detectar si una contabilidad sirve para tomar decisiones.",
+        "Identificación de errores comunes y ejercicio para detectar si una contabilidad sirve para tomar decisiones.",
     },
     {
       label: "Clase 2",
-      title: "Postulados basicos aplicados",
+      title: "Postulados básicos aplicados",
       accent: "from-violet-500 to-fuchsia-400",
       objective:
-        "Entender y aplicar postulados basicos en casos reales donde empieza el criterio profesional.",
+        "Entender y aplicar postulados básicos en casos reales donde empieza el criterio profesional.",
       topics: [
-        "Que son los postulados basicos NIF A-2.",
-        "Sustancia economica.",
-        "Devengacion contable.",
-        "Asociacion de costos y gastos.",
+        "Qué son los postulados básicos NIF A-2.",
+        "Sustancia económica.",
+        "Devengación contable.",
+        "Asociación de costos y gastos.",
         "Consistencia.",
         "Errores comunes por no aplicarlos.",
         "Impacto fiscal vs impacto contable.",
       ],
       practice:
-        "Casos de ingresos incorrectos, gastos no deducibles vs contables y registros bajo sustancia economica.",
+        "Casos de ingresos incorrectos, gastos no deducibles vs contables y registros bajo sustancia económica.",
     },
     {
       label: "Clase 3",
       title: "Registro contable con NIF",
       accent: "from-emerald-500 to-lime-300",
       objective:
-        "Dominar el registro contable con base en NIF, usando logica y no memoria.",
+        "Dominar el registro contable con base en NIF, usando lógica y no memoria.",
       topics: [
         "Concepto de cuenta, activo, pasivo y capital.",
-        "Reglas de cargo y abono con logica real.",
+        "Reglas de cargo y abono con lógica real.",
         "NIF C-1: efectivo.",
         "NIF C-3: clientes.",
         "NIF C-4: inventarios.",
@@ -109,11 +109,11 @@ export default function RetoNifSalesPage() {
         "NIF C-9 y C-19: pasivos.",
       ],
       practice:
-        "Registro de venta, compra, IVA y prestamos, con ejercicio guiado y validacion de errores comunes.",
+        "Registro de venta, compra, IVA y préstamos, con ejercicio guiado y validación de errores comunes.",
     },
     {
       label: "Clase 4",
-      title: "Estados financieros que si sirven",
+      title: "Estados financieros que sí sirven",
       accent: "from-orange-500 to-amber-300",
       objective:
         "Aprender a construir e interpretar estados financieros con criterio y utilidad real.",
@@ -133,17 +133,17 @@ export default function RetoNifSalesPage() {
       title: "De contador a asesor estrategico",
       accent: "from-red-500 to-orange-300",
       objective:
-        "Convertir el conocimiento de NIF en valor economico real para el contador y sus clientes.",
+        "Convertir el conocimiento de NIF en valor económico real para el contador y sus clientes.",
       topics: [
-        "Como usar NIF para tomar decisiones.",
-        "Como asesorar clientes con informacion financiera.",
-        "Como cobrar mejor por tu criterio.",
-        "Que si le importa al cliente: crecer, ganar dinero y entender su negocio.",
-        "Conexion entre NIF, estados financieros y estrategia.",
-        "Introduccion al uso de IA en contabilidad.",
+        "Cómo usar NIF para tomar decisiones.",
+        "Cómo asesorar clientes con información financiera.",
+        "Cómo cobrar mejor por tu criterio.",
+        "Qué sí le importa al cliente: crecer, ganar dinero y entender su negocio.",
+        "Conexión entre NIF, estados financieros y estrategia.",
+        "Introducción al uso de IA en contabilidad.",
       ],
       practice:
-        "Caso completo desde registro, estados financieros e interpretacion hasta diagnostico tipo consultor.",
+        "Caso completo desde registro, estados financieros e interpretación hasta diagnóstico tipo consultor.",
     },
   ];
 
@@ -234,13 +234,13 @@ export default function RetoNifSalesPage() {
             </h1>
 
             <div className="mt-6 inline-flex rounded-full bg-amber-300 px-7 py-3 text-xl font-black text-black sm:text-2xl">
-              La base solida que siempre necesitaste
+              La base sólida que siempre necesitaste
             </div>
 
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/78 sm:text-xl">
               Entra al entrenamiento completo para fortalecer tu criterio con NIF,
-              leer mejor la informacion financiera y explicar tus conclusiones con
-              mas seguridad frente a clientes y equipos.
+              leer mejor la información financiera y explicar tus conclusiones con
+              más seguridad frente a clientes y equipos.
             </p>
 
             <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-2">
@@ -305,11 +305,11 @@ export default function RetoNifSalesPage() {
                 Temario completo
               </p>
               <h2 className="mt-4 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white sm:text-6xl">
-                Taller Practico de NIF
+                Taller Práctico de NIF
               </h2>
               <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white/68">
-                5 clases en vivo de 2 horas por sesion, con enfoque en
-                aplicacion real, criterio profesional e impacto directo en el
+                5 clases en vivo de 2 horas por sesión, con enfoque en
+                aplicación real, criterio profesional e impacto directo en el
                 negocio.
               </p>
             </div>
@@ -360,7 +360,7 @@ export default function RetoNifSalesPage() {
 
                     <div className="mt-6 rounded-2xl border border-amber-300/15 bg-amber-300/10 p-4">
                       <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-200">
-                        Parte practica
+                        Parte práctica
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-white/76">
                         {item.practice}
