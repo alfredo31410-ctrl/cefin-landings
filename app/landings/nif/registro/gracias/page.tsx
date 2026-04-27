@@ -1,7 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
@@ -10,11 +11,19 @@ declare global {
   }
 }
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/HJbdr2Xwnkn8YumgEMPUvU"; // <-- cambia esto
-const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/alfredo.png";
+const WHATSAPP_GROUPS = {
+  default: "https://chat.whatsapp.com/HJbdr2Xwnkn8YumgEMPUvU",
+  ig: "https://chat.whatsapp.com/G0Y5bkSHQxwIc1hrujZkLQ",
+  google: "https://chat.whatsapp.com/FbRR8asMMBDEwZgNtJNXSF",
+  tiktok: "https://chat.whatsapp.com/JvKIw50x11U5Z3KphHCdgA",
+  yt: "https://chat.whatsapp.com/KsCKALXvsGTGoNzw7L2ad9",
+} as const;
+
+const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
 export default function GraciasEstadosFinancierosPage() {
+  const searchParams = useSearchParams();
+
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
 
@@ -25,6 +34,23 @@ export default function GraciasEstadosFinancierosPage() {
 
     window.fbq("track", event);
   };
+
+  const trafficSource = useMemo(() => {
+    const rawSource =
+      searchParams.get("src") ||
+      searchParams.get("source") ||
+      searchParams.get("channel") ||
+      "default";
+
+    return rawSource.toLowerCase();
+  }, [searchParams]);
+
+  const whatsappUrl = useMemo(() => {
+    return (
+      WHATSAPP_GROUPS[trafficSource as keyof typeof WHATSAPP_GROUPS] ||
+      WHATSAPP_GROUPS.default
+    );
+  }, [trafficSource]);
 
   useEffect(() => {
     document.title = "Registro completado | Estados Financieros con NIF | CEFIN";
@@ -121,12 +147,8 @@ export default function GraciasEstadosFinancierosPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Día
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">
-                    12 de mayo
-                  </p>
+                  <p className="mt-1 text-xl font-black text-white">12 de mayo</p>
                 </div>
-
-                
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
@@ -140,12 +162,19 @@ export default function GraciasEstadosFinancierosPage() {
 
               <button
                 onClick={() =>
-                  window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")
+                  window.open(whatsappUrl, "_blank", "noopener,noreferrer")
                 }
                 className="mt-6 inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
               >
                 Entrar al grupo de WhatsApp
               </button>
+
+              <p className="mt-3 text-sm font-semibold text-white/55">
+                Fuente detectada:{" "}
+                <span className="font-black uppercase text-white/80">
+                  {trafficSource}
+                </span>
+              </p>
             </div>
           </div>
         </div>
