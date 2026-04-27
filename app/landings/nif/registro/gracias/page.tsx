@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
@@ -23,6 +23,7 @@ const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
 export default function GraciasEstadosFinancierosPage() {
   const searchParams = useSearchParams();
+  const [resolvedTrafficSource, setResolvedTrafficSource] = useState("default");
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
@@ -35,22 +36,30 @@ export default function GraciasEstadosFinancierosPage() {
     window.fbq("track", event);
   };
 
-  const trafficSource = useMemo(() => {
+  useEffect(() => {
     const rawSource =
       searchParams.get("src") ||
       searchParams.get("source") ||
       searchParams.get("channel") ||
+      (typeof window !== "undefined"
+        ? window.sessionStorage.getItem("nifTrafficSource")
+        : null) ||
       "default";
 
-    return rawSource.toLowerCase();
+    const normalizedSource = rawSource.toLowerCase();
+    setResolvedTrafficSource(normalizedSource);
+
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
+    }
   }, [searchParams]);
 
   const whatsappUrl = useMemo(() => {
     return (
-      WHATSAPP_GROUPS[trafficSource as keyof typeof WHATSAPP_GROUPS] ||
+      WHATSAPP_GROUPS[resolvedTrafficSource as keyof typeof WHATSAPP_GROUPS] ||
       WHATSAPP_GROUPS.default
     );
-  }, [trafficSource]);
+  }, [resolvedTrafficSource]);
 
   useEffect(() => {
     document.title = "Registro completado | Estados Financieros con NIF | CEFIN";
@@ -172,7 +181,7 @@ export default function GraciasEstadosFinancierosPage() {
               <p className="mt-3 text-sm font-semibold text-white/55">
                 Fuente detectada:{" "}
                 <span className="font-black uppercase text-white/80">
-                  {trafficSource}
+                  {resolvedTrafficSource}
                 </span>
               </p>
             </div>
