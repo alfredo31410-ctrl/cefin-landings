@@ -2,7 +2,6 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
@@ -18,7 +17,6 @@ const HERO_IMAGE_URL =
 
 export default function EstadosFinancierosLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const searchParams = useSearchParams();
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
@@ -41,17 +39,20 @@ export default function EstadosFinancierosLandingPage() {
   }, []);
 
   useEffect(() => {
-    const source =
-      searchParams.get("src") ||
-      searchParams.get("source") ||
-      searchParams.get("channel");
+    if (typeof window === "undefined") return;
 
-    if (!source || typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const source =
+      params.get("src") ||
+      params.get("source") ||
+      params.get("channel");
+
+    if (!source) return;
 
     const normalizedSource = source.toLowerCase();
     window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
     window.localStorage.setItem("nifTrafficSource", normalizedSource);
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
