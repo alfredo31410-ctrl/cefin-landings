@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
@@ -15,6 +15,7 @@ const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function ResicoPersonasFisicasPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const lastAdvancedMatchRef = useRef("");
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
@@ -25,6 +26,70 @@ export default function ResicoPersonasFisicasPage() {
     }
 
     window.fbq("track", event);
+  };
+
+  const getNormalizedText = (value: string | null | undefined) =>
+    (value ?? "").trim();
+
+  const getPhoneDigits = (value: string | null | undefined) =>
+    (value ?? "").replace(/\D/g, "");
+
+  const buildAdvancedMatchData = (formRoot: ParentNode) => {
+    const fields = Array.from(
+      formRoot.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+        "input, textarea"
+      )
+    );
+
+    const findField = (patterns: string[]) =>
+      fields.find((field) => {
+        const fieldText = [
+          field.name,
+          field.id,
+          field.placeholder,
+          field.getAttribute("aria-label"),
+          field
+            .closest("div")
+            ?.querySelector("label")
+            ?.textContent,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        return patterns.some((pattern) => fieldText.includes(pattern));
+      });
+
+    const firstNameField = findField(["nombre"]);
+    const lastNameField = findField(["apellido"]);
+    const emailField = findField(["email", "correo"]);
+    const phoneField = findField(["whatsapp", "telefono", "tel"]);
+
+    const advancedMatchData: Record<string, string> = {};
+    const firstName = getNormalizedText(firstNameField?.value);
+    const lastName = getNormalizedText(lastNameField?.value);
+    const email = getNormalizedText(emailField?.value).toLowerCase();
+    const phone = getPhoneDigits(phoneField?.value);
+
+    if (firstName) advancedMatchData.fn = firstName;
+    if (lastName) advancedMatchData.ln = lastName;
+    if (email) advancedMatchData.em = email;
+    if (phone) advancedMatchData.ph = phone;
+
+    return advancedMatchData;
+  };
+
+  const syncAdvancedMatching = (formRoot: ParentNode) => {
+    if (typeof window === "undefined" || !window.fbq) return;
+
+    const advancedMatchData = buildAdvancedMatchData(formRoot);
+    if (!Object.keys(advancedMatchData).length) return;
+
+    const serialized = JSON.stringify(advancedMatchData);
+    if (serialized === lastAdvancedMatchRef.current) return;
+
+    window.fbq("init", META_PIXEL_ID, advancedMatchData);
+    lastAdvancedMatchRef.current = serialized;
   };
 
   useEffect(() => {
@@ -54,6 +119,48 @@ export default function ResicoPersonasFisicasPage() {
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const formRoot = document.querySelector(`.${FORM_CLASS}`);
+    if (!formRoot) return;
+
+    const handleFieldInteraction = () => syncAdvancedMatching(formRoot);
+
+    const bindListeners = () => {
+      const formFields = formRoot.querySelectorAll("input, textarea, select");
+      formFields.forEach((field) => {
+        field.addEventListener("input", handleFieldInteraction);
+        field.addEventListener("change", handleFieldInteraction);
+        field.addEventListener("blur", handleFieldInteraction);
+      });
+    };
+
+    const unbindListeners = () => {
+      const formFields = formRoot.querySelectorAll("input, textarea, select");
+      formFields.forEach((field) => {
+        field.removeEventListener("input", handleFieldInteraction);
+        field.removeEventListener("change", handleFieldInteraction);
+        field.removeEventListener("blur", handleFieldInteraction);
+      });
+    };
+
+    const observer = new MutationObserver(() => {
+      unbindListeners();
+      bindListeners();
+      syncAdvancedMatching(formRoot);
+    });
+
+    observer.observe(formRoot, { childList: true, subtree: true });
+    bindListeners();
+    syncAdvancedMatching(formRoot);
+
+    return () => {
+      observer.disconnect();
+      unbindListeners();
+    };
   }, [isModalOpen]);
 
   return (
