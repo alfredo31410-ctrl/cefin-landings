@@ -48,7 +48,9 @@ export default function EstadosFinancierosLandingPage() {
 
     if (!source || typeof window === "undefined") return;
 
-    window.sessionStorage.setItem("nifTrafficSource", source.toLowerCase());
+    const normalizedSource = source.toLowerCase();
+    window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
+    window.localStorage.setItem("nifTrafficSource", normalizedSource);
   }, [searchParams]);
 
   useEffect(() => {

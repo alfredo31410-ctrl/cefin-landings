@@ -42,7 +42,8 @@ export default function GraciasEstadosFinancierosPage() {
       searchParams.get("source") ||
       searchParams.get("channel") ||
       (typeof window !== "undefined"
-        ? window.sessionStorage.getItem("nifTrafficSource")
+        ? window.sessionStorage.getItem("nifTrafficSource") ||
+          window.localStorage.getItem("nifTrafficSource")
         : null) ||
       "default";
 
@@ -51,6 +52,7 @@ export default function GraciasEstadosFinancierosPage() {
 
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
+      window.localStorage.setItem("nifTrafficSource", normalizedSource);
     }
   }, [searchParams]);
 
