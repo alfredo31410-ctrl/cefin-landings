@@ -193,10 +193,10 @@ export default function EstadosFinancierosLandingPage() {
             </div>
 
             <div className="mt-6 flex flex-col gap-2 text-xl font-black uppercase sm:text-3xl">
-              <p>11:00 AM (CDMX)</p>
+              <p>11:00 AM (HORARIO CDMX)</p>
               <p>
                 Gratuito - en vivo{" "}
-                <span className="text-violet-500">O</span>
+                <span className="text-violet-500"></span>
               </p>
             </div>
 

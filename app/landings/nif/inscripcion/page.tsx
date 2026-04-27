@@ -237,6 +237,26 @@ export default function RetoNifSalesPage() {
               La base sólida que siempre necesitaste
             </div>
 
+            <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4 backdrop-blur">
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">
+                  Fecha
+                </p>
+                <p className="mt-1 text-2xl font-black uppercase text-white">
+                  18 al 22 de mayo
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4 backdrop-blur">
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">
+                  Horario
+                </p>
+                <p className="mt-1 text-2xl font-black uppercase text-white">
+                  11:00 AM (HORARIO CDMX)
+                </p>
+              </div>
+            </div>
+
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/78 sm:text-xl">
               Entra al entrenamiento completo para fortalecer tu criterio con NIF,
               leer mejor la información financiera y explicar tus conclusiones con
@@ -282,6 +302,25 @@ export default function RetoNifSalesPage() {
                 Hoy puedes entrar por
               </p>
               <p className="mt-1 text-5xl font-black text-white">{PRICE}</p>
+            </div>
+
+            <div className="mt-6 space-y-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/45">
+                  Fecha
+                </p>
+                <p className="mt-1 text-lg font-black uppercase text-white">
+                  18 al 22 de mayo
+                </p>
+              </div>
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/45">
+                  Horario
+                </p>
+                <p className="mt-1 text-lg font-black uppercase text-white">
+                  11:00 AM (HORARIO CDMX)
+                </p>
+              </div>
             </div>
 
             <a
