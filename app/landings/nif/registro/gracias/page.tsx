@@ -3,13 +3,13 @@
 import Script from "next/script";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
-
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
 
 const WHATSAPP_GROUPS = {
   default: "https://chat.whatsapp.com/HJbdr2Xwnkn8YumgEMPUvU",
@@ -25,25 +25,14 @@ function GraciasEstadosFinancierosContent() {
   const searchParams = useSearchParams();
   const [resolvedTrafficSource, setResolvedTrafficSource] = useState("default");
 
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   useEffect(() => {
     const rawSource =
       searchParams.get("src") ||
       searchParams.get("source") ||
       searchParams.get("channel") ||
       (typeof window !== "undefined"
-        ? window.sessionStorage.getItem("nifTrafficSource") ||
-          window.localStorage.getItem("nifTrafficSource")
+        ? window.sessionStorage.getItem(NIF_TRAFFIC_SOURCE_STORAGE_KEY) ||
+          window.localStorage.getItem(NIF_TRAFFIC_SOURCE_STORAGE_KEY)
         : null) ||
       "default";
 
@@ -51,8 +40,14 @@ function GraciasEstadosFinancierosContent() {
     setResolvedTrafficSource(normalizedSource);
 
     if (typeof window !== "undefined") {
-      window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
-      window.localStorage.setItem("nifTrafficSource", normalizedSource);
+      window.sessionStorage.setItem(
+        NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+        normalizedSource,
+      );
+      window.localStorage.setItem(
+        NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+        normalizedSource,
+      );
     }
   }, [searchParams]);
 
@@ -66,7 +61,7 @@ function GraciasEstadosFinancierosContent() {
   useEffect(() => {
     document.title = "Registro completado | Estados Financieros con NIF | CEFIN";
 
-    trackEvent("CompleteRegistration", {
+    trackMetaEvent("CompleteRegistration", {
       content_name: "Estados Financieros con NIF | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
@@ -122,7 +117,7 @@ function GraciasEstadosFinancierosContent() {
             <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                  Día
+                  Día 1
                 </p>
                 <p className="mt-1 text-xl font-black text-white">12 de mayo</p>
               </div>
@@ -165,24 +160,7 @@ export default function GraciasEstadosFinancierosPage() {
       <Script
         id="meta-pixel-estados-financieros-thankyou"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -190,7 +168,7 @@ export default function GraciasEstadosFinancierosPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>

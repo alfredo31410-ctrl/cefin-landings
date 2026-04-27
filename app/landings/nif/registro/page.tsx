@@ -2,37 +2,55 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
-
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
 
 const ACTIVE_CAMPAIGN_FORM_ID = 187;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
-const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/alfredo.png";
+const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
+
+const bullets = [
+  "Aprende a leer estados financieros con criterio contable.",
+  "Conecta la información financiera con decisiones reales.",
+  "Evita errores comunes al interpretar reportes.",
+];
+
+const liveDays = [
+  {
+    day: "Día 1",
+    date: "12 de mayo",
+    title: "Estados financieros con NIF",
+    detail:
+      "La base para entender si una empresa gana, pierde o solo aparenta estar bien.",
+  },
+  {
+    day: "Día 2",
+    date: "Sorpresa",
+    title: "Clase revelada dentro del grupo",
+    detail:
+      "El segundo entrenamiento se libera solo para quienes completan su registro y entran al grupo.",
+  },
+];
+
+const previewClasses = [
+  "Base y mentalidad NIF",
+  "Postulados básicos aplicados",
+  "Registro contable con lógica real",
+  "Estados financieros que sí sirven",
+  "De contador operativo a asesor estratégico",
+];
 
 export default function EstadosFinancierosLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   useEffect(() => {
     document.title = "Estados Financieros con NIF | CEFIN";
 
-    trackEvent("ViewContent", {
+    trackMetaEvent("ViewContent", {
       content_name: "Estados Financieros con NIF",
       content_category: "Clase gratuita",
     });
@@ -43,15 +61,22 @@ export default function EstadosFinancierosLandingPage() {
 
     const params = new URLSearchParams(window.location.search);
     const source =
-      params.get("src") ||
-      params.get("source") ||
-      params.get("channel");
+      params.get("src") || params.get("source") || params.get("channel");
 
     if (!source) return;
 
     const normalizedSource = source.toLowerCase();
-    window.sessionStorage.setItem("nifTrafficSource", normalizedSource);
-    window.localStorage.setItem("nifTrafficSource", normalizedSource);
+
+    // ActiveCampaign redirige fuera de React, así que persistimos la fuente
+    // antes de enviar al usuario a la thank-you page.
+    window.sessionStorage.setItem(
+      NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+      normalizedSource,
+    );
+    window.localStorage.setItem(
+      NIF_TRAFFIC_SOURCE_STORAGE_KEY,
+      normalizedSource,
+    );
   }, []);
 
   useEffect(() => {
@@ -74,52 +99,12 @@ export default function EstadosFinancierosLandingPage() {
     document.body.appendChild(script);
   }, [isModalOpen]);
 
-  const bullets = [
-    "Aprende a leer estados financieros con criterio contable.",
-    "Conecta la información financiera con decisiones reales.",
-    "Evita errores comunes al interpretar reportes.",
-  ];
-
-  const liveDay = [
-    {
-      day: "Día",
-      date: "12 de mayo",
-      title: "Estados financieros con NIF",
-      detail: "La base para entender si una empresa gana, pierde o solo aparenta estar bien.",
-    }
-  ];
-
-  const previewClasses = [
-    "Base y mentalidad NIF",
-    "Postulados básicos aplicados",
-    "Registro contable con lógica real",
-    "Estados financieros que sí sirven",
-    "De contador operativo a asesor estratégico",
-  ];
-
   return (
     <>
       <Script
         id="meta-pixel-estados-financieros"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -127,7 +112,7 @@ export default function EstadosFinancierosLandingPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
@@ -186,7 +171,7 @@ export default function EstadosFinancierosLandingPage() {
             </p>
 
             <div className="mt-8 grid max-w-4xl gap-4 sm:grid-cols-2">
-              {liveDay.map((item) => (
+              {liveDays.map((item) => (
                 <div
                   key={item.day}
                   className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.07] p-5 backdrop-blur"
@@ -209,11 +194,8 @@ export default function EstadosFinancierosLandingPage() {
             </div>
 
             <div className="mt-6 flex flex-col gap-2 text-xl font-black uppercase sm:text-3xl">
-              <p>11:00 AM (HORARIO CDMX)</p>
-              <p>
-                Gratuito - en vivo{" "}
-                <span className="text-violet-500"></span>
-              </p>
+              <p>11:00 AM (Horario CDMX)</p>
+              <p>2 días gratuitos - en vivo</p>
             </div>
 
             <div className="mt-8 grid max-w-4xl gap-3 sm:grid-cols-2">

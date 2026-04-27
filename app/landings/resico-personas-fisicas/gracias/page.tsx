@@ -2,32 +2,20 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
-
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/FLIX0a5Ph0IEOxx7otDRE8";
 
 export default function GraciasResicoPage() {
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   useEffect(() => {
     document.title = "Registro completado | RESICO Personas Físicas | CEFIN";
 
-    trackEvent("CompleteRegistration", {
+    trackMetaEvent("CompleteRegistration", {
       content_name: "RESICO Personas Físicas | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
@@ -45,24 +33,7 @@ export default function GraciasResicoPage() {
       <Script
         id="meta-pixel-resico-thankyou"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -70,7 +41,7 @@ export default function GraciasResicoPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
