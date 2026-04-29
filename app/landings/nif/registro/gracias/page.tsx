@@ -12,7 +12,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_GROUPS = {
-  default: "https://chat.whatsapp.com/HJbdr2Xwnkn8YumgEMPUvU",
+  default: "https://chat.whatsapp.com/K94VNiHB6Uv7ILiPeiBh7r",
   ig: "https://chat.whatsapp.com/G0Y5bkSHQxwIc1hrujZkLQ",
   google: "https://chat.whatsapp.com/FbRR8asMMBDEwZgNtJNXSF",
   tiktok: "https://chat.whatsapp.com/JvKIw50x11U5Z3KphHCdgA",
