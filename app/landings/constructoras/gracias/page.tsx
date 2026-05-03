@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/IfQgMwiYdxU03swJJWrf6D"; // <-- cámbialo
+const WHATSAPP_URL = "https://chat.whatsapp.com/KgwLhKrdk0EJeKAzHGM2l6"; // <-- cámbialo
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 const BACKGROUND_IMAGE_URL =
