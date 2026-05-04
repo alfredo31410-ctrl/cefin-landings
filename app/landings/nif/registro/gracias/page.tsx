@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -12,20 +13,15 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_GROUPS = {
-  default: "https://chat.whatsapp.com/K94VNiHB6Uv7ILiPeiBh7r",
-  ig: "https://chat.whatsapp.com/G0Y5bkSHQxwIc1hrujZkLQ",
-  google: "https://chat.whatsapp.com/FbRR8asMMBDEwZgNtJNXSF",
-  tiktok: "https://chat.whatsapp.com/JvKIw50x11U5Z3KphHCdgA",
-  yt: "https://chat.whatsapp.com/KsCKALXvsGTGoNzw7L2ad9",
+  default: "https://chat.whatsapp.com/JvKIw50x11U5Z3KphHCdgA",
 } as const;
 
 const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
 function GraciasEstadosFinancierosContent() {
   const searchParams = useSearchParams();
-  const [resolvedTrafficSource, setResolvedTrafficSource] = useState("default");
 
-  useEffect(() => {
+  const resolvedTrafficSource = useMemo(() => {
     const rawSource =
       searchParams.get("src") ||
       searchParams.get("source") ||
@@ -36,20 +32,21 @@ function GraciasEstadosFinancierosContent() {
         : null) ||
       "default";
 
-    const normalizedSource = rawSource.toLowerCase();
-    setResolvedTrafficSource(normalizedSource);
+    return rawSource.toLowerCase();
+  }, [searchParams]);
 
+  useEffect(() => {
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem(
         NIF_TRAFFIC_SOURCE_STORAGE_KEY,
-        normalizedSource,
+        resolvedTrafficSource,
       );
       window.localStorage.setItem(
         NIF_TRAFFIC_SOURCE_STORAGE_KEY,
-        normalizedSource,
+        resolvedTrafficSource,
       );
     }
-  }, [searchParams]);
+  }, [resolvedTrafficSource]);
 
   const whatsappUrl = useMemo(() => {
     return (
@@ -74,18 +71,20 @@ function GraciasEstadosFinancierosContent() {
     <main className="relative h-screen overflow-x-hidden overflow-y-auto bg-[#08080b] text-white">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_80%,rgba(55,86,235,0.34),transparent_24%),radial-gradient(circle_at_92%_12%,rgba(124,66,255,0.4),transparent_24%),linear-gradient(135deg,#07070a_0%,#16161b_48%,#08080b_100%)]" />
-        <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.16)_1px,transparent_1px)] [background-size:30px_30px]" />
+        <div className="absolute inset-0 opacity-[0.12] bg-[linear-gradient(rgba(255,255,255,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.16)_1px,transparent_1px)] bg-size-[30px_30px]" />
         <div className="absolute right-[-8%] top-0 h-[45%] w-[34%] rotate-12 bg-violet-500/75 blur-[1px]" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#08080b] via-[#08080b]/78 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-[#08080b] via-[#08080b]/78 to-transparent" />
       </div>
 
       <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[48%] lg:block">
-        <img
+        <Image
           src={HERO_IMAGE_URL}
           alt="Alfredo Cobos"
+          width={1000}
+          height={1000}
           className="absolute bottom-0 right-[6%] h-[86%] w-auto max-w-none object-contain opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08080b] via-[#08080b]/58 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#08080b] via-[#08080b]/58 to-transparent" />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
@@ -113,7 +112,7 @@ function GraciasEstadosFinancierosContent() {
             avisos importantes de la sesión.
           </p>
 
-          <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
+          <div className="mt-8 rounded-4xl border border-white/10 bg-white/5 p-5 backdrop-blur sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
@@ -136,7 +135,7 @@ function GraciasEstadosFinancierosContent() {
               onClick={() =>
                 window.open(whatsappUrl, "_blank", "noopener,noreferrer")
               }
-              className="mt-6 inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-90 sm:text-lg"
             >
               Entrar al grupo de WhatsApp
             </button>
