@@ -13,7 +13,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_GROUPS = {
-  default: "https://chat.whatsapp.com/JvKIw50x11U5Z3KphHCdgA",
+  default: "https://chat.whatsapp.com/KsCKALXvsGTGoNzw7L2ad9",
 } as const;
 
 const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
