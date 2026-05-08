@@ -10,7 +10,8 @@ import {
 
 const ACTIVE_CAMPAIGN_FORM_ID = 191;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
-const HERO_IMAGE_URL = "/academia-contabilidad/alfredo-academia.png";
+const HERO_IMAGE_URL =
+  "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo-academia.png";
 
 const bullets = [
   "Aprende contabilidad desde cero con enfoque claro y práctico.",

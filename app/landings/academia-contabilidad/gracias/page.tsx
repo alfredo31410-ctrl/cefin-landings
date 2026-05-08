@@ -10,7 +10,8 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/JeFF9VaNQoh1snLDN8ksx4";
-const HERO_IMAGE_URL = "/academia-contabilidad/alfredo-academia.png";
+const HERO_IMAGE_URL =
+  "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo-academia.png";
 
 export default function GraciasAcademiaContabilidadPage() {
   useEffect(() => {
