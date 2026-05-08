@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/PEGA_AQUI_TU_LINK";
+const WHATSAPP_URL = "https://chat.whatsapp.com/JeFF9VaNQoh1snLDN8ksx4";
 const HERO_IMAGE_URL = "/academia-contabilidad/alfredo-academia.png";
 
 export default function GraciasAcademiaContabilidadPage() {
@@ -95,14 +95,14 @@ export default function GraciasAcademiaContabilidadPage() {
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
               Entra al grupo de WhatsApp para recibir acceso, recordatorios y
-              avisos importantes de la sesión.
+              avisos importantes de la clase.
             </p>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                    Fecha
+                    Día
                   </p>
                   <p className="mt-1 text-xl font-black text-white">Jueves</p>
                 </div>
@@ -111,7 +111,9 @@ export default function GraciasAcademiaContabilidadPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Hora
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">11:00 AM</p>
+                  <p className="mt-1 text-xl font-black text-white">
+                    11:00 AM (CDMX)
+                  </p>
                 </div>
               </div>
 

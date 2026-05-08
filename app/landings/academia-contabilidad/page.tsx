@@ -78,7 +78,7 @@ export default function AcademiaContabilidadPage() {
       <main className="relative min-h-screen overflow-x-hidden bg-[#210828] text-white">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,85,120,0.32),transparent_24%),radial-gradient(circle_at_86%_12%,rgba(168,85,247,0.42),transparent_26%),linear-gradient(135deg,#3a123e_0%,#2b0d4a_42%,#1a0321_100%)]" />
-          <div className="absolute inset-0 opacity-[0.18] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18)_0,rgba(255,255,255,0)_58%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18)_0,rgba(255,255,255,0)_58%)] opacity-[0.18]" />
           <div className="absolute inset-0 opacity-[0.14] [background-image:radial-gradient(rgba(255,255,255,0.55)_1.2px,transparent_1.2px)] [background-size:36px_36px]" />
           <div className="absolute left-[34%] top-[10%] hidden h-[78%] w-[48%] rounded-full border border-white/15 lg:block" />
           <div className="absolute left-[41%] top-[16%] hidden h-[62%] w-[34%] rounded-full border border-white/10 lg:block" />
@@ -123,7 +123,7 @@ export default function AcademiaContabilidadPage() {
                   Aprende Contabilidad desde Cero y transforma tu forma de entender los negocios.
                 </p>
                 <p className="mt-3 text-2xl font-black text-white sm:text-4xl">
-                  Este Jueves, 11:00 AM (CDMX)
+                  Jueves, 11:00 AM (CDMX)
                 </p>
               </div>
 
@@ -147,7 +147,7 @@ export default function AcademiaContabilidadPage() {
                   Impartida por: Mtro. Alfredo Cobos
                 </p>
                 <p className="mt-5 text-2xl font-black text-white sm:text-4xl">
-                  100% en línea
+                  Acceso 100% en línea
                 </p>
                 <div className="mx-auto mt-3 h-1 w-full max-w-[420px] bg-gradient-to-r from-[#ff5e7a] via-[#d85cff] to-[#8b5cf6] lg:mx-0 lg:ml-auto" />
               </div>
