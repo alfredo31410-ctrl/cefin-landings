@@ -54,12 +54,12 @@ const LIVE_PAGE_DATA = {
   presenter: "Mtro. Alfredo Cobos",
   broadcastDayLabel: "Jueves",
   broadcastTimeLabel: "11:00 AM (CDMX)",
-  liveNoticeTitle: "La sesion abre solo los jueves a las 11:00 AM",
+  liveNoticeTitle: "Esta clase especial se transmite todos los jueves a las 11:00 AM",
   liveNoticeBody:
-    "Fuera de ese horario puedes usar esta pagina como pre-landing y volver cuando se active la transmision.",
+    "Guarda esta pagina y vuelve en ese horario para entrar a la sesion, seguir la clase completa y aprovechar la oferta activa del dia.",
   enrollmentTitle: "Entra a la Academia CEFIN de Contabilidad Basica",
   enrollmentDescription:
-    "Cuando Alfredo llegue al cierre de la clase se activa la oferta completa: 16 modulos, acceso por un ano, software contable, IA aplicada y el bono de acompanamiento en vivo.",
+    "Accede a 16 modulos, un ano completo de acceso, practica real con software contable, inteligencia artificial aplicada y un bono especial de acompanamiento en vivo.",
   enrollmentBadges: [
     "16 modulos grabados",
     "Acceso por 1 ano",
@@ -257,7 +257,7 @@ function EnrollmentCard({
       <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <p className="inline-flex rounded-full bg-[#fff1f4] px-4 py-1 text-sm font-bold uppercase tracking-wide text-[#d9355a]">
-            Oferta de la clase
+            Academia completa
           </p>
 
           <h3 className="mt-3 text-2xl font-black leading-tight text-slate-900 md:text-3xl">
@@ -293,12 +293,12 @@ function EnrollmentCard({
 
           {offerUnlocked ? (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              La oferta ya esta desbloqueada dentro del flujo de la clase.
+              Ya puedes asegurar tu acceso completo desde esta misma pagina.
             </p>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Esta tarjeta se activa automaticamente cuando Alfredo entra al
-              bloque de academia y cierre.
+              Durante la clase se habilita este acceso especial para quienes
+              deciden dar el siguiente paso.
             </p>
           )}
 
@@ -312,7 +312,7 @@ function EnrollmentCard({
             </a>
           ) : (
             <div className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-slate-800 px-6 py-4 text-center text-base font-black text-slate-400 md:text-lg">
-              Se activa al llegar el cierre
+              Disponible durante la clase
             </div>
           )}
         </div>
@@ -614,8 +614,8 @@ export default function AcademiaContabilidadLivePage() {
                   </PrimaryButton>
                 ) : (
                   <div className="inline-flex items-center justify-center rounded-2xl bg-slate-100 px-8 py-5 text-center text-lg font-black text-slate-500 md:text-2xl">
-                  El CTA se habilita durante la clase
-                  </div>
+                  Disponible durante la transmision
+                </div>
                 )}
               </div>
             </div>
