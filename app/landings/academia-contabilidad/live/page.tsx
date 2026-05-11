@@ -34,62 +34,64 @@ declare global {
 const LIVE_PAGE_DATA = {
   title: "Academia de Contabilidad Basica",
   subtitle:
-    "Aprende contabilidad desde cero y acompana una sesion guiada cada jueves para construir una base mucho mas clara.",
+    "Vuelve a la contabilidad con una clase guiada cada jueves y construye una base real para trabajar con claridad y confianza.",
   pageBackgroundImage:
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImage:
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImageAlt: "Mtro. Alfredo Cobos",
   heroSupportText:
-    "Este espacio esta pensado para que el live semanal se vea como una clase guiada y luego desbloquee la oferta en el momento correcto.",
+    "Cada jueves esta pagina abre una clase guiada para reconectar con la contabilidad real y, al final, desbloquear el acceso a la academia completa.",
   liveLabel: "Sesion semanal",
   openLabel: "Estamos en vivo",
-  paymentLabel: "Inscribirme ahora",
-  paymentUrl: "https://pay.hotmart.com/PEGA_AQUI_TU_LINK",
-  price: "$0",
-  oldPrice: "$0",
+  paymentLabel: "Quiero entrar a la academia",
+  paymentUrl:
+    "https://pay.hotmart.com/K105150399H?off=9ho393qq&checkoutMode=10&bid=1778522461361",
+  price: "$4,387",
+  oldPrice: "",
   priceCurrency: "MXN",
-  productValue: 0,
+  productValue: 4387,
   presenter: "Mtro. Alfredo Cobos",
   broadcastDayLabel: "Jueves",
   broadcastTimeLabel: "11:00 AM (CDMX)",
   liveNoticeTitle: "La sesion abre solo los jueves a las 11:00 AM",
   liveNoticeBody:
     "Fuera de ese horario puedes usar esta pagina como pre-landing y volver cuando se active la transmision.",
-  enrollmentTitle: "Entra a la academia completa",
+  enrollmentTitle: "Entra a la Academia CEFIN de Contabilidad Basica",
   enrollmentDescription:
-    "Cuando el live llegue al bloque de oferta, aqui apareceran el precio final, los bonos y el CTA fuerte hacia Hotmart.",
+    "Cuando Alfredo llegue al cierre de la clase se activa la oferta completa: 16 modulos, acceso por un ano, software contable, IA aplicada y el bono de acompanamiento en vivo.",
   enrollmentBadges: [
-    "Base contable clara",
-    "Explicacion paso a paso",
-    "Pensado para principiantes",
+    "16 modulos grabados",
+    "Acceso por 1 ano",
+    "4 sesiones en vivo del Factor CEFIN",
+    "Software contable + IA aplicada",
   ],
-  realityTitle: "La mayoria no falla por falta de ganas.",
+  realityTitle: "No te falta capacidad. Te falta claridad.",
   realityItems: [
-    "Falla porque nunca le explicaron la contabilidad con una logica facil de seguir.",
-    "Falla porque escucha terminos tecnicos, pero no entiende como aterrizarlos a un negocio real.",
-    "Falla porque siente que todo esta suelto y no sabe por donde empezar.",
+    "La mayoria de los colegas no se aleja de la contabilidad por falta de talento, sino porque nadie se la explico con logica y aplicacion real.",
+    "Puedes haber egresado hace anos, haber pausado tu carrera o sentir que lo viste en la escuela, pero no sabes como aterrizarlo en empresas reales.",
+    "La contabilidad no se memoriza como receta: se entiende, se razona y luego se aplica con tecnica.",
   ],
   realityResult:
-    "Esta clase busca darte una base mucho mas clara para dejar de ver la contabilidad como algo pesado o ajeno.",
+    "Cuando entiendes la logica detras de cada cargo, abono y asiento, recuperas seguridad para trabajar, cobrar mejor y volver a disfrutar la profesion.",
   realityWarning:
-    "Cuando me pases la transcripcion, esta parte se puede amarrar mejor al mensaje exacto del live.",
-  problemTitle: "Que se desbloquea durante el live",
+    "Este live esta pensado para despertar lo que ya sabes, ordenar tu criterio y convertir la contabilidad en una habilidad util para trabajar y crecer.",
+  problemTitle: "Que se desbloquea durante la clase",
   problemSubtitle:
-    "La pagina puede ir soltando bloques en momentos especificos para acompanar lo que Alfredo va diciendo.",
-  learnEyebrow: "Timeline del live",
-  learnTitle: "Bloques programados para aparecer por horario",
+    "La pagina va soltando cada bloque en el momento donde Alfredo lo explica: reconexion, metodo, practica real, academia y cierre con oferta.",
+  learnEyebrow: "Timeline de la clase",
+  learnTitle: "Ruta del entrenamiento en esta sesion",
   learnClosing:
-    "La timeline se puede afinar con tu transcripcion para que el flujo se sienta sincronizado con el directo.",
-  valueTitle: "Oferta preparada para el cierre",
+    "La meta es que el CTA fuerte aparezca justo cuando ya viste la promesa, la logica del metodo y el contenido completo de la academia.",
+  valueTitle: "Lo que desbloqueas al entrar hoy",
   valueSubtitle:
-    "Esta seccion queda lista para activarse automaticamente cuando llegue el momento de la oferta.",
-  urgencyTitle: "Este espacio se puede repetir cada jueves",
+    "Esta no es solo una clase aislada: es una ruta completa para regresar a la contabilidad desde cero y con acompanamiento.",
+  urgencyTitle: "La decision correcta se toma dentro de la clase",
   urgencySubtitle:
-    "La pagina se activa por horario en CDMX y fuera de esa ventana se vuelve a cerrar automaticamente.",
+    "El cierre vive aqui mismo: si la clase te dio claridad, entra hoy y asegura acceso a la academia completa con sus bonos activos.",
   footerNotes: [
-    "Solo se debe cambiar el embed de YouTube, el link de Hotmart y los textos finales de la oferta.",
-    "La logica de apertura semanal y desbloqueos ya queda concentrada en este archivo para que sea facil mantenerla.",
+    "La promesa central de esta pagina es simple: volver a la contabilidad si, pero volver con metodo, practica y confianza real.",
+    "Cuando me compartas el embed final del directo, solo hay que pegarlo arriba y esta experiencia queda lista para repetirse cada jueves.",
   ],
 };
 
@@ -112,7 +114,7 @@ const LIVE_TIMEZONE = "America/Mexico_City";
 const LIVE_WEEKDAY = "Thu";
 const LIVE_START_HOUR = 11;
 const LIVE_START_MINUTE = 0;
-const LIVE_DURATION_MINUTES = 90;
+const LIVE_DURATION_MINUTES = 84;
 
 /**
  * Esta timeline es la base del desbloqueo por tiempo.
@@ -122,36 +124,37 @@ const LIVE_STEPS = [
   {
     id: "intro",
     minute: 0,
-    title: "Inicio del live",
-    description: "Se habilita el reproductor y arranca la clase.",
+    title: "Reconecta con la contabilidad",
+    description:
+      "Alfredo abre la clase explicando para quien es: recien egresados, colegas que se alejaron y estudiantes que quieren aterrizar la practica real.",
   },
   {
     id: "benefits",
     minute: 8,
-    title: "Bloque de beneficios",
+    title: "No te falta capacidad, te falta claridad",
     description:
-      "Se muestran los beneficios y la razon de por que esta base contable importa.",
+      "Se activa el bloque donde baja el miedo, explica por que la contabilidad no se memoriza y muestra que la base sigue viva si se entiende con logica.",
   },
   {
     id: "reality",
-    minute: 18,
-    title: "Problema real",
+    minute: 20,
+    title: "Metodo, practica y casos reales",
     description:
-      "Aparece la seccion donde bajamos la realidad del alumno y el dolor de no entender contabilidad.",
+      "En este punto ya entra la parte practica: cuentas, cargo y abono, asientos, IVA, software y el enfoque real que transforma la seguridad del alumno.",
   },
   {
     id: "offer",
-    minute: 30,
-    title: "Previa de oferta",
+    minute: 74,
+    title: "Se revela la academia completa",
     description:
-      "Se activa la seccion donde ya se empieza a preparar la entrada a la academia completa.",
+      "Se abre el bloque donde Alfredo presenta la Academia CEFIN de Contabilidad Basica con sus 16 modulos, acceso por un ano y herramientas incluidas.",
   },
   {
     id: "checkout",
-    minute: 40,
-    title: "CTA Hotmart",
+    minute: 80,
+    title: "Cierre y boton de inscripcion",
     description:
-      "Se habilita el boton principal de compra para que el cierre ocurra en el momento correcto.",
+      "Se activa el boton principal de Hotmart en el momento del cierre, junto con el bono de 4 sesiones en vivo del Factor CEFIN.",
   },
 ];
 
@@ -254,7 +257,7 @@ function EnrollmentCard({
       <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <p className="inline-flex rounded-full bg-[#fff1f4] px-4 py-1 text-sm font-bold uppercase tracking-wide text-[#d9355a]">
-            Oferta programada
+            Oferta de la clase
           </p>
 
           <h3 className="mt-3 text-2xl font-black leading-tight text-slate-900 md:text-3xl">
@@ -290,12 +293,12 @@ function EnrollmentCard({
 
           {offerUnlocked ? (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              La oferta ya está desbloqueada dentro del flujo del live.
+              La oferta ya esta desbloqueada dentro del flujo de la clase.
             </p>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Esta tarjeta se activará automáticamente cuando llegue el bloque
-              de oferta.
+              Esta tarjeta se activa automaticamente cuando Alfredo entra al
+              bloque de academia y cierre.
             </p>
           )}
 
@@ -309,7 +312,7 @@ function EnrollmentCard({
             </a>
           ) : (
             <div className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-slate-800 px-6 py-4 text-center text-base font-black text-slate-400 md:text-lg">
-              Se activa mas adelante
+              Se activa al llegar el cierre
             </div>
           )}
         </div>
@@ -611,7 +614,7 @@ export default function AcademiaContabilidadLivePage() {
                   </PrimaryButton>
                 ) : (
                   <div className="inline-flex items-center justify-center rounded-2xl bg-slate-100 px-8 py-5 text-center text-lg font-black text-slate-500 md:text-2xl">
-                    El CTA se habilita durante el live
+                  El CTA se habilita durante la clase
                   </div>
                 )}
               </div>
