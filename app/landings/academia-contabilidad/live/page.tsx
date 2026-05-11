@@ -497,19 +497,16 @@ export default function AcademiaContabilidadLivePage() {
         />
       </noscript>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#1a0321]/80 text-white backdrop-blur">
+      <header className="sticky top-0 z-50 text-white">
         <Container>
-          <div className="flex items-center justify-between py-4">
+          <div className="flex items-center justify-between py-5">
             <div>
-              <p className="text-2xl font-black tracking-tight">CEFIN</p>
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">
-                {clockState?.isDuringLive
-                  ? LIVE_PAGE_DATA.openLabel
-                  : LIVE_PAGE_DATA.liveLabel}
+              <p className="text-3xl font-black tracking-tight drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
+                CEFIN
               </p>
             </div>
 
-            <div className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/85 md:text-sm">
+            <div className="rounded-full bg-white/10 px-5 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90 shadow-[0_12px_30px_rgba(0,0,0,0.18)] backdrop-blur md:text-sm">
               {!clockState
                 ? "Cargando horario CDMX"
                 : clockState.isDuringLive
