@@ -12,7 +12,8 @@ import {
 const ACTIVE_CAMPAIGN_FORM_ID = 189; // Reemplazar con el ID del formulario de ActiveCampaign.
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HAS_ACTIVE_CAMPAIGN_FORM = ACTIVE_CAMPAIGN_FORM_ID > 0;
-const HERO_BACKGROUND_URL = "/contabilidad-electronica/background-banner.png";
+const HERO_BACKGROUND_URL =
+  "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/background-banner.png";
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();

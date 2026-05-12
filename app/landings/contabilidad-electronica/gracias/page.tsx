@@ -10,7 +10,8 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/IPMGmsbKY4k1kG8Nt8wDkI"; // Reemplazar con el link del grupo de WhatsApp.
-const BANNER_IMAGE_URL = "/contabilidad-electronica/banner.png";
+const BANNER_IMAGE_URL =
+  "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/banner.png";
 
 export default function GraciasContabilidadElectronicaPage() {
   useEffect(() => {
