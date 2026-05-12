@@ -14,6 +14,8 @@ const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HAS_ACTIVE_CAMPAIGN_FORM = ACTIVE_CAMPAIGN_FORM_ID > 0;
 const HERO_BACKGROUND_URL =
   "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/background-banner.png";
+const MARISOL_IMAGE_URL =
+  "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/marisol-contabilidad-electronica.png";
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();
@@ -218,6 +220,16 @@ export default function ContabilidadElectronicaPage() {
                 <span className="h-2.5 w-2.5 rounded-full bg-cyan-300" />
                 Clase gratuita en vivo
               </p>
+
+              <div className="relative mx-auto mt-6 flex h-[300px] w-full max-w-[350px] items-end justify-center overflow-hidden lg:hidden">
+                <div className="absolute inset-x-6 bottom-0 h-48 rounded-full bg-cyan-300/18 blur-[70px]" />
+                <img
+                  src={MARISOL_IMAGE_URL}
+                  alt="Marisol Galván"
+                  className="relative z-10 h-full w-full object-contain object-bottom drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)]"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#02070a] via-[#02070a]/65 to-transparent" />
+              </div>
 
               <h1 className="mt-6 text-5xl font-black uppercase italic leading-[0.84] tracking-tight text-white drop-shadow-[0_7px_0_rgba(0,0,0,0.45)] sm:text-7xl lg:text-8xl xl:text-[7.2rem]">
                 Contabilidad
