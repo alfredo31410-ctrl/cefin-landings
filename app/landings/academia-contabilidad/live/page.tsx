@@ -101,7 +101,7 @@ const LIVE_PAGE_DATA = {
  * https://www.youtube.com/embed/TU_VIDEO_ID?autoplay=1&rel=0
  */
 const YOUTUBE_EMBED_URL =
-  "https://www.youtube.com/embed/PEGA_AQUI_EL_EMBED_DEL_LIVE?rel=0";
+  "https://www.youtube.com/embed/hQOJB0TQr-4?autoplay=1&rel=0";
 
 /**
  * REGLAS DEL EVENTO SEMANAL
