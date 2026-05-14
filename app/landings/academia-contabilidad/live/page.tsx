@@ -41,7 +41,7 @@ const LIVE_PAGE_DATA = {
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImageAlt: "Mtro. Alfredo Cobos",
   heroSupportText:
-    "Acompana esta clase especial y descubre una forma mucho mas clara, practica y ordenada de entender la contabilidad.",
+    "Acompaña esta clase especial y descubre una forma mucho mas clara, practica y ordenada de entender la contabilidad.",
   liveLabel: "Clase especial",
   openLabel: "Estamos en vivo",
   paymentLabel: "Quiero entrar a la academia",
@@ -59,7 +59,7 @@ const LIVE_PAGE_DATA = {
     "En ese horario podras entrar, seguir la sesion completa y aprovechar la invitacion especial que aparece al final de la clase.",
   enrollmentTitle: "Entra hoy a la Academia de Contabilidad Basica",
   enrollmentDescription:
-    "Accede a 16 modulos paso a paso, un ano completo de acceso, practica real con software contable, inteligencia artificial aplicada y sesiones de acompanamiento para resolver dudas.",
+    "Accede a 16 modulos paso a paso, un ano completo de acceso, practica real con software contable, inteligencia artificial aplicada y sesiones de acompañamiento para resolver dudas.",
   enrollmentBadges: [
     "16 modulos paso a paso",
     "Acceso por 12 meses",
@@ -85,7 +85,7 @@ const LIVE_PAGE_DATA = {
     "Al final no solo vas a entender mejor la contabilidad: tambien vas a saber cual es el siguiente paso si quieres dominarla de verdad.",
   valueTitle: "Lo que recibes al entrar hoy",
   valueSubtitle:
-    "No es solo una clase suelta: es una ruta completa para regresar a la contabilidad con metodo, practica y acompanamiento.",
+    "No es solo una clase suelta: es una ruta completa para regresar a la contabilidad con metodo, practica y acompañamiento.",
   urgencyTitle: "Hoy puedes convertir claridad en avance real",
   urgencySubtitle:
     "Si esta clase te acomodo las ideas y te devolvio confianza, este es el mejor momento para entrar a la academia completa.",
@@ -154,7 +154,7 @@ const LIVE_STEPS = [
     minute: 80,
     title: "Cierre e inscripcion",
     description:
-      "En el cierre aparece el acceso para inscribirte y aprovechar el bono especial de acompanamiento del Factor CEFIN.",
+      "En el cierre aparece el acceso para inscribirte y aprovechar el bono especial de acompañamiento del Factor CEFIN.",
   },
 ];
 
