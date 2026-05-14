@@ -34,36 +34,36 @@ declare global {
 const LIVE_PAGE_DATA = {
   title: "Academia de Contabilidad Basica",
   subtitle:
-    "Vuelve a la contabilidad con una clase guiada cada jueves y construye una base real para trabajar con claridad y confianza.",
+    "Cada jueves tienes una clase guiada para recuperar seguridad, entender la contabilidad desde la base y volver a ejercer con claridad.",
   pageBackgroundImage:
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImage:
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImageAlt: "Mtro. Alfredo Cobos",
   heroSupportText:
-    "Cada jueves esta pagina abre una clase guiada para reconectar con la contabilidad real y, al final, desbloquear el acceso a la academia completa.",
-  liveLabel: "Sesion semanal",
+    "Acompana esta clase especial y descubre una forma mucho mas clara, practica y ordenada de entender la contabilidad.",
+  liveLabel: "Clase especial",
   openLabel: "Estamos en vivo",
   paymentLabel: "Quiero entrar a la academia",
   paymentUrl:
     "https://pay.hotmart.com/K105150399H?off=9ho393qq&checkoutMode=10&bid=1778522461361",
-  price: "$4,387",
+  price: "$3,387",
   oldPrice: "",
   priceCurrency: "MXN",
-  productValue: 4387,
+  productValue: 3387,
   presenter: "Mtro. Alfredo Cobos",
   broadcastDayLabel: "Jueves",
   broadcastTimeLabel: "11:00 AM (CDMX)",
-  liveNoticeTitle: "Esta clase especial se transmite todos los jueves a las 11:00 AM",
+  liveNoticeTitle: "Tu clase especial abre todos los jueves a las 11:00 AM",
   liveNoticeBody:
-    "Guarda esta pagina y vuelve en ese horario para entrar a la sesion, seguir la clase completa y aprovechar la oferta activa del dia.",
-  enrollmentTitle: "Entra a la Academia CEFIN de Contabilidad Basica",
+    "En ese horario podras entrar, seguir la sesion completa y aprovechar la invitacion especial que aparece al final de la clase.",
+  enrollmentTitle: "Entra hoy a la Academia de Contabilidad Basica",
   enrollmentDescription:
-    "Accede a 16 modulos, un ano completo de acceso, practica real con software contable, inteligencia artificial aplicada y un bono especial de acompanamiento en vivo.",
+    "Accede a 16 modulos paso a paso, un ano completo de acceso, practica real con software contable, inteligencia artificial aplicada y sesiones de acompanamiento para resolver dudas.",
   enrollmentBadges: [
-    "16 modulos grabados",
-    "Acceso por 1 ano",
-    "4 sesiones en vivo del Factor CEFIN",
+    "16 modulos paso a paso",
+    "Acceso por 12 meses",
+    "4 sesiones del Factor CEFIN",
     "Software contable + IA aplicada",
   ],
   realityTitle: "No te falta capacidad. Te falta claridad.",
@@ -76,22 +76,22 @@ const LIVE_PAGE_DATA = {
     "Cuando entiendes la logica detras de cada cargo, abono y asiento, recuperas seguridad para trabajar, cobrar mejor y volver a disfrutar la profesion.",
   realityWarning:
     "Este live esta pensado para despertar lo que ya sabes, ordenar tu criterio y convertir la contabilidad en una habilidad util para trabajar y crecer.",
-  problemTitle: "Que se desbloquea durante la clase",
+  problemTitle: "Asi avanza la clase de hoy",
   problemSubtitle:
-    "La pagina va soltando cada bloque en el momento donde Alfredo lo explica: reconexion, metodo, practica real, academia y cierre con oferta.",
-  learnEyebrow: "Timeline de la clase",
-  learnTitle: "Ruta del entrenamiento en esta sesion",
+    "Vas a recorrer una ruta clara: volver a la base, entender la logica, aterrizarlo a la practica real y conocer la academia completa.",
+  learnEyebrow: "Ruta de la clase",
+  learnTitle: "Lo que iremos viendo en esta sesion",
   learnClosing:
-    "La meta es que el CTA fuerte aparezca justo cuando ya viste la promesa, la logica del metodo y el contenido completo de la academia.",
-  valueTitle: "Lo que desbloqueas al entrar hoy",
+    "Al final no solo vas a entender mejor la contabilidad: tambien vas a saber cual es el siguiente paso si quieres dominarla de verdad.",
+  valueTitle: "Lo que recibes al entrar hoy",
   valueSubtitle:
-    "Esta no es solo una clase aislada: es una ruta completa para regresar a la contabilidad desde cero y con acompanamiento.",
-  urgencyTitle: "La decision correcta se toma dentro de la clase",
+    "No es solo una clase suelta: es una ruta completa para regresar a la contabilidad con metodo, practica y acompanamiento.",
+  urgencyTitle: "Hoy puedes convertir claridad en avance real",
   urgencySubtitle:
-    "El cierre vive aqui mismo: si la clase te dio claridad, entra hoy y asegura acceso a la academia completa con sus bonos activos.",
+    "Si esta clase te acomodo las ideas y te devolvio confianza, este es el mejor momento para entrar a la academia completa.",
   footerNotes: [
-    "La promesa central de esta pagina es simple: volver a la contabilidad si, pero volver con metodo, practica y confianza real.",
-    "Cuando me compartas el embed final del directo, solo hay que pegarlo arriba y esta experiencia queda lista para repetirse cada jueves.",
+    "La promesa de esta experiencia es simple: ayudarte a volver a la contabilidad con estructura, practica real y seguridad profesional.",
+    "La academia esta pensada para llevarte desde la base hasta la aplicacion real, con una ruta mucho mas clara que la que la mayoria recibio en la universidad.",
   ],
 };
 
@@ -126,35 +126,35 @@ const LIVE_STEPS = [
     minute: 0,
     title: "Reconecta con la contabilidad",
     description:
-      "Alfredo abre la clase explicando para quien es: recien egresados, colegas que se alejaron y estudiantes que quieren aterrizar la practica real.",
+      "Alfredo abre la clase para recien egresados, colegas que se alejaron de la profesion y estudiantes que quieren aterrizar la practica real.",
   },
   {
     id: "benefits",
     minute: 8,
     title: "No te falta capacidad, te falta claridad",
     description:
-      "Se activa el bloque donde baja el miedo, explica por que la contabilidad no se memoriza y muestra que la base sigue viva si se entiende con logica.",
+      "Aqui entiendes por que la contabilidad no se memoriza: se comprende con logica, se ordena con metodo y luego se aplica con seguridad.",
   },
   {
     id: "reality",
     minute: 20,
     title: "Metodo, practica y casos reales",
     description:
-      "En este punto ya entra la parte practica: cuentas, cargo y abono, asientos, IVA, software y el enfoque real que transforma la seguridad del alumno.",
+      "En este tramo entran cuentas, cargo y abono, asientos, IVA, software y el enfoque practico que hace que todo empiece a tener sentido.",
   },
   {
     id: "offer",
     minute: 74,
-    title: "Se revela la academia completa",
+    title: "Conoces la academia completa",
     description:
-      "Se abre el bloque donde Alfredo presenta la Academia CEFIN de Contabilidad Basica con sus 16 modulos, acceso por un ano y herramientas incluidas.",
+      "Aqui ves como esta construida la academia: 16 modulos, acceso por 12 meses y herramientas para llevar tu aprendizaje a la practica.",
   },
   {
     id: "checkout",
     minute: 80,
-    title: "Cierre y boton de inscripcion",
+    title: "Cierre e inscripcion",
     description:
-      "Se activa el boton principal de Hotmart en el momento del cierre, junto con el bono de 4 sesiones en vivo del Factor CEFIN.",
+      "En el cierre aparece el acceso para inscribirte y aprovechar el bono especial de acompanamiento del Factor CEFIN.",
   },
 ];
 
@@ -297,8 +297,8 @@ function EnrollmentCard({
             </p>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Durante la clase se habilita este acceso especial para quienes
-              deciden dar el siguiente paso.
+              Durante la clase se abre este acceso especial para quienes
+              deciden seguir avanzando.
             </p>
           )}
 
@@ -312,7 +312,7 @@ function EnrollmentCard({
             </a>
           ) : (
             <div className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-slate-800 px-6 py-4 text-center text-base font-black text-slate-400 md:text-lg">
-              Disponible durante la clase
+              Acceso disponible durante la clase
             </div>
           )}
         </div>
@@ -614,7 +614,7 @@ export default function AcademiaContabilidadLivePage() {
                   </PrimaryButton>
                 ) : (
                   <div className="inline-flex items-center justify-center rounded-2xl bg-slate-100 px-8 py-5 text-center text-lg font-black text-slate-500 md:text-2xl">
-                  Disponible durante la transmision
+                  Acceso disponible durante la transmision
                 </div>
                 )}
               </div>
@@ -785,7 +785,7 @@ export default function AcademiaContabilidadLivePage() {
                 </PrimaryButton>
               ) : (
                 <div className="inline-flex items-center justify-center rounded-2xl bg-slate-100 px-8 py-5 text-center text-lg font-black text-slate-500 md:text-2xl">
-                  El boton se mostrara cuando llegue el bloque de cierre
+                  La inscripcion se abre al final de la clase
                 </div>
               )}
             </div>
