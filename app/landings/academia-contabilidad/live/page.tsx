@@ -547,7 +547,7 @@ export default function AcademiaContabilidadLivePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/35" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
                         <p className="rounded-full bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-white/85">
-                          Sesion semanal automatizada
+                          Sesion semanal
                         </p>
                         <h2 className="mt-5 max-w-3xl text-3xl font-black leading-tight md:text-5xl">
                           {LIVE_PAGE_DATA.liveNoticeTitle}
