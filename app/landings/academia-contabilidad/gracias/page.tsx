@@ -77,13 +77,13 @@ export default function GraciasAcademiaContabilidadPage() {
         <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
           <div className="ml-auto w-full max-w-3xl">
             <div className="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.26em] text-emerald-300">
-              Registro completado
+              Registro 80% completado
             </div>
 
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-6xl xl:text-[5.5rem]">
-              Ya casi
+              Falta entrar
               <br />
-              estás dentro
+              al grupo
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -91,15 +91,29 @@ export default function GraciasAcademiaContabilidadPage() {
               <span className="font-black text-[#ff8cae]">
                 Academia de Contabilidad Básica
               </span>{" "}
-              ya quedó.
+              ya quedó casi listo.
             </p>
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-              Entra al grupo de WhatsApp para recibir acceso, recordatorios y
-              avisos importantes de la clase.
+              Para que tu registro quede totalmente completo, entra ahora al
+              grupo de WhatsApp. Ahí recibirás acceso, recordatorios y avisos
+              importantes de la clase.
             </p>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
+              <div className="mb-6 rounded-2xl border border-[#25D366]/25 bg-[#25D366]/10 p-4">
+                <div className="flex items-center justify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
+                  <span>Registro casi listo</span>
+                  <span>80%</span>
+                </div>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full w-4/5 rounded-full bg-[#25D366]" />
+                </div>
+                <p className="mt-3 text-sm font-bold text-white">
+                  El último 20% es entrar al grupo de WhatsApp.
+                </p>
+              </div>
+
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
@@ -127,7 +141,7 @@ export default function GraciasAcademiaContabilidadPage() {
                 </button>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
-                  Este es el paso más importante para no perder tu acceso.
+                  Sin este paso podrías perder el acceso y los recordatorios.
                 </p>
               </div>
             </div>

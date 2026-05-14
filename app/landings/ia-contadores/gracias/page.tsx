@@ -117,7 +117,7 @@ export default function GraciasIA() {
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 sm:px-4">
                 <span className="h-2 w-2 rounded-full bg-cyan-400" />
                 <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.24em] text-cyan-300">
-                  Ya casi terminas
+                  Registro 80% completado
                 </span>
               </div>
 
@@ -130,13 +130,14 @@ export default function GraciasIA() {
 
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base lg:text-lg">
                 <span className="font-bold text-white">
-                  Ya completaste gran parte de tu registro.
+                  Ya completaste el 80% de tu registro.
                 </span>{" "}
-                Ahora mismo, el paso más importante para asegurar tu lugar en{" "}
+                Para que quede totalmente completo, el paso más importante para
+                asegurar tu lugar en{" "}
                 <span className="font-bold text-cyan-300">
                   ABC de Inteligencia Artificial para Contadores
                 </span>{" "}
-                es entrar al grupo privado de WhatsApp.
+                es entrar ahora al grupo privado de WhatsApp.
               </p>
 
               <div className="mt-8 sm:mt-10">
@@ -164,6 +165,9 @@ export default function GraciasIA() {
 
               <div className="mt-6 rounded-2xl border border-lime-400/20 bg-lime-400/10 p-4 sm:p-5">
                 <p className="text-sm font-bold leading-relaxed text-white sm:text-base lg:text-lg">
+                  Tu registro todavía no está al 100%: falta entrar al grupo de
+                  WhatsApp.
+                  <br />
                   Ahí te vamos a compartir el acceso a la clase, recordatorios, avisos importantes y todo lo que necesitas para no perderte nada.
                 </p>
               </div>

@@ -116,7 +116,7 @@ export default function GraciasAuxiliar() {
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-3 py-1 sm:px-4">
                 <span className="h-2 w-2 rounded-full bg-fuchsia-400" />
                 <span className="text-[10px] font-black uppercase tracking-[0.24em] text-fuchsia-300 sm:text-[11px]">
-                  Ya casi terminas
+                  Registro 80% completado
                 </span>
               </div>
 
@@ -129,10 +129,10 @@ export default function GraciasAuxiliar() {
 
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base lg:text-lg">
                 <span className="font-bold text-white">
-                  Ya completaste gran parte de tu registro.
+                  Ya completaste el 80% de tu registro.
                 </span>{" "}
-                Ahora mismo, el paso más importante para asegurar tu lugar es
-                entrar al grupo privado de WhatsApp.
+                Para que quede totalmente completo, el paso más importante es
+                entrar ahora al grupo privado de WhatsApp.
               </p>
 
               <div className="mt-8 sm:mt-10">
@@ -161,6 +161,9 @@ export default function GraciasAuxiliar() {
 
               <div className="mt-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-4 sm:p-5">
                 <p className="text-sm font-bold leading-relaxed text-white sm:text-base lg:text-lg">
+                  Tu registro todavía no está al 100%: falta entrar al grupo de
+                  WhatsApp.
+                  <br />
                   Ahí te compartiremos el acceso a la clase, recordatorios,
                   avisos importantes y todo lo necesario para que no te pierdas
                   nada.

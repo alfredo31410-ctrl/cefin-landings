@@ -77,13 +77,13 @@ export default function GraciasContabilidadElectronicaPage() {
         <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
           <div className="w-full max-w-3xl">
             <div className="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.26em] text-cyan-300">
-              Registro completado
+              Registro 80% completado
             </div>
 
             <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-tight text-white drop-shadow-[0_6px_0_rgba(0,0,0,0.35)] sm:text-6xl xl:text-[5.5rem]">
-              Ya casi
+              Falta entrar
               <br />
-              estás dentro
+              al grupo
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/82 sm:text-xl">
@@ -91,15 +91,29 @@ export default function GraciasContabilidadElectronicaPage() {
               <span className="font-black text-cyan-300">
                 Contabilidad Electrónica
               </span>{" "}
-              ya quedó.
+              ya quedó casi listo.
             </p>
 
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-              Ahora entra al grupo de WhatsApp porque por ahí se comparte el
-              acceso, recordatorios y avisos importantes de la sesión.
+              Para que tu registro quede totalmente completo, entra ahora al
+              grupo de WhatsApp. Ahí se comparte el acceso, recordatorios y
+              avisos importantes de la sesión.
             </p>
 
             <div className="mt-8 rounded-lg border border-cyan-200/12 bg-white/[0.055] p-5 backdrop-blur sm:p-6">
+              <div className="mb-6 rounded-lg border border-[#25D366]/25 bg-[#25D366]/10 p-4">
+                <div className="flex items-center justify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
+                  <span>Registro casi listo</span>
+                  <span>80%</span>
+                </div>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full w-4/5 rounded-full bg-[#25D366]" />
+                </div>
+                <p className="mt-3 text-sm font-bold text-white">
+                  El último 20% es entrar al grupo de WhatsApp.
+                </p>
+              </div>
+
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-lg border border-white/10 bg-black/24 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
@@ -130,8 +144,7 @@ export default function GraciasContabilidadElectronicaPage() {
                 </button>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
-                  Este clic queda medido como evento Lead para identificar a
-                  quienes avanzan al grupo.
+                  Sin este paso podrías perder el acceso y los recordatorios.
                 </p>
               </div>
             </div>
