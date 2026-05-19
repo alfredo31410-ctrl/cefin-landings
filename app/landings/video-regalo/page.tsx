@@ -18,7 +18,7 @@ import {
  * - resourceUrl / resourceLabel
  */
 const PAGE_DATA = {
-  title: "Clase Especial CEFIN",
+  title: "REGALO Especial CEFIN",
   subtitle:
     "Mira el video completo y descarga el material de apoyo para seguir la clase con más claridad.",
   eyebrow: "Acceso al recurso",
