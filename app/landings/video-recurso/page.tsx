@@ -23,12 +23,13 @@ const PAGE_DATA = {
     "Mira el video completo y descarga el material de apoyo para seguir la clase con más claridad.",
   eyebrow: "Acceso al recurso",
   videoTitle: "Video de la clase",
-  youtubeEmbedUrl: "https://youtube.com/live/Jhj0J0rKkdc",
+  youtubeEmbedUrl: "https://www.youtube.com/embed/Jhj0J0rKkdc?rel=0",
   resourceTitle: "Material de apoyo",
   resourceDescription:
     "Abre o descarga el documento complementario para tomar notas, revisar conceptos clave y conservar el material.",
   resourceLabel: "Descargar documento",
-  resourceUrl: "https://drive.google.com/uc?export=download&id=1-zmfzdvzkaIdsolSC2clSbZyQqznQ9QC",
+  resourceUrl:
+    "https://drive.google.com/uc?export=download&id=1-zmfzdvzkaIdsolSC2clSbZyQqznQ9QC",
   footerNote:
     "Este enlace es privado para alumnos y personas registradas a esta sesión.",
 };
