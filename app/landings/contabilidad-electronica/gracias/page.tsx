@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/IPMGmsbKY4k1kG8Nt8wDkI"; // Reemplazar con el link del grupo de WhatsApp.
+const WHATSAPP_URL = "https://chat.whatsapp.com/L9kXQbshY6eAotS7H3zjQr"; // Reemplazar con el link del grupo de WhatsApp.
 const BANNER_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/banner.png";
 
