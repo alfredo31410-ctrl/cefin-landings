@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
@@ -284,19 +283,34 @@ export default function Sistema360InscripcionPage() {
               </div>
 
               <div className="mt-6 grid gap-3 md:grid-cols-2 md:gap-x-7">
-                {courses.map((course, index) => (
-                  <div
-                    key={course}
-                    className={`flex gap-3 text-base font-bold leading-[1.04] text-white ${
-                      index === 4
-                        ? "md:border-l md:border-yellow-300 md:pl-7"
-                        : ""
-                    } ${index > 4 ? "md:border-l md:border-yellow-300 md:pl-7" : ""}`}
-                  >
-                    <span className="text-yellow-300">{index + 1}.</span>
-                    <span>{course}</span>
-                  </div>
-                ))}
+                {[courses.slice(0, 4), courses.slice(4)].map(
+                  (courseColumn, columnIndex) => (
+                    <div
+                      key={courseColumn.join("-")}
+                      className={`space-y-3 ${
+                        columnIndex === 1
+                          ? "md:border-l md:border-yellow-300 md:pl-7"
+                          : ""
+                      }`}
+                    >
+                      {courseColumn.map((course, courseIndex) => {
+                        const courseNumber = columnIndex * 4 + courseIndex + 1;
+
+                        return (
+                          <div
+                            key={course}
+                            className="flex gap-3 text-base font-bold leading-[1.04] text-white"
+                          >
+                            <span className="text-yellow-300">
+                              {courseNumber}.
+                            </span>
+                            <span>{course}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ),
+                )}
               </div>
             </div>
           </div>
