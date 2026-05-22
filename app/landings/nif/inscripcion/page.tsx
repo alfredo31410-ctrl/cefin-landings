@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
@@ -228,7 +229,7 @@ export default function Sistema360InscripcionPage() {
             onClick={handleCheckoutClick}
             className="hidden rounded-full border border-yellow-300 bg-yellow-300 px-6 py-3 text-sm font-black uppercase text-black transition hover:scale-[1.02] hover:bg-yellow-200 md:inline-flex"
           >
-            Quiero ser asesor 360°
+            Quiero convertirme en un Asesor Contable 360°
           </a>
         </header>
 
@@ -265,7 +266,7 @@ export default function Sistema360InscripcionPage() {
                 onClick={handleCheckoutClick}
                 className="inline-flex w-fit rounded-2xl bg-yellow-300 px-6 py-4 text-center text-lg font-black uppercase leading-tight text-black shadow-[0_18px_60px_rgba(250,204,21,0.26)] transition hover:scale-[1.01] hover:bg-yellow-200 sm:px-8 sm:text-2xl"
               >
-                Quiero transformar mi asesoría
+                Quiero transformar mi asesoría contable
               </a>
               <p className="max-w-xs text-sm font-black uppercase leading-tight tracking-[0.14em] text-orange-200">
                 Última oportunidad: cierra el 31 de mayo de 2026
@@ -287,7 +288,9 @@ export default function Sistema360InscripcionPage() {
                   <div
                     key={course}
                     className={`flex gap-3 text-base font-bold leading-[1.04] text-white ${
-                      index === 4 ? "md:border-l md:border-yellow-300 md:pl-7" : ""
+                      index === 4
+                        ? "md:border-l md:border-yellow-300 md:pl-7"
+                        : ""
                     } ${index > 4 ? "md:border-l md:border-yellow-300 md:pl-7" : ""}`}
                   >
                     <span className="text-yellow-300">{index + 1}.</span>
@@ -323,7 +326,8 @@ export default function Sistema360InscripcionPage() {
                   Sí, quiero el Sistema 360°
                 </a>
                 <p className="mt-3 text-center text-sm font-bold text-orange-100">
-                  Inscríbete antes del 31 de mayo y entra a la ruta completa.
+                  Inscríbete antes del 31 de mayo, para entrar a la ruta
+                  completa{" "}
                 </p>
               </div>
 
@@ -402,14 +406,15 @@ export default function Sistema360InscripcionPage() {
                 onClick={handleCheckoutClick}
                 className="inline-flex items-center justify-center rounded-2xl bg-black px-8 py-5 text-center text-base font-black uppercase text-white transition hover:scale-[1.01] hover:bg-zinc-900"
               >
-                Tomar mi lugar ahora
+                Quiero inscribirme ahora{" "}
               </a>
             </div>
 
             <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-2xl text-lg font-semibold text-white/68">
-                Accede a la ruta de cursos contables, el acompañamiento del
-                Factor CEFIN y el bono de IA para resolver dudas contables.
+              <p className="max-w-2xl text-lg font-semibold   text-white/68">
+                Accede a la ruta completa con: todos los cursos contables, el
+                acompañamiento con el Factor CEFIN y Norma IA para resolver
+                dudas contables en el momento
               </p>
               <a
                 href={PAYMENT_URL}
