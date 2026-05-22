@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
 declare global {
@@ -17,23 +17,112 @@ const PRODUCT_NAME = "Sistema 360: Asesor Contable | CEFIN";
 const PRODUCT_VALUE = 9987;
 const PRICE = "$9,987";
 const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
+const ENROLLMENT_DEADLINE = new Date("2026-06-01T00:00:00-06:00");
 
 const courses = [
-  "Seminario Practico de NIF del Activo",
-  "Seminario Practico de NIF del Pasivo y Capital",
-  "Seminario Practico de NIF de Ingresos, Costos y Gastos",
+  "Seminario Práctico de NIF del Activo",
+  "Seminario Práctico de NIF del Pasivo y Capital",
+  "Seminario Práctico de NIF de Ingresos, Costos y Gastos",
   "Contabilidad Avanzada",
-  "Elaboracion y Analisis de Estados Financieros",
+  "Elaboración y Análisis de Estados Financieros",
   "Contabilidad de Costos e Inventarios",
   "Normas de Sustentabilidad CINIF",
-  "Depreciaciones y Deduccion de Inversiones",
+  "Depreciaciones y Deducción de Inversiones",
 ];
 
 const highlights = [
-  "Nuestros mejores cursos contables en una sola ruta.",
-  "Criterio financiero, NIF, costos, inventarios y analisis.",
-  "Acompanamiento en vivo para resolver preguntas reales.",
+  "Deja de solo registrar operaciones y aprende a interpretar el negocio.",
+  "Convierte NIF, costos y estados financieros en asesoría con criterio.",
+  "Responde con seguridad, cobra mejor y deja de sentir que improvisas.",
 ];
+
+const transformationPoints = [
+  "Leerás los estados financieros para detectar riesgos, oportunidades y decisiones que el cliente sí necesita.",
+  "Conectarás NIF, costos, inventarios, depreciaciones y sustentabilidad en una visión contable completa.",
+  "Pasarás de entregar números a explicar qué significan y qué hacer con ellos.",
+];
+
+type DeadlineState = {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+  isClosed: boolean;
+};
+
+function getDeadlineState(): DeadlineState {
+  const remainingMs = ENROLLMENT_DEADLINE.getTime() - Date.now();
+
+  if (remainingMs <= 0) {
+    return {
+      days: "00",
+      hours: "00",
+      minutes: "00",
+      seconds: "00",
+      isClosed: true,
+    };
+  }
+
+  const days = Math.floor(remainingMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((remainingMs / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((remainingMs / (1000 * 60)) % 60);
+  const seconds = Math.floor((remainingMs / 1000) % 60);
+
+  return {
+    days: String(days).padStart(2, "0"),
+    hours: String(hours).padStart(2, "0"),
+    minutes: String(minutes).padStart(2, "0"),
+    seconds: String(seconds).padStart(2, "0"),
+    isClosed: false,
+  };
+}
+
+function DeadlineCountdown() {
+  const [deadlineState, setDeadlineState] = useState(getDeadlineState);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setDeadlineState(getDeadlineState());
+    }, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  const countdownItems = [
+    { label: "Días", value: deadlineState.days },
+    { label: "Horas", value: deadlineState.hours },
+    { label: "Min", value: deadlineState.minutes },
+    { label: "Seg", value: deadlineState.seconds },
+  ];
+
+  return (
+    <div className="rounded-[1.6rem] border-2 border-orange-400 bg-black/82 p-4 shadow-[0_18px_70px_rgba(0,0,0,0.34)] backdrop-blur sm:p-5">
+      <p className="text-sm font-black uppercase leading-tight text-yellow-300">
+        {deadlineState.isClosed
+          ? "La inscripción ya cerró"
+          : "Inscripción disponible solo hasta el 31 de mayo de 2026"}
+      </p>
+      <p className="mt-1 text-sm font-semibold text-white/70">
+        Cierre exacto: 31 de mayo de 2026, 11:59 PM (hora CDMX).
+      </p>
+      <div className="mt-4 grid grid-cols-4 gap-2">
+        {countdownItems.map((item) => (
+          <div
+            key={item.label}
+            className="rounded-xl border border-yellow-300/20 bg-white/[0.08] px-2 py-3 text-center"
+          >
+            <p className="text-2xl font-black leading-none text-white sm:text-3xl">
+              {item.value}
+            </p>
+            <p className="mt-1 text-[10px] font-black uppercase tracking-[0.14em] text-yellow-300">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Sistema360InscripcionPage() {
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
@@ -139,12 +228,16 @@ export default function Sistema360InscripcionPage() {
             onClick={handleCheckoutClick}
             className="hidden rounded-full border border-yellow-300 bg-yellow-300 px-6 py-3 text-sm font-black uppercase text-black transition hover:scale-[1.02] hover:bg-yellow-200 md:inline-flex"
           >
-            Inscribete ya
+            Quiero ser asesor 360
           </a>
         </header>
 
         <section className="relative z-30 mx-auto grid min-h-[calc(100vh-84px)] max-w-7xl gap-10 px-6 pb-14 pt-5 lg:grid-cols-12 lg:items-center lg:px-10">
           <div className="lg:col-span-7">
+            <div className="mb-6 max-w-2xl lg:hidden">
+              <DeadlineCountdown />
+            </div>
+
             <p className="text-base font-black uppercase text-white/92 sm:text-2xl">
               Sistema 360:
             </p>
@@ -160,15 +253,23 @@ export default function Sistema360InscripcionPage() {
               Impartido por el Mtro. Alfredo Cobos
             </p>
 
+            <p className="mt-5 max-w-2xl text-lg font-semibold leading-relaxed text-white/82 sm:text-xl">
+              Transforma tu forma de ejercer: deja de ser el contador que solo
+              entrega reportes y conviértete en el asesor que interpreta,
+              explica y guía decisiones con seguridad.
+            </p>
+
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
               <a
                 href={PAYMENT_URL}
                 onClick={handleCheckoutClick}
-                className="inline-flex w-fit border-b-4 border-white pb-1 text-2xl font-black uppercase leading-none text-white transition hover:border-yellow-300 hover:text-yellow-200 sm:text-4xl"
+                className="inline-flex w-fit rounded-2xl bg-yellow-300 px-6 py-4 text-center text-lg font-black uppercase leading-tight text-black shadow-[0_18px_60px_rgba(250,204,21,0.26)] transition hover:scale-[1.01] hover:bg-yellow-200 sm:px-8 sm:text-2xl"
               >
-                Inscribete ya
+                Quiero transformar mi asesoría
               </a>
-              <p className="text-2xl font-black tracking-tight text-white">CEFIN</p>
+              <p className="max-w-xs text-sm font-black uppercase leading-tight tracking-[0.14em] text-orange-200">
+                Última oportunidad: cierra el 31 de mayo de 2026
+              </p>
             </div>
 
             <div className="mt-10 max-w-4xl rounded-[1.8rem] border-2 border-yellow-300 bg-black/70 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.36)] backdrop-blur sm:p-7">
@@ -199,9 +300,13 @@ export default function Sistema360InscripcionPage() {
 
           <aside className="self-end lg:col-span-5 lg:pl-8">
             <div className="grid gap-5 pt-[24rem] sm:pt-[30rem] lg:pt-0">
+              <div className="hidden lg:block">
+                <DeadlineCountdown />
+              </div>
+
               <div className="rounded-[1.8rem] border-2 border-yellow-300 bg-black/76 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] backdrop-blur">
                 <p className="border-b-2 border-yellow-300 pb-2 text-lg font-black uppercase leading-none text-white">
-                  Inversion por participante:
+                  Inversión por participante:
                 </p>
                 <p className="mt-4 text-5xl font-black italic tracking-tight text-white sm:text-6xl">
                   {PRICE}
@@ -215,8 +320,11 @@ export default function Sistema360InscripcionPage() {
                   onClick={handleCheckoutClick}
                   className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-yellow-300 px-6 py-4 text-center text-base font-black uppercase text-black transition hover:scale-[1.01] hover:bg-yellow-200"
                 >
-                  Finalizar inscripcion
+                  Sí, quiero el Sistema 360
                 </a>
+                <p className="mt-3 text-center text-sm font-bold text-orange-100">
+                  Inscríbete antes del 31 de mayo y entra a la ruta completa.
+                </p>
               </div>
 
               <div className="space-y-4 px-2">
@@ -225,7 +333,7 @@ export default function Sistema360InscripcionPage() {
                   CEFIN para preguntas y respuestas en vivo
                 </p>
                 <div className="rounded-xl bg-yellow-300 px-4 py-2 text-center text-sm font-black uppercase text-black">
-                  Ademas, te llevas gratis:
+                  Además, te llevas gratis:
                 </div>
                 <p className="flex gap-3 text-lg font-black leading-tight text-white">
                   <span className="text-yellow-300">+</span>
@@ -244,10 +352,10 @@ export default function Sistema360InscripcionPage() {
             <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.24em] text-yellow-300">
-                  Sistema completo
+                  La transformación
                 </p>
                 <h2 className="mt-3 text-3xl font-black uppercase leading-tight text-white sm:text-5xl">
-                  Formate para asesorar con una vision contable 360.
+                  Fórmate para asesorar con una visión contable 360.
                 </h2>
               </div>
 
@@ -263,9 +371,44 @@ export default function Sistema360InscripcionPage() {
               </div>
             </div>
 
+            <div className="mt-10 grid gap-4 lg:grid-cols-3">
+              {transformationPoints.map((item, index) => (
+                <article
+                  key={item}
+                  className="rounded-[1.5rem] border border-orange-300/18 bg-black/62 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur"
+                >
+                  <p className="text-xs font-black uppercase tracking-[0.22em] text-yellow-300">
+                    Resultado {index + 1}
+                  </p>
+                  <p className="mt-3 text-lg font-bold leading-relaxed text-white">
+                    {item}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-10 grid gap-5 rounded-[1.8rem] border-2 border-yellow-300 bg-yellow-300 p-6 text-black shadow-[0_24px_90px_rgba(0,0,0,0.32)] lg:grid-cols-[1fr_auto] lg:items-center lg:p-8">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.18em]">
+                  Cierre de inscripción
+                </p>
+                <h3 className="mt-2 text-2xl font-black uppercase leading-tight sm:text-4xl">
+                  Después del 31 de mayo de 2026 esta oferta deja de estar
+                  disponible.
+                </h3>
+              </div>
+              <a
+                href={PAYMENT_URL}
+                onClick={handleCheckoutClick}
+                className="inline-flex items-center justify-center rounded-2xl bg-black px-8 py-5 text-center text-base font-black uppercase text-white transition hover:scale-[1.01] hover:bg-zinc-900"
+              >
+                Tomar mi lugar ahora
+              </a>
+            </div>
+
             <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-2xl text-lg font-semibold text-white/68">
-                Accede a la ruta de cursos contables, el acompanamiento del
+                Accede a la ruta de cursos contables, el acompañamiento del
                 Factor CEFIN y el bono de IA para resolver dudas contables.
               </p>
               <a
@@ -273,7 +416,7 @@ export default function Sistema360InscripcionPage() {
                 onClick={handleCheckoutClick}
                 className="inline-flex items-center justify-center rounded-2xl bg-yellow-300 px-8 py-5 text-base font-black uppercase text-black transition hover:scale-[1.01] hover:bg-yellow-200"
               >
-                Inscribirme ahora
+                Quiero asesorar con seguridad
               </a>
             </div>
           </div>
