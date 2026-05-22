@@ -12,7 +12,7 @@ declare global {
 
 // Reemplazar cuando Hotmart tenga la liga final de Sistema 360.
 const PAYMENT_URL =
-  "https://pay.hotmart.com/N105507797E?off=cl39s5z7&checkoutMode=10";
+  "https://pay.hotmart.com/Y105942158X?off=57a4x11n&checkoutMode=10&bid=1779461792632";
 const PRODUCT_NAME = "Sistema 360: Asesor Contable | CEFIN";
 const PRODUCT_VALUE = 9987;
 const PRICE = "$9,987";
