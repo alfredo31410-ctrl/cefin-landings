@@ -13,7 +13,7 @@ declare global {
 // Reemplazar cuando Hotmart tenga la liga final de Sistema 360.
 const PAYMENT_URL =
   "https://pay.hotmart.com/Y105942158X?off=57a4x11n&checkoutMode=10&bid=1779461792632";
-const PRODUCT_NAME = "Sistema 360: Asesor Contable | CEFIN";
+const PRODUCT_NAME = "Sistema 360°: Asesor Contable | CEFIN";
 const PRODUCT_VALUE = 9987;
 const PRICE = "$9,987";
 const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
@@ -146,7 +146,7 @@ export default function Sistema360InscripcionPage() {
   };
 
   useEffect(() => {
-    document.title = "Sistema 360: Asesor Contable | CEFIN";
+    document.title = "Sistema 360°: Asesor Contable | CEFIN";
 
     trackEvent("ViewContent", {
       content_name: PRODUCT_NAME,
@@ -228,7 +228,7 @@ export default function Sistema360InscripcionPage() {
             onClick={handleCheckoutClick}
             className="hidden rounded-full border border-yellow-300 bg-yellow-300 px-6 py-3 text-sm font-black uppercase text-black transition hover:scale-[1.02] hover:bg-yellow-200 md:inline-flex"
           >
-            Quiero ser asesor 360
+            Quiero ser asesor 360°
           </a>
         </header>
 
@@ -239,7 +239,7 @@ export default function Sistema360InscripcionPage() {
             </div>
 
             <p className="text-base font-black uppercase text-white/92 sm:text-2xl">
-              Sistema 360:
+              Sistema 360°:
             </p>
 
             <h1 className="mt-2 text-5xl font-black uppercase leading-[0.86] tracking-tight text-yellow-300 sm:text-7xl lg:text-8xl">
@@ -320,7 +320,7 @@ export default function Sistema360InscripcionPage() {
                   onClick={handleCheckoutClick}
                   className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-yellow-300 px-6 py-4 text-center text-base font-black uppercase text-black transition hover:scale-[1.01] hover:bg-yellow-200"
                 >
-                  Sí, quiero el Sistema 360
+                  Sí, quiero el Sistema 360°
                 </a>
                 <p className="mt-3 text-center text-sm font-bold text-orange-100">
                   Inscríbete antes del 31 de mayo y entra a la ruta completa.
@@ -355,7 +355,7 @@ export default function Sistema360InscripcionPage() {
                   La transformación
                 </p>
                 <h2 className="mt-3 text-3xl font-black uppercase leading-tight text-white sm:text-5xl">
-                  Fórmate para asesorar con una visión contable 360.
+                  Fórmate para asesorar con una visión contable 360°.
                 </h2>
               </div>
 
