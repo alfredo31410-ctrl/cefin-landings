@@ -10,14 +10,32 @@ declare global {
   }
 }
 
-const PAYMENT_URL = "https://pay.hotmart.com/N105507797E?off=cl39s5z7&checkoutMode=10"; // <-- cambia esto
-const PRODUCT_NAME = "Reto NIF | CEFIN";
-const PRODUCT_VALUE = 487; // <-- cambia esto cuando tengas precio
-const PRICE = "$487 MXN"; // <-- cambia esto
-const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/alfredo.png";
+// Reemplazar cuando Hotmart tenga la liga final de Sistema 360.
+const PAYMENT_URL =
+  "https://pay.hotmart.com/N105507797E?off=cl39s5z7&checkoutMode=10";
+const PRODUCT_NAME = "Sistema 360: Asesor Contable | CEFIN";
+const PRODUCT_VALUE = 9987;
+const PRICE = "$9,987";
+const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
-export default function RetoNifSalesPage() {
+const courses = [
+  "Seminario Practico de NIF del Activo",
+  "Seminario Practico de NIF del Pasivo y Capital",
+  "Seminario Practico de NIF de Ingresos, Costos y Gastos",
+  "Contabilidad Avanzada",
+  "Elaboracion y Analisis de Estados Financieros",
+  "Contabilidad de Costos e Inventarios",
+  "Normas de Sustentabilidad CINIF",
+  "Depreciaciones y Deduccion de Inversiones",
+];
+
+const highlights = [
+  "Nuestros mejores cursos contables en una sola ruta.",
+  "Criterio financiero, NIF, costos, inventarios y analisis.",
+  "Acompanamiento en vivo para resolver preguntas reales.",
+];
+
+export default function Sistema360InscripcionPage() {
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window === "undefined" || !window.fbq) return;
 
@@ -32,125 +50,27 @@ export default function RetoNifSalesPage() {
   const handleCheckoutClick = () => {
     trackEvent("InitiateCheckout", {
       content_name: PRODUCT_NAME,
-      content_category: "Curso",
+      content_category: "Programa",
       value: PRODUCT_VALUE,
       currency: META_CURRENCY,
     });
   };
 
   useEffect(() => {
-    document.title = "Reto NIF | CEFIN";
+    document.title = "Sistema 360: Asesor Contable | CEFIN";
 
     trackEvent("ViewContent", {
       content_name: PRODUCT_NAME,
-      content_category: "Curso",
+      content_category: "Programa",
       value: PRODUCT_VALUE,
       currency: META_CURRENCY,
     });
   }, []);
 
-  const includes = [
-    "5 clases en vivo de 2 horas cada una.",
-    "Aplicación real de NIF, no teoría suelta.",
-    "Criterio profesional para interpretar estados financieros.",
-    "Ruta para pasar de contador operativo a asesor estratégico.",
-  ];
-
-  const syllabus = [
-    {
-      label: "Clase 1",
-      title: "El verdadero juego de las NIF",
-      accent: "from-blue-500 to-cyan-300",
-      objective:
-        "Romper paradigmas y entender por qué las NIF cambian tu valor en el mercado.",
-      topics: [
-        "El error del contador tradicional: enfoque solo fiscal.",
-        "Contador operativo vs asesor estratégico.",
-        "Qué son las NIF y para qué sirven realmente.",
-        "Contabilidad financiera vs fiscal.",
-        "Información para SAT vs información para decisiones.",
-        "Principios de contabilidad, NIF y convergencia internacional.",
-        "Estructura de las NIF y marco conceptual NIF A-1.",
-      ],
-      practice:
-        "Identificación de errores comunes y ejercicio para detectar si una contabilidad sirve para tomar decisiones.",
-    },
-    {
-      label: "Clase 2",
-      title: "Postulados básicos aplicados",
-      accent: "from-violet-500 to-fuchsia-400",
-      objective:
-        "Entender y aplicar postulados básicos en casos reales donde empieza el criterio profesional.",
-      topics: [
-        "Qué son los postulados básicos NIF A-2.",
-        "Sustancia económica.",
-        "Devengación contable.",
-        "Asociación de costos y gastos.",
-        "Consistencia.",
-        "Errores comunes por no aplicarlos.",
-        "Impacto fiscal vs impacto contable.",
-      ],
-      practice:
-        "Casos de ingresos incorrectos, gastos no deducibles vs contables y registros bajo sustancia económica.",
-    },
-    {
-      label: "Clase 3",
-      title: "Registro contable con NIF",
-      accent: "from-emerald-500 to-lime-300",
-      objective:
-        "Dominar el registro contable con base en NIF, usando lógica y no memoria.",
-      topics: [
-        "Concepto de cuenta, activo, pasivo y capital.",
-        "Reglas de cargo y abono con lógica real.",
-        "NIF C-1: efectivo.",
-        "NIF C-3: clientes.",
-        "NIF C-4: inventarios.",
-        "NIF C-6: activo fijo.",
-        "NIF C-9 y C-19: pasivos.",
-      ],
-      practice:
-        "Registro de venta, compra, IVA y préstamos, con ejercicio guiado y validación de errores comunes.",
-    },
-    {
-      label: "Clase 4",
-      title: "Estados financieros que sí sirven",
-      accent: "from-orange-500 to-amber-300",
-      objective:
-        "Aprender a construir e interpretar estados financieros con criterio y utilidad real.",
-      topics: [
-        "Que son los estados financieros y para que sirven realmente.",
-        "Estado de resultados.",
-        "Balance general.",
-        "Flujo de efectivo.",
-        "Cambios en el capital.",
-        "El error de hacer estados financieros sin entenderlos.",
-      ],
-      practice:
-        "Construccion de estado de resultados, interpretacion del negocio y diagnostico financiero basico.",
-    },
-    {
-      label: "Clase 5",
-      title: "De contador a asesor estrategico",
-      accent: "from-red-500 to-orange-300",
-      objective:
-        "Convertir el conocimiento de NIF en valor económico real para el contador y sus clientes.",
-      topics: [
-        "Cómo usar NIF para tomar decisiones.",
-        "Cómo asesorar clientes con información financiera.",
-        "Cómo cobrar mejor por tu criterio.",
-        "Qué sí le importa al cliente: crecer, ganar dinero y entender su negocio.",
-        "Conexión entre NIF, estados financieros y estrategia.",
-        "Introducción al uso de IA en contabilidad.",
-      ],
-      practice:
-        "Caso completo desde registro, estados financieros e interpretación hasta diagnóstico tipo consultor.",
-    },
-  ];
-
   return (
     <>
       <Script
-        id="meta-pixel-reto-nif"
+        id="meta-pixel-sistema-360-inscripcion"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
@@ -182,252 +102,179 @@ export default function RetoNifSalesPage() {
         />
       </noscript>
 
-      <main className="relative min-h-screen overflow-x-hidden bg-[#080807] text-white">
+      <main className="relative min-h-screen overflow-x-hidden bg-[#060606] text-white">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_18%,rgba(255,193,46,0.38),transparent_24%),radial-gradient(circle_at_12%_84%,rgba(230,115,0,0.42),transparent_24%),linear-gradient(135deg,#090908_0%,#161411_48%,#080807_100%)]" />
-          <div className="absolute left-[3%] top-[4%] text-[19rem] font-black uppercase leading-none tracking-[-0.12em] text-amber-300/85 sm:text-[27rem] lg:text-[34rem]">
-            NIF
-          </div>
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,7,0.78)_0%,rgba(8,8,7,0.48)_45%,rgba(8,8,7,0.7)_100%)]" />
-          <div className="absolute left-[-8%] bottom-[-12%] h-[38%] w-[48%] -rotate-6 bg-orange-500/75" />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#080807] via-[#080807]/78 to-transparent" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#060606_0%,#12100a_36%,#070707_68%,#111111_100%)]" />
+          <div className="absolute left-[-9%] top-[8%] h-24 w-[52%] -rotate-[24deg] bg-orange-500 sm:top-[18%] sm:h-32" />
+          <div className="absolute left-[-14%] top-[13%] h-5 w-[60%] -rotate-[22deg] bg-[#111]" />
+          <div className="absolute right-[-10%] top-[-2%] h-28 w-[50%] -rotate-[18deg] bg-orange-500 sm:h-40" />
+          <div className="absolute right-[-6%] top-[11%] h-7 w-[46%] -rotate-[16deg] bg-black" />
+          <div className="absolute inset-0 opacity-[0.13] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:4px_4px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,6,6,0.96)_0%,rgba(6,6,6,0.74)_42%,rgba(6,6,6,0.25)_68%,rgba(6,6,6,0.72)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#060606] via-[#060606]/88 to-transparent" />
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-[48%] lg:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-[52%] lg:block">
           <img
             src={HERO_IMAGE_URL}
-            alt="Alfredo Cobos"
-            className="absolute bottom-0 right-[10%] h-[82%] w-auto max-w-none object-contain opacity-95"
+            alt="Mtro. Alfredo Cobos"
+            className="absolute bottom-0 right-[4%] h-[94%] w-auto max-w-none object-contain object-bottom"
           />
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#080807] via-[#080807]/80 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#060606] via-[#060606]/72 to-transparent" />
         </div>
 
         <div className="pointer-events-none absolute inset-0 z-10 lg:hidden">
           <img
             src={HERO_IMAGE_URL}
-            alt="Alfredo Cobos"
-            className="absolute bottom-[24%] right-[-24%] h-[46%] w-auto max-w-none object-contain opacity-55"
+            alt="Mtro. Alfredo Cobos"
+            className="absolute right-[-17%] top-[7.5rem] h-[32rem] w-auto max-w-none object-contain opacity-70 sm:right-[-7%]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,8,7,0.42)_0%,rgba(8,8,7,0.72)_56%,rgba(8,8,7,0.96)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,6,6,0.08)_0%,rgba(6,6,6,0.48)_30%,rgba(6,6,6,0.96)_68%,#060606_100%)]" />
         </div>
 
-        <header className="relative z-30 mx-auto flex max-w-7xl items-center justify-between px-6 py-7 lg:px-10">
-          <div className="text-3xl font-black tracking-tight">CEFIN</div>
+        <header className="relative z-30 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+          <p className="text-2xl font-black tracking-tight">CEFIN</p>
           <a
             href={PAYMENT_URL}
             onClick={handleCheckoutClick}
-            className="hidden rounded-full bg-amber-300 px-6 py-3 text-sm font-black uppercase tracking-tight text-black transition hover:scale-[1.02] md:inline-flex"
+            className="hidden rounded-full border border-yellow-300 bg-yellow-300 px-6 py-3 text-sm font-black uppercase text-black transition hover:scale-[1.02] hover:bg-yellow-200 md:inline-flex"
           >
-            Inscribirme
+            Inscribete ya
           </a>
         </header>
 
-        <section className="relative z-30 mx-auto grid min-h-[calc(100vh-92px)] max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-14 pt-4 lg:grid-cols-12 lg:px-10">
+        <section className="relative z-30 mx-auto grid min-h-[calc(100vh-84px)] max-w-7xl gap-10 px-6 pb-14 pt-5 lg:grid-cols-12 lg:items-center lg:px-10">
           <div className="lg:col-span-7">
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-amber-300">
-              Oferta activa
+            <p className="text-base font-black uppercase text-white/92 sm:text-2xl">
+              Sistema 360:
             </p>
-            <h1 className="mt-5 text-5xl font-black uppercase leading-[0.85] tracking-[-0.07em] text-white sm:text-7xl lg:text-8xl xl:text-[8.8rem]">
-              Bienvenido
-              <br />
-              al reto
+
+            <h1 className="mt-2 text-5xl font-black uppercase leading-[0.86] tracking-tight text-yellow-300 sm:text-7xl lg:text-8xl">
+              Asesor
+              <span className="block bg-gradient-to-r from-yellow-200 via-yellow-300 to-orange-400 bg-clip-text text-transparent">
+                Contable
+              </span>
             </h1>
 
-            <div className="mt-6 inline-flex rounded-full bg-amber-300 px-7 py-3 text-xl font-black text-black sm:text-2xl">
-              La base sólida que siempre necesitaste
-            </div>
-
-            <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4 backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">
-                  Fecha
-                </p>
-                <p className="mt-1 text-2xl font-black uppercase text-white">
-                  18 al 22 de mayo
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4 backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">
-                  Horario
-                </p>
-                <p className="mt-1 text-2xl font-black uppercase text-white">
-                  11:00 AM (HORARIO CDMX)
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/78 sm:text-xl">
-              Entra al entrenamiento completo para fortalecer tu criterio con NIF,
-              leer mejor la información financiera y explicar tus conclusiones con
-              más seguridad frente a clientes y equipos.
+            <p className="mt-5 text-xs font-black uppercase tracking-[0.14em] text-white/70 sm:text-sm">
+              Impartido por el Mtro. Alfredo Cobos
             </p>
 
-            <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-2">
-              {includes.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-amber-300/15 bg-white/[0.06] p-4 text-sm font-semibold text-white/82 backdrop-blur"
-                >
-                  <span className="mr-2 text-amber-300">+</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
               <a
                 href={PAYMENT_URL}
                 onClick={handleCheckoutClick}
-                className="inline-flex items-center justify-center rounded-2xl bg-amber-300 px-9 py-5 text-base font-black uppercase tracking-tight text-black shadow-[0_18px_50px_rgba(251,191,36,0.28)] transition hover:scale-[1.01] hover:bg-amber-200 active:scale-[0.98] sm:text-lg"
+                className="inline-flex w-fit border-b-4 border-white pb-1 text-2xl font-black uppercase leading-none text-white transition hover:border-yellow-300 hover:text-yellow-200 sm:text-4xl"
               >
-                Inscribirme al reto
+                Inscribete ya
               </a>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/60">
-                Pago seguro por Hotmart
-              </p>
+              <p className="text-2xl font-black tracking-tight text-white">CEFIN</p>
+            </div>
+
+            <div className="mt-10 max-w-4xl rounded-[1.8rem] border-2 border-yellow-300 bg-black/70 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.36)] backdrop-blur sm:p-7">
+              <div className="mx-auto -mt-12 flex w-fit items-center gap-4 rounded-full border-2 border-yellow-300 bg-yellow-300 px-5 py-3 text-black shadow-[0_16px_40px_rgba(0,0,0,0.32)]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-black text-2xl font-black">
+                  +
+                </span>
+                <span className="max-w-[14rem] text-base font-black uppercase leading-[0.92]">
+                  Nuestros mejores cursos contables
+                </span>
+              </div>
+
+              <div className="mt-6 grid gap-3 md:grid-cols-2 md:gap-x-7">
+                {courses.map((course, index) => (
+                  <div
+                    key={course}
+                    className={`flex gap-3 text-base font-bold leading-[1.04] text-white ${
+                      index === 4 ? "md:border-l md:border-yellow-300 md:pl-7" : ""
+                    } ${index > 4 ? "md:border-l md:border-yellow-300 md:pl-7" : ""}`}
+                  >
+                    <span className="text-yellow-300">{index + 1}.</span>
+                    <span>{course}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <aside className="relative z-30 rounded-[2rem] border border-amber-300/18 bg-black/50 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.38)] backdrop-blur lg:col-span-5 lg:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
-              Registro de pago
-            </p>
-            <h2 className="mt-3 text-3xl font-black uppercase leading-tight text-white">
-              Entra hoy al programa completo
-            </h2>
-
-            <div className="mt-4">
-              <p className="text-sm font-black uppercase text-amber-300">
-                Hoy puedes entrar por
-              </p>
-              <p className="mt-1 text-5xl font-black text-white">{PRICE}</p>
-            </div>
-
-            <div className="mt-6 space-y-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-              <div>
-                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/45">
-                  Fecha
+          <aside className="self-end lg:col-span-5 lg:pl-8">
+            <div className="grid gap-5 pt-[24rem] sm:pt-[30rem] lg:pt-0">
+              <div className="rounded-[1.8rem] border-2 border-yellow-300 bg-black/76 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] backdrop-blur">
+                <p className="border-b-2 border-yellow-300 pb-2 text-lg font-black uppercase leading-none text-white">
+                  Inversion por participante:
                 </p>
-                <p className="mt-1 text-lg font-black uppercase text-white">
-                  18 al 22 de mayo
+                <p className="mt-4 text-5xl font-black italic tracking-tight text-white sm:text-6xl">
+                  {PRICE}
+                  <span className="ml-2 text-xl uppercase text-yellow-300">
+                    MXN.
+                  </span>
                 </p>
-              </div>
-              <div>
-                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/45">
-                  Horario
-                </p>
-                <p className="mt-1 text-lg font-black uppercase text-white">
-                  11:00 AM (HORARIO CDMX)
-                </p>
-              </div>
-            </div>
 
-            <a
-              href={PAYMENT_URL}
-              onClick={handleCheckoutClick}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-2xl bg-amber-300 px-7 py-5 text-center text-base font-black uppercase tracking-tight text-black transition hover:scale-[1.01] hover:bg-amber-200 active:scale-[0.98]"
-            >
-              Finalizar registro
-            </a>
-
-            <p className="mt-4 text-sm font-semibold text-white/48">
-              Purchase debe dispararse desde Hotmart al completar el pago.
-            </p>
-          </aside>
-        </section>
-
-        <section className="relative z-30 border-t border-white/10 bg-black/30">
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-            <div className="max-w-4xl">
-              <p className="text-sm font-black uppercase tracking-[0.3em] text-amber-300">
-                Temario completo
-              </p>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-white sm:text-6xl">
-                Taller Práctico de NIF
-              </h2>
-              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white/68">
-                5 clases en vivo de 2 horas por sesión, con enfoque en
-                aplicación real, criterio profesional e impacto directo en el
-                negocio.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-5 lg:grid-cols-2">
-              {syllabus.map((item) => (
-                <article
-                  key={item.label}
-                  className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur"
-                >
-                  <div className={`h-2 bg-gradient-to-r ${item.accent}`} />
-                  <div className="p-6 sm:p-7">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-white/45">
-                          {item.label}
-                        </p>
-                        <h3 className="mt-2 text-2xl font-black uppercase leading-tight text-white">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <div className="rounded-full border border-amber-300/20 bg-amber-300/10 px-3 py-1 text-xs font-black uppercase text-amber-200">
-                        En vivo
-                      </div>
-                    </div>
-
-                    <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-amber-300">
-                      Objetivo
-                    </p>
-                    <p className="mt-2 text-base leading-relaxed text-white/72">
-                      {item.objective}
-                    </p>
-
-                    <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-white/45">
-                      Contenido
-                    </p>
-                    <ul className="mt-3 space-y-2">
-                      {item.topics.map((topic) => (
-                        <li
-                          key={topic}
-                          className="flex gap-3 text-sm leading-relaxed text-white/72"
-                        >
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-300" />
-                          <span>{topic}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-6 rounded-2xl border border-amber-300/15 bg-amber-300/10 p-4">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-200">
-                        Parte práctica
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-white/76">
-                        {item.practice}
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-12 rounded-[2rem] border border-amber-300/20 bg-gradient-to-r from-amber-300/18 to-orange-500/10 p-6 backdrop-blur sm:p-8">
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                  <p className="text-sm font-black uppercase tracking-[0.25em] text-amber-200">
-                    Entra al taller completo
-                  </p>
-                  <h3 className="mt-2 text-3xl font-black uppercase leading-tight text-white">
-                    Aprende NIF para asesorar, interpretar y cobrar mejor.
-                  </h3>
-                </div>
                 <a
                   href={PAYMENT_URL}
                   onClick={handleCheckoutClick}
-                  className="inline-flex items-center justify-center rounded-2xl bg-amber-300 px-8 py-5 text-base font-black uppercase tracking-tight text-black transition hover:scale-[1.01] hover:bg-amber-200 active:scale-[0.98]"
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-yellow-300 px-6 py-4 text-center text-base font-black uppercase text-black transition hover:scale-[1.01] hover:bg-yellow-200"
                 >
-                  Inscribirme ahora
+                  Finalizar inscripcion
                 </a>
               </div>
+
+              <div className="space-y-4 px-2">
+                <p className="text-2xl font-black uppercase italic leading-[0.98] text-white">
+                  <span className="text-yellow-300">6 meses</span> del Factor
+                  CEFIN para preguntas y respuestas en vivo
+                </p>
+                <div className="rounded-xl bg-yellow-300 px-4 py-2 text-center text-sm font-black uppercase text-black">
+                  Ademas, te llevas gratis:
+                </div>
+                <p className="flex gap-3 text-lg font-black leading-tight text-white">
+                  <span className="text-yellow-300">+</span>
+                  <span>
+                    Norma IA: Agente de Inteligencia Artificial para dudas
+                    contables
+                  </span>
+                </p>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section className="relative z-30 border-t border-yellow-300/20 bg-black/58">
+          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+            <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-yellow-300">
+                  Sistema completo
+                </p>
+                <h2 className="mt-3 text-3xl font-black uppercase leading-tight text-white sm:text-5xl">
+                  Formate para asesorar con una vision contable 360.
+                </h2>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                {highlights.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-yellow-300/16 bg-white/[0.06] p-5 text-base font-bold leading-relaxed text-white/84 backdrop-blur"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-2xl text-lg font-semibold text-white/68">
+                Accede a la ruta de cursos contables, el acompanamiento del
+                Factor CEFIN y el bono de IA para resolver dudas contables.
+              </p>
+              <a
+                href={PAYMENT_URL}
+                onClick={handleCheckoutClick}
+                className="inline-flex items-center justify-center rounded-2xl bg-yellow-300 px-8 py-5 text-base font-black uppercase text-black transition hover:scale-[1.01] hover:bg-yellow-200"
+              >
+                Inscribirme ahora
+              </a>
             </div>
           </div>
         </section>
