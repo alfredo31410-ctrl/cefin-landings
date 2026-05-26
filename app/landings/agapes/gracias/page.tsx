@@ -1,0 +1,150 @@
+"use client";
+
+import Script from "next/script";
+import { useEffect } from "react";
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
+
+const WHATSAPP_URL = ""; // Reemplazar con el link del grupo de WhatsApp.
+const ASSET_BASE =
+  process.env.NODE_ENV === "production"
+    ? "https://cefin-landings-z9uk.vercel.app"
+    : "";
+const BANNER_IMAGE_URL = `${ASSET_BASE}/agapes/banner.png`;
+
+export default function GraciasAgapesPage() {
+  useEffect(() => {
+    document.title = "Registro completado | AGAPES | CEFIN";
+
+    trackMetaEvent("CompleteRegistration", {
+      content_name: "AGAPES | Registro completado",
+      content_category: "Clase gratuita",
+      status: "completed",
+      value: 0,
+      currency: META_CURRENCY,
+    });
+  }, []);
+
+  const handleWhatsAppClick = () => {
+    trackMetaEvent("Lead", {
+      content_name: "AGAPES | Click grupo WhatsApp",
+      content_category: "Grupo de WhatsApp",
+      status: "whatsapp_group_click",
+      value: 0,
+      currency: META_CURRENCY,
+    });
+
+    if (!WHATSAPP_URL) return;
+
+    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <>
+      <Script
+        id="meta-pixel-agapes-thankyou"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
+      />
+
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          src={getMetaPixelNoscriptUrl()}
+          alt=""
+        />
+      </noscript>
+
+      <main className="relative h-screen overflow-x-hidden overflow-y-auto bg-[#06110d] text-white">
+        <div className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute inset-0 scale-105 opacity-38 blur-[2px]"
+            style={{
+              backgroundImage: `url("${BANNER_IMAGE_URL}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#06110d_0%,rgba(6,17,13,0.78)_48%,rgba(6,17,13,0.92)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08)_0%,rgba(6,17,13,0.20)_54%,#06110d_100%)]" />
+          <div className="absolute right-[-8%] top-[15%] h-[300px] w-[300px] rounded-full bg-lime-400/14 blur-[110px]" />
+        </div>
+
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
+          <div className="w-full max-w-3xl">
+            <div className="inline-flex rounded-full border border-lime-300/25 bg-lime-300/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.26em] text-lime-300">
+              Registro 80% completado
+            </div>
+
+            <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-tight text-white drop-shadow-[0_6px_0_rgba(0,0,0,0.35)] sm:text-6xl xl:text-[5.5rem]">
+              Falta entrar
+              <br />
+              al grupo
+            </h1>
+
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/82 sm:text-xl">
+              Tu registro para la clase gratuita de{" "}
+              <span className="font-black text-lime-300">AGAPES</span> ya
+              quedó casi listo.
+            </p>
+
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+              Para que tu registro quede totalmente completo, entra ahora al
+              grupo de WhatsApp. Ahí se comparte el acceso, recordatorios y
+              avisos importantes de la sesión.
+            </p>
+
+            <div className="mt-8 rounded-2xl border border-lime-200/12 bg-white/[0.055] p-5 backdrop-blur sm:p-6">
+              <div className="mb-6 rounded-2xl border border-[#25D366]/25 bg-[#25D366]/10 p-4">
+                <div className="flex items-center justify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
+                  <span>Registro casi listo</span>
+                  <span>80%</span>
+                </div>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full w-4/5 rounded-full bg-[#25D366]" />
+                </div>
+                <p className="mt-3 text-sm font-bold text-white">
+                  El último 20% es entrar al grupo de WhatsApp.
+                </p>
+              </div>
+
+              <button
+                onClick={handleWhatsAppClick}
+                className="group inline-flex w-full items-center justify-center rounded-xl bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
+                disabled={!WHATSAPP_URL}
+              >
+                Entrar al grupo de WhatsApp
+              </button>
+
+              <p className="mt-3 text-sm font-semibold text-white/55">
+                Sin este paso podrías perder el acceso y los recordatorios.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              {[
+                "Te llegarán recordatorios",
+                "Recibirás el acceso a la sesión",
+                "Evitas perder avisos importantes",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-lime-200/12 bg-white/[0.04] p-4 text-sm font-medium text-white/75"
+                >
+                  <span className="mr-2 text-lime-300">●</span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
