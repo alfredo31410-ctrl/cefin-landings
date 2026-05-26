@@ -14,7 +14,7 @@ const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
-const BANNER_IMAGE_URL = `${ASSET_BASE}/agapes/banner.png`;
+const BANNER_IMAGE_URL = `${ASSET_BASE}/agapes/banner_gracias.png`;
 
 export default function GraciasAgapesPage() {
   useEffect(() => {
@@ -63,18 +63,28 @@ export default function GraciasAgapesPage() {
 
       <main className="relative h-screen overflow-x-hidden overflow-y-auto bg-[#06110d] text-white">
         <div className="pointer-events-none absolute inset-0">
-          <div
-            className="absolute inset-0 scale-105 opacity-38 blur-[2px]"
-            style={{
-              backgroundImage: `url("${BANNER_IMAGE_URL}")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,#06110d_0%,rgba(6,17,13,0.78)_48%,rgba(6,17,13,0.92)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08)_0%,rgba(6,17,13,0.20)_54%,#06110d_100%)]" />
-          <div className="absolute right-[-8%] top-[15%] h-[300px] w-[300px] rounded-full bg-lime-400/14 blur-[110px]" />
-        </div>
+  <div
+    className="absolute inset-0 scale-100 opacity-85"
+    style={{
+      backgroundImage: `
+        linear-gradient(
+          90deg,
+          rgba(4, 32, 24, 0.90) 0%,
+          rgba(4, 32, 24, 0.72) 34%,
+          rgba(4, 32, 24, 0.38) 62%,
+          rgba(4, 32, 24, 0.16) 100%
+        ),
+        url("${BANNER_IMAGE_URL}")`,
+      backgroundSize: "cover",
+      backgroundPosition: "left center",
+      backgroundRepeat: "no-repeat",
+    }}
+  />
+
+  <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(4,32,24,0.08)_0%,rgba(4,32,24,0.24)_62%,#06110d_100%)]" />
+
+  <div className="absolute left-[-8%] top-[15%] h-[300px] w-[300px] rounded-full bg-lime-400/14 blur-[110px]" />
+</div>
 
         <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
           <div className="w-full max-w-3xl">
@@ -114,13 +124,15 @@ export default function GraciasAgapesPage() {
                 </p>
               </div>
 
-              <button
-                onClick={handleWhatsAppClick}
-                className="group inline-flex w-full items-center justify-center rounded-xl bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
-                disabled={!WHATSAPP_URL}
-              >
-                Entrar al grupo de WhatsApp
-              </button>
+              <a
+  href={WHATSAPP_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl border border-lime-200/70 bg-lime-400 px-8 py-5 text-lg font-black uppercase tracking-tight text-[#06110d] shadow-[0_0_35px_rgba(163,255,18,0.45)] transition-all duration-300 hover:scale-[1.03] hover:bg-lime-300 hover:shadow-[0_0_60px_rgba(163,255,18,0.80)] active:scale-[0.98]"
+>
+  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+  <span className="relative z-10">ENTRAR AL GRUPO DE WHATSAPP</span>
+</a>
 
               <p className="mt-3 text-sm font-semibold text-white/55">
                 Sin este paso podrías perder el acceso y los recordatorios.

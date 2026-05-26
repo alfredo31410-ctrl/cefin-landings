@@ -174,11 +174,20 @@ export default function AgapesLandingPage() {
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div
             className="absolute inset-0"
-            style={{
-              backgroundImage: `url("${BANNER_IMAGE_URL}")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+style={{
+  backgroundImage: `
+    linear-gradient(
+      90deg,
+      rgba(4, 32, 24, 0.18) 0%,
+      rgba(4, 32, 24, 0.28) 28%,
+      rgba(4, 32, 24, 0.62) 58%,
+      rgba(4, 32, 24, 0.88) 100%
+    ),
+    url("${BANNER_IMAGE_URL}")`,
+  backgroundSize: "cover",
+  backgroundPosition: "left center",
+  backgroundRepeat: "no-repeat",
+}}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,12,0.16)_0%,rgba(5,14,12,0.28)_42%,rgba(5,14,12,0.76)_74%,rgba(5,14,12,0.92)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.12)_48%,#06110d_100%)]" />
