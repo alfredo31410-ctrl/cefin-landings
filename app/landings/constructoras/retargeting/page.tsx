@@ -211,7 +211,8 @@ export default function ConstructorasRetargetingPage() {
 
                 <p className="mt-4 leading-relaxed text-white/72">
                   Lleva tu criterio contable y fiscal en constructoras a un
-                  nivel mas claro, mas seguro y mucho mas util para tus clientes.
+                  nivel mas claro, mas seguro y mucho mas util para tus
+                  clientes.
                 </p>
 
                 <div className="mt-6 rounded-[1.4rem] border border-white/10 bg-black/20 p-5">
@@ -316,8 +317,8 @@ export default function ConstructorasRetargetingPage() {
                 Cuando una constructora mezcla anticipos, materiales,
                 contratistas, maquinaria, costos y presion fiscal, cualquier
                 error contable se vuelve caro. Este entrenamiento busca darte
-                una base mas solida para ordenar mejor la informacion y
-                asesorar con mas seguridad.
+                una base mas solida para ordenar mejor la informacion y asesorar
+                con mas seguridad.
               </p>
             </div>
           </div>

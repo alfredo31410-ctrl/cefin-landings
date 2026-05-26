@@ -4,7 +4,6 @@ import Script from "next/script";
 import { useEffect } from "react";
 import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
 
-
 declare global {
   interface Window {
     fbq?: (command: string, ...args: unknown[]) => void;
@@ -12,11 +11,8 @@ declare global {
 }
 
 export default function GraciasAuxiliar() {
-
   //CAMBIO DE GRUPO DE WHATSAPP
   const whatsappUrl = "https://chat.whatsapp.com/CAw8p1TLqMMLdpZon2ZsoQ";
-
-
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.fbq) {

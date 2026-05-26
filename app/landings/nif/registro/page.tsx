@@ -273,8 +273,7 @@ export default function EstadosFinancierosLandingPage() {
         )}
 
         <style jsx global>{`
-          .${FORM_CLASS},
-          .${FORM_CLASS} form {
+          .${FORM_CLASS}, .${FORM_CLASS} form {
             width: 100% !important;
             max-width: 430px !important;
             margin: 0 auto !important;
@@ -327,7 +326,11 @@ export default function EstadosFinancierosLandingPage() {
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #3156ff 0%, #7c42ff 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #3156ff 0%,
+              #7c42ff 100%
+            ) !important;
             color: white !important;
             padding: 16px 20px !important;
             font-size: 15px !important;

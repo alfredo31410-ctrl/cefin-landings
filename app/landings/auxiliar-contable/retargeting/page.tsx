@@ -130,9 +130,9 @@ export default function AuxiliarContableRetargetingPage() {
 
               <p className="max-w-2xl text-lg leading-relaxed text-slate-200 sm:text-xl">
                 Si ya viste el entrenamiento gratuito y te diste cuenta de que
-                necesitas estructura, práctica y seguridad para trabajar mejor en
-                contabilidad, esta es tu oportunidad para entrar con una oferta
-                especial.
+                necesitas estructura, práctica y seguridad para trabajar mejor
+                en contabilidad, esta es tu oportunidad para entrar con una
+                oferta especial.
               </p>
 
               <div className="flex flex-col justify-center gap-4 pt-2 sm:flex-row lg:justify-start">
@@ -228,7 +228,8 @@ export default function AuxiliarContableRetargetingPage() {
                 </a>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-slate-400">
-                  Oferta dirigida a personas que ya mostraron interés en el entrenamiento.
+                  Oferta dirigida a personas que ya mostraron interés en el
+                  entrenamiento.
                 </p>
               </div>
             </div>
@@ -243,7 +244,10 @@ export default function AuxiliarContableRetargetingPage() {
               </p>
               <h2 className="mt-4 text-3xl font-black uppercase italic leading-tight md:text-5xl">
                 El problema no es querer entrar al área contable.
-                <span className="text-yellow-400"> El problema es entrar sin bases.</span>
+                <span className="text-yellow-400">
+                  {" "}
+                  El problema es entrar sin bases.
+                </span>
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-slate-300">
                 Muchos quieren trabajar como auxiliares contables, pero llegan
@@ -285,9 +289,18 @@ export default function AuxiliarContableRetargetingPage() {
               </h3>
 
               <div className="mt-6 space-y-4 leading-relaxed text-slate-200">
-                <p>• Vas empezando en contabilidad y quieres entender mejor el trabajo real.</p>
-                <p>• Sientes que conoces conceptos, pero todavía no te sientes seguro aplicándolos.</p>
-                <p>• Quieres dar mejores pasos para integrarte a un despacho o área administrativa.</p>
+                <p>
+                  • Vas empezando en contabilidad y quieres entender mejor el
+                  trabajo real.
+                </p>
+                <p>
+                  • Sientes que conoces conceptos, pero todavía no te sientes
+                  seguro aplicándolos.
+                </p>
+                <p>
+                  • Quieres dar mejores pasos para integrarte a un despacho o
+                  área administrativa.
+                </p>
                 <p>• Necesitas una base más práctica y menos revuelta.</p>
               </div>
             </div>
@@ -365,7 +378,8 @@ export default function AuxiliarContableRetargetingPage() {
             </a>
 
             <p className="mt-4 text-sm text-slate-400">
-              Precio especial: <span className="font-black text-white">{PRICE}</span>
+              Precio especial:{" "}
+              <span className="font-black text-white">{PRICE}</span>
             </p>
           </div>
         </section>

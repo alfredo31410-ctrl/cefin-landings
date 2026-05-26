@@ -17,10 +17,8 @@ const PRODUCT_NAME = "EstrategIA Evolución Contable";
 const PRICE = "$ 3,387 MXN";
 const OLD_PRICE = "$22,922 MXN";
 const PRODUCT_VALUE = 3387;
-const DESKTOP_BG =
-  "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
-const MOBILE_BG =
-  "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
+const DESKTOP_BG = "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
+const MOBILE_BG = "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
 
 export default function IARetargetingPage() {
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
@@ -151,7 +149,9 @@ export default function IARetargetingPage() {
               <span className="text-sm font-black text-cyan-300">C</span>
             </div>
             <div className="text-left leading-none">
-              <p className="text-sm font-black tracking-tight text-white">CEFIN</p>
+              <p className="text-sm font-black tracking-tight text-white">
+                CEFIN
+              </p>
               <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">
                 Estrategia y evolución contable
               </p>
@@ -185,8 +185,12 @@ export default function IARetargetingPage() {
                   <span className="block text-cyan-300">
                     Estrateg<span className="text-lime-300">IA</span>
                   </span>
-                  <span className="mt-[-0.12em] block text-cyan-300">Evolución</span>
-                  <span className="mt-[-0.12em] block text-cyan-300">Contable</span>
+                  <span className="mt-[-0.12em] block text-cyan-300">
+                    Evolución
+                  </span>
+                  <span className="mt-[-0.12em] block text-cyan-300">
+                    Contable
+                  </span>
                 </h1>
               </div>
 
@@ -196,10 +200,10 @@ export default function IARetargetingPage() {
 
               <p className="max-w-[42rem] text-lg leading-relaxed text-slate-200 sm:text-xl">
                 Si ya viste la clase gratuita y entendiste que la IA no es moda
-                sino ventaja competitiva, esta es tu oportunidad para entrar a la
-                versión completa con una oferta especial que concentra sesiones,
-                cursos, agentes IA y herramientas pensadas para acelerar y elevar
-                tu práctica contable.
+                sino ventaja competitiva, esta es tu oportunidad para entrar a
+                la versión completa con una oferta especial que concentra
+                sesiones, cursos, agentes IA y herramientas pensadas para
+                acelerar y elevar tu práctica contable.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
@@ -210,8 +214,6 @@ export default function IARetargetingPage() {
                 >
                   <span>Quiero entrar ahora</span>
                 </a>
-
-                
               </div>
 
               <div className="flex flex-wrap gap-4 pt-2 text-sm font-bold uppercase text-slate-300">
@@ -242,8 +244,8 @@ export default function IARetargetingPage() {
 
                 <p className="mt-4 leading-relaxed text-slate-300">
                   Accede a un paquete completo de contenidos, sesiones en vivo y
-                  agentes IA pensados para contadores que quieren usar tecnología
-                  con más estructura, criterio y ventaja competitiva.
+                  agentes IA pensados para contadores que quieren usar
+                  tecnología con más estructura, criterio y ventaja competitiva.
                 </p>
 
                 <div className="mt-8">
@@ -270,7 +272,8 @@ export default function IARetargetingPage() {
                   <div className="flex items-start gap-3">
                     <span className="mt-1 h-2.5 w-2.5 rounded-full bg-cyan-400" />
                     <p className="text-slate-200">
-                      Incluye cursos, sesiones y agentes IA aplicados al contador
+                      Incluye cursos, sesiones y agentes IA aplicados al
+                      contador
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
@@ -290,8 +293,8 @@ export default function IARetargetingPage() {
                 </a>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-slate-400">
-                  Oferta dirigida a personas que ya mostraron interés en la clase
-                  gratuita.
+                  Oferta dirigida a personas que ya mostraron interés en la
+                  clase gratuita.
                 </p>
               </div>
             </div>
@@ -314,9 +317,9 @@ export default function IARetargetingPage() {
               <p className="mt-6 text-lg leading-relaxed text-slate-300">
                 Muchos contadores prueban herramientas, pero siguen perdiendo
                 tiempo, sin estructura, sin prompts útiles y sin una forma clara
-                de llevar la tecnología a resultados reales. Esta oferta junta en
-                una sola inversión varios recursos que normalmente comprarías por
-                separado para ayudarte a avanzar más rápido.
+                de llevar la tecnología a resultados reales. Esta oferta junta
+                en una sola inversión varios recursos que normalmente comprarías
+                por separado para ayudarte a avanzar más rápido.
               </p>
             </div>
           </div>
@@ -395,9 +398,9 @@ export default function IARetargetingPage() {
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
               Si ya decidiste que quieres evolucionar como contador con ayuda de
-              IA, esta es una forma mucho más inteligente de entrar: con una sola
-              inversión accedes a contenidos y herramientas con mucho más valor
-              del que pagas hoy.
+              IA, esta es una forma mucho más inteligente de entrar: con una
+              sola inversión accedes a contenidos y herramientas con mucho más
+              valor del que pagas hoy.
             </p>
 
             <a
@@ -409,7 +412,8 @@ export default function IARetargetingPage() {
             </a>
 
             <p className="mt-4 text-sm text-slate-400">
-              Precio especial: <span className="font-black text-white">{PRICE}</span>
+              Precio especial:{" "}
+              <span className="font-black text-white">{PRICE}</span>
             </p>
           </div>
         </section>

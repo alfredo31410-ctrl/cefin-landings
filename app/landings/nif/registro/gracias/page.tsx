@@ -16,9 +16,6 @@ const WHATSAPP_GROUPS = {
   default: "https://chat.whatsapp.com/FbRR8asMMBDEwZgNtJNXSF",
 } as const;
 
-
-
-
 const HERO_IMAGE_URL = "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
 function GraciasEstadosFinancierosContent() {
@@ -59,7 +56,8 @@ function GraciasEstadosFinancierosContent() {
   }, [resolvedTrafficSource]);
 
   useEffect(() => {
-    document.title = "Registro completado | Estados Financieros con NIF | CEFIN";
+    document.title =
+      "Registro completado | Estados Financieros con NIF | CEFIN";
 
     trackMetaEvent("CompleteRegistration", {
       content_name: "Estados Financieros con NIF | Registro completado",
@@ -111,8 +109,8 @@ function GraciasEstadosFinancierosContent() {
           </p>
 
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-            Para que tu registro quede totalmente completo, entra ahora al
-            grupo de WhatsApp. Ahí recibirás acceso, recordatorios y avisos
+            Para que tu registro quede totalmente completo, entra ahora al grupo
+            de WhatsApp. Ahí recibirás acceso, recordatorios y avisos
             importantes de la sesión.
           </p>
 

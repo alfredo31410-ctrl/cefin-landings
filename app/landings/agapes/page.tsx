@@ -174,8 +174,8 @@ export default function AgapesLandingPage() {
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div
             className="absolute inset-0"
-style={{
-  backgroundImage: `
+            style={{
+              backgroundImage: `
     linear-gradient(
       90deg,
       rgba(4, 32, 24, 0.18) 0%,
@@ -184,10 +184,10 @@ style={{
       rgba(4, 32, 24, 0.88) 100%
     ),
     url("${BANNER_IMAGE_URL}")`,
-  backgroundSize: "cover",
-  backgroundPosition: "left center",
-  backgroundRepeat: "no-repeat",
-}}
+              backgroundSize: "cover",
+              backgroundPosition: "left center",
+              backgroundRepeat: "no-repeat",
+            }}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,12,0.16)_0%,rgba(5,14,12,0.28)_42%,rgba(5,14,12,0.76)_74%,rgba(5,14,12,0.92)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.12)_48%,#06110d_100%)]" />
@@ -274,7 +274,8 @@ style={{
             <div className="space-y-5 lg:col-span-7">
               <p className="text-lg leading-relaxed text-white/75">
                 Ganadería, agricultura, silvicultura y pesca tienen operaciones,
-                obligaciones y criterios que requieren una lectura especializada.
+                obligaciones y criterios que requieren una lectura
+                especializada.
               </p>
               <p className="text-lg leading-relaxed text-white/75">
                 Esta clase te ayuda a ubicar los puntos clave para asesorar con
@@ -315,7 +316,9 @@ style={{
         <footer className="relative z-30 border-t border-lime-300/12">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>Formación práctica para contadores que quieren asesorar mejor.</p>
+            <p>
+              Formación práctica para contadores que quieren asesorar mejor.
+            </p>
           </div>
         </footer>
 
@@ -378,8 +381,7 @@ style={{
             box-shadow: none !important;
           }
 
-          .${FORM_CLASS},
-          .${FORM_CLASS} ._form-content,
+          .${FORM_CLASS}, .${FORM_CLASS} ._form-content,
           .${FORM_CLASS} ._form-body,
           .${FORM_CLASS} ._inline-style,
           .${FORM_CLASS} ._form-thank-you {
@@ -462,7 +464,11 @@ style={{
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #bef264 0%, #84cc16 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #bef264 0%,
+              #84cc16 100%
+            ) !important;
             color: #081109 !important;
             padding: 16px 20px !important;
             font-size: 15px !important;

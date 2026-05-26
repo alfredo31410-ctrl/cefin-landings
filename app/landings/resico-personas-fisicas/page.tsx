@@ -37,8 +37,8 @@ export default function ResicoPersonasFisicasPage() {
   const buildAdvancedMatchData = (formRoot: ParentNode) => {
     const fields = Array.from(
       formRoot.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-        "input, textarea"
-      )
+        "input, textarea",
+      ),
     );
 
     const findField = (patterns: string[]) =>
@@ -48,10 +48,7 @@ export default function ResicoPersonasFisicasPage() {
           field.id,
           field.placeholder,
           field.getAttribute("aria-label"),
-          field
-            .closest("div")
-            ?.querySelector("label")
-            ?.textContent,
+          field.closest("div")?.querySelector("label")?.textContent,
         ]
           .filter(Boolean)
           .join(" ")
@@ -281,9 +278,10 @@ export default function ResicoPersonasFisicasPage() {
               </p>
 
               <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-                Una clase diseñada para contadores que necesitan entender con claridad
-                cómo aplicar RESICO en personas físicas, detectar errores comunes y
-                explicar este régimen con más seguridad frente a sus clientes.
+                Una clase diseñada para contadores que necesitan entender con
+                claridad cómo aplicar RESICO en personas físicas, detectar
+                errores comunes y explicar este régimen con más seguridad frente
+                a sus clientes.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
@@ -307,7 +305,9 @@ export default function ResicoPersonasFisicasPage() {
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
                       Hora
                     </p>
-                    <p className="text-lg font-black text-white">11:00 AM (CDMX)</p>
+                    <p className="text-lg font-black text-white">
+                      11:00 AM (CDMX)
+                    </p>
                   </div>
                 </div>
               </div>
@@ -359,9 +359,9 @@ export default function ResicoPersonasFisicasPage() {
 
               <div className="space-y-5 lg:col-span-7">
                 <p className="text-lg leading-relaxed text-white/75">
-                  Muchos contadores han leído sobre el régimen, pero cuando llega
-                  el momento de revisar casos reales, dar una recomendación o
-                  explicarle algo al cliente, aparece la duda.
+                  Muchos contadores han leído sobre el régimen, pero cuando
+                  llega el momento de revisar casos reales, dar una
+                  recomendación o explicarle algo al cliente, aparece la duda.
                 </p>
                 <p className="text-lg leading-relaxed text-white/75">
                   Esta clase está pensada para darte una base más clara, más
@@ -404,7 +404,10 @@ export default function ResicoPersonasFisicasPage() {
         <footer className="relative z-30 border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>Formación práctica para contadores que quieren trabajar con más seguridad.</p>
+            <p>
+              Formación práctica para contadores que quieren trabajar con más
+              seguridad.
+            </p>
           </div>
         </footer>
 
@@ -474,8 +477,7 @@ export default function ResicoPersonasFisicasPage() {
             max-width: 100% !important;
           }
 
-          .${FORM_CLASS},
-          .${FORM_CLASS} ._form-content,
+          .${FORM_CLASS}, .${FORM_CLASS} ._form-content,
           .${FORM_CLASS} ._form-body,
           .${FORM_CLASS} ._inline-style,
           .${FORM_CLASS} ._form-thank-you {
@@ -551,7 +553,11 @@ export default function ResicoPersonasFisicasPage() {
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #d946ef 0%, #8b5cf6 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #d946ef 0%,
+              #8b5cf6 100%
+            ) !important;
             color: white !important;
             padding: 16px 20px !important;
             font-size: 15px !important;

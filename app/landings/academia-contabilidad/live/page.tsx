@@ -171,7 +171,9 @@ type LiveClockState = {
 };
 
 function Container({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">{children}</div>;
+  return (
+    <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">{children}</div>
+  );
 }
 
 function SectionEyebrow({
@@ -289,7 +291,9 @@ function EnrollmentCard({
             {LIVE_PAGE_DATA.price}
           </p>
 
-          <p className="text-sm text-slate-300">{LIVE_PAGE_DATA.priceCurrency}</p>
+          <p className="text-sm text-slate-300">
+            {LIVE_PAGE_DATA.priceCurrency}
+          </p>
 
           {offerUnlocked ? (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
@@ -297,8 +301,8 @@ function EnrollmentCard({
             </p>
           ) : (
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Durante la clase se abre este acceso especial para quienes
-              deciden seguir avanzando.
+              Durante la clase se abre este acceso especial para quienes deciden
+              seguir avanzando.
             </p>
           )}
 
@@ -513,8 +517,8 @@ export default function AcademiaContabilidadLivePage() {
               {!clockState
                 ? "Cargando horario CDMX"
                 : clockState.isDuringLive
-                ? `CDMX ${formatMexicoTime(clockState)}`
-                : `${LIVE_PAGE_DATA.broadcastDayLabel} ${LIVE_PAGE_DATA.broadcastTimeLabel}`}
+                  ? `CDMX ${formatMexicoTime(clockState)}`
+                  : `${LIVE_PAGE_DATA.broadcastDayLabel} ${LIVE_PAGE_DATA.broadcastTimeLabel}`}
             </div>
           </div>
         </Container>
@@ -557,7 +561,9 @@ export default function AcademiaContabilidadLivePage() {
                         </p>
                         <p className="mt-4 text-base font-bold text-white/90 md:text-lg">
                           Hora actual en CDMX:{" "}
-                          {clockState ? formatMexicoTime(clockState) : "--:--:--"}
+                          {clockState
+                            ? formatMexicoTime(clockState)
+                            : "--:--:--"}
                         </p>
                       </div>
                     </>
@@ -614,8 +620,8 @@ export default function AcademiaContabilidadLivePage() {
                   </PrimaryButton>
                 ) : (
                   <div className="inline-flex items-center justify-center rounded-2xl bg-slate-100 px-8 py-5 text-center text-lg font-black text-slate-500 md:text-2xl">
-                  Acceso disponible durante la transmision
-                </div>
+                    Acceso disponible durante la transmision
+                  </div>
                 )}
               </div>
             </div>
@@ -683,7 +689,9 @@ export default function AcademiaContabilidadLivePage() {
         <section className="bg-white/96 py-20 backdrop-blur-[2px] md:py-24">
           <Container>
             <div className="mx-auto max-w-5xl">
-              <SectionEyebrow center>{LIVE_PAGE_DATA.learnEyebrow}</SectionEyebrow>
+              <SectionEyebrow center>
+                {LIVE_PAGE_DATA.learnEyebrow}
+              </SectionEyebrow>
 
               <h2 className="mt-4 text-center text-3xl font-black leading-tight text-slate-900 md:text-5xl">
                 {LIVE_PAGE_DATA.learnTitle}

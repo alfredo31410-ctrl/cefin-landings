@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Script from "next/script";
 import { useEffect } from "react";
@@ -11,7 +11,8 @@ declare global {
 }
 
 export default function GraciasIA() {
-  const whatsappUrl = "https://chat.whatsapp.com/DxXMjcw3I7lCdP6H3yQsVA?mode=gi_t";
+  const whatsappUrl =
+    "https://chat.whatsapp.com/DxXMjcw3I7lCdP6H3yQsVA?mode=gi_t";
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.fbq) {
@@ -24,7 +25,8 @@ export default function GraciasIA() {
   };
 
   useEffect(() => {
-    document.title = "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
+    document.title =
+      "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
     trackEvent("CompleteRegistration", {
       content_name: "ABC de Inteligencia Artificial para Contadores",
@@ -94,7 +96,9 @@ export default function GraciasIA() {
                     <span className="text-sm font-black text-cyan-300">C</span>
                   </div>
                   <div className="text-left leading-none">
-                    <p className="text-sm font-black tracking-tight text-white">CEFIN</p>
+                    <p className="text-sm font-black tracking-tight text-white">
+                      CEFIN
+                    </p>
                     <p className="text-[10px] uppercase tracking-[0.16em] text-slate-400">
                       Capacitación contable y fiscal
                     </p>
@@ -110,7 +114,11 @@ export default function GraciasIA() {
                   stroke="currentColor"
                   strokeWidth="2.5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
 
@@ -168,13 +176,16 @@ export default function GraciasIA() {
                   Tu registro todavía no está al 100%: falta entrar al grupo de
                   WhatsApp.
                   <br />
-                  Ahí te vamos a compartir el acceso a la clase, recordatorios, avisos importantes y todo lo que necesitas para no perderte nada.
+                  Ahí te vamos a compartir el acceso a la clase, recordatorios,
+                  avisos importantes y todo lo que necesitas para no perderte
+                  nada.
                 </p>
               </div>
 
               <p className="mt-6 text-sm leading-relaxed text-slate-300 sm:text-base">
-                <span className="font-bold text-lime-300">Importante:</span>{" "}
-                si no entras al grupo, podrías perderte información clave sobre tu inscripción y el acceso a la sesión.
+                <span className="font-bold text-lime-300">Importante:</span> si
+                no entras al grupo, podrías perderte información clave sobre tu
+                inscripción y el acceso a la sesión.
               </p>
 
               <div className="mt-8 grid gap-3 text-left sm:mt-10 sm:grid-cols-3">
@@ -211,7 +222,8 @@ export default function GraciasIA() {
                   Nota importante
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                  El grupo de WhatsApp es el canal principal donde te compartiremos la información importante de esta clase.{" "}
+                  El grupo de WhatsApp es el canal principal donde te
+                  compartiremos la información importante de esta clase.{" "}
                   <span className="font-bold text-white">
                     Entra ahora para asegurar que recibas todo correctamente.
                   </span>

@@ -70,30 +70,28 @@ export default function LandingIA() {
 
       <main className="relative min-h-screen overflow-y-auto overflow-x-hidden bg-[#02040a] text-white font-sans">
         {/* BACKGROUND OPTIMIZADO */}
-<div className="fixed inset-0 z-0 overflow-hidden">
+        <div className="fixed inset-0 z-0 overflow-hidden">
+          {/* DESKTOP (horizontal) */}
+          <img
+            src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial.png"
+            alt="ABC de Inteligencia Artificial para Contadores"
+            className="hidden lg:block absolute inset-0 h-full w-full object-cover object-right opacity-80"
+          />
 
-  {/* DESKTOP (horizontal) */}
-  <img
-    src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial.png"
-    alt="ABC de Inteligencia Artificial para Contadores"
-    className="hidden lg:block absolute inset-0 h-full w-full object-cover object-right opacity-80"
-  />
+          {/* MOBILE (vertical) */}
+          <img
+            src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial_Vertical.png" // 👈 tu nueva imagen vertical
+            alt="ABC de Inteligencia Artificial para Contadores"
+            className="block lg:hidden absolute inset-0 h-full w-full object-cover object-[50%_50%] opacity-60"
+          />
 
-  {/* MOBILE (vertical) */}
-  <img
-    src="https://cefin-landings-z9uk.vercel.app/Inteligencia_Artificial_Vertical.png" // 👈 tu nueva imagen vertical
-    alt="ABC de Inteligencia Artificial para Contadores"
-    className="block lg:hidden absolute inset-0 h-full w-full object-cover object-[50%_50%] opacity-60"
-  />
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#02040a]/40 via-[#02040a]/70 to-[#02040a] lg:bg-gradient-to-r lg:from-[#02040a] lg:via-[#02040a]/85 lg:to-[#02040a]/25" />
 
-  {/* OVERLAY */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#02040a]/40 via-[#02040a]/70 to-[#02040a] lg:bg-gradient-to-r lg:from-[#02040a] lg:via-[#02040a]/85 lg:to-[#02040a]/25" />
-
-  {/* GLOWS */}
-  <div className="absolute -left-16 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
-  <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-lime-400/10 blur-3xl" />
-
-</div>
+          {/* GLOWS */}
+          <div className="absolute -left-16 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-lime-400/10 blur-3xl" />
+        </div>
 
         {/* MARCA CEFIN */}
         <header className="relative z-20 flex justify-center px-4 pt-5 sm:justify-start sm:px-8 lg:px-12">

@@ -182,10 +182,10 @@ export default function ConstructorasLandingPage() {
               </div>
 
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/78 sm:text-lg">
-                Una clase diseñada para contadores que trabajan o quieren trabajar
-                con constructoras y necesitan tener más claridad fiscal, mejor
-                criterio contable y una forma más segura de explicar números,
-                impuestos y obligaciones del giro.
+                Una clase diseñada para contadores que trabajan o quieren
+                trabajar con constructoras y necesitan tener más claridad
+                fiscal, mejor criterio contable y una forma más segura de
+                explicar números, impuestos y obligaciones del giro.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
@@ -209,7 +209,9 @@ export default function ConstructorasLandingPage() {
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
                       Hora
                     </p>
-                    <p className="text-lg font-black text-white">11:00 AM (CDMX)</p>
+                    <p className="text-lg font-black text-white">
+                      11:00 AM (CDMX)
+                    </p>
                   </div>
                 </div>
               </div>
@@ -250,15 +252,16 @@ export default function ConstructorasLandingPage() {
                   ¿Por qué entrar a esta clase?
                 </p>
                 <h3 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
-                  Porque una constructora no se opera igual que cualquier otro negocio.
+                  Porque una constructora no se opera igual que cualquier otro
+                  negocio.
                 </h3>
               </div>
 
               <div className="space-y-5 lg:col-span-7">
                 <p className="text-lg leading-relaxed text-white/75">
-                  Cuando el giro tiene anticipos, obra, maquinaria, contratistas,
-                  materiales y presión fiscal, una mala lectura contable termina
-                  complicando decisiones, impuestos y flujo.
+                  Cuando el giro tiene anticipos, obra, maquinaria,
+                  contratistas, materiales y presión fiscal, una mala lectura
+                  contable termina complicando decisiones, impuestos y flujo.
                 </p>
                 <p className="text-lg leading-relaxed text-white/75">
                   Esta clase busca darte una base más clara y más útil para
@@ -301,7 +304,10 @@ export default function ConstructorasLandingPage() {
         <footer className="relative z-30 border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>Formación práctica para contadores que quieren trabajar con más seguridad.</p>
+            <p>
+              Formación práctica para contadores que quieren trabajar con más
+              seguridad.
+            </p>
           </div>
         </footer>
 
@@ -357,8 +363,7 @@ export default function ConstructorasLandingPage() {
             box-shadow: none !important;
           }
 
-          .${FORM_CLASS},
-          .${FORM_CLASS} ._form-content,
+          .${FORM_CLASS}, .${FORM_CLASS} ._form-content,
           .${FORM_CLASS} ._form-body,
           .${FORM_CLASS} ._inline-style,
           .${FORM_CLASS} ._form-thank-you {
@@ -441,7 +446,11 @@ export default function ConstructorasLandingPage() {
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #bfff5c 0%, #5ee25d 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #bfff5c 0%,
+              #5ee25d 100%
+            ) !important;
             color: #081008 !important;
             padding: 16px 20px !important;
             font-size: 15px !important;

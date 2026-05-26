@@ -11,10 +11,7 @@ declare global {
   }
 }
 
-export function trackMetaEvent(
-  event: string,
-  data?: MetaEventPayload,
-) {
+export function trackMetaEvent(event: string, data?: MetaEventPayload) {
   if (typeof window === "undefined" || !window.fbq) return;
 
   if (data) {

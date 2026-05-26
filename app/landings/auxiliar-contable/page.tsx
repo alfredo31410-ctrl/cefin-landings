@@ -4,7 +4,6 @@ import Script from "next/script";
 import { useState, useEffect } from "react";
 import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
-
 declare global {
   interface Window {
     fbq?: (command: string, ...args: unknown[]) => void;

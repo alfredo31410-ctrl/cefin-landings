@@ -121,7 +121,8 @@ export default function AcademiaContabilidadPage() {
             <div className="flex flex-col items-start gap-5 lg:items-end">
               <div className="max-w-[520px] rounded-[2rem] border border-white/10 bg-white/12 px-5 py-4 text-left shadow-[0_18px_60px_rgba(255,94,122,0.18)] backdrop-blur sm:px-6 sm:py-5 lg:-mt-4 lg:text-right">
                 <p className="text-xl leading-tight text-white sm:text-3xl">
-                  Aprende Contabilidad desde Cero y transforma tu forma de entender los negocios.
+                  Aprende Contabilidad desde Cero y transforma tu forma de
+                  entender los negocios.
                 </p>
                 <p className="mt-3 text-2xl font-black text-white sm:text-4xl">
                   Jueves, 11:00 AM (CDMX)
@@ -188,7 +189,8 @@ export default function AcademiaContabilidadPage() {
                   Lo que vas a trabajar
                 </p>
                 <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
-                  Una clase clara para entender contabilidad sin sentir que todo es demasiado técnico.
+                  Una clase clara para entender contabilidad sin sentir que todo
+                  es demasiado técnico.
                 </h2>
               </div>
 
@@ -240,8 +242,7 @@ export default function AcademiaContabilidadPage() {
         )}
 
         <style jsx global>{`
-          .${FORM_CLASS},
-          .${FORM_CLASS} form {
+          .${FORM_CLASS}, .${FORM_CLASS} form {
             width: 100% !important;
             max-width: 430px !important;
             margin: 0 auto !important;
@@ -294,7 +295,12 @@ export default function AcademiaContabilidadPage() {
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #ff5e7a 0%, #d85cff 55%, #8b5cf6 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #ff5e7a 0%,
+              #d85cff 55%,
+              #8b5cf6 100%
+            ) !important;
             color: white !important;
             padding: 16px 20px !important;
             font-size: 15px !important;

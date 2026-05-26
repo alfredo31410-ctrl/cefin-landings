@@ -157,7 +157,9 @@ export default function GraciasConstructorasPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Fecha
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">5 de mayo</p>
+                  <p className="mt-1 text-xl font-black text-white">
+                    5 de mayo
+                  </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">

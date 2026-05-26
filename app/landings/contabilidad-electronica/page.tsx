@@ -304,8 +304,8 @@ export default function ContabilidadElectronicaPage() {
             <div className="space-y-5 lg:col-span-7">
               <p className="text-lg leading-relaxed text-white/75">
                 La contabilidad electrónica no es solo cumplir con el envío. Es
-                entender qué información llega al SAT, qué inconsistencias pueden
-                levantar alertas y cómo revisar antes de presentar.
+                entender qué información llega al SAT, qué inconsistencias
+                pueden levantar alertas y cómo revisar antes de presentar.
               </p>
               <p className="text-lg leading-relaxed text-white/75">
                 Esta clase está pensada para contadores que quieren trabajar con
@@ -430,8 +430,7 @@ export default function ContabilidadElectronicaPage() {
             box-shadow: none !important;
           }
 
-          .${FORM_CLASS},
-          .${FORM_CLASS} ._form-content,
+          .${FORM_CLASS}, .${FORM_CLASS} ._form-content,
           .${FORM_CLASS} ._form-body,
           .${FORM_CLASS} ._inline-style,
           .${FORM_CLASS} ._form-thank-you {
@@ -514,7 +513,11 @@ export default function ContabilidadElectronicaPage() {
             width: 100% !important;
             border: 0 !important;
             border-radius: 18px !important;
-            background: linear-gradient(90deg, #67e8f9 0%, #22d3ee 100%) !important;
+            background: linear-gradient(
+              90deg,
+              #67e8f9 0%,
+              #22d3ee 100%
+            ) !important;
             color: #021014 !important;
             padding: 16px 20px !important;
             font-size: 15px !important;
