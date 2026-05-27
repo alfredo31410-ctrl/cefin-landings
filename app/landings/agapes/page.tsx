@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 0; // Reemplazar con el ID del formulario de ActiveCampaign.
+const ACTIVE_CAMPAIGN_FORM_ID = 211; // Reemplazar con el ID del formulario de ActiveCampaign.
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HAS_ACTIVE_CAMPAIGN_FORM = ACTIVE_CAMPAIGN_FORM_ID > 0;
 const ASSET_BASE =
