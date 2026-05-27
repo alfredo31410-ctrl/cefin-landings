@@ -222,6 +222,30 @@ export default function AgapesLandingPage() {
                 Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras
               </p>
 
+              {/* 
+  FECHA Y HORA DE LA CLASE
+  --------------------------------------------------
+  Este bloque muestra la fecha del evento de forma visible,
+  pero sin cambiar la estructura general de la landing.
+
+  Ajustes rápidos:
+  - Si quieres que se vea más grande, sube text-sm a text-base.
+  - Si quieres más brillo, sube shadow-[...] o bg-lime-300/18.
+  - Si quieres cambiar la fecha, edita únicamente el texto:
+    "2 de junio · 11:00 a.m. · Hora CDMX"
+*/}
+<div className="mt-5 flex justify-center lg:justify-end">
+  <div className="inline-flex flex-col items-center gap-1 rounded-2xl border border-lime-300/40 bg-lime-300/14 px-6 py-4 text-center shadow-[0_0_35px_rgba(190,242,100,0.22)] backdrop-blur-md sm:flex-row sm:gap-3">
+    <span className="text-xs font-black uppercase tracking-[0.22em] text-lime-200">
+      Fecha de la clase
+    </span>
+
+    <span className="text-base font-black uppercase tracking-tight text-white sm:text-lg">
+      2 de junio · 11:00 a.m. · Hora CDMX
+    </span>
+  </div>
+</div>
+
               <div className="mt-7 ml-auto max-w-2xl rounded-2xl border-l-4 border-lime-300 bg-black/58 px-6 py-5 text-left shadow-[0_22px_70px_rgba(0,0,0,0.34)] backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/86 sm:text-xl">
                   Conviértete en contador especializado en sector primario y

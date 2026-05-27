@@ -289,6 +289,29 @@ export default function GraciasAgapesPage() {
             </p>
 
             {/*
+  FECHA Y HORA DE LA CLASE
+  --------------------------------------------------
+  Este bloque refuerza cuándo será la clase después del registro.
+  Se coloca antes de la tarjeta principal para que el usuario lo vea
+  antes de entrar al grupo de WhatsApp.
+
+  Ajustes rápidos:
+  - Si quieres que resalte más, sube bg-lime-300/14 a bg-lime-300/20.
+  - Si quieres menos brillo, baja shadow-[...] o cambia border-lime-300/40.
+  - Si cambia la fecha, edita únicamente:
+    "2 de junio · 11:00 a.m. · Hora CDMX"
+*/}
+<div className="mt-6 inline-flex w-full flex-col items-center gap-2 rounded-2xl border border-lime-300/40 bg-lime-300/14 px-5 py-4 text-center shadow-[0_0_35px_rgba(190,242,100,0.24)] backdrop-blur-md sm:w-auto sm:flex-row sm:gap-3 sm:px-6">
+  <span className="text-xs font-black uppercase tracking-[0.22em] text-lime-200">
+    Fecha de la clase
+  </span>
+
+  <span className="text-base font-black uppercase tracking-tight text-white sm:text-lg">
+    2 de junio · 11:00 a.m. · Hora CDMX
+  </span>
+</div>
+
+            {/*
               TARJETA PRINCIPAL
               --------------------------------------------------
               Aquí vive la barra de progreso y el botón.
