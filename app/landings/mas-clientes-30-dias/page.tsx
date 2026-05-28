@@ -17,6 +17,7 @@ const ASSET_BASE =
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
 const HERO_BG_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg.png`;
+const MOBILE_HERO_BG_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg-movil.png`;
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();
@@ -171,15 +172,25 @@ export default function MasClientesTreintaDiasPage() {
       </noscript>
 
       <main className="relative min-h-screen overflow-x-hidden bg-[#050505] text-white">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden md:absolute">
+          {/* Mobile: imagen especial para celular y fondo fijo mientras el usuario hace scroll. */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 bg-cover bg-no-repeat md:hidden"
+            style={{
+              backgroundImage: `url("${MOBILE_HERO_BG_URL}")`,
+              backgroundPosition: "center top",
+            }}
+          />
+
+          {/* Desktop: se conserva el banner horizontal completo. */}
+          <div
+            className="absolute inset-0 hidden bg-cover bg-no-repeat md:block"
             style={{
               backgroundImage: `url("${HERO_BG_URL}")`,
-              backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           />
+
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_46%,rgba(0,0,0,0.72)_78%,rgba(0,0,0,0.94)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.20)_58%,#050505_100%)]" />
         </div>
@@ -223,7 +234,20 @@ export default function MasClientesTreintaDiasPage() {
                 comunicar tu valor y dejar de depender solo de recomendaciones.
               </p>
 
-              <div className="mt-7 grid max-w-3xl gap-4 sm:grid-cols-3">
+             
+
+              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-orange-600 px-8 py-5 text-center text-xl font-black uppercase tracking-tight text-white shadow-[0_20px_60px_rgba(234,88,12,0.34)] transition hover:scale-[1.01] hover:bg-orange-500 active:scale-[0.98] sm:w-auto"
+                >
+                  Reservar mi lugar gratis
+                </button>
+                <p className="text-sm font-semibold text-white/62">
+                  Acceso sin costo para la clase en vivo.
+                </p>
+              </div>
+               <div className="mt-7 grid max-w-3xl gap-4 sm:grid-cols-3">
                 {[
                   "Oferta más clara",
                   "Prospección con enfoque",
@@ -236,18 +260,6 @@ export default function MasClientesTreintaDiasPage() {
                     {item}
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-orange-600 px-8 py-5 text-center text-xl font-black uppercase tracking-tight text-white shadow-[0_20px_60px_rgba(234,88,12,0.34)] transition hover:scale-[1.01] hover:bg-orange-500 active:scale-[0.98] sm:w-auto"
-                >
-                  Reservar mi lugar gratis
-                </button>
-                <p className="text-sm font-semibold text-white/62">
-                  Acceso sin costo para la clase en vivo.
-                </p>
               </div>
             </div>
           </div>
