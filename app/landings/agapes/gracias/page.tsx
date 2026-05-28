@@ -105,18 +105,18 @@ export default function GraciasAgapesPage() {
         />
       </noscript>
 
-      {/*
-        CONTENEDOR GENERAL
-        --------------------------------------------------
-        min-h-screen:
-        - Permite que la página mida al menos toda la pantalla.
-        - Si el contenido crece en móvil, permite scroll natural.
+  {/*
+  CONTENEDOR GENERAL
+  --------------------------------------------------
+  min-h-screen:
+  - Permite que la página mida al menos toda la pantalla.
+  - Si el contenido crece en móvil, permite scroll natural.
 
-        overflow-hidden:
-        - Evita que los fondos absolutos generen scroll lateral.
-      */}
-      <main className="relative min-h-screen overflow-hidden bg-[#06110d] text-white">
-        {/*
+  overflow-x-hidden:
+  - Evita scroll lateral por capas absolutas o brillos decorativos.
+  - No bloquea el scroll vertical.
+*/}
+<main className="relative min-h-screen overflow-x-hidden bg-[#06110d] text-white">        {/*
           CAPAS DE FONDO
           --------------------------------------------------
           Todo este bloque es decorativo.
@@ -327,7 +327,7 @@ export default function GraciasAgapesPage() {
                   <span>80%</span>
                 </div>
 
-                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                <div className="mt-3 h-2 overflow-x-hidden rounded-full bg-white/10">
                   <div className="h-full w-4/5 rounded-full bg-[#25D366] shadow-[0_0_22px_rgba(37,211,102,0.75)]" />
                 </div>
 
@@ -354,7 +354,7 @@ export default function GraciasAgapesPage() {
               <button
                 type="button"
                 onClick={handleWhatsAppClick}
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl border border-lime-200/70 bg-lime-400 px-8 py-5 text-center text-base font-black uppercase tracking-tight text-[#06110d] shadow-[0_0_35px_rgba(163,255,18,0.50)] transition-all duration-300 hover:scale-[1.03] hover:bg-lime-300 hover:shadow-[0_0_60px_rgba(163,255,18,0.85)] active:scale-[0.98] sm:w-auto sm:text-lg"
+                className="group relative inline-flex w-full items-center justify-center overflow-x-hidden rounded-2xl border border-lime-200/70 bg-lime-400 px-8 py-5 text-center text-base font-black uppercase tracking-tight text-[#06110d] shadow-[0_0_35px_rgba(163,255,18,0.50)] transition-all duration-300 hover:scale-[1.03] hover:bg-lime-300 hover:shadow-[0_0_60px_rgba(163,255,18,0.85)] active:scale-[0.98] sm:w-auto sm:text-lg"
               >
                 {/*
                   BRILLO ANIMADO DEL BOTÓN

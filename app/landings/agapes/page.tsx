@@ -171,7 +171,7 @@ export default function AgapesLandingPage() {
       </noscript>
 
       <main className="relative min-h-screen overflow-x-hidden bg-[#06110d] text-white">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-x-hidden">
           <div
             className="absolute inset-0"
             style={{
@@ -348,7 +348,7 @@ export default function AgapesLandingPage() {
 
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#06110d]/88 p-3 backdrop-blur-md sm:p-4">
-            <div className="relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+            <div className="relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-x-hidden rounded-2xl border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
