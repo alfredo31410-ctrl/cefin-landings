@@ -64,21 +64,27 @@ export default function GraciasMasClientesTreintaDiasPage() {
       <main className="relative h-screen overflow-x-hidden overflow-y-auto bg-[#050505] text-white">
         <div className="pointer-events-none absolute inset-0">
           <div
-            className="absolute inset-0 bg-cover bg-no-repeat opacity-90 md:hidden"
+            className="absolute inset-0 bg-cover bg-no-repeat opacity-100 md:hidden"
             style={{
               backgroundImage: `url("${BANNER_IMAGE_URL}")`,
               backgroundPosition: "center top",
             }}
           />
                  <div
-            className="absolute inset-0 hidden bg-cover bg-no-repeat opacity-95 md:block"
+            className="absolute inset-0 hidden bg-cover bg-no-repeat opacity-100 md:block"
             style={{
               backgroundImage: `url("${BANNER_IMAGE_URL}")`,
               backgroundPosition: "left center",
             }}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,#050505_0%,rgba(5,5,5,0.80)_48%,rgba(5,5,5,0.92)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08)_0%,rgba(5,5,5,0.20)_54%,#050505_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#050505_0%,
+            rgba(5,5,5,0.80)_48%,
+            rgba(5,5,5,0.92)_100%)]" 
+            />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,
+            rgba(0,0,0,0.08)_0%,
+            rgba(5,5,5,0.20)_54%,#050505_100%)]" 
+            />
           <div className="absolute right-[-8%] top-[15%] h-[300px] w-[300px] rounded-full bg-orange-600/18 blur-[110px]" />
         </div>
 
@@ -110,7 +116,7 @@ export default function GraciasMasClientesTreintaDiasPage() {
 
             <div className="mt-8 rounded-2xl border border-orange-200/12 bg-white/[0.055] p-5 backdrop-blur sm:p-6">
               <div className="mb-6 rounded-2xl border border-[#25D366]/25 bg-[#25D366]/10 p-4">
-                <div className="flex items-center justify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
+                <div className="flex items-center   stify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
                   <span>Registro casi listo</span>
                   <span>80%</span>
                 </div>
