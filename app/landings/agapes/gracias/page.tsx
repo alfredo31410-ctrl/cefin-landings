@@ -19,7 +19,7 @@ import {
 
   Mientras esté vacío, el botón se verá, pero no abrirá ningún enlace.
 */
-const WHATSAPP_URL = "https://chat.whatsapp.com/Fh4TLoGFJuV4XuYpwgAHO4";
+const WHATSAPP_URL = "https://chat.whatsapp.com/JHvz3iFmBB2FPOTrquktas";
 
 /*
   BASE DE ASSETS
