@@ -226,7 +226,7 @@ export default function MasClientesTreintaDiasPage() {
               </div>
 
               <p className="mt-6 max-w-2xl text-xl font-black uppercase leading-tight text-white">
-                11 de junio · 11:00 AM (hora CDMX)
+                10 de junio · 11:00 AM (hora CDMX)
               </p>
 
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/78 sm:text-xl">

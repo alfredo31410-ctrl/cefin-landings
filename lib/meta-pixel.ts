@@ -3,6 +3,7 @@ export const META_CURRENCY = "MXN";
 export const NIF_TRAFFIC_SOURCE_STORAGE_KEY = "nifTrafficSource";
 
 export type MetaEventPayload = Record<string, unknown>;
+type MetaEventCommand = "track" | "trackCustom";
 
 declare global {
   interface Window {
@@ -11,15 +12,42 @@ declare global {
   }
 }
 
-export function trackMetaEvent(event: string, data?: MetaEventPayload) {
-  if (typeof window === "undefined" || !window.fbq) return;
+function runWhenMetaPixelReady(callback: () => void, attempts = 20) {
+  if (typeof window === "undefined") return;
 
-  if (data) {
-    window.fbq("track", event, data);
+  if (window.fbq) {
+    callback();
     return;
   }
 
-  window.fbq("track", event);
+  if (attempts <= 0) return;
+
+  window.setTimeout(() => runWhenMetaPixelReady(callback, attempts - 1), 150);
+}
+
+function sendMetaEvent(
+  command: MetaEventCommand,
+  event: string,
+  data?: MetaEventPayload,
+) {
+  runWhenMetaPixelReady(() => {
+    if (!window.fbq) return;
+
+    if (data) {
+      window.fbq(command, event, data);
+      return;
+    }
+
+    window.fbq(command, event);
+  });
+}
+
+export function trackMetaEvent(event: string, data?: MetaEventPayload) {
+  sendMetaEvent("track", event, data);
+}
+
+export function trackMetaCustomEvent(event: string, data?: MetaEventPayload) {
+  sendMetaEvent("trackCustom", event, data);
 }
 
 export function getMetaPixelScript(pixelId = META_PIXEL_ID) {

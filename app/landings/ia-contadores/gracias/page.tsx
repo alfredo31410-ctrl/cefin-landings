@@ -2,33 +2,22 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
-
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
 
 export default function GraciasIA() {
   const whatsappUrl =
     "https://chat.whatsapp.com/EW77dpPHqVmKmucuuFSyhL?s=cl&p=a&mlu=3";
 
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window !== "undefined" && window.fbq) {
-      if (data) {
-        window.fbq("track", event, data);
-      } else {
-        window.fbq("track", event);
-      }
-    }
-  };
-
   useEffect(() => {
     document.title =
       "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
-    trackEvent("CompleteRegistration", {
+    trackMetaEvent("CompleteRegistration", {
       content_name: "ABC de Inteligencia Artificial para Contadores",
       status: "registered",
       value: 0,
@@ -36,31 +25,22 @@ export default function GraciasIA() {
     });
   }, []);
 
+  const handleWhatsAppClick = () => {
+    trackMetaEvent("Lead", {
+      content_name: "ABC de Inteligencia Artificial para Contadores",
+      content_category: "Grupo de WhatsApp",
+      status: "whatsapp_group_click",
+      value: 0,
+      currency: META_CURRENCY,
+    });
+  };
+
   return (
     <>
       <Script
         id="meta-pixel-ia-thank-you"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}
-            (window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -68,7 +48,7 @@ export default function GraciasIA() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
@@ -151,6 +131,7 @@ export default function GraciasIA() {
               <div className="mt-8 sm:mt-10">
                 <a
                   href={whatsappUrl}
+                  onClick={handleWhatsAppClick}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-lime-400 px-6 py-5 text-center text-base font-black uppercase italic text-black shadow-[0_0_40px_rgba(163,230,53,0.45)] transition-all duration-200 hover:scale-[1.02] hover:bg-lime-300 active:scale-[0.98] sm:px-8 sm:py-6 sm:text-lg lg:text-xl"

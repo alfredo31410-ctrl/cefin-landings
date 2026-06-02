@@ -2,13 +2,12 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
-
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
 
 const PAYMENT_URL =
   "https://pay.hotmart.com/I105503339V?off=7l62yrr2&checkoutMode=10";
@@ -21,19 +20,8 @@ const DESKTOP_BG = "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
 const MOBILE_BG = "https://cefin-landings-z9uk.vercel.app/IA-retargeting.png";
 
 export default function IARetargetingPage() {
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   const handleCheckoutClick = () => {
-    trackEvent("InitiateCheckout", {
+    trackMetaEvent("InitiateCheckout", {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE,
@@ -44,7 +32,7 @@ export default function IARetargetingPage() {
   useEffect(() => {
     document.title = "EstrategIA Evolución Contable | Oferta Especial CEFIN";
 
-    trackEvent("ViewContent", {
+    trackMetaEvent("ViewContent", {
       content_name: PRODUCT_NAME,
       content_category: "Curso",
       value: PRODUCT_VALUE,
@@ -84,26 +72,7 @@ export default function IARetargetingPage() {
       <Script
         id="meta-pixel-retargeting-ia"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}
-            (window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -111,7 +80,7 @@ export default function IARetargetingPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
