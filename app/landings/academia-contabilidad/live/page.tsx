@@ -381,7 +381,9 @@ function formatMexicoTime(clockState: LiveClockState) {
 
 export default function AcademiaContabilidadLivePage() {
   const [hasStarted, setHasStarted] = useState(false);
-  const [clockState, setClockState] = useState<LiveClockState | null>(null);
+  const [clockState, setClockState] = useState<LiveClockState>(() =>
+    getLiveClockState(),
+  );
   const playerRef = useRef<{ destroy?: () => void } | null>(null);
 
   useEffect(() => {
@@ -394,8 +396,6 @@ export default function AcademiaContabilidadLivePage() {
   }, []);
 
   useEffect(() => {
-    setClockState(getLiveClockState());
-
     const intervalId = window.setInterval(() => {
       setClockState(getLiveClockState());
     }, 1000);
