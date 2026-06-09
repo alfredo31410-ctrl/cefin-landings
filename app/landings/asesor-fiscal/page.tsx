@@ -133,7 +133,7 @@ export default function AsesorFiscalPage() {
               <img
                 src={ALFREDO_IMAGE_URL}
                 alt="Mtro. Alfredo Cobos"
-                className="h-full w-full max-w-[610px] object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] [mask-image:linear-gradient(to_bottom,black_0%,black_82%,transparent_100%)]"
+                className="h-full w-full max-w-[610px] origin-bottom-right scale-[1.08] object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] [mask-image:linear-gradient(to_bottom,black_0%,black_82%,transparent_100%)] xl:scale-[1.16]"
               />
             </div>
 
