@@ -10,6 +10,12 @@ import {
 
 const ACTIVE_CAMPAIGN_FORM_ID = 169;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
+const ASSET_BASE =
+  process.env.NODE_ENV === "production"
+    ? "https://cefin-landings-z9uk.vercel.app"
+    : "";
+const BUILDINGS_IMAGE_URL = `${ASSET_BASE}/asesor-fiscal/edificios-hd.png`;
+const ALFREDO_IMAGE_URL = `${ASSET_BASE}/asesor-fiscal/alfredo-academia.png`;
 
 export default function AsesorFiscalPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,7 +97,7 @@ export default function AsesorFiscalPage() {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url("/asesor-fiscal/edificios-hd.png")',
+              backgroundImage: `url("${BUILDINGS_IMAGE_URL}")`,
             }}
           />
 
@@ -103,7 +109,7 @@ export default function AsesorFiscalPage() {
 
           {/* Alfredo forma parte del fondo en pantallas pequeñas. */}
           <img
-            src="/asesor-fiscal/alfredo-academia.png"
+            src={ALFREDO_IMAGE_URL}
             alt=""
             className="absolute inset-x-0 bottom-[-5%] mx-auto h-[72%] w-full object-contain object-bottom opacity-55 drop-shadow-[0_24px_48px_rgba(0,0,0,0.58)] lg:hidden"
           />
@@ -125,7 +131,7 @@ export default function AsesorFiscalPage() {
             {/* Alfredo */}
             <div className="relative order-2 hidden items-end justify-center lg:order-1 lg:col-span-5 lg:flex lg:h-[min(72vh,720px)] lg:justify-end lg:pr-2 xl:col-span-1 xl:translate-x-8">
               <img
-                src="/asesor-fiscal/alfredo-academia.png"
+                src={ALFREDO_IMAGE_URL}
                 alt="Mtro. Alfredo Cobos"
                 className="h-full w-full max-w-[610px] object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)]"
               />
