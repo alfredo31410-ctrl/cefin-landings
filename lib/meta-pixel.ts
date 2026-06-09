@@ -72,3 +72,6 @@ export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
 export function getMetaPixelNoscriptUrl(pixelId = META_PIXEL_ID) {
   return `https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`;
 }
+
+
+
