@@ -91,7 +91,7 @@ export default function AsesorFiscalPage() {
         />
       </noscript>
 
-      <main className="relative h-[100svh] overflow-hidden bg-[#071019] text-white lg:min-h-screen lg:h-auto">
+      <main className="relative min-h-[100svh] overflow-x-hidden overflow-y-auto bg-[#071019] text-white">
         {/* Fondo de edificios */}
         <div className="pointer-events-none absolute inset-0 z-0">
           <div
@@ -111,7 +111,7 @@ export default function AsesorFiscalPage() {
           <img
             src={ALFREDO_IMAGE_URL}
             alt=""
-            className="absolute inset-x-0 bottom-[-5%] mx-auto h-[72%] w-full object-contain object-bottom opacity-55 drop-shadow-[0_24px_48px_rgba(0,0,0,0.58)] lg:hidden"
+            className="absolute inset-x-0 bottom-[-5%] mx-auto h-[72%] w-full object-contain object-bottom opacity-55 drop-shadow-[0_24px_48px_rgba(0,0,0,0.58)] [mask-image:linear-gradient(to_bottom,black_0%,black_72%,transparent_100%)] lg:hidden"
           />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(3,9,14,0.18)_0%,rgba(3,9,14,0.42)_48%,rgba(3,9,14,0.76)_100%)] lg:hidden" />
         </div>
@@ -127,13 +127,13 @@ export default function AsesorFiscalPage() {
 
         {/* Hero */}
         <section className="relative z-20">
-          <div className="mx-auto grid h-[calc(100svh-48px)] w-full max-w-[1600px] items-center px-5 pb-5 lg:min-h-[calc(100vh-84px)] lg:h-auto lg:grid-cols-12 lg:gap-0 lg:px-12 lg:pb-6 xl:grid-cols-[minmax(420px,0.9fr)_minmax(620px,1.1fr)] xl:px-16">
+          <div className="mx-auto grid min-h-[calc(100svh-48px)] w-full max-w-[1600px] items-center px-5 pb-5 lg:min-h-[calc(100vh-84px)] lg:grid-cols-12 lg:gap-0 lg:px-12 lg:pb-6 xl:grid-cols-[minmax(420px,0.9fr)_minmax(620px,1.1fr)] xl:px-16">
             {/* Alfredo */}
             <div className="relative order-2 hidden items-end justify-center lg:order-1 lg:col-span-5 lg:flex lg:h-[min(72vh,720px)] lg:justify-end lg:pr-2 xl:col-span-1 xl:translate-x-8">
               <img
                 src={ALFREDO_IMAGE_URL}
                 alt="Mtro. Alfredo Cobos"
-                className="h-full w-full max-w-[610px] object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)]"
+                className="h-full w-full max-w-[610px] object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] [mask-image:linear-gradient(to_bottom,black_0%,black_82%,transparent_100%)]"
               />
             </div>
 
