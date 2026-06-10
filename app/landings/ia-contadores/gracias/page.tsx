@@ -11,7 +11,7 @@ import {
 
 export default function GraciasIA() {
   const whatsappUrl =
-    "https://chat.whatsapp.com/EW77dpPHqVmKmucuuFSyhL?s=cl&p=a&mlu=3";
+    "https://chat.whatsapp.com/EWnJh1a7yZxEVxxSMJfAvA";
 
   useEffect(() => {
     document.title =
