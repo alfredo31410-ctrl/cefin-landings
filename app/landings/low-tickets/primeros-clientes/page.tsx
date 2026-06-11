@@ -17,7 +17,7 @@ const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
-const ALFREDO_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/marisol_contadora_estrategica.png`;
+const ALFREDO_IMAGE_URL = `${ASSET_BASE}/primeros-5-clientes/alfredo_5_clientes.png`;
 const outcomes = [
   ["01", "Define a tu cliente ideal", "Deja de hablarle a todos y reconoce a quién puedes ayudar mejor."],
   ["02", "Presenta tus servicios", "Explica lo que haces de forma clara, profesional y fácil de valorar."],
