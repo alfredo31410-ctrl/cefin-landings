@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Script from "next/script";
 import { useEffect } from "react";
 import {
@@ -122,13 +121,11 @@ export default function PrimerosClientesPage() {
               <div className="reveal delay-1 relative order-2 mx-auto h-[380px] w-full max-w-[510px] self-end sm:h-[510px] lg:order-1 lg:h-[690px]">
                 <div className="absolute bottom-[12%] left-1/2 h-[62%] w-[72%] -translate-x-1/2 border border-[#0aa8ff]/30 bg-[#087ac4]/10 [transform:translateX(-50%)_rotate(-4deg)]" />
                 <div className="absolute bottom-[17%] left-[9%] h-24 w-24 border-l-2 border-t-2 border-[#17b9ff]/70" />
-                <Image
+                <img
                   src={ALFREDO_IMAGE_URL}
                   alt="Mtro. Alfredo Cobos"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 90vw, 48vw"
-                  className="object-contain object-bottom drop-shadow-[0_30px_50px_rgba(0,0,0,.72)] [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]"
+                  fetchPriority="high"
+                  className="absolute inset-0 h-full w-full object-contain object-bottom drop-shadow-[0_30px_50px_rgba(0,0,0,.72)] [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]"
                 />
               </div>
 
