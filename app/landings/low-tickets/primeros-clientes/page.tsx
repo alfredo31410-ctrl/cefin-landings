@@ -13,6 +13,11 @@ import {
 const PRICE = 297;
 const CHECKOUT_URL = "#comprar";
 
+const ASSET_BASE =
+  process.env.NODE_ENV === "production"
+    ? "https://cefin-landings-z9uk.vercel.app"
+    : "";
+const ALFREDO_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/marisol_contadora_estrategica.png`;
 const outcomes = [
   ["01", "Define a tu cliente ideal", "Deja de hablarle a todos y reconoce a quién puedes ayudar mejor."],
   ["02", "Presenta tus servicios", "Explica lo que haces de forma clara, profesional y fácil de valorar."],
@@ -118,7 +123,7 @@ export default function PrimerosClientesPage() {
                 <div className="absolute bottom-[12%] left-1/2 h-[62%] w-[72%] -translate-x-1/2 border border-[#0aa8ff]/30 bg-[#087ac4]/10 [transform:translateX(-50%)_rotate(-4deg)]" />
                 <div className="absolute bottom-[17%] left-[9%] h-24 w-24 border-l-2 border-t-2 border-[#17b9ff]/70" />
                 <Image
-                  src="/primeros-5-clientes/alfredo-5-clientes.png"
+                  src={ALFREDO_IMAGE_URL}
                   alt="Mtro. Alfredo Cobos"
                   fill
                   priority
