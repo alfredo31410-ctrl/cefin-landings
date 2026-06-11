@@ -295,32 +295,6 @@ export default function PrimerosClientesPage() {
                 ))}
               </div>
             </div>
-
-            <div className="relative overflow-hidden bg-[#080b0f] p-8 text-white sm:p-12">
-              <div className="grid-lines absolute inset-0 opacity-15" />
-              <div className="relative">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#32c7ff]">
-                  Después de tus primeros clientes
-                </p>
-                <h3 className="mt-4 text-4xl font-black leading-tight">
-                  Escala hacia algo más grande.
-                </h3>
-                <p className="mt-5 leading-relaxed text-white/62">
-                  Esta guía es el primer paso. Cuando estés listo para construir,
-                  posicionar y escalar tu despacho, continúa con nuestro programa
-                  completo.
-                </p>
-                <div className="mt-9 border-l-4 border-[#079fe9] bg-white/[0.06] p-6">
-                  <p className="text-sm font-bold uppercase tracking-[0.15em] text-white/45">Método CEFIN</p>
-                  <p className="mt-2 text-2xl font-black">
-                    Incubadora de Despachos Contables
-                  </p>
-                </div>
-                <a href="https://cefin.mx" className="mt-8 inline-flex font-black text-[#32c7ff]">
-                  Conoce el Método CEFIN <span className="ml-3">→</span>
-                </a>
-              </div>
-            </div>
           </div>
         </section>
 
