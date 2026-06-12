@@ -10,7 +10,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 297;
-const CHECKOUT_URL = "#comprar";
+const CHECKOUT_URL = "https://pay.hotmart.com/O105077745K?off=60uw7x37&checkoutMode=10";
 
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
