@@ -12,7 +12,7 @@ import {
 
 
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/IsvrgXFQkDGCtcYfb50Wwd";
+const WHATSAPP_URL = "https://chat.whatsapp.com/DvDU1K1EnHl7Y8OqCd8cJH";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"

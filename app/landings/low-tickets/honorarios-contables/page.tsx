@@ -11,7 +11,7 @@ import {
 
 // Información comercial del producto
 const PRICE = 297;
-const CHECKOUT_URL = "lowticket honorarios contables: https://pay.hotmart.com/D106297950M?off=y8s212iw&checkoutMode=10";
+const CHECKOUT_URL = "https://pay.hotmart.com/D106297950M?off=y8s212iw&checkoutMode=10";
 
 // En producción servimos la imagen desde Vercel para evitar problemas con el proxy de cefin.mx
 const ASSET_BASE =
