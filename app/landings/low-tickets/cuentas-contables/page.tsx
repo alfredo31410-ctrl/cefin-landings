@@ -550,7 +550,7 @@ export default function CuentasContablesPage() {
                   </div>
 
                   <a
-                    href="https://pay.hotmart.com/K105150399H?off=9ho393qq&checkoutMode=10&bid=1781630463369"
+                    href="https://pay.hotmart.com/K105150399H?off=9ho393qq&checkoutMode=10&bid=1781641011047"
                     className="mt-7 inline-flex min-h-13 items-center justify-center bg-[#e5b84b] px-7 font-black uppercase text-[#071426] transition hover:-translate-y-1 hover:bg-[#f5ce6a]"
                   >
                     Conoce la Academia <span className="ml-3 text-xl">→</span>
