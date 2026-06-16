@@ -550,7 +550,7 @@ export default function CuentasContablesPage() {
                   </div>
 
                   <a
-                    href="/landings/academia-contabilidad"
+                    href="https://pay.hotmart.com/K105150399H?off=9ho393qq&checkoutMode=10&bid=1781630463369"
                     className="mt-7 inline-flex min-h-13 items-center justify-center bg-[#e5b84b] px-7 font-black uppercase text-[#071426] transition hover:-translate-y-1 hover:bg-[#f5ce6a]"
                   >
                     Conoce la Academia <span className="ml-3 text-xl">→</span>
@@ -608,7 +608,7 @@ export default function CuentasContablesPage() {
           </div>
         </section>
         {/* Preguntas frecuentes: resuelve las últimas objeciones */}
-        <section className="bg-[#f3f8fb] text-[#071a3f]">
+        <section className="bg-[#f3f0e8] text-[#071a3f]">
           <div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24">
             <p className="eyebrow text-center">Preguntas frecuentes</p>
             <h2 className="mt-4 text-center text-4xl font-black sm:text-5xl">
@@ -622,7 +622,7 @@ export default function CuentasContablesPage() {
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black">
                     {faq.question}
-                    <span className="text-2xl text-[#0794b4] transition group-open:rotate-45">
+                    <span className="text-2xl text-[#b18124] transition group-open:rotate-45">
                       +
                     </span>
                   </summary>
@@ -636,10 +636,10 @@ export default function CuentasContablesPage() {
         </section>
 
         {/* Pie de página */}
-        <footer className="border-t border-white/10 bg-[#02091a]">
+<footer className="border-t border-[#e5b84b]/15 bg-[#020d20]">
           <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-3 px-5 py-7 text-center text-sm text-white/40 sm:flex-row sm:px-8 sm:text-left">
             <span className="text-xl font-black text-white">CEFIN</span>
-            <p>Formación que transforma tu práctica contable.</p>
+            <p>Fundamentos sólidos para crecer en contabilidad.</p>
             <a
               href="https://cefin.mx"
               className="font-bold transition hover:text-white"
@@ -657,17 +657,17 @@ export default function CuentasContablesPage() {
 
           .blue-grid {
             background-image:
-              linear-gradient(rgba(76, 224, 220, 0.08) 1px, transparent 1px),
+              linear-gradient(rgba(229, 184, 75. 0.08) 1px, transparent 1px),
               linear-gradient(
                 90deg,
-                rgba(76, 224, 220, 0.08) 1px,
+                rgba(229, 184, 75, 0.08) 1px,
                 transparent 1px
               );
             background-size: 48px 48px;
           }
 
           .eyebrow {
-            color: #0788aa;
+            color: #b18124;
             font-size: 0.75rem;
             font-weight: 900;
             letter-spacing: 0.22em;
@@ -675,7 +675,7 @@ export default function CuentasContablesPage() {
           }
 
           .reveal {
-            animation: honorarios-reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1)
+            animation: cuentas-reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1)
               both;
           }
 
@@ -703,10 +703,10 @@ export default function CuentasContablesPage() {
               transparent 74%
             );
             transform: translateX(-140%);
-            animation: honorarios-shine 4.6s ease-in-out infinite;
+            animation: cuentas-shine 4.6s ease-in-out infinite;
           }
 
-          @keyframes honorarios-reveal {
+          @keyframes cuentas-reveal {
             from {
               opacity: 0;
               transform: translateY(28px);
@@ -717,7 +717,7 @@ export default function CuentasContablesPage() {
             }
           }
 
-          @keyframes honorarios-shine {
+          @keyframes cuentas-shine {
             0%,
             66% {
               transform: translateX(-140%);
