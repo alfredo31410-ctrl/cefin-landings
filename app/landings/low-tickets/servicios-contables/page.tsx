@@ -85,7 +85,14 @@ export default function ServiciosContablesPage() {
       value: PRICE,
       currency: META_CURRENCY,
     });
+
+      window.setTimeout(() => {
+    window.location.href = CHECKOUT_URL;
+  }, 250);
+  
   };
+
+
 
   return (
     <>
