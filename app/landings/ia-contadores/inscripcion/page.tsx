@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Image from "next/image";
 import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
@@ -11,7 +12,8 @@ import {
 
 const PRICE = 497;
 const CHECKOUT_URL = "#comprar";
-const MASTERIA_BACKGROUND_IMAGE_URL = "/Inteligencia_Artificial.png";
+const ALFREDO_IMAGE_URL = "/alfredo.png";
+const EVENT_DATE_TEXT = "Del 20 al 24 de julio | 11:00 AM (hora CDMX)";
 
 const PRODUCT_EVENT = {
   content_name: "MasterIA CEFIN",
@@ -186,19 +188,7 @@ export default function MasterIAInscripcionPage() {
         />
       </noscript>
 
-      <main className="relative overflow-x-hidden bg-[#02040a] text-white">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center opacity-20 md:bg-right"
-          style={{
-            backgroundImage: `url(${MASTERIA_BACKGROUND_IMAGE_URL})`,
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(90deg,rgba(2,4,10,.96)_0%,rgba(2,4,10,.7)_46%,rgba(2,4,10,.9)_100%)]"
-        />
-        <div className="relative z-10">
+      <main className="overflow-x-hidden bg-[#02040a] text-white">
         <section className="relative isolate min-h-svh overflow-hidden">
           <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_20%,rgba(163,230,53,.2),transparent_28%),radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_28%),linear-gradient(120deg,#02040a_0%,#06132c_52%,#02040a_100%)]" />
           <div className="ai-grid absolute inset-0 -z-20 opacity-[0.16]" />
@@ -221,9 +211,9 @@ export default function MasterIAInscripcionPage() {
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckout}
-                className="inline-flex min-h-11 items-center bg-lime-400 px-5 text-xs font-black uppercase text-black transition hover:-translate-y-0.5 hover:bg-lime-300"
+                className="inline-flex min-h-11 items-center bg-lime-400 px-5 text-xs font-black uppercase text-black shadow-[0_0_28px_rgba(163,230,53,.22)] transition hover:-translate-y-0.5 hover:bg-lime-300"
               >
-                Inscribirme ahora
+                INSCRIBIRME AHORA
               </a>
             </header>
 
@@ -241,6 +231,10 @@ export default function MasterIAInscripcionPage() {
                   <span className="block">en solo 5 dias</span>
                 </h1>
 
+                <p className="mt-6 inline-flex border border-lime-300/40 bg-lime-300/10 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-lime-200">
+                  {EVENT_DATE_TEXT}
+                </p>
+
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
                   Aprende a usar IA, Excel y prompts profesionales para organizar
                   CFDI y XML, crear papeles de trabajo, preparar reportes y reducir
@@ -255,9 +249,9 @@ export default function MasterIAInscripcionPage() {
                   <a
                     href={CHECKOUT_URL}
                     onClick={handleCheckout}
-                    className="cta-shine inline-flex min-h-16 items-center justify-center bg-lime-400 px-8 text-base font-black uppercase text-black transition hover:-translate-y-1 hover:bg-lime-300"
+                    className="cta-shine inline-flex min-h-16 items-center justify-center bg-lime-400 px-8 text-base font-black uppercase text-black shadow-[0_20px_60px_rgba(163,230,53,.25)] transition hover:-translate-y-1 hover:bg-lime-300"
                   >
-                    Quiero convertir la IA en mi auxiliar contable
+                    INSCRIBIRME AHORA
                     <span className="ml-4 text-2xl">→</span>
                   </a>
                 </div>
@@ -269,38 +263,37 @@ export default function MasterIAInscripcionPage() {
 
               <div className="relative">
                 <div className="absolute -inset-5 bg-gradient-to-br from-cyan-400/15 via-blue-500/10 to-lime-300/20 blur-2xl" />
-                <div className="relative border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl">
-                  <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-300">
-                        MasterIA Console
-                      </p>
-                      <p className="mt-1 text-2xl font-black">Flujo contable con IA</p>
-                    </div>
-                    <span className="bg-lime-300/15 px-3 py-1 text-xs font-black text-lime-200">
-                      5 DIAS
-                    </span>
+                <div className="relative min-h-[520px] overflow-hidden border border-white/10 bg-white/[0.06] backdrop-blur-xl">
+                  <div className="ai-grid absolute inset-0 opacity-[0.18]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(163,230,53,.22),transparent_28%),linear-gradient(to_bottom,rgba(2,4,10,.08),#02040a_92%)]" />
+
+                  <div className="absolute left-5 top-5 z-20 border border-cyan-300/30 bg-[#02040a]/80 px-4 py-3 backdrop-blur">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-300">
+                      MasterIA
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-white">
+                      IA dirigida por criterio contable
+                    </p>
                   </div>
 
-                  {[
-                    ["CFDI / XML", "Ordena datos para revisar con criterio."],
-                    ["IA + Excel", "Estructura informacion y procesos."],
-                    ["Reportes", "Crea borradores claros y revisables."],
-                    ["Validacion", "Tu criterio profesional sigue al centro."],
-                  ].map(([title, text]) => (
-                    <div key={title} className="mb-3 border border-white/10 bg-slate-950/55 p-4">
-                      <p className="font-black uppercase text-white">{title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-400">{text}</p>
-                    </div>
-                  ))}
+                  <div className="absolute bottom-6 right-5 z-20 max-w-[250px] border border-lime-300/30 bg-lime-300 px-5 py-4 text-black shadow-[0_20px_70px_rgba(163,230,53,.25)]">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-black/55">
+                      {EVENT_DATE_TEXT}
+                    </p>
+                    <p className="mt-1 text-2xl font-black uppercase leading-none">
+                      Tu nuevo auxiliar digital
+                    </p>
+                  </div>
 
-                  <div className="mt-5 bg-slate-950/70 p-4">
-                    <pre className="overflow-hidden text-xs leading-6 text-cyan-100">
-                      {`> Organiza estos XML
-> Resume hallazgos clave
-> Crea checklist de revision
-> Genera reporte para cliente`}
-                    </pre>
+                  <div className="absolute bottom-0 left-1/2 z-10 h-[94%] w-[78%] -translate-x-1/2 sm:w-[68%] lg:w-[82%]">
+                    <Image
+                      src={ALFREDO_IMAGE_URL}
+                      alt="Mtro. Alfredo Cobos"
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 40vw, 85vw"
+                      className="object-contain object-bottom"
+                    />
                   </div>
                 </div>
               </div>
@@ -308,7 +301,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#02040a]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1160px]">
             <div className="max-w-3xl">
               <p className="eyebrow">El problema</p>
@@ -331,7 +324,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#071126]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-[1160px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
               <p className="eyebrow">El reencuadre</p>
@@ -360,7 +353,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#02040a]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1240px]">
             <div className="mx-auto max-w-3xl text-center">
               <p className="eyebrow">Lo que lograras</p>
@@ -395,14 +388,17 @@ export default function MasterIAInscripcionPage() {
                 Son 5 dias para dejar de improvisar prompts y empezar a
                 trabajar con estructura, Excel y criterio profesional.
               </p>
+              <p className="mt-3 text-sm font-black uppercase tracking-[0.16em] text-black/60">
+                {EVENT_DATE_TEXT}
+              </p>
             </div>
             <div className="shrink-0 border-2 border-black bg-black p-2 shadow-[12px_12px_0_rgba(0,0,0,.22)]">
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckout}
-                className="cta-shine inline-flex min-h-16 w-full items-center justify-center bg-white px-8 text-base font-black uppercase text-black transition hover:-translate-y-1 hover:bg-cyan-100 sm:w-auto"
+                className="cta-shine inline-flex min-h-16 w-full items-center justify-center bg-white px-8 text-base font-black uppercase text-black shadow-[0_18px_45px_rgba(0,0,0,.25)] transition hover:-translate-y-1 hover:bg-cyan-100 sm:w-auto"
               >
-                Comprar MasterIA ahora
+                INSCRIBIRME AHORA
                 <span className="ml-3 text-2xl leading-none">→</span>
               </a>
               <p className="mt-3 text-center text-sm font-black uppercase text-lime-200">
@@ -412,7 +408,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#071126]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1160px]">
             <div className="max-w-3xl">
               <p className="eyebrow">Programa de 5 dias</p>
@@ -441,10 +437,30 @@ export default function MasterIAInscripcionPage() {
                 </article>
               ))}
             </div>
+
+            <div className="mt-10 flex flex-col items-start justify-between gap-5 border border-lime-300/25 bg-lime-300/10 p-6 sm:flex-row sm:items-center">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-lime-300">
+                  Agenda cerrada
+                </p>
+                <p className="mt-2 text-2xl font-black uppercase text-white">
+                  Aparta tu acceso antes de que empiece el taller.
+                </p>
+                <p className="mt-2 font-bold text-slate-400">{EVENT_DATE_TEXT}</p>
+              </div>
+              <a
+                href={CHECKOUT_URL}
+                onClick={handleCheckout}
+                className="cta-shine inline-flex min-h-14 w-full items-center justify-center bg-lime-400 px-7 text-sm font-black uppercase text-black shadow-[0_18px_55px_rgba(163,230,53,.22)] transition hover:-translate-y-1 hover:bg-lime-300 sm:w-auto"
+              >
+                INSCRIBIRME AHORA
+                <span className="ml-3 text-xl leading-none">→</span>
+              </a>
+            </div>
           </div>
         </section>
 
-        <section className="bg-[#02040a]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-[1160px] gap-10 lg:grid-cols-2">
             <div>
               <p className="eyebrow">Esto es para ti si...</p>
@@ -472,7 +488,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#071126]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1160px]">
             <p className="eyebrow text-center">Que incluye</p>
             <h2 className="mt-4 text-center text-4xl font-black uppercase italic sm:text-5xl">
@@ -485,10 +501,24 @@ export default function MasterIAInscripcionPage() {
                 </div>
               ))}
             </div>
+
+            <div className="mt-10 text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">
+                {EVENT_DATE_TEXT}
+              </p>
+              <a
+                href={CHECKOUT_URL}
+                onClick={handleCheckout}
+                className="cta-shine mt-4 inline-flex min-h-14 items-center justify-center bg-lime-400 px-8 text-sm font-black uppercase text-black shadow-[0_18px_55px_rgba(163,230,53,.22)] transition hover:-translate-y-1 hover:bg-lime-300"
+              >
+                INSCRIBIRME AHORA
+                <span className="ml-3 text-xl leading-none">→</span>
+              </a>
+            </div>
           </div>
         </section>
 
-        <section className="bg-[#02040a]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[900px]">
             <p className="eyebrow text-center">Tal vez estas pensando...</p>
             <h2 className="mt-4 text-center text-4xl font-black uppercase italic sm:text-5xl">
@@ -508,7 +538,7 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <section id="comprar" className="relative overflow-hidden bg-[#071126]/90 px-5 py-20 sm:px-8 lg:px-10">
+        <section id="comprar" className="relative overflow-hidden bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="ai-grid absolute inset-0 opacity-[0.12]" />
           <div className="relative mx-auto grid max-w-[1120px] gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
@@ -529,14 +559,14 @@ export default function MasterIAInscripcionPage() {
               </p>
               <p className="mt-3 text-5xl font-black text-lime-300">$497 MXN</p>
               <p className="mt-3 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
-                5 dias para convertir la IA en tu auxiliar contable digital
+                {EVENT_DATE_TEXT}
               </p>
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckout}
-                className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-lime-400 px-7 text-base font-black uppercase text-black transition hover:-translate-y-1 hover:bg-lime-300"
+                className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-lime-400 px-7 text-base font-black uppercase text-black shadow-[0_22px_70px_rgba(163,230,53,.25)] transition hover:-translate-y-1 hover:bg-lime-300"
               >
-                Si, quiero entrar al MasterIA CEFIN
+                INSCRIBIRME AHORA
                 <span className="ml-4 text-2xl">→</span>
               </a>
               <p className="mt-4 text-sm text-slate-500">
@@ -546,10 +576,9 @@ export default function MasterIAInscripcionPage() {
           </div>
         </section>
 
-        <footer className="border-t border-white/10 bg-[#02040a]/95 px-5 py-7 text-center text-sm text-slate-500 sm:px-8">
+        <footer className="border-t border-white/10 bg-[#02040a] px-5 py-7 text-center text-sm text-slate-500 sm:px-8">
           CEFIN · Inteligencia artificial aplicada al trabajo contable
         </footer>
-        </div>
 
         <style jsx global>{`
           html {
