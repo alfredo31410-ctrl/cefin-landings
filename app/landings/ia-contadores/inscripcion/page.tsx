@@ -12,7 +12,8 @@ import {
 
 const PRICE = 497;
 const CHECKOUT_URL = "#comprar";
-const ALFREDO_IMAGE_URL = "/alfredo.png";
+const ASSET_BASE = "https://cefin-landings-z9uk.vercel.app";
+const ALFREDO_IMAGE_URL = `${ASSET_BASE}/alfredo.png`;
 const EVENT_DATE_TEXT = "Del 20 al 24 de julio | 11:00 AM (hora CDMX)";
 
 const PRODUCT_EVENT = {
