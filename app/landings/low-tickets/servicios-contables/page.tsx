@@ -146,10 +146,7 @@ export default function ServiciosContablesPage() {
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                   <span className="border border-white/30 bg-black/15 px-4 py-2 text-[10px] font-black uppercase tracking-[0.14em] backdrop-blur sm:text-xs">
                     Formalización profesional
-                  </span>
-                  <span className="border border-white/30 bg-black/15 px-4 py-2 text-[10px] font-black uppercase tracking-[0.14em] backdrop-blur sm:text-xs">
-                    Low ticket evergreen
-                  </span>
+                  </span> 
                 </div>
 
                 <p className="mt-6 text-sm font-black uppercase tracking-[0.26em] text-white/70">
@@ -183,7 +180,7 @@ export default function ServiciosContablesPage() {
                     onClick={handleCheckout}
                     className="cta-shine inline-flex min-h-16 items-center justify-center bg-white px-8 text-lg font-black text-[#a20818] shadow-[0_18px_45px_rgba(50,0,5,.25)] transition hover:-translate-y-1"
                   >
-                    Quiero empezar ahora <span className="ml-4 text-2xl">→</span>
+                    INSCRIBIRME AHORA <span className="ml-4 text-2xl">→</span>
                   </a>
                 </div>
                 <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/55">
@@ -212,28 +209,12 @@ export default function ServiciosContablesPage() {
               </p>
             </div>
 
-            <div className="relative min-h-[390px] overflow-hidden bg-[#f4f1f1] p-7 sm:p-10">
-              <div className="absolute right-[-8%] top-[-8%] h-44 w-44 rotate-12 border-[28px] border-[#c81022]/10" />
-              <div className="relative mx-auto max-w-[440px] bg-white p-6 shadow-[0_25px_60px_rgba(40,0,5,.14)] sm:p-8">
-                <div className="flex items-start justify-between border-b-2 border-[#c81022] pb-5">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#bd0b1d]">Documento profesional</p>
-                    <p className="mt-2 text-2xl font-black">Contrato de servicios</p>
-                  </div>
-                  <span className="text-4xl font-black text-[#c81022]">✓</span>
-                </div>
-                <div className="mt-6 space-y-4">
-                  {[84, 100, 76, 91, 62].map((width, index) => (
-                    <div key={width} className="flex items-center gap-3">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-[#c81022] text-[10px] font-black text-white">
-                        {index + 1}
-                      </span>
-                      <span className="h-2 bg-black/12" style={{ width: `${width}%` }} />
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-8 text-right font-serif text-2xl italic text-black/45">Firma</p>
-              </div>
+            <div className="relative min-h-[390px] overflow-hidden bg-[#f4f1f1]">
+              <img 
+                src={`${ASSET_BASE}/contrato-servicios-contables/alfredo-ia.png`} 
+                alt="Contrato de servicios contables"
+                className="h-full min-h-[390px] w-full object-cover object-center "
+              />
             </div>
           </div>
         </section>
@@ -264,6 +245,26 @@ export default function ServiciosContablesPage() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="bg-[#c81022] px-5 py-10 text-white sm:px-8">
+          <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-white/60">
+                Formaliza antes de crecer
+              </p>
+              <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+                Evita acuerdos de palabnra y protege tu trabajo desde hoy
+              </h2>
+            </div>
+            <a 
+              href={CHECKOUT_URL}
+              onClick={handleCheckout}
+              className="cta-shine inline-flex min-h-14 items-center justify-center bg-white px-8 text-base font-black text-[#a20818] shadow-xl transition hover:-translate-y-1"
+            >
+              INSCRIIRME AHORA <span className="ml-4 text-2xl">→</span>
+            </a>
           </div>
         </section>
 
@@ -315,7 +316,7 @@ export default function ServiciosContablesPage() {
             <div className="relative overflow-hidden bg-[#0b0c0f] p-8 text-white sm:p-11">
               <div className="contract-grid absolute inset-0 opacity-[0.08]" />
               <div className="relative">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ef3348]">Tu transformación</p>
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ef3348]">Que logras tu...</p>
                 <p className="mt-6 text-xl font-black text-white/40 line-through decoration-[#ef3348] decoration-2 sm:text-2xl">
                   Trabajar con acuerdos de palabra y riesgos innecesarios.
                 </p>
@@ -399,7 +400,7 @@ export default function ServiciosContablesPage() {
                 onClick={handleCheckout}
                 className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-white px-7 text-lg font-black text-[#a20818] shadow-xl transition hover:-translate-y-1"
               >
-                Quiero formalizar mis servicios <span className="ml-4 text-2xl">→</span>
+                INSCRIBIRME AHORA <span className="ml-4 text-2xl">→</span>
               </a>
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.12em] text-white/55">
                 Compra segura · Garantía de 7 días

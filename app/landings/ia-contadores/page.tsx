@@ -12,9 +12,12 @@ import {
 const WEBINAR_EVENT = {
   content_name: "ABC de Inteligencia Artificial para Contadores",
   content_category: "Webinar",
-  event_date: "2026-06-18",
+  event_date: "2026-07-16",
   event_time: "11:00 AM CDMX",
 };
+
+const ACTIVE_CAMPAIGN_FORM_ID = 249;
+const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function LandingIA() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,12 +60,14 @@ export default function LandingIA() {
 
     const script = document.createElement("script");
     script.id = "ac-script-loader";
-    script.src = "https://cefincapacitacion.activehosted.com/f/embed.php?id=215";
+    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
     script.async = true;
     document.body.appendChild(script);
 
     const interval = window.setInterval(() => {
-      const form = document.querySelector("._form_215 form");
+      const form = document.querySelector(
+        `.${ACTIVE_CAMPAIGN_FORM_CLASS} form`,
+      );
 
       if (!form) return;
 
@@ -71,7 +76,7 @@ export default function LandingIA() {
         () => {
           trackCompleteRegistration();
         },
-        { once: true }
+        { once: true },
       );
 
       window.clearInterval(interval);
@@ -130,7 +135,9 @@ export default function LandingIA() {
             </div>
 
             <div className="text-left leading-none">
-              <p className="text-sm font-black tracking-tight text-white">CEFIN</p>
+              <p className="text-sm font-black tracking-tight text-white">
+                CEFIN
+              </p>
               <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400">
                 Centro de Estudios Fiscales, Innovación y Negocios
               </p>
@@ -211,7 +218,7 @@ export default function LandingIA() {
               </p>
 
               <div className="mt-5 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
-                <InfoCard label="Próxima sesión" value="18 DE JUNIO" />
+                <InfoCard label="Próxima sesión" value="16 DE JULIO" />
                 <InfoCard label="Horario online" value="11:00 AM" />
                 <InfoCard label="Hora local" value="CDMX" />
               </div>
@@ -268,7 +275,7 @@ export default function LandingIA() {
                     </div>
 
                     <pre className="overflow-hidden text-xs leading-6 text-cyan-100">
-{`> Revisa este reporte
+                      {`> Revisa este reporte
 > Extrae hallazgos clave
 > Genera resumen ejecutivo
 > Sugiere próximos pasos`}
@@ -370,13 +377,15 @@ export default function LandingIA() {
                 <p className="text-sm font-semibold text-slate-700">
                   Completa tus datos para recibir el acceso a la clase del{" "}
                   <span className="font-black text-slate-950">
-                    18 de junio a las 11:00 AM CDMX.
+                    16 de julio a las 11:00 AM CDMX.
                   </span>
                 </p>
               </div>
 
               <div className="custom-scrollbar flex-1 overflow-y-auto p-4 sm:p-8">
-                <div className="_form_215 min-h-[500px] w-full" />
+                <div
+                  className={`${ACTIVE_CAMPAIGN_FORM_CLASS} min-h-[500px] w-full`}
+                />
               </div>
             </div>
           </div>
@@ -392,11 +401,11 @@ export default function LandingIA() {
             border-radius: 10px;
           }
 
-          ._form_215 {
+          [class^="_form_"] {
             width: 100% !important;
           }
 
-          ._form_215 form {
+          [class^="_form_"] form {
             margin: 0 !important;
             width: 100% !important;
           }
