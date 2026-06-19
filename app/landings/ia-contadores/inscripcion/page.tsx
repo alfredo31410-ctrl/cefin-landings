@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import Image from "next/image";
 import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
@@ -11,152 +10,152 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 497;
-const CHECKOUT_URL = "#comprar";
+const CHECKOUT_URL = "https://pay.hotmart.com/L106373757U?off=eb9vgnqz&checkoutMode=10&bid=1781880440085";
 const ASSET_BASE = "https://cefin-landings-z9uk.vercel.app";
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/alfredo.png`;
 const EVENT_DATE_TEXT = "Del 20 al 24 de julio | 11:00 AM (hora CDMX)";
 
 const PRODUCT_EVENT = {
-  content_name: "MasterIA CEFIN",
-  content_category: "Taller practico en vivo / IA para contadores",
+  content_name: "Master-IA CEFIN",
+  content_category: "Taller práctico en vivo / IA para contadores",
   value: PRICE,
   currency: META_CURRENCY,
 };
 
 const pains = [
-  "Mas CFDI por revisar.",
-  "Mas XML por descargar y organizar.",
-  "Mas reportes por preparar.",
-  "Mas conciliaciones.",
-  "Mas informacion dispersa.",
-  "Mas pendientes operativos.",
+  "Más CFDI por revisar.",
+  "Más XML por descargar y organizar.",
+  "Más reportes por preparar.",
+  "Más conciliaciones.",
+  "Más información dispersa.",
+  "Más pendientes operativos.",
   "Menos tiempo para analizar y asesorar.",
   "Muchas horas en tareas repetitivas.",
 ];
 
 const outcomes = [
-  ["01", "Dar instrucciones claras a la IA", "Aprende a pedir resultados utiles, estructurados y revisables."],
+  ["01", "Dar instrucciones claras a la IA", "Aprende a pedir resultados útiles, estructurados y revisables."],
   ["02", "Crear prompts contables", "Construye instrucciones profesionales para tareas reales de contabilidad."],
-  ["03", "Organizar CFDI y XML", "Convierte datos dispersos en informacion ordenada para revisar mejor."],
-  ["04", "Usar IA + Excel", "Apoya tu trabajo con estructuras, formulas, tablas y analisis guiado."],
+  ["03", "Organizar CFDI y XML", "Convierte datos dispersos en información ordenada para revisar mejor."],
+  ["04", "Usar IA + Excel", "Apoya tu trabajo con estructuras, fórmulas, tablas y análisis guiado."],
   ["05", "Crear reportes", "Prepara borradores, checklists y papeles de trabajo con mayor velocidad."],
   ["06", "Ahorrar tiempo operativo", "Reduce tareas repetitivas sin soltar tu criterio profesional."],
-  ["07", "Saber que delegar", "Identifica que puede apoyar la IA y que debes validar personalmente."],
-  ["08", "Aplicarlo en tu practica", "Usa el metodo en despacho, empleo, clientes o etapa de aprendizaje."],
+  ["07", "Saber qué delegar", "Identifica qué puede apoyar la IA y qué debes validar personalmente."],
+  ["08", "Aplicarlo en tu práctica", "Usa el método en despacho, empleo, clientes o etapa de aprendizaje."],
 ];
 
 const program = [
   {
-    day: "Dia 1",
+    day: "Día 1",
     title: "De contador saturado a contador potenciado con IA",
     bullets: [
       "La nueva realidad del trabajo contable.",
-      "Que puede hacer la IA por un contador.",
-      "Que nunca debe hacer sin revision profesional.",
+      "Qué puede hacer la IA por un contador.",
+      "Qué nunca debe hacer sin revisión profesional.",
       "Las 3 reglas: contexto, estructura y criterio.",
     ],
-    key: "No necesitas saber programar. Necesitas aprender a dirigir la IA como dirigirias a un auxiliar contable.",
+    key: "No necesitas saber programar. Necesitas aprender a dirigir la IA como dirigirías a un auxiliar contable.",
   },
   {
-    day: "Dia 2",
+    day: "Día 2",
     title: "Prompts contables profesionales",
     bullets: [
-      "Por que muchas respuestas de IA salen genericas.",
+      "Por qué muchas respuestas de IA salen genéricas.",
       "Estructura CEFIN para prompts: rol, contexto, objetivo, tarea y formato.",
       "Prompts para CFDI, reportes, papeles de trabajo y conciliaciones.",
     ],
-    key: "La calidad de la respuesta de la IA depende de la calidad de la instruccion que le das.",
+    key: "La calidad de la respuesta de la IA depende de la calidad de la instrucción que le das.",
   },
   {
-    day: "Dia 3",
-    title: "IA + Excel para convertir datos en informacion util",
+    day: "Día 3",
+    title: "IA + Excel para convertir datos en información útil",
     bullets: [
-      "Por que Excel sigue siendo el centro del trabajo contable.",
-      "Organizacion de CFDI, XML y datos contables.",
+      "Por qué Excel sigue siendo el centro del trabajo contable.",
+      "Organización de CFDI, XML y datos contables.",
       "Papeles de trabajo, conciliaciones, reportes y checklists.",
     ],
-    key: "Pasa de datos contables sueltos a informacion organizada y procesos mas claros.",
+    key: "Pasa de datos contables sueltos a información organizada y procesos más claros.",
   },
   {
-    day: "Dia 4",
+    day: "Día 4",
     title: "Tus consultores digitales",
     bullets: [
       "El problema de usar IA como chat aislado.",
-      "Como trabajar con proyectos, memorias y GPT personalizados.",
-      "Que es un agente de IA explicado para contadores.",
+      "Cómo trabajar con proyectos, memorias y GPT personalizados.",
+      "Qué es un agente de IA explicado para contadores.",
     ],
     key: "Empieza a usar la IA como un sistema de apoyo, no como una pregunta suelta.",
   },
   {
-    day: "Dia 5",
-    title: "Ruta de implementacion",
+    day: "Día 5",
+    title: "Ruta de implementación",
     bullets: [
-      "Recapitulacion de lo aprendido.",
+      "Recapitulación de lo aprendido.",
       "Los 4 niveles del contador con IA.",
-      "Mapa de implementacion para despacho, empleo o practica profesional.",
+      "Mapa de implementación para despacho, empleo o práctica profesional.",
     ],
-    key: "No terminas con mas informacion. Terminas con una nueva forma de trabajar.",
+    key: "No terminas con más información. Terminas con una nueva forma de trabajar.",
   },
 ];
 
 const audience = [
   "Eres contador, auxiliar o estudiante de contabilidad.",
-  "Pasas demasiado tiempo organizando informacion.",
+  "Pasas demasiado tiempo organizando información.",
   "Tienes muchas tareas repetitivas cada mes.",
-  "Quieres usar IA de forma practica y segura.",
+  "Quieres usar IA de forma práctica y segura.",
   "Quieres aprender a trabajar con IA + Excel.",
   "Buscas mejorar tu productividad sin perder criterio.",
   "Te interesa atender mejor a tus clientes.",
-  "No sabes programar, pero quieres aprovechar la IA en tu profesion.",
+  "No sabes programar, pero quieres aprovechar la IA en tu profesión.",
 ];
 
 const includes = [
-  "5 sesiones practicas en vivo.",
-  "Aplicacion de IA a tareas contables reales.",
+  "5 sesiones prácticas en vivo.",
+  "Aplicación de IA a tareas contables reales.",
   "Uso de ChatGPT como auxiliar contable digital.",
-  "Creacion de prompts profesionales.",
+  "Creación de prompts profesionales.",
   "Ejercicios con CFDI, XML y Excel.",
   "Papeles de trabajo, reportes y checklists.",
-  "Ruta de implementacion.",
-  "Materiales practicos del taller.",
+  "Ruta de implementación.",
+  "Materiales prácticos del taller.",
 ];
 
 const faqs = [
   {
-    question: "Necesito saber programar?",
+    question: "¿Necesito saber programar?",
     answer:
-      "No. El taller esta disenado para contadores que quieren aprender a usar herramientas de IA de forma practica, sin programar.",
+      "No. El taller está diseñado para contadores que quieren aprender a usar herramientas de IA de forma práctica, sin programar.",
   },
   {
-    question: "La IA va a sustituir mi trabajo como contador?",
+    question: "¿La IA va a sustituir mi trabajo como contador?",
     answer:
-      "No. La IA puede ayudarte a reducir tareas repetitivas, organizar informacion y crear borradores, pero el analisis, validacion y criterio profesional siguen siendo tuyos.",
+      "No. La IA puede ayudarte a reducir tareas repetitivas, organizar información y crear borradores, pero el análisis, la validación y el criterio profesional siguen siendo tuyos.",
   },
   {
-    question: "Puedo tomarlo si nunca he usado ChatGPT?",
+    question: "¿Puedo tomarlo si nunca he usado ChatGPT?",
     answer:
-      "Si. El taller parte desde una explicacion clara y practica para que puedas empezar a utilizar la IA en tareas reales.",
+      "Sí. El taller parte desde una explicación clara y práctica para que puedas empezar a utilizar la IA en tareas reales.",
   },
   {
-    question: "Me sirve si trabajo en un despacho?",
+    question: "¿Me sirve si trabajo en un despacho?",
     answer:
-      "Si. Esta pensado para contadores, auxiliares y profesionistas que trabajan con CFDI, XML, reportes, conciliaciones y papeles de trabajo.",
+      "Sí. Está pensado para contadores, auxiliares y profesionistas que trabajan con CFDI, XML, reportes, conciliaciones y papeles de trabajo.",
   },
   {
-    question: "Me sirve si soy estudiante o recien egresado?",
+    question: "¿Me sirve si soy estudiante o recién egresado?",
     answer:
-      "Si. Te ayudara a desarrollar una forma mas moderna, ordenada y practica de trabajar con informacion contable.",
+      "Sí. Te ayudará a desarrollar una forma más moderna, ordenada y práctica de trabajar con información contable.",
   },
   {
-    question: "Que pasa si ya uso ChatGPT?",
+    question: "¿Qué pasa si ya uso ChatGPT?",
     answer:
-      "Te servira para dejar de usarlo solo como un chat de preguntas y empezar a darle instrucciones estructuradas para tareas contables reales.",
+      "Te servirá para dejar de usarlo solo como un chat de preguntas y empezar a darle instrucciones estructuradas para tareas contables reales.",
   },
 ];
 
 export default function MasterIAInscripcionPage() {
   useEffect(() => {
-    document.title = "MasterIA CEFIN | Inscripcion";
+    document.title = "Master-IA CEFIN | Inscripción";
 
     trackMetaEvent("ViewContent", {
       ...PRODUCT_EVENT,
@@ -204,7 +203,7 @@ export default function MasterIAInscripcionPage() {
                 <div>
                   <p className="text-lg font-black">CEFIN</p>
                   <p className="hidden text-[10px] uppercase tracking-[0.18em] text-slate-400 sm:block">
-                    IA aplicada a contabilidad
+                    IA aplicada a contabilidad.
                   </p>
                 </div>
               </div>
@@ -221,7 +220,7 @@ export default function MasterIAInscripcionPage() {
             <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1.05fr_0.95fr]">
               <div>
                 <p className="inline-flex border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-cyan-200">
-                  Taller practico en vivo para contadores
+                  Taller práctico en vivo para contadores
                 </p>
 
                 <h1 className="mt-6 max-w-4xl text-[clamp(3rem,7vw,6.6rem)] font-black uppercase italic leading-[0.88] tracking-normal">
@@ -229,7 +228,7 @@ export default function MasterIAInscripcionPage() {
                   <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-lime-300 bg-clip-text text-transparent">
                     auxiliar contable digital
                   </span>
-                  <span className="block">en solo 5 dias</span>
+                  <span className="block">en solo 5 días</span>
                 </h1>
 
                 <p className="mt-6 inline-flex border border-lime-300/40 bg-lime-300/10 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-lime-200">
@@ -238,8 +237,9 @@ export default function MasterIAInscripcionPage() {
 
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
                   Aprende a usar IA, Excel y prompts profesionales para organizar
-                  CFDI y XML, crear papeles de trabajo, preparar reportes y reducir
-                  tareas repetitivas sin dejar de usar tu criterio profesional.
+                  CFDI y XML, crear papeles de trabajo, preparar reportes y
+                  reducir tareas repetitivas sin dejar de usar tu criterio
+                  profesional.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -258,7 +258,7 @@ export default function MasterIAInscripcionPage() {
                 </div>
 
                 <p className="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
-                  Acceso al taller practico de 5 dias para contadores.
+                  Acceso al taller práctico de 5 días para contadores.
                 </p>
               </div>
 
@@ -270,7 +270,7 @@ export default function MasterIAInscripcionPage() {
 
                   <div className="absolute left-5 top-5 z-20 border border-cyan-300/30 bg-[#02040a]/80 px-4 py-3 backdrop-blur">
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-300">
-                      MasterIA
+                      Master-IA
                     </p>
                     <p className="mt-1 text-sm font-bold text-white">
                       IA dirigida por criterio contable
@@ -287,13 +287,12 @@ export default function MasterIAInscripcionPage() {
                   </div>
 
                   <div className="absolute bottom-0 left-1/2 z-10 h-[94%] w-[78%] -translate-x-1/2 sm:w-[68%] lg:w-[82%]">
-                    <Image
+                    <img
                       src={ALFREDO_IMAGE_URL}
                       alt="Mtro. Alfredo Cobos"
-                      fill
-                      priority
-                      sizes="(min-width: 1024px) 40vw, 85vw"
-                      className="object-contain object-bottom"
+                      loading="eager"
+                      decoding="async"
+                      className="h-full w-full object-contain object-bottom"
                     />
                   </div>
                 </div>
@@ -307,7 +306,7 @@ export default function MasterIAInscripcionPage() {
             <div className="max-w-3xl">
               <p className="eyebrow">El problema</p>
               <h2 className="mt-4 text-4xl font-black uppercase italic sm:text-5xl">
-                Sientes que tu trabajo contable cada mes exige mas tiempo?
+                ¿Sientes que tu trabajo contable cada mes exige más tiempo?
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-slate-400">
                 El problema no es que te falte capacidad. El problema es que
@@ -334,16 +333,25 @@ export default function MasterIAInscripcionPage() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-slate-300">
                 Viene a ayudarte a reducir tareas repetitivas para que uses mejor
-                tu criterio profesional, trabajes con mas orden y te enfoques en
+                tu criterio profesional, trabajes con más orden y te enfoques en
                 lo que realmente aporta valor.
               </p>
             </div>
 
             <div className="grid gap-px bg-cyan-300/15">
               {[
-                ["La IA puede ayudarte a organizar informacion", "Pero tu debes validar resultados"],
-                ["La IA puede estructurar reportes", "Pero tu debes aplicar criterio profesional"],
-                ["La IA puede preparar borradores", "Pero tu debes tomar decisiones contables y fiscales"],
+                [
+                  "La IA puede ayudarte a organizar información",
+                  "Pero tú debes validar resultados",
+                ],
+                [
+                  "La IA puede estructurar reportes",
+                  "Pero tú debes aplicar criterio profesional",
+                ],
+                [
+                  "La IA puede preparar borradores",
+                  "Pero tú debes tomar decisiones contables y fiscales",
+                ],
               ].map(([left, right]) => (
                 <div key={left} className="grid gap-px bg-cyan-300/15 sm:grid-cols-2">
                   <div className="bg-[#020b1b] p-5 font-bold text-cyan-100">{left}</div>
@@ -357,9 +365,9 @@ export default function MasterIAInscripcionPage() {
         <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1240px]">
             <div className="mx-auto max-w-3xl text-center">
-              <p className="eyebrow">Lo que lograras</p>
+              <p className="eyebrow">Lo que lograrás</p>
               <h2 className="mt-4 text-4xl font-black uppercase italic sm:text-5xl">
-                En 5 dias podras empezar a usar IA en tareas contables reales.
+                En 5 días podrás empezar a usar IA en tareas contables reales.
               </h2>
             </div>
 
@@ -386,7 +394,7 @@ export default function MasterIAInscripcionPage() {
                 Compra tu acceso y empieza a usar IA como auxiliar contable.
               </h2>
               <p className="mt-4 max-w-2xl text-lg font-semibold leading-relaxed text-black/70">
-                Son 5 dias para dejar de improvisar prompts y empezar a
+                Son 5 días para dejar de improvisar prompts y empezar a
                 trabajar con estructura, Excel y criterio profesional.
               </p>
               <p className="mt-3 text-sm font-black uppercase tracking-[0.16em] text-black/60">
@@ -403,7 +411,7 @@ export default function MasterIAInscripcionPage() {
                 <span className="ml-3 text-2xl leading-none">→</span>
               </a>
               <p className="mt-3 text-center text-sm font-black uppercase text-lime-200">
-                ${PRICE} MXN · Acceso al taller de 5 dias
+                ${PRICE} MXN · Acceso al taller de 5 días
               </p>
             </div>
           </div>
@@ -412,9 +420,9 @@ export default function MasterIAInscripcionPage() {
         <section className="bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1160px]">
             <div className="max-w-3xl">
-              <p className="eyebrow">Programa de 5 dias</p>
+              <p className="eyebrow">Programa de 5 días</p>
               <h2 className="mt-4 text-4xl font-black uppercase italic sm:text-5xl">
-                Esto es lo que trabajaras durante el taller.
+                Esto es lo que trabajarás durante el taller.
               </h2>
             </div>
 
@@ -482,7 +490,7 @@ export default function MasterIAInscripcionPage() {
                 Esto no es para ti si...
               </p>
               <p className="mt-5 text-3xl font-black leading-tight">
-                Buscas que la IA haga tu trabajo sin revision, sustituya tu
+                Buscas que la IA haga tu trabajo sin revisión, sustituya tu
                 criterio o tome decisiones contables y fiscales por ti.
               </p>
             </div>
@@ -491,9 +499,9 @@ export default function MasterIAInscripcionPage() {
 
         <section className="bg-[#071126] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1160px]">
-            <p className="eyebrow text-center">Que incluye</p>
+            <p className="eyebrow text-center">Qué incluye</p>
             <h2 className="mt-4 text-center text-4xl font-black uppercase italic sm:text-5xl">
-              Tu acceso a MasterIA CEFIN incluye:
+              Tu acceso a Master-IA CEFIN incluye:
             </h2>
             <div className="mt-12 grid border-l border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
               {includes.map((item) => (
@@ -521,7 +529,7 @@ export default function MasterIAInscripcionPage() {
 
         <section className="bg-[#02040a] px-5 py-20 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[900px]">
-            <p className="eyebrow text-center">Tal vez estas pensando...</p>
+            <p className="eyebrow text-center">Tal vez estás pensando...</p>
             <h2 className="mt-4 text-center text-4xl font-black uppercase italic sm:text-5xl">
               Preguntas frecuentes
             </h2>
@@ -545,7 +553,7 @@ export default function MasterIAInscripcionPage() {
             <div>
               <p className="eyebrow">Cierre de venta</p>
               <h2 className="mt-4 text-4xl font-black uppercase italic sm:text-6xl">
-                En 5 dias puedes dejar de usar IA solo para preguntar y empezar a trabajar mejor.
+                En 5 días puedes dejar de usar IA solo para preguntar y empezar a trabajar mejor.
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
                 No necesitas convertirte en programador. Necesitas usar la
@@ -556,7 +564,7 @@ export default function MasterIAInscripcionPage() {
 
             <div className="border border-lime-300/25 bg-[#02040a]/70 p-7 text-center">
               <p className="text-sm font-black uppercase tracking-[0.22em] text-cyan-300">
-                MasterIA CEFIN
+                Master-IA CEFIN
               </p>
               <p className="mt-3 text-5xl font-black text-lime-300">$497 MXN</p>
               <p className="mt-3 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
@@ -571,7 +579,7 @@ export default function MasterIAInscripcionPage() {
                 <span className="ml-4 text-2xl">→</span>
               </a>
               <p className="mt-4 text-sm text-slate-500">
-                Da el primer paso para trabajar con mas orden, velocidad y claridad.
+                Da el primer paso para trabajar con más orden, velocidad y claridad.
               </p>
             </div>
           </div>
