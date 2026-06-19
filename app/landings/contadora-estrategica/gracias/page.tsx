@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/Cx6lJ5kkFsbIa4JHk488pF";
+const WHATSAPP_URL = "https://chat.whatsapp.com/GFdo1IiPXydJ4HWO8lYdOk";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
