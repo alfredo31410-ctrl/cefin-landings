@@ -128,9 +128,10 @@ export default function PlataformasGraciasPage() {
           <img
             src={ALFREDO_IMAGE_URL}
             alt="Mtro. Alfredo Cobos"
-            className="absolute bottom-0 right-[-46%] h-[48%] w-auto max-w-none object-contain opacity-25 sm:right-[-24%] sm:h-[62%] sm:opacity-35 md:right-[-12%] md:h-[70%] md:opacity-40"
+            className="absolute right-[-92px] top-[118px] h-[330px] w-auto max-w-none object-contain opacity-30 sm:right-[-64px] sm:top-[112px] sm:h-[440px] sm:opacity-38 md:right-[-32px] md:top-[96px] md:h-[560px] md:opacity-44"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/68 to-black" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,.16)_0%,rgba(0,0,0,.56)_42%,rgba(0,0,0,.96)_100%)]" />
+          <div className="absolute inset-y-0 left-0 w-[72%] bg-gradient-to-r from-black via-black/92 to-transparent" />
         </div>
 
         <section className="relative z-20 mx-auto grid min-h-screen max-w-[1320px] items-center gap-8 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:px-12">
@@ -158,9 +159,32 @@ export default function PlataformasGraciasPage() {
               </span>
             </h1>
 
+                        <a
+              href={WHATSAPP_GROUP_URL}
+              onClick={handleWhatsAppClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 inline-flex min-h-20 w-full items-center justify-center gap-3 rounded-[1.6rem] bg-lime-400 px-7 text-center text-lg font-black uppercase italic text-black shadow-[0_0_70px_rgba(163,230,53,.45)] transition hover:-translate-y-1 hover:scale-[1.01] hover:bg-lime-300 active:scale-[0.98] sm:w-auto sm:px-10 sm:text-xl"
+            >
+              <svg
+                className="h-7 w-7 shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M20.52 3.48A11.82 11.82 0 0012.07 0C5.5 0 .16 5.34.16 11.92c0 2.1.55 4.16 1.59 5.97L0 24l6.3-1.65a11.87 11.87 0 005.77 1.47h.01c6.57 0 11.91-5.35 11.92-11.92 0-3.18-1.24-6.17-3.48-8.42zM12.08 21.8h-.01a9.88 9.88 0 01-5.03-1.37l-.36-.21-3.74.98 1-3.64-.24-.37a9.86 9.86 0 01-1.51-5.27c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.13 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.89-9.89 9.89zm5.42-7.42c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.48-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.63.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.3.18-1.42-.08-.12-.27-.2-.57-.35z" />
+              </svg>
+              <span>Entrar al grupo de WhatsApp</span>
+            </a>
+
             <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-white/74 sm:text-xl">
               Tu registro para la clase de Plataformas Tecnológicas quedó
               guardado, pero todavía no está completo al 100%.
+            </p>
+
+            <p className="mt-4 max-w-2xl text-sm font-black uppercase tracking-[0.16em] text-lime-200">
+              Si no entras al grupo, no recibirás el enlace de acceso,
+              recordatorios ni avisos importantes.
             </p>
 
             <div className="mt-7 grid max-w-3xl gap-3 sm:grid-cols-3">
@@ -199,28 +223,6 @@ export default function PlataformasGraciasPage() {
               </p>
             </div>
 
-            <a
-              href={WHATSAPP_GROUP_URL}
-              onClick={handleWhatsAppClick}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-8 inline-flex min-h-20 w-full items-center justify-center gap-3 rounded-[1.6rem] bg-lime-400 px-7 text-center text-lg font-black uppercase italic text-black shadow-[0_0_70px_rgba(163,230,53,.45)] transition hover:-translate-y-1 hover:scale-[1.01] hover:bg-lime-300 active:scale-[0.98] sm:w-auto sm:px-10 sm:text-xl"
-            >
-              <svg
-                className="h-7 w-7 shrink-0"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M20.52 3.48A11.82 11.82 0 0012.07 0C5.5 0 .16 5.34.16 11.92c0 2.1.55 4.16 1.59 5.97L0 24l6.3-1.65a11.87 11.87 0 005.77 1.47h.01c6.57 0 11.91-5.35 11.92-11.92 0-3.18-1.24-6.17-3.48-8.42zM12.08 21.8h-.01a9.88 9.88 0 01-5.03-1.37l-.36-.21-3.74.98 1-3.64-.24-.37a9.86 9.86 0 01-1.51-5.27c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.13 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.89-9.89 9.89zm5.42-7.42c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.48-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.63.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.3.18-1.42-.08-.12-.27-.2-.57-.35z" />
-              </svg>
-              <span>Entrar al grupo de WhatsApp</span>
-            </a>
-
-            <p className="mt-4 max-w-2xl text-sm font-black uppercase tracking-[0.16em] text-lime-200">
-              Si no entras al grupo, no recibirás el enlace de acceso,
-              recordatorios ni avisos importantes.
-            </p>
           </div>
 
           <div className="relative mx-auto h-[310px] w-full max-w-[390px] lg:h-[370px] lg:max-w-[390px]">
@@ -372,6 +374,16 @@ export default function PlataformasGraciasPage() {
             .platform-shadow,
             .platform-logo-image {
               animation-duration: 10s;
+            }
+          }
+
+          @media (max-width: 1023px) {
+            .platform-logo,
+            .platform-logo::after,
+            .platform-phone,
+            .platform-shadow,
+            .platform-logo-image {
+              animation: none;
             }
           }
         `}</style>
