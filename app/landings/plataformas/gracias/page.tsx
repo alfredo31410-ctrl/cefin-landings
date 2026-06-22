@@ -8,7 +8,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_GROUP_URL = "/landings/plataformas";
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/BUfCVRKblO31syRjxC5Uoz";
 const ALFREDO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/honorarios-contables/alfredo-honorarios-contables.png";
 const PLATFORM_ASSET_BASE =
