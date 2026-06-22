@@ -14,6 +14,8 @@ const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 const ALFREDO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/honorarios-contables/alfredo-honorarios-contables.png";
+const PLATFORM_ASSET_BASE =
+  "https://cefin-landings-z9uk.vercel.app/plataformas";
 
 const WEBINAR_EVENT = {
   content_name: "Plataformas Tecnológicas",
@@ -25,42 +27,42 @@ const WEBINAR_EVENT = {
 const platformLogos = [
   {
     name: "DiDi",
-    src: "/plataformas/didi.png",
+    src: `${PLATFORM_ASSET_BASE}/didi.png`,
     className: "left-[8px] top-[8px] w-20",
     mobileClassName: "left-2 top-4 w-16",
     imageClassName: "w-11",
   },
   {
     name: "Mercado Libre",
-    src: "/plataformas/mercado-libre.png",
+    src: `${PLATFORM_ASSET_BASE}/mercado-libre.png`,
     className: "left-[122px] top-[22px] w-32",
     mobileClassName: "right-1 top-8 w-28",
     imageClassName: "w-24",
   },
   {
     name: "Amazon",
-    src: "/plataformas/amazon.png",
+    src: `${PLATFORM_ASSET_BASE}/amazon.png`,
     className: "left-[-8px] top-[92px] w-32",
     mobileClassName: "left-0 top-[100px] w-28",
     imageClassName: "w-24",
   },
   {
     name: "Uber Eats",
-    src: "/plataformas/uber-eats.png",
+    src: `${PLATFORM_ASSET_BASE}/uber-eats.png`,
     className: "left-[22px] top-[174px] w-28",
     mobileClassName: "left-6 bottom-8 w-24",
     imageClassName: "w-20",
   },
   {
     name: "Uber",
-    src: "/plataformas/uber.png",
+    src: `${PLATFORM_ASSET_BASE}/uber.png`,
     className: "left-[168px] top-[132px] w-24",
     mobileClassName: "right-8 top-[130px] w-20",
     imageClassName: "w-14",
   },
   {
     name: "Airbnb",
-    src: "/plataformas/airbnb.png",
+    src: `${PLATFORM_ASSET_BASE}/airbnb.png`,
     className: "left-[150px] top-[220px] w-24",
     mobileClassName: "right-3 bottom-5 w-20",
     imageClassName: "w-16",
@@ -253,17 +255,17 @@ export default function PlataformasLandingPage() {
               <div className="platform-shadow absolute bottom-4 left-1/2 h-10 w-44 -translate-x-1/2 rounded-full bg-black/70 blur-sm" />
               <div className="platform-phone absolute bottom-12 left-[calc(50%-40px)] h-36 w-20 rotate-[-15deg] rounded-[1.5rem] border border-white/15 bg-gradient-to-br from-slate-900 via-indigo-900 to-black shadow-[0_25px_60px_rgba(0,0,0,.55)]">
                 <img
-                  src="/plataformas/uber.png"
+                  src={`${PLATFORM_ASSET_BASE}/uber.png`}
                   alt="Uber"
                   className="absolute bottom-5 left-4 w-10 opacity-80"
                 />
                 <img
-                  src="/plataformas/airbnb.png"
+                  src={`${PLATFORM_ASSET_BASE}/airbnb.png`}
                   alt="Airbnb"
                   className="absolute left-5 top-5 w-8 opacity-90"
                 />
                 <img
-                  src="/plataformas/uber-eats.png"
+                  src={`${PLATFORM_ASSET_BASE}/uber-eats.png`}
                   alt="Uber Eats"
                   className="absolute right-2 top-16 w-10 opacity-95"
                 />
@@ -293,17 +295,17 @@ export default function PlataformasLandingPage() {
               <div className="platform-shadow absolute bottom-3 left-1/2 h-12 w-48 -translate-x-1/2 rounded-full bg-black/70 blur-sm" />
               <div className="platform-phone absolute bottom-14 left-[108px] h-40 w-24 rotate-[-16deg] rounded-[1.7rem] border border-white/15 bg-gradient-to-br from-slate-900 via-indigo-900 to-black shadow-[0_25px_60px_rgba(0,0,0,.55)]">
                 <img
-                  src="/plataformas/uber.png"
+                  src={`${PLATFORM_ASSET_BASE}/uber.png`}
                   alt="Uber"
                   className="absolute bottom-5 left-4 w-12 opacity-80"
                 />
                 <img
-                  src="/plataformas/airbnb.png"
+                  src={`${PLATFORM_ASSET_BASE}/airbnb.png`}
                   alt="Airbnb"
                   className="absolute left-6 top-6 w-10 opacity-90"
                 />
                 <img
-                  src="/plataformas/uber-eats.png"
+                  src={`${PLATFORM_ASSET_BASE}/uber-eats.png`}
                   alt="Uber Eats"
                   className="absolute right-2 top-[72px] w-12 opacity-95"
                 />
