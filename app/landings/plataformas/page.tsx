@@ -185,9 +185,10 @@ export default function PlataformasLandingPage() {
           <img
             src={ALFREDO_IMAGE_URL}
             alt="Mtro. Alfredo Cobos"
-            className="absolute bottom-0 right-[-42%] h-[48%] w-auto max-w-none object-contain opacity-30 sm:right-[-24%] sm:h-[62%] sm:opacity-40 md:right-[-12%] md:h-[70%] md:opacity-45"
+            className="absolute right-[-92px] top-[118px] h-[330px] w-auto max-w-none object-contain opacity-38 sm:right-[-64px] sm:top-[112px] sm:h-[440px] sm:opacity-44 md:right-[-32px] md:top-[96px] md:h-[560px] md:opacity-48"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/62 to-black" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,.16)_0%,rgba(0,0,0,.5)_42%,rgba(0,0,0,.96)_100%)]" />
+          <div className="absolute inset-y-0 left-0 w-[72%] bg-gradient-to-r from-black via-black/92 to-transparent" />
         </div>
 
         <section className="relative z-20 mx-auto flex min-h-screen max-w-[1400px] items-start px-5 py-8 sm:px-8 sm:py-10 lg:items-center lg:px-12">
@@ -228,18 +229,7 @@ export default function PlataformasLandingPage() {
               </p>
             </div>
 
-            <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
-              {classPoints.map((point) => (
-                <div
-                  key={point}
-                  className="border border-purple-400/20 bg-white/[0.06] p-4 text-sm font-bold leading-relaxed text-white/78 backdrop-blur"
-                >
-                  {point}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-7 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-center">
               <button
                 onClick={openRegistrationModal}
                 className="inline-flex min-h-16 items-center justify-center rounded-full bg-white px-9 text-base font-black uppercase tracking-wide text-black shadow-[0_0_70px_rgba(147,51,234,.45)] transition hover:-translate-y-1 hover:bg-purple-100 sm:text-lg"
@@ -249,6 +239,17 @@ export default function PlataformasLandingPage() {
               <p className="text-sm font-black uppercase tracking-[0.18em] text-purple-200">
                 Clase gratuita en vivo
               </p>
+            </div>
+
+            <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+              {classPoints.map((point) => (
+                <div
+                  key={point}
+                  className="border border-purple-400/20 bg-white/[0.06] p-4 text-sm font-bold leading-relaxed text-white/78 backdrop-blur"
+                >
+                  {point}
+                </div>
+              ))}
             </div>
 
             <div className="relative mx-auto mt-10 h-[290px] w-full max-w-[380px] lg:hidden">
@@ -468,6 +469,16 @@ export default function PlataformasLandingPage() {
             .platform-shadow,
             .platform-logo-image {
               animation-duration: 10s;
+            }
+          }
+
+          @media (max-width: 1023px) {
+            .platform-logo,
+            .platform-logo::after,
+            .platform-phone,
+            .platform-shadow,
+            .platform-logo-image {
+              animation: none;
             }
           }
         `}</style>
