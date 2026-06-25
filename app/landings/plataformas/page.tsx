@@ -108,7 +108,7 @@ export default function PlataformasLandingPage() {
     });
   }, [registrationTracked]);
 
-  useEffect(() => {
+useEffect(() => {
     if (!isModalOpen) return;
 
     const oldScript = document.getElementById("ac-script-loader");

@@ -6,6 +6,7 @@ import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   trackMetaEvent,
+  trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/BUfCVRKblO31syRjxC5Uoz";
@@ -80,11 +81,14 @@ export default function PlataformasGraciasPage() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Lead", {
+    trackMetaCustomEvent("WhatsAppGroupClick", {
       content_name: "Plataformas Tecnológicas",
       content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
+      funnel_step: "whatsapp_group_click",
+      lead_stage: "lead_neto",
       source: "thank_you_page",
+      destination: "whatsapp_group",
+      status: "clicked",
     });
   };
 
