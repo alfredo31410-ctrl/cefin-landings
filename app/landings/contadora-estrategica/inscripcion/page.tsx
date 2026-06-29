@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import Script from "next/script";
 import { useEffect } from "react";
@@ -10,7 +11,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 3687;
-const CHECKOUT_URL = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
+const CHECKOUT_URL: string = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
@@ -71,7 +72,7 @@ export default function ContadoraEstrategicaPagoPage() {
       currency: META_CURRENCY,
     });
 
-    if (!CHECKOUT_URL || CHECKOUT_URL=== "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751") {
+    if (!CHECKOUT_URL || CHECKOUT_URL=== "#") {
       console.warn("No hay una URL de checkout configurada.");
       return;
     }
