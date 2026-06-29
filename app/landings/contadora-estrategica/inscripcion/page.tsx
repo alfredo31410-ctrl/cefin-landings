@@ -71,7 +71,10 @@ export default function ContadoraEstrategicaPagoPage() {
       currency: META_CURRENCY,
     });
 
-    if (CHECKOUT_URL === "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751") return;
+    if (!CHECKOUT_URL || CHECKOUT_URL=== "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751") {
+      console.warn("No hay una URL de checkout configurada.");
+      return;
+    }
 
     window.setTimeout(() => {
       window.location.href = CHECKOUT_URL;
