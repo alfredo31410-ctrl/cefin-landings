@@ -11,8 +11,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 3687;
-const CHECKOUT_URL: string =
-  "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
+const CHECKOUT_URL: string = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
@@ -40,26 +39,10 @@ const bonuses = [
 ];
 
 const outcomes = [
-  [
-    "01",
-    "Decide con estrategia",
-    "Deja de operar solo como capturista y aprende a tomar mejores decisiones.",
-  ],
-  [
-    "02",
-    "Comunica valor",
-    "Presenta tus servicios con claridad para que tus clientas entiendan lo que haces.",
-  ],
-  [
-    "03",
-    "Cobra mejor",
-    "Ordena tu oferta, tus honorarios y tu posicionamiento profesional.",
-  ],
-  [
-    "04",
-    "Crece con dirección",
-    "Combina técnica, mentalidad comercial y marca personal para avanzar con estructura.",
-  ],
+  ["01", "Decide con estrategia", "Deja de operar solo como capturista y aprende a tomar mejores decisiones."],
+  ["02", "Comunica valor", "Presenta tus servicios con claridad para que tus clientas entiendan lo que haces."],
+  ["03", "Cobra mejor", "Ordena tu oferta, tus honorarios y tu posicionamiento profesional."],
+  ["04", "Crece con dirección", "Combina técnica, mentalidad comercial y marca personal para avanzar con estructura."],
 ];
 
 const audience = [
@@ -89,7 +72,7 @@ export default function ContadoraEstrategicaPagoPage() {
       currency: META_CURRENCY,
     });
 
-    if (!CHECKOUT_URL || CHECKOUT_URL === "#") {
+    if (!CHECKOUT_URL || CHECKOUT_URL=== "#") {
       console.warn("No hay una URL de checkout configurada.");
       return;
     }
@@ -179,31 +162,34 @@ export default function ContadoraEstrategicaPagoPage() {
                 </p>
               </div>
 
-              <div className="relative mx-auto min-h-[460px] w-full max-w-[600px] sm:min-h-[540px] lg:min-h-[620px]">
-                {/* Halo principal */}
-                <div className="absolute inset-x-[8%] bottom-[8%] top-[14%] rounded-full bg-[#8c52ff]/35 blur-[75px]" />
+<div className="relative mx-auto min-h-[460px] w-full max-w-[620px] overflow-hidden sm:min-h-[540px] lg:min-h-[620px]">
+  {/* Halo morado detrás */}
+  <div className="absolute inset-x-[10%] top-[10%] bottom-[10%] rounded-full bg-[#8c52ff]/30 blur-[80px]" />
 
-                {/* Luz detrás para separar la silueta */}
-                <div className="absolute right-[2%] top-[16%] h-[62%] w-[70%] rounded-full bg-[#c4b5fd]/20 blur-[90px]" />
+  {/* Luz secundaria */}
+  <div className="absolute right-[4%] top-[14%] h-[60%] w-[68%] rounded-full bg-[#c4b5fd]/20 blur-[95px]" />
 
-                {/* Fondo oscuro de integración */}
-                <div className="absolute inset-x-[10%] bottom-[4%] top-[20%] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(46,16,82,.68),rgba(8,5,13,.08)_72%)] blur-2xl" />
+  {/* Fondo oscuro suave para integrar la silueta */}
+  <div className="absolute inset-x-[12%] top-[20%] bottom-[6%] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(48,18,97,.65),rgba(8,5,13,.05)_72%)] blur-2xl" />
 
-                <img
-                  src={MARISOL_IMAGE_URL}
-                  alt="Marisol Galván"
-                  className="absolute bottom-0 left-1/2 z-10 h-[min(70vh,680px)] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_34px_85px_rgba(0,0,0,.44)] lg:-translate-x-[56%]"
-                  style={{
-                    WebkitMaskImage:
-                      "radial-gradient(ellipse 92% 95% at 52% 46%, black 58%, transparent 100%)",
-                    maskImage:
-                      "radial-gradient(ellipse 92% 95% at 52% 46%, black 58%, transparent 100%)",
-                  }}
-                />
+  <img
+    src={MARISOL_IMAGE_URL}
+    alt="Marisol Galván"
+    className="absolute bottom-0 left-1/2 z-10 h-[min(70vh,690px)] w-auto max-w-none -translate-x-[50%] object-contain drop-shadow-[0_34px_90px_rgba(0,0,0,.42)] lg:-translate-x-[56%]"
+    style={{
+      WebkitMaskImage:
+        "radial-gradient(ellipse 88% 94% at 48% 42%, black 58%, rgba(0,0,0,.92) 72%, transparent 100%)",
+      maskImage:
+        "radial-gradient(ellipse 88% 94% at 48% 42%, black 58%, rgba(0,0,0,.92) 72%, transparent 100%)",
+    }}
+  />
 
-                {/* Oculta el corte inferior y conecta la imagen con el fondo */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-gradient-to-t from-[#08050d] via-[#08050d]/65 to-transparent" />
-              </div>
+  {/* Difuminado del lado derecho */}
+  <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-[#2b0d63] via-[#3d1590]/70 to-transparent sm:w-28 lg:w-32" />
+
+  {/* Difuminado inferior */}
+  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-t from-[#2b0d63] via-[#2b0d63]/72 to-transparent sm:h-32 lg:h-36" />
+</div>
             </div>
           </div>
         </section>
@@ -343,9 +329,7 @@ export default function ContadoraEstrategicaPagoPage() {
         <footer className="border-t border-white/10 bg-black px-5 py-7 sm:px-8">
           <div className="mx-auto flex max-w-[1180px] flex-col gap-3 text-sm font-bold text-white/55 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-2xl font-black text-white">CEFIN</span>
-            <span>
-              Capacitación fiscal y contable para crecer con estrategia.
-            </span>
+            <span>Capacitación fiscal y contable para crecer con estrategia.</span>
           </div>
         </footer>
       </main>
