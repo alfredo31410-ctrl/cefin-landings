@@ -10,7 +10,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 3687;
-const CHECKOUT_URL = "#";
+const CHECKOUT_URL = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
@@ -71,7 +71,7 @@ export default function ContadoraEstrategicaPagoPage() {
       currency: META_CURRENCY,
     });
 
-    if (CHECKOUT_URL === "#") return;
+    if (CHECKOUT_URL === "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751") return;
 
     window.setTimeout(() => {
       window.location.href = CHECKOUT_URL;
