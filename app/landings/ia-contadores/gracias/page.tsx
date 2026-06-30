@@ -10,6 +10,10 @@ import {
   trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
 
+type WindowWithMetaPixel = Window & {
+  fbq?: (...args: unknown[]) => void;
+};
+
 export default function GraciasIA() {
   const whatsappUrl =
     "https://chat.whatsapp.com/LmuG3LV025H5RfxQj1ufB5";
@@ -19,20 +23,51 @@ useEffect(() => {
     "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
   const registrationKey = "ia_contadores_16_julio_registered";
+  const maxAttempts = 20;
+  let attempts = 0;
+  let timeoutId: number | undefined;
 
-  if (sessionStorage.getItem(registrationKey)) return;
+  const sendCompleteRegistration = () => {
+    if (sessionStorage.getItem(registrationKey)) return;
 
-  trackMetaEvent("CompleteRegistration", {
-    content_name: "ABC de Inteligencia Artificial para Contadores",
-    content_category: "Webinar",
-    event_date: "2026-07-16",
-    event_time: "11:00 AM CDMX",
-    status: "registered",
-    value: 0,
-    currency: META_CURRENCY,
-  });
+    const fbq = (window as WindowWithMetaPixel).fbq;
 
-  sessionStorage.setItem(registrationKey, "true");
+    // Espera a que el script del pixel esté listo antes de disparar el evento.
+    if (typeof fbq !== "function") {
+      attempts += 1;
+
+      if (attempts < maxAttempts) {
+        timeoutId = window.setTimeout(sendCompleteRegistration, 250);
+      } else {
+        console.warn(
+          "Meta Pixel no estuvo listo a tiempo para CompleteRegistration.",
+        );
+      }
+
+      return;
+    }
+
+    trackMetaEvent("CompleteRegistration", {
+      content_name: "ABC de Inteligencia Artificial para Contadores",
+      content_category: "Webinar",
+      event_date: "2026-07-16",
+      event_time: "11:00 AM CDMX",
+      status: "registered",
+      value: 0,
+      currency: META_CURRENCY,
+    });
+
+    // Solo se bloquean repeticiones después de confirmar que fbq ya estaba listo.
+    sessionStorage.setItem(registrationKey, "true");
+  };
+
+  sendCompleteRegistration();
+
+  return () => {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+  };
 }, []);
 
   const handleWhatsAppClick = () => {
