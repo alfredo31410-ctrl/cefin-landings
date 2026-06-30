@@ -7,33 +7,44 @@ import {
   getMetaPixelScript,
   META_CURRENCY,
   trackMetaEvent,
+  trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
 
 export default function GraciasIA() {
   const whatsappUrl =
     "https://chat.whatsapp.com/LmuG3LV025H5RfxQj1ufB5";
 
-  useEffect(() => {
-    document.title =
-      "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
+useEffect(() => {
+  document.title =
+    "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
-    trackMetaEvent("CompleteRegistration", {
-      content_name: "ABC de Inteligencia Artificial para Contadores",
-      status: "registered",
-      value: 0,
-      currency: META_CURRENCY,
-    });
-  }, []);
+  const registrationKey = "ia_contadores_16_julio_registered";
+
+  if (sessionStorage.getItem(registrationKey)) return;
+
+  trackMetaEvent("CompleteRegistration", {
+    content_name: "ABC de Inteligencia Artificial para Contadores",
+    content_category: "Webinar",
+    event_date: "2026-07-16",
+    event_time: "11:00 AM CDMX",
+    status: "registered",
+    value: 0,
+    currency: META_CURRENCY,
+  });
+
+  sessionStorage.setItem(registrationKey, "true");
+}, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Lead", {
-      content_name: "ABC de Inteligencia Artificial para Contadores",
-      content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
-      value: 0,
-      currency: META_CURRENCY,
-    });
-  };
+  trackMetaCustomEvent("WhatsAppGroupClick", {
+    content_name: "ABC de Inteligencia Artificial para Contadores",
+    content_category: "Grupo de WhatsApp",
+    event_date: "2026-07-16",
+    event_time: "11:00 AM CDMX",
+    value: 0,
+    currency: META_CURRENCY,
+  });
+};
 
   return (
     <>

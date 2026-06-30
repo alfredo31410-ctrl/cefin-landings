@@ -162,33 +162,30 @@ export default function ContadoraEstrategicaPagoPage() {
                 </p>
               </div>
 
-<div className="relative mx-auto min-h-[460px] w-full max-w-[620px] overflow-hidden sm:min-h-[540px] lg:min-h-[620px]">
-  {/* Halo morado detrás */}
-  <div className="absolute inset-x-[10%] top-[10%] bottom-[10%] rounded-full bg-[#8c52ff]/30 blur-[80px]" />
+<div className="relative mx-auto min-h-[460px] w-full max-w-[580px] sm:min-h-[540px] lg:min-h-[620px]">
+  {/* Halo principal detrás de Marisol */}
+  <div className="absolute inset-x-[12%] bottom-[8%] top-[14%] rounded-full bg-[#8c52ff]/35 blur-[90px]" />
 
-  {/* Luz secundaria */}
-  <div className="absolute right-[4%] top-[14%] h-[60%] w-[68%] rounded-full bg-[#c4b5fd]/20 blur-[95px]" />
+  {/* Luz suave detrás de cabello y hombros */}
+  <div className="absolute right-[10%] top-[12%] h-[52%] w-[58%] rounded-full bg-[#d8b4fe]/20 blur-[85px]" />
 
-  {/* Fondo oscuro suave para integrar la silueta */}
-  <div className="absolute inset-x-[12%] top-[20%] bottom-[6%] rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(48,18,97,.65),rgba(8,5,13,.05)_72%)] blur-2xl" />
+  {/* Sombra suave en la base para integrarla al fondo */}
+  <div className="absolute inset-x-[14%] bottom-0 h-28 rounded-full bg-black/35 blur-3xl" />
 
   <img
     src={MARISOL_IMAGE_URL}
     alt="Marisol Galván"
-    className="absolute bottom-0 left-1/2 z-10 h-[min(70vh,690px)] w-auto max-w-none -translate-x-[50%] object-contain drop-shadow-[0_34px_90px_rgba(0,0,0,.42)] lg:-translate-x-[56%]"
+    className="absolute bottom-0 left-1/2 z-10 h-[min(70vh,670px)] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,.42)] lg:-translate-x-[58%]"
     style={{
       WebkitMaskImage:
-        "radial-gradient(ellipse 88% 94% at 48% 42%, black 58%, rgba(0,0,0,.92) 72%, transparent 100%)",
+        "radial-gradient(ellipse 67% 96% at 42% 47%, black 34%, rgba(0,0,0,.96) 52%, rgba(0,0,0,.72) 67%, transparent 90%)",
       maskImage:
-        "radial-gradient(ellipse 88% 94% at 48% 42%, black 58%, rgba(0,0,0,.92) 72%, transparent 100%)",
+        "radial-gradient(ellipse 67% 96% at 42% 47%, black 34%, rgba(0,0,0,.96) 52%, rgba(0,0,0,.72) 67%, transparent 90%)",
     }}
   />
 
-  {/* Difuminado del lado derecho */}
-  <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-[#2b0d63] via-[#3d1590]/70 to-transparent sm:w-28 lg:w-32" />
-
-  {/* Difuminado inferior */}
-  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-t from-[#2b0d63] via-[#2b0d63]/72 to-transparent sm:h-32 lg:h-36" />
+  {/* Funde la parte inferior con el fondo del hero */}
+  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#08050d] via-[#08050d]/45 to-transparent sm:h-28" />
 </div>
             </div>
           </div>

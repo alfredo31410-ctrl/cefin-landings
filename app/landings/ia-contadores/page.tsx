@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -16,12 +16,11 @@ const WEBINAR_EVENT = {
   event_time: "11:00 AM CDMX",
 };
 
-const ACTIVE_CAMPAIGN_FORM_ID = 249;
+const ACTIVE_CAMPAIGN_FORM_ID = 263;
 const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function LandingIA() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [registrationTracked, setRegistrationTracked] = useState(false);
 
   useEffect(() => {
     document.title = "ABC de Inteligencia Artificial para Contadores | CEFIN";
@@ -41,16 +40,6 @@ export default function LandingIA() {
     });
   };
 
-  const trackCompleteRegistration = useCallback(() => {
-    if (registrationTracked) return;
-
-    setRegistrationTracked(true);
-
-    trackMetaEvent("CompleteRegistration", {
-      ...WEBINAR_EVENT,
-      status: "submitted",
-    });
-  }, [registrationTracked]);
 
   useEffect(() => {
     if (!isModalOpen) return;
@@ -62,28 +51,9 @@ export default function LandingIA() {
     script.id = "ac-script-loader";
     script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
     script.async = true;
+
     document.body.appendChild(script);
-
-    const interval = window.setInterval(() => {
-      const form = document.querySelector(
-        `.${ACTIVE_CAMPAIGN_FORM_CLASS} form`,
-      );
-
-      if (!form) return;
-
-      form.addEventListener(
-        "submit",
-        () => {
-          trackCompleteRegistration();
-        },
-        { once: true },
-      );
-
-      window.clearInterval(interval);
-    }, 400);
-
-    return () => window.clearInterval(interval);
-  }, [isModalOpen, trackCompleteRegistration]);
+  }, [isModalOpen]);
 
   return (
     <>
