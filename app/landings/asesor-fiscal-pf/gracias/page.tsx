@@ -1,8 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import { 
+  getMetaPixelScript, 
+  trackMetaEvent, 
+  META_CURRENCY, 
+  getMetaPixelNoscriptUrl
+} from "@/lib/meta-pixel";
+import Script from "next/script"; 
 
-const WHATSAPP_GROUP_URL = "";
+const WHATSAPP_URL = "";
 
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
@@ -11,13 +18,52 @@ const ASSET_BASE =
 
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/asesor-fiscal-pf/alfredo-pf.png`;
 
-export default function GraciasAsesorFiscalPage() {
+export default function GraciasAsesorFiscalPagePF() {
   useEffect(() => {
     document.title =
-      "Registro confirmado | Tus primeros pasos como asesor fiscal | CEFIN";
+      "Ultimo Paso | Tus primeros pasos como asesor fiscal | CEFIN";
+
+       trackMetaEvent("CompleteRegistration", {
+      content_name: "Tus primeros pasos como asesor fiscal - PF | Registro completado",
+      content_category: "Clase gratuita",
+      status: "completed",
+      value: 0,
+      currency: META_CURRENCY,
+    });
   }, []);
 
+  const handleWhatsAppClick = () => {
+    trackMetaEvent("Lead", {
+      content_name: "Tus primeros pasos como asesor fiscal - PF | Click grupo WhatsApp",
+      content_category: "Grupo de WhatsApp",
+      status: "whatsapp_group_click",
+      value: 0,
+      currency: META_CURRENCY,
+    });
+
+    if (!WHATSAPP_URL) return;
+
+    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
+    <>
+      <Script
+        id="meta-pixel-asesor-fiscal-thankyou"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
+      />
+
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          src={getMetaPixelNoscriptUrl()}
+          alt=""
+        />
+      </noscript>
+  
     <main className="relative min-h-screen overflow-x-hidden bg-[#17100d] text-white">
       {/* Fondo y texturas */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -116,7 +162,7 @@ export default function GraciasAsesorFiscalPage() {
 
                   {/* CTA principal */}
                   <a
-                    href={WHATSAPP_GROUP_URL}
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="whatsapp-cta group relative mt-5 flex min-h-[76px] w-full items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/25 bg-gradient-to-r from-[#9F4F31] via-[#C66A42] to-[#E18452] px-4 py-4 text-center text-[15px] font-black uppercase tracking-[0.07em] text-white shadow-[0_24px_65px_rgba(0,0,0,0.58)] ring-4 ring-[#F5A06D]/20 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.66)] active:translate-y-0 active:scale-[0.98] sm:mt-6 sm:min-h-[74px] sm:max-w-[500px] sm:px-5 sm:py-5 sm:text-base"
@@ -563,5 +609,6 @@ export default function GraciasAsesorFiscalPage() {
         }
       `}</style>
     </main>
+    </>
   );
 }
