@@ -9,7 +9,7 @@ import {
 } from "@/lib/meta-pixel";
 import Script from "next/script"; 
 
-const WHATSAPP_URL = "";
+const WHATSAPP_URL = "https://chat.whatsapp.com/Cwq5WlznYALEmsByZOsu4J";
 
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
