@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
+  trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
@@ -63,9 +64,12 @@ export default function AsesorFiscalPage() {
   }, [isModalOpen]);
 
   const openRegistrationModal = () => {
-    trackMetaEvent("Lead", {
+    trackMetaCustomEvent("OpenRegistrationModal", {
       content_name: "Tus primeros pasos como asesor fiscal | Abrir formulario",
       content_category: "Clase gratuita",
+      funnel_step: "registration_modal_open",
+      lead_stage: "registration_intent",
+      source: "landing_cta",
       status: "form_opened",
     });
 

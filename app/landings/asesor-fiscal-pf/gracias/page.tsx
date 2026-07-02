@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { 
-  getMetaPixelScript, 
-  trackMetaEvent, 
-  META_CURRENCY, 
-  getMetaPixelNoscriptUrl
+import {
+  getMetaPixelScript,
+  trackMetaEvent,
+  trackMetaCustomEvent,
+  META_CURRENCY,
+  getMetaPixelNoscriptUrl,
 } from "@/lib/meta-pixel";
-import Script from "next/script"; 
+import Script from "next/script";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/Cwq5WlznYALEmsByZOsu4J";
 
@@ -33,23 +34,23 @@ export default function GraciasAsesorFiscalPagePF() {
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Lead", {
+    trackMetaCustomEvent("WhatsAppGroupClick", {
       content_name: "Tus primeros pasos como asesor fiscal - PF | Click grupo WhatsApp",
       content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
+      funnel_step: "whatsapp_group_click",
+      lead_stage: "lead_neto_intent",
+      source: "thank_you_page",
+      destination: "whatsapp_group",
+      status: "clicked",
       value: 0,
       currency: META_CURRENCY,
     });
-
-    if (!WHATSAPP_URL) return;
-
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
     <>
       <Script
-        id="meta-pixel-asesor-fiscal-thankyou"
+        id="meta-pixel-asesor-fiscal-pf-thankyou"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
@@ -163,6 +164,7 @@ export default function GraciasAsesorFiscalPagePF() {
                   {/* CTA principal */}
                   <a
                     href={WHATSAPP_URL}
+                    onClick={handleWhatsAppClick}
                     target="_blank"
                     rel="noreferrer"
                     className="whatsapp-cta group relative mt-5 flex min-h-[76px] w-full items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/25 bg-gradient-to-r from-[#9F4F31] via-[#C66A42] to-[#E18452] px-4 py-4 text-center text-[15px] font-black uppercase tracking-[0.07em] text-white shadow-[0_24px_65px_rgba(0,0,0,0.58)] ring-4 ring-[#F5A06D]/20 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.66)] active:translate-y-0 active:scale-[0.98] sm:mt-6 sm:min-h-[74px] sm:max-w-[500px] sm:px-5 sm:py-5 sm:text-base"
