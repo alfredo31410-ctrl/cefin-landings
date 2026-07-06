@@ -1219,8 +1219,7 @@ export default function AsesorFiscalMedicosPage() {
             }
 
             50% {
-              transform: translate3d(0, -10px, 0)
-                scale(var(--portrait-scale));
+              transform: translate3d(0, -10px, 0) scale(var(--portrait-scale));
             }
           }
 

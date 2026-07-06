@@ -62,13 +62,7 @@ export default function AsesorFiscalPage() {
   }, [isModalOpen]);
 
   const openRegistrationModal = () => {
-    trackMetaEvent("Lead", {
-      content_name: "ABC Asesor Fiscal de Empresas | Abrir formulario",
-      content_category: "Clase gratuita",
-      status: "form_opened",
-    });
-
-    setIsModalOpen(true);
+ setIsModalOpen(true);
   };
 
   return (

@@ -33,42 +33,30 @@ export default function GraciasAsesorFiscalMedicosPage() {
     document.title =
       "Último paso | Contabilidad e Impuestos para Médicos | CEFIN";
 
-    trackMetaEvent("Lead", {
-      content_name:
-        "Contabilidad e Impuestos para Médicos | Registro de formulario completado",
-      content_category: "Clase gratuita",
-      status: "completed",
-      value: 0,
-      currency: META_CURRENCY,
-    });
-
     trackMetaEvent("CompleteRegistration", {
       content_name:
         "Contabilidad e Impuestos para Médicos | Formulario completado",
       content_category: "Clase gratuita",
-      status: "form_completed",
+      status: "completed",
       value: 0,
       currency: META_CURRENCY,
     });
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Contact", {
+    trackMetaEvent("WhatsAppGroupClick", {
       content_name:
         "Contabilidad e Impuestos para Médicos | Click grupo WhatsApp",
       content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
+      funnel_step: "whatsapp_group_click",
+      lead_stage: "lead_neto_intent",
+      source: "thank_you_page",
+      destination: "whatsapp_group",
+      status: "clicked",
       value: 0,
       currency: META_CURRENCY,
     });
-
-    if (!WHATSAPP_URL || WHATSAPP_URL.includes("REEMPLAZA")) return;
-
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
   };
-
-  const isWhatsAppConfigured =
-    Boolean(WHATSAPP_URL) && !WHATSAPP_URL.includes("REEMPLAZA");
 
   return (
     <>
@@ -163,9 +151,7 @@ export default function GraciasAsesorFiscalMedicosPage() {
 
               <h1 className="landing-reveal landing-reveal--3 mt-5 text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-6xl lg:text-[5.2rem]">
                 Tu registro aún
-                <span className="block text-orange-400">
-                  no está completo
-                </span>
+                <span className="block text-orange-400">no está completo</span>
               </h1>
 
               <p className="landing-reveal landing-reveal--4 mt-5 max-w-2xl text-lg font-semibold leading-relaxed text-white/86 sm:text-xl">
@@ -222,7 +208,6 @@ export default function GraciasAsesorFiscalMedicosPage() {
                 <button
                   type="button"
                   onClick={handleWhatsAppClick}
-                  disabled={!isWhatsAppConfigured}
                   className="thankyou-whatsapp-button group relative z-10 mt-5 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#62F9A7_0%,#25D366_48%,#16B75A_100%)] px-6 py-5 text-center text-base font-black uppercase text-[#052b14] ring-2 ring-[#91FFD0]/50 shadow-[0_0_0_1px_rgba(255,255,255,0.24),0_22px_60px_rgba(37,211,102,0.52),0_0_40px_rgba(88,249,167,0.34)] transition duration-200 hover:scale-[1.01] hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 sm:text-lg"
                 >
                   <span className="relative z-10">
@@ -248,8 +233,8 @@ export default function GraciasAsesorFiscalMedicosPage() {
               </div>
               <div className="landing-reveal landing-reveal--5 thankyou-warning mt-6 border-l-4 border-orange-400 bg-black/30 px-5 py-4 backdrop-blur-sm">
                 <p className="text-base font-black uppercase leading-relaxed text-white sm:text-lg">
-                  Importante: el enlace de la clase se enviará únicamente por
-                  el grupo de WhatsApp.
+                  Importante: el enlace de la clase se enviará únicamente por el
+                  grupo de WhatsApp.
                 </p>
 
                 <p className="mt-2 text-sm font-semibold leading-relaxed text-white/70">
@@ -258,8 +243,6 @@ export default function GraciasAsesorFiscalMedicosPage() {
                   conectarte.
                 </p>
               </div>
-
-
 
               <div className="landing-reveal landing-reveal--7 mt-5 grid gap-3 sm:grid-cols-3">
                 {[
@@ -299,18 +282,14 @@ export default function GraciasAsesorFiscalMedicosPage() {
         }
 
         .medical-background-image {
-          animation: medical-background-drift 24s ease-in-out infinite
-            alternate;
+          animation: medical-background-drift 24s ease-in-out infinite alternate;
           transform-origin: center;
         }
 
         .medical-grid {
           opacity: 0.13;
           background-image:
-            linear-gradient(
-              rgba(103, 232, 249, 0.14) 1px,
-              transparent 1px
-            ),
+            linear-gradient(rgba(103, 232, 249, 0.14) 1px, transparent 1px),
             linear-gradient(
               90deg,
               rgba(103, 232, 249, 0.14) 1px,
@@ -430,8 +409,7 @@ export default function GraciasAsesorFiscalMedicosPage() {
             0 14px 34px rgba(251, 146, 60, 0.18),
             inset 0 1px 0 rgba(255, 255, 255, 0.12);
           animation:
-            landing-reveal-up 0.72s cubic-bezier(0.22, 1, 0.36, 1)
-              forwards,
+            landing-reveal-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards,
             premium-status-glow 3.4s ease-in-out infinite 1.2s;
         }
 
