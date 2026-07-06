@@ -128,14 +128,14 @@ export default function AsesorFiscalMedicosPage() {
 
           <div className="medical-light-trail" />
 
-          {/* Marisol como elemento visual para móvil y tablet */}
+          {/* Marisol para móvil y tablet */}
           <img
             src={MARISOL_IMAGE_URL}
             alt=""
-            className="medical-mobile-portrait absolute bottom-[-8%] right-[-16%] h-[68%] w-auto max-w-none object-contain object-bottom opacity-25 drop-shadow-[0_28px_60px_rgba(0,0,0,0.65)] lg:hidden"
+            className="medical-mobile-portrait absolute bottom-[-3%] right-[-10%] h-[74%] w-auto max-w-none object-contain object-bottom opacity-30 drop-shadow-[0_32px_68px_rgba(0,0,0,0.78)] lg:hidden"
           />
 
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,8,23,0.10)_0%,rgba(2,8,23,0.32)_40%,rgba(2,8,23,0.86)_100%)] lg:hidden" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,8,23,0.10)_0%,rgba(2,8,23,0.30)_40%,rgba(2,8,23,0.74)_100%)] lg:hidden" />
         </div>
 
         {/* ================================================================
@@ -158,9 +158,7 @@ export default function AsesorFiscalMedicosPage() {
            ================================================================ */}
         <section className="relative z-20">
           <div className="medical-shell medical-hero-shell mx-auto grid min-h-[calc(100svh-64px)] w-full grid-cols-1 items-center px-5 pb-8 lg:min-h-[calc(100vh-92px)] lg:grid-cols-[minmax(0,1fr)_minmax(400px,0.82fr)] lg:gap-4 lg:px-12 lg:pb-10 xl:grid-cols-[minmax(0,1fr)_minmax(520px,0.92fr)] xl:px-16">
-            {/* ============================================================
-                TEXTO / CTA
-               ============================================================ */}
+            {/* TEXTO / CTA */}
             <div className="medical-copy relative z-10 max-w-[760px] py-8 text-left lg:py-10">
               <div className="landing-reveal landing-reveal--2 premium-pill inline-flex items-center rounded-full border border-orange-300/40 bg-orange-400 px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-slate-950 sm:text-xs">
                 <span className="mr-2 h-1.5 w-1.5 rounded-full bg-slate-950" />
@@ -242,9 +240,7 @@ export default function AsesorFiscalMedicosPage() {
               </p>
             </div>
 
-            {/* ============================================================
-                FOTO DE MARISOL - DESKTOP
-               ============================================================ */}
+            {/* MARISOL DESKTOP */}
             <div className="landing-reveal landing-reveal--5 medical-portrait-wrap relative hidden h-full min-h-[620px] items-end justify-center lg:flex">
               <div className="medical-portrait-aura" />
               <div className="medical-portrait-ring medical-portrait-ring--one" />
@@ -325,18 +321,11 @@ export default function AsesorFiscalMedicosPage() {
           </div>
         )}
 
-        {/* ================================================================
-            ESTILOS
-           ================================================================ */}
         <style jsx global>{`
           .medical-landing {
             isolation: isolate;
           }
 
-          /*
-            CANVAS GENERAL
-            Controla el ancho útil en laptop, monitores amplios y ultrawide.
-          */
           .medical-shell {
             width: min(100%, 1600px);
           }
@@ -351,7 +340,11 @@ export default function AsesorFiscalMedicosPage() {
             opacity: 0.13;
             background-image:
               linear-gradient(rgba(103, 232, 249, 0.14) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(103, 232, 249, 0.14) 1px, transparent 1px);
+              linear-gradient(
+                90deg,
+                rgba(103, 232, 249, 0.14) 1px,
+                transparent 1px
+              );
             background-size: 54px 54px;
             mask-image: linear-gradient(
               to bottom,
@@ -418,10 +411,6 @@ export default function AsesorFiscalMedicosPage() {
             animation: medical-light-sweep 8s ease-in-out infinite;
           }
 
-          /* ===============================================================
-             TIPOGRAFÍA FLUIDA
-             =============================================================== */
-
           .medical-pretitle {
             font-size: clamp(1.2rem, 1.7vw, 2.2rem);
           }
@@ -433,10 +422,6 @@ export default function AsesorFiscalMedicosPage() {
           .medical-description {
             font-size: clamp(0.96rem, 1.08vw, 1.35rem);
           }
-
-          /* ===============================================================
-             ANIMACIONES
-             =============================================================== */
 
           .landing-reveal {
             opacity: 0;
@@ -648,10 +633,7 @@ export default function AsesorFiscalMedicosPage() {
               forwards;
           }
 
-          /* ===============================================================
-             MÓVIL COMPACTO: 320px A 374px
-             =============================================================== */
-
+          /* MÓVIL COMPACTO */
           @media (max-width: 374px) {
             .medical-header-shell {
               padding-top: 0.9rem;
@@ -712,10 +694,10 @@ export default function AsesorFiscalMedicosPage() {
             }
 
             .medical-mobile-portrait {
-              right: -30%;
-              bottom: -8%;
-              height: 50%;
-              opacity: 0.15;
+              right: -16%;
+              bottom: -1%;
+              height: 62%;
+              opacity: 0.3;
             }
 
             .medical-grid {
@@ -723,10 +705,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             MÓVIL ESTÁNDAR: 375px A 767px
-             =============================================================== */
-
+          /* MÓVIL ESTÁNDAR */
           @media (min-width: 375px) and (max-width: 767px) {
             .medical-copy {
               padding-top: clamp(1.5rem, 4vh, 2.5rem);
@@ -767,18 +746,14 @@ export default function AsesorFiscalMedicosPage() {
             }
 
             .medical-mobile-portrait {
-              right: -24%;
-              bottom: -8%;
-              height: 57%;
-              opacity: 0.18;
+              right: -12%;
+              bottom: -3%;
+              height: 72%;
+              opacity: 0.34;
             }
           }
 
-          /* ===============================================================
-             TABLET VERTICAL: 768px A 1023px
-             Sigue en una columna, pero aprovecha el espacio.
-             =============================================================== */
-
+          /* TABLET */
           @media (min-width: 768px) and (max-width: 1023px) {
             .medical-shell {
               width: min(100%, 920px);
@@ -827,10 +802,10 @@ export default function AsesorFiscalMedicosPage() {
             }
 
             .medical-mobile-portrait {
-              right: -10%;
-              bottom: -12%;
-              height: 66%;
-              opacity: 0.2;
+              right: -6%;
+              bottom: -8%;
+              height: 72%;
+              opacity: 0.28;
             }
 
             .medical-grid {
@@ -838,10 +813,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             LAPTOP / DESKTOP NORMAL: 1024px A 1439px
-             =============================================================== */
-
+          /* LAPTOP / DESKTOP NORMAL */
           @media (min-width: 1024px) {
             .medical-copy {
               transform: translateY(-2vh);
@@ -860,10 +832,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             MONITOR AMPLIO: 1440px A 1699px
-             =============================================================== */
-
+          /* MONITOR AMPLIO */
           @media (min-width: 1440px) {
             .medical-shell {
               width: min(100%, 1750px);
@@ -939,10 +908,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             MONITOR GRANDE / 27": 1700px A 1899px
-             =============================================================== */
-
+          /* MONITOR GRANDE / 27" */
           @media (min-width: 1700px) {
             .medical-shell {
               width: min(100%, 1880px);
@@ -1027,10 +993,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             ULTRAWIDE / 1900px+
-             =============================================================== */
-
+          /* ULTRAWIDE */
           @media (min-width: 1900px) {
             .medical-shell {
               width: min(100%, 2100px);
@@ -1078,11 +1041,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             PANTALLAS BAJAS
-             Laptop pequeña, 1366x768, etc.
-             =============================================================== */
-
+          /* LAPTOPS CON ALTURA BAJA */
           @media (min-width: 1024px) and (max-height: 820px) {
             .medical-header-shell {
               padding-top: 1rem;
@@ -1179,13 +1138,9 @@ export default function AsesorFiscalMedicosPage() {
             }
 
             .medical-mobile-portrait {
-              opacity: 0.12;
+              opacity: 0.22;
             }
           }
-
-          /* ===============================================================
-             KEYFRAMES
-             =============================================================== */
 
           @keyframes landing-reveal-up {
             from {
@@ -1353,10 +1308,7 @@ export default function AsesorFiscalMedicosPage() {
             }
           }
 
-          /* ===============================================================
-             ACTIVECAMPAIGN
-             =============================================================== */
-
+          /* ACTIVECAMPAIGN */
           .ac-modal-wrapper .${FORM_CLASS} {
             width: 100% !important;
             max-width: 430px !important;

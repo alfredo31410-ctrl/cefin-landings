@@ -176,20 +176,6 @@ export default function GraciasAsesorFiscalMedicosPage() {
                 , pero todavía debes entrar al grupo de WhatsApp para completar
                 tu registro y recibir el enlace de acceso.
               </p>
-
-              <div className="landing-reveal landing-reveal--5 thankyou-warning mt-6 border-l-4 border-orange-400 bg-black/30 px-5 py-4 backdrop-blur-sm">
-                <p className="text-base font-black uppercase leading-relaxed text-white sm:text-lg">
-                  Importante: el enlace de la clase se enviará únicamente por
-                  el grupo de WhatsApp.
-                </p>
-
-                <p className="mt-2 text-sm font-semibold leading-relaxed text-white/70">
-                  Si sales de esta página sin entrar al grupo, tu registro
-                  quedará incompleto y podrías no recibir el acceso para
-                  conectarte.
-                </p>
-              </div>
-
               {/* ============================================================
                   CARD DEL PASO FINAL
                  ============================================================ */}
@@ -260,6 +246,20 @@ export default function GraciasAsesorFiscalMedicosPage() {
                   Sin entrar al grupo, no recibirás el enlace de acceso
                 </p>
               </div>
+              <div className="landing-reveal landing-reveal--5 thankyou-warning mt-6 border-l-4 border-orange-400 bg-black/30 px-5 py-4 backdrop-blur-sm">
+                <p className="text-base font-black uppercase leading-relaxed text-white sm:text-lg">
+                  Importante: el enlace de la clase se enviará únicamente por
+                  el grupo de WhatsApp.
+                </p>
+
+                <p className="mt-2 text-sm font-semibold leading-relaxed text-white/70">
+                  Si sales de esta página sin entrar al grupo, tu registro
+                  quedará incompleto y podrías no recibir el acceso para
+                  conectarte.
+                </p>
+              </div>
+
+
 
               <div className="landing-reveal landing-reveal--7 mt-5 grid gap-3 sm:grid-cols-3">
                 {[
