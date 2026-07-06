@@ -43,20 +43,24 @@ export default function GraciasAsesorFiscalMedicosPage() {
     });
   }, []);
 
-  const handleWhatsAppClick = () => {
-    trackMetaEvent("WhatsAppGroupClick", {
-      content_name:
-        "Contabilidad e Impuestos para Médicos | Click grupo WhatsApp",
-      content_category: "Grupo de WhatsApp",
-      funnel_step: "whatsapp_group_click",
-      lead_stage: "lead_neto_intent",
-      source: "thank_you_page",
-      destination: "whatsapp_group",
-      status: "clicked",
-      value: 0,
-      currency: META_CURRENCY,
-    });
-  };
+const handleWhatsAppClick = () => {
+  trackMetaEvent("WhatsAppGroupClick", {
+    content_name:
+      "Contabilidad e Impuestos para Médicos | Click grupo WhatsApp",
+    content_category: "Grupo de WhatsApp",
+    funnel_step: "whatsapp_group_click",
+    lead_stage: "lead_neto_intent",
+    source: "thank_you_page",
+    destination: "whatsapp_group",
+    status: "clicked",
+    value: 0,
+    currency: META_CURRENCY,
+  });
+
+  if (!WHATSAPP_URL) return;
+
+  window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+};
 
   return (
     <>
