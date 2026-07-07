@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, type MouseEvent } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -10,20 +10,47 @@ import {
 } from "@/lib/meta-pixel";
 
 const PRICE = 197;
-const CHECKOUT_URL = "https://pay.hotmart.com/C106298773X?off=lgv68uq8&checkoutMode=10&bid=1781287899459";
+const CHECKOUT_URL =
+  "https://pay.hotmart.com/C106298773X?off=lgv68uq8&checkoutMode=10&bid=1781287899459";
+
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
+
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/contrato-servicios-contables/alfredo-servicios-contables.png`;
 
 const outcomes = [
-  ["01", "Delimita alcances", "Define con precisión qué incluye y qué no incluye tu servicio."],
-  ["02", "Aclara responsabilidades", "Establece qué corresponde al contador y qué debe cumplir el cliente."],
-  ["03", "Protege tus honorarios", "Documenta montos, fechas, formas de pago y consecuencias por incumplimiento."],
-  ["04", "Ordena entregables", "Aterriza documentos, información, fechas y canales de comunicación."],
-  ["05", "Cuida la información", "Incluye criterios de confidencialidad para ambas partes."],
-  ["06", "Reduce conflictos", "Evita que acuerdos ambiguos se conviertan en problemas con tus clientes."],
+  [
+    "01",
+    "Delimita alcances",
+    "Define con precisión qué incluye y qué no incluye tu servicio.",
+  ],
+  [
+    "02",
+    "Aclara responsabilidades",
+    "Establece qué corresponde al contador y qué debe cumplir el cliente.",
+  ],
+  [
+    "03",
+    "Protege tus honorarios",
+    "Documenta montos, fechas, formas de pago y consecuencias por incumplimiento.",
+  ],
+  [
+    "04",
+    "Ordena entregables",
+    "Define documentos, información, fechas y canales de comunicación.",
+  ],
+  [
+    "05",
+    "Cuida la información",
+    "Incluye criterios de confidencialidad para ambas partes.",
+  ],
+  [
+    "06",
+    "Reduce conflictos",
+    "Evita que los acuerdos ambiguos se conviertan en problemas con tus clientes.",
+  ],
 ];
 
 const clauses = [
@@ -70,6 +97,7 @@ const faqs = [
 export default function ServiciosContablesPage() {
   useEffect(() => {
     document.title = "Crea tu Contrato de Servicios Contables | CEFIN";
+
     trackMetaEvent("ViewContent", {
       content_name: "Crea tu Contrato de Servicios Contables",
       content_category: "Formalización profesional / Protección del servicio",
@@ -78,7 +106,9 @@ export default function ServiciosContablesPage() {
     });
   }, []);
 
-  const handleCheckout = () => {
+  const handleCheckout = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
     trackMetaEvent("InitiateCheckout", {
       content_name: "Crea tu Contrato de Servicios Contables",
       content_category: "Entrenamiento práctico / Low ticket evergreen",
@@ -86,13 +116,10 @@ export default function ServiciosContablesPage() {
       currency: META_CURRENCY,
     });
 
-      window.setTimeout(() => {
-    window.location.href = CHECKOUT_URL;
-  }, 250);
-  
+    window.setTimeout(() => {
+      window.location.assign(CHECKOUT_URL);
+    }, 250);
   };
-
-
 
   return (
     <>
@@ -101,6 +128,7 @@ export default function ServiciosContablesPage() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
+
       <noscript>
         <img
           height="1"
@@ -122,18 +150,20 @@ export default function ServiciosContablesPage() {
               <span className="text-2xl font-black tracking-normal text-white sm:text-3xl lg:text-[#090a0c]">
                 CEFIN
               </span>
+
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckout}
                 className="hidden min-h-11 items-center bg-white px-5 text-sm font-black text-[#a20818] shadow-lg transition hover:-translate-y-0.5 sm:inline-flex"
               >
-                Formalizar mis servicios
+                INSCRIBIRME YA
               </a>
             </header>
 
             <div className="grid flex-1 items-center gap-2 py-8 lg:grid-cols-[0.78fr_1.22fr]">
               <div className="reveal delay-1 relative order-2 mx-auto h-[420px] w-full max-w-[520px] self-end sm:h-[560px] lg:order-1 lg:h-[710px]">
                 <div className="absolute bottom-[12%] left-1/2 h-[66%] w-[72%] -translate-x-1/2 border border-black/15 bg-white/30 backdrop-blur-sm" />
+
                 <img
                   src={ALFREDO_IMAGE_URL}
                   alt="Mtro. Alfredo Cobos"
@@ -146,12 +176,13 @@ export default function ServiciosContablesPage() {
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                   <span className="border border-white/30 bg-black/15 px-4 py-2 text-[10px] font-black uppercase tracking-[0.14em] backdrop-blur sm:text-xs">
                     Formalización profesional
-                  </span> 
+                  </span>
                 </div>
 
                 <p className="mt-6 text-sm font-black uppercase tracking-[0.26em] text-white/70">
                   Protege el valor de tu trabajo
                 </p>
+
                 <h1 className="mt-3 text-[clamp(3.25rem,7vw,7rem)] font-black uppercase leading-[0.84] tracking-normal text-white [text-shadow:0_6px_0_rgba(80,0,8,.24)]">
                   Crea tu contrato
                   <span className="mt-3 block">de servicios</span>
@@ -159,9 +190,9 @@ export default function ServiciosContablesPage() {
                 </h1>
 
                 <p className="mx-auto mt-7 max-w-[680px] text-lg font-semibold leading-relaxed text-white/85 lg:mx-0">
-                  Aprende qué elementos debe incluir tu contrato para evitar malos
-                  entendidos, delimitar responsabilidades y formalizar mejor la
-                  relación con tus clientes.
+                  Aprende qué elementos debe incluir tu contrato para evitar
+                  malos entendidos, delimitar responsabilidades y formalizar
+                  mejor la relación con tus clientes.
                 </p>
 
                 <div className="mt-5 flex items-center justify-center gap-3 text-sm font-bold text-white/75 lg:justify-start">
@@ -175,14 +206,16 @@ export default function ServiciosContablesPage() {
                   <span className="border border-white/40 bg-black/20 px-7 py-3 text-3xl font-black backdrop-blur">
                     $197 MXN
                   </span>
+
                   <a
                     href={CHECKOUT_URL}
                     onClick={handleCheckout}
                     className="cta-shine inline-flex min-h-16 items-center justify-center bg-white px-8 text-lg font-black text-[#a20818] shadow-[0_18px_45px_rgba(50,0,5,.25)] transition hover:-translate-y-1"
                   >
-                    INSCRIBIRME AHORA <span className="ml-4 text-2xl">→</span>
+                    INSCRIBIRME YA <span className="ml-4 text-2xl">→</span>
                   </a>
                 </div>
+
                 <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/55">
                   Pago único · Acceso inmediato · Garantía de 7 días
                 </p>
@@ -195,25 +228,28 @@ export default function ServiciosContablesPage() {
           <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-10 lg:py-28">
             <div>
               <p className="eyebrow">Qué es este entrenamiento</p>
+
               <h2 className="mt-4 text-4xl font-black leading-tight sm:text-6xl">
                 Reglas claras antes de comenzar.
               </h2>
+
               <p className="mt-6 text-lg leading-relaxed text-black/65">
                 Es un entrenamiento práctico para contadores independientes que
-                quieren formalizar la relación con sus clientes mediante acuerdos
-                claros, profesionales y adaptados a sus servicios.
+                quieren formalizar la relación con sus clientes mediante
+                acuerdos claros, profesionales y adaptados a sus servicios.
               </p>
+
               <p className="mt-4 text-lg font-bold leading-relaxed text-black/75">
-                Te enseña qué debe incluir tu contrato para trabajar con más
+                Te enseña qué debe incluir tu contrato para trabajar con mayor
                 seguridad, orden y confianza.
               </p>
             </div>
 
             <div className="relative min-h-[390px] overflow-hidden bg-[#f4f1f1]">
-              <img 
-                src={`${ASSET_BASE}/contrato-servicios-contables/alfredo-ia.png`} 
+              <img
+                src={`${ASSET_BASE}/contrato-servicios-contables/alfredo-ia.png`}
                 alt="Contrato de servicios contables"
-                className="h-full min-h-[390px] w-full object-cover object-center "
+                className="h-full min-h-[390px] w-full object-cover object-center"
               />
             </div>
           </div>
@@ -221,12 +257,15 @@ export default function ServiciosContablesPage() {
 
         <section className="relative bg-[#0b0c0f]">
           <div className="contract-grid absolute inset-0 opacity-[0.06]" />
+
           <div className="relative mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
             <div className="mx-auto max-w-[850px] text-center">
               <p className="eyebrow">Lo que vas a lograr</p>
+
               <h2 className="mt-4 text-4xl font-black sm:text-6xl">
                 De acuerdos de palabra a servicios profesionales.
               </h2>
+
               <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-white/58">
                 Reduce riesgos innecesarios y construye relaciones comerciales
                 alineadas al valor de tu trabajo.
@@ -239,8 +278,14 @@ export default function ServiciosContablesPage() {
                   key={number}
                   className="group border-b border-r border-white/10 p-7 transition duration-500 hover:bg-[#c81022]/12 sm:p-9"
                 >
-                  <p className="text-sm font-black tracking-[0.2em] text-[#ef3348]">{number}</p>
-                  <h3 className="mt-9 text-2xl font-black transition group-hover:text-[#ff5366]">{title}</h3>
+                  <p className="text-sm font-black tracking-[0.2em] text-[#ef3348]">
+                    {number}
+                  </p>
+
+                  <h3 className="mt-9 text-2xl font-black transition group-hover:text-[#ff5366]">
+                    {title}
+                  </h3>
+
                   <p className="mt-3 leading-relaxed text-white/55">{text}</p>
                 </article>
               ))}
@@ -248,23 +293,55 @@ export default function ServiciosContablesPage() {
           </div>
         </section>
 
-        <section className="bg-[#c81022] px-5 py-10 text-white sm:px-8">
-          <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-white/60">
-                Formaliza antes de crecer
-              </p>
-              <h2 className="mt-3 text-3xl font-black sm:text-4xl">
-                Evita acuerdos de palabnra y protege tu trabajo desde hoy
+        {/* CTA intermedio reforzado */}
+        <section className="relative overflow-hidden bg-[#08090b] px-5 py-12 sm:px-8 lg:py-20">
+          <div className="contract-grid absolute inset-0 opacity-[0.07]" />
+          <div className="absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#c81022]/30 blur-3xl" />
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#ff6a78]/20 blur-3xl" />
+
+          <div className="formalize-card relative mx-auto max-w-[1160px] overflow-hidden border border-white/20 bg-[linear-gradient(120deg,#7b0615_0%,#c81022_48%,#a60819_100%)] p-7 sm:p-10 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12 lg:p-12">
+            <div className="absolute inset-y-0 right-0 hidden w-[38%] bg-[linear-gradient(135deg,transparent_0%,rgba(255,255,255,.11)_100%)] lg:block" />
+
+            <div className="relative">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="border border-white/40 bg-black/15 px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white/90">
+                  Formaliza antes de crecer
+                </span>
+
+                <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/65">
+                  Claridad · Protección · Profesionalismo
+                </span>
+              </div>
+
+              <h2 className="mt-6 max-w-3xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-6xl">
+                Tu trabajo vale demasiado para seguir con acuerdos de palabra.
               </h2>
+
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80">
+                Formaliza lo que haces, protege tus honorarios y define desde el
+                inicio qué corresponde a ti y qué debe cumplir cada cliente.
+              </p>
             </div>
-            <a 
-              href={CHECKOUT_URL}
-              onClick={handleCheckout}
-              className="cta-shine inline-flex min-h-14 items-center justify-center bg-white px-8 text-base font-black text-[#a20818] shadow-xl transition hover:-translate-y-1"
-            >
-              INSCRIIRME AHORA <span className="ml-4 text-2xl">→</span>
-            </a>
+
+            <div className="relative mt-8 w-full border border-white/25 bg-black/20 p-6 text-center backdrop-blur-sm sm:p-7 lg:mt-0 lg:w-[300px]">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/60">
+                Acceso inmediato
+              </p>
+
+              <p className="mt-2 text-4xl font-black sm:text-5xl">$197 MXN</p>
+
+              <p className="mt-3 text-sm font-bold text-white/75">
+                Pago único · Garantía de 7 días
+              </p>
+
+              <a
+                href={CHECKOUT_URL}
+                onClick={handleCheckout}
+                className="cta-shine mt-6 inline-flex min-h-14 w-full items-center justify-center bg-white px-6 text-sm font-black text-[#a20818] shadow-xl transition hover:-translate-y-1 sm:text-base"
+              >
+                INSCRIBIRME YA <span className="ml-3 text-2xl">→</span>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -272,21 +349,28 @@ export default function ServiciosContablesPage() {
           <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-10 lg:py-28">
             <div>
               <p className="eyebrow">Qué aprenderás</p>
+
               <h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">
                 Los elementos que sostienen una relación clara.
               </h2>
+
               <p className="mt-5 text-lg leading-relaxed text-black/60">
                 No se trata de llenar páginas, sino de dejar documentadas las
-                decisiones que protegen el servicio y la relación con tu cliente.
+                decisiones que protegen el servicio y la relación con tu
+                cliente.
               </p>
             </div>
 
             <div className="grid border-l border-t border-black/12 sm:grid-cols-2">
               {clauses.map((clause, index) => (
-                <div key={clause} className="flex min-h-28 gap-4 border-b border-r border-black/12 bg-white p-6">
+                <div
+                  key={clause}
+                  className="flex min-h-28 gap-4 border-b border-r border-black/12 bg-white p-6"
+                >
                   <span className="text-sm font-black text-[#c81022]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
+
                   <p className="text-lg font-black">{clause}</p>
                 </div>
               ))}
@@ -298,16 +382,21 @@ export default function ServiciosContablesPage() {
           <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:px-10 lg:py-28">
             <div>
               <p className="eyebrow">Ideal para ti si...</p>
+
               <h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">
                 Quieres trabajar con claridad desde el inicio.
               </h2>
+
               <div className="mt-9 space-y-5">
                 {audience.map((item) => (
                   <div key={item} className="flex gap-4">
                     <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center bg-[#c81022] text-xs font-black text-white">
                       ✓
                     </span>
-                    <p className="text-lg font-semibold leading-relaxed text-black/65">{item}</p>
+
+                    <p className="text-lg font-semibold leading-relaxed text-black/65">
+                      {item}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -315,15 +404,21 @@ export default function ServiciosContablesPage() {
 
             <div className="relative overflow-hidden bg-[#0b0c0f] p-8 text-white sm:p-11">
               <div className="contract-grid absolute inset-0 opacity-[0.08]" />
+
               <div className="relative">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ef3348]">Que logras tu...</p>
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ef3348]">
+                  El cambio que lograrás
+                </p>
+
                 <p className="mt-6 text-xl font-black text-white/40 line-through decoration-[#ef3348] decoration-2 sm:text-2xl">
                   Trabajar con acuerdos de palabra y riesgos innecesarios.
                 </p>
+
                 <div className="my-8 h-px bg-white/12" />
+
                 <p className="text-3xl font-black leading-tight sm:text-4xl">
-                  Formalizar tus servicios con contratos más claros, profesionales
-                  y alineados al valor de tu trabajo.
+                  Formalizar tus servicios con contratos más claros,
+                  profesionales y alineados al valor de tu trabajo.
                 </p>
               </div>
             </div>
@@ -338,9 +433,15 @@ export default function ServiciosContablesPage() {
               ["Profesional", "Creado para la realidad de los contadores."],
               ["Protegido", "Pago único y garantía de 7 días."],
             ].map(([title, text]) => (
-              <div key={title} className="border-b border-white/10 px-7 py-9 sm:border-r">
+              <div
+                key={title}
+                className="border-b border-white/10 px-7 py-9 sm:border-r"
+              >
                 <p className="text-xl font-black text-[#ef3348]">{title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-white/50">{text}</p>
+
+                <p className="mt-2 text-sm leading-relaxed text-white/50">
+                  {text}
+                </p>
               </div>
             ))}
           </div>
@@ -350,26 +451,50 @@ export default function ServiciosContablesPage() {
           <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
               <div>
-                <p className="eyebrow">Escala hacia más</p>
+                <p className="eyebrow">Sigue construyendo tu despacho</p>
+
                 <h2 className="mt-4 text-4xl font-black sm:text-5xl">
                   Este es un paso para seguir creciendo.
                 </h2>
+
                 <p className="mt-5 leading-relaxed text-white/58">
-                  Continúa tu ruta profesional con soluciones para captar clientes,
-                  construir un sistema comercial y escalar tu despacho.
+                  Continúa tu ruta profesional con soluciones para captar
+                  clientes, construir un sistema comercial y escalar tu
+                  despacho.
                 </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
                 {[
-                  ["01", "Tus Primeros 5 Clientes", "Atrae, contacta y convierte prospectos."],
-                  ["02", "Método CEFIN", "Estructura, posiciona y escala tu despacho."],
-                  ["03", "Incubadora de Despachos", "Acompañamiento para construir algo más grande."],
+                  [
+                    "01",
+                    "Tus Primeros 5 Clientes",
+                    "Atrae, contacta y convierte prospectos.",
+                  ],
+                  [
+                    "02",
+                    "Método CEFIN",
+                    "Estructura, posiciona y escala tu despacho.",
+                  ],
+                  [
+                    "03",
+                    "Incubadora de Despachos",
+                    "Acompañamiento para construir algo más grande.",
+                  ],
                 ].map(([number, title, text]) => (
-                  <article key={number} className="border border-white/15 bg-white/[0.04] p-6">
-                    <span className="flex h-9 w-9 items-center justify-center bg-[#c81022] text-sm font-black">{number}</span>
+                  <article
+                    key={number}
+                    className="border border-white/15 bg-white/[0.04] p-6"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center bg-[#c81022] text-sm font-black">
+                      {number}
+                    </span>
+
                     <h3 className="mt-8 text-xl font-black">{title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/50">{text}</p>
+
+                    <p className="mt-3 text-sm leading-relaxed text-white/50">
+                      {text}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -380,28 +505,39 @@ export default function ServiciosContablesPage() {
         <section id="comprar" className="relative overflow-hidden bg-[#a60819]">
           <div className="contract-grid absolute inset-0 opacity-10" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_50%,rgba(255,255,255,.13),transparent_28%)]" />
+
           <div className="relative mx-auto grid max-w-[1120px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:px-10 lg:py-24">
             <div className="text-center lg:text-left">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-white/65">Formaliza desde el inicio</p>
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-white/65">
+                Formaliza desde el inicio
+              </p>
+
               <h2 className="mt-4 text-4xl font-black uppercase leading-tight sm:text-6xl">
                 Tus servicios merecen reglas claras.
               </h2>
+
               <p className="mt-5 text-lg leading-relaxed text-white/75">
                 Protege tu tiempo, tu trabajo y la relación con cada cliente.
               </p>
             </div>
 
             <div className="border border-white/25 bg-black/20 p-6 text-center backdrop-blur sm:p-8">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/60">Pago único</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/60">
+                Pago único
+              </p>
+
               <p className="mt-2 text-5xl font-black sm:text-6xl">$197 MXN</p>
+
               <p className="mt-3 font-bold text-white/75">Acceso inmediato</p>
+
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckout}
                 className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-white px-7 text-lg font-black text-[#a20818] shadow-xl transition hover:-translate-y-1"
               >
-                INSCRIBIRME AHORA <span className="ml-4 text-2xl">→</span>
+                INSCRIBIRME YA <span className="ml-4 text-2xl">→</span>
               </a>
+
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.12em] text-white/55">
                 Compra segura · Garantía de 7 días
               </p>
@@ -412,15 +548,28 @@ export default function ServiciosContablesPage() {
         <section className="bg-[#f3f3f1] text-[#101114]">
           <div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24">
             <p className="eyebrow text-center">Preguntas frecuentes</p>
-            <h2 className="mt-4 text-center text-4xl font-black sm:text-5xl">Antes de comenzar</h2>
+
+            <h2 className="mt-4 text-center text-4xl font-black sm:text-5xl">
+              Antes de comenzar
+            </h2>
+
             <div className="mt-10 border-t border-black/15">
               {faqs.map((faq) => (
-                <details key={faq.question} className="group border-b border-black/15 py-6">
+                <details
+                  key={faq.question}
+                  className="group border-b border-black/15 py-6"
+                >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black">
                     {faq.question}
-                    <span className="text-2xl text-[#c81022] transition group-open:rotate-45">+</span>
+
+                    <span className="text-2xl text-[#c81022] transition group-open:rotate-45">
+                      +
+                    </span>
                   </summary>
-                  <p className="max-w-3xl pt-4 leading-relaxed text-black/60">{faq.answer}</p>
+
+                  <p className="max-w-3xl pt-4 leading-relaxed text-black/60">
+                    {faq.answer}
+                  </p>
                 </details>
               ))}
             </div>
@@ -430,8 +579,15 @@ export default function ServiciosContablesPage() {
         <footer className="border-t border-white/10 bg-[#08090b]">
           <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-3 px-5 py-7 text-center text-sm text-white/40 sm:flex-row sm:px-8 sm:text-left">
             <span className="text-xl font-black text-white">CEFIN</span>
+
             <p>Educación y crecimiento para contadores que quieren más.</p>
-            <a href="https://cefin.mx" className="font-bold transition hover:text-white">cefin.mx</a>
+
+            <a
+              href="https://cefin.mx"
+              className="font-bold transition hover:text-white"
+            >
+              cefin.mx
+            </a>
           </div>
         </footer>
 
@@ -443,7 +599,11 @@ export default function ServiciosContablesPage() {
           .contract-grid {
             background-image:
               linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+              linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.08) 1px,
+                transparent 1px
+              );
             background-size: 46px 46px;
           }
 
@@ -467,6 +627,12 @@ export default function ServiciosContablesPage() {
             animation-delay: 0.23s;
           }
 
+          .formalize-card {
+            box-shadow:
+              0 30px 80px rgba(0, 0, 0, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+          }
+
           .cta-shine {
             position: relative;
             overflow: hidden;
@@ -476,7 +642,12 @@ export default function ServiciosContablesPage() {
             position: absolute;
             inset: 0;
             content: "";
-            background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.48) 48%, transparent 74%);
+            background: linear-gradient(
+              110deg,
+              transparent 20%,
+              rgba(255, 255, 255, 0.48) 48%,
+              transparent 74%
+            );
             transform: translateX(-140%);
             animation: contract-shine 4.6s ease-in-out infinite;
           }
@@ -486,6 +657,7 @@ export default function ServiciosContablesPage() {
               opacity: 0;
               transform: translateY(28px);
             }
+
             to {
               opacity: 1;
               transform: translateY(0);
@@ -493,10 +665,13 @@ export default function ServiciosContablesPage() {
           }
 
           @keyframes contract-shine {
-            0%, 66% {
+            0%,
+            66% {
               transform: translateX(-140%);
             }
-            92%, 100% {
+
+            92%,
+            100% {
               transform: translateX(140%);
             }
           }

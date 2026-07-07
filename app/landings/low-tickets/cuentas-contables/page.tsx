@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, type MouseEvent } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -9,19 +9,19 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-// Información comercial del producto
-const PRICE = 298;
+const PRICE = 297;
+const CTA_LABEL = "INSCRIBIRME YA";
+
 const CHECKOUT_URL =
   "https://pay.hotmart.com/J106299049Q?off=rf1ez41t&checkoutMode=10";
 
-// En producción servimos la imagen desde Vercel para evitar problemas con el proxy de cefin.mx
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
+
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/cuentas-contables/alfredo-cuentas-contables.png`;
 
-// Resultados principales que se presentan en la sección de beneficios
 const outcomes = [
   [
     "01",
@@ -31,12 +31,12 @@ const outcomes = [
   [
     "02",
     "Entiende cargos y abonos",
-    "Comprende la lógica del debe y haber sin depender de la memoria.",
+    "Comprende la lógica del debe y el haber sin depender de la memoria.",
   ],
   [
     "03",
     "Registra operaciones",
-    "Aplica reglas contables para registrar correctamente libros y pólizas.",
+    "Aplica reglas contables para registrar correctamente en libros y pólizas.",
   ],
   [
     "04",
@@ -55,7 +55,6 @@ const outcomes = [
   ],
 ];
 
-// Temas que forman parte de la guía
 const lessons = [
   ["Activo", "Qué representa y cómo se comportan sus cuentas."],
   ["Pasivo", "Cómo identificar obligaciones y deudas."],
@@ -75,7 +74,6 @@ const lessons = [
   ["Registros contables", "Aplicación práctica mediante ejemplos y pólizas."],
 ];
 
-// Perfil de las personas para quienes fue creado el producto
 const audience = [
   "Eres estudiante y quieres entender contabilidad desde la base.",
   "Eres auxiliar o asistente contable y necesitas reforzar tus fundamentos.",
@@ -83,7 +81,6 @@ const audience = [
   "Eres contador con experiencia, pero todavía tienes dudas en lo esencial.",
 ];
 
-// Preguntas frecuentes mostradas al final de la landing
 const faqs = [
   {
     question: "¿Necesito conocimientos previos de contabilidad?",
@@ -103,41 +100,45 @@ const faqs = [
   {
     question: "¿El pago es único?",
     answer:
-      "Sí. La inversión es de $298 MXN en un solo pago, sin mensualidades ni cargos recurrentes.",
+      "Sí. La inversión es de $297 MXN en un solo pago, sin mensualidades ni cargos recurrentes.",
   },
 ];
 
 export default function CuentasContablesPage() {
-  // Registra la visita a la landing cuando el componente se carga
   useEffect(() => {
     document.title = "Cuentas Contables desde Cero | CEFIN";
 
     trackMetaEvent("ViewContent", {
       content_name: "Cuentas Contables desde Cero",
-      content_category: "Contabilidad básica / Fundamentos Contables",
+      content_category: "Contabilidad básica / Fundamentos contables",
       value: PRICE,
       currency: META_CURRENCY,
     });
   }, []);
 
-  // Registra la intención de compra antes de abrir el checkout
-  const handleCheckout = () => {
+  const handleCheckout = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
     trackMetaEvent("InitiateCheckout", {
       content_name: "Cuentas Contables desde Cero",
       content_category: "Guía práctica / Low ticket evergreen",
       value: PRICE,
       currency: META_CURRENCY,
     });
+
+    window.setTimeout(() => {
+      window.location.assign(CHECKOUT_URL);
+    }, 250);
   };
 
   return (
     <>
-      {/* Meta Pixel */}
       <Script
         id="meta-pixel-cuentas-contables"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
+
       <noscript>
         <img
           height="1"
@@ -149,17 +150,16 @@ export default function CuentasContablesPage() {
       </noscript>
 
       <main className="cuentas-landing overflow-x-hidden bg-[#031a36] text-white">
-        {/* Hero principal: presenta el producto, el precio y la llamada a la compra */}
         <section className="relative isolate min-h-svh overflow-hidden">
           <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_25%,rgba(222,169,61,.24),transparent_30%),linear-gradient(120deg,#021226_0%,#07305a_55%,#03172e_100%)]" />
           <div className="gold-grid absolute inset-0 -z-20 opacity-20" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-[linear-gradient(to_bottom,transparent,#031a36)]" />
 
           <div className="mx-auto flex min-h-svh max-w-[1280px] flex-col px-5 pb-8 pt-6 sm:px-8 lg:px-10">
-            {/* Encabezado mínimo para evitar distracciones */}
             <header className="reveal flex items-center justify-between">
               <div>
                 <p className="text-2xl font-black sm:text-3xl">CEFIN</p>
+
                 <p className="mt-1 hidden text-xs leading-tight text-white/50 sm:block">
                   Formación que transforma
                   <br />
@@ -172,12 +172,11 @@ export default function CuentasContablesPage() {
                 onClick={handleCheckout}
                 className="cta-shine inline-flex min-h-11 items-center justify-center rounded-md bg-[#e5b84b] px-5 text-xs font-black uppercase text-[#071426] transition hover:-translate-y-0.5 hover:bg-[#f5ce6a]"
               >
-                Quiero aprender ahora
+                {CTA_LABEL}
               </a>
             </header>
 
             <div className="grid flex-1 items-center gap-5 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-2">
-              {/* Mensaje y oferta principal */}
               <div className="reveal delay-1 order-1 text-center lg:text-left">
                 <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
                   <span className="rounded-full border border-[#e5b84b]/60 bg-[#e5b84b]/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white/80 sm:text-xs">
@@ -186,34 +185,40 @@ export default function CuentasContablesPage() {
                       / Fundamentos contables
                     </span>
                   </span>
+
                   <span className="rounded-full border border-[#e5b84b]/60 bg-[#e5b84b]/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white/80 sm:text-xs">
                     Guía práctica{" "}
                     <span className="text-[#e5b84b]">
-                      / Low ticket evergreen
+                      / Acceso inmediato
                     </span>
                   </span>
                 </div>
 
                 <h1 className="mt-6 text-[clamp(3rem,6.5vw,6.4rem)] font-black uppercase leading-[0.86] tracking-normal">
-                  Cuentas Contables
-                  <span className="mt-3 block text-[#e5b84b]">Desde cero</span>
+                  Cuentas contables
+                  <span className="mt-3 block text-[#e5b84b]">
+                    desde cero
+                  </span>
                 </h1>
+
                 <p className="mt-6 text-xl font-black uppercase text-[#f0c75e] sm:text-2xl">
                   Cargos, abonos y registros sin confusión
                 </p>
+
                 <p className="mx-auto mt-3 max-w-[650px] text-lg leading-relaxed text-white/70 lg:mx-0">
                   Aprende la lógica básica para identificar cuentas, registrar
                   operaciones y entender cargos y abonos paso a paso.
                 </p>
 
-                {/* Caja de compra del hero */}
                 <div className="mx-auto mt-7 max-w-[640px] border border-[#e5b84b]/55 bg-[#020d20]/60 p-5 text-left backdrop-blur-md lg:mx-0">
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
                     <p className="text-4xl font-black text-[#e5b84b] sm:border-r sm:border-white/15 sm:pr-7">
-                      $298 <span className="text-lg text-white">MXN</span>
+                      $297 <span className="text-lg text-white">MXN</span>
                     </p>
+
                     <div>
                       <p className="text-sm text-white/50">Impartido por el</p>
+
                       <p className="text-lg font-black">Mtro. Alfredo Cobos</p>
                     </div>
                   </div>
@@ -229,9 +234,10 @@ export default function CuentasContablesPage() {
                       onClick={handleCheckout}
                       className="cta-shine inline-flex min-h-14 flex-1 items-center justify-center bg-[#e5b84b] px-6 text-sm font-black uppercase text-[#071426] transition hover:-translate-y-1 hover:bg-[#f5ce6a]"
                     >
-                      Quiero aprender ahora{" "}
+                      {CTA_LABEL}
                       <span className="ml-3 text-xl">→</span>
                     </a>
+
                     <a
                       href="#contenido"
                       className="inline-flex min-h-14 items-center justify-center border border-[#e5b84b]/70 px-7 text-sm font-black uppercase transition hover:bg-[#e5b84b]/10 hover:text-[#f0c75e]"
@@ -242,7 +248,6 @@ export default function CuentasContablesPage() {
                 </div>
               </div>
 
-              {/* Imagen principal del instructor */}
               <div className="reveal delay-2 relative order-2 mx-auto h-[430px] w-full max-w-[590px] self-end sm:h-[590px] lg:h-[720px]">
                 <div className="absolute bottom-[12%] left-1/2 h-[64%] w-[74%] -translate-x-1/2 border border-[#e5b84b]/20 bg-[#c99124]/10" />
 
@@ -255,7 +260,6 @@ export default function CuentasContablesPage() {
               </div>
             </div>
 
-            {/* Beneficios rápidos visibles desde la primera pantalla */}
             <div className="grid border border-[#e5b84b]/30 bg-[#031a36]/90 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ["Inmediato", "Acceso disponible después de tu compra."],
@@ -278,7 +282,6 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Presentación: explica el propósito general de la guía */}
         <section id="contenido" className="bg-[#061c36] text-white">
           <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-10 lg:py-28">
             <div>
@@ -300,7 +303,6 @@ export default function CuentasContablesPage() {
               </p>
             </div>
 
-            {/* Representación visual de las cuentas contables */}
             <div className="relative min-h-[390px] overflow-hidden border border-[#e5b84b]/25 bg-[#03152d] p-7 sm:p-10">
               <div className="absolute right-[-7%] top-[-9%] h-44 w-44 rotate-12 border-[28px] border-[#e5b84b]/10" />
 
@@ -315,7 +317,9 @@ export default function CuentasContablesPage() {
                       Debe
                     </p>
 
-                    <p className="mt-4 text-5xl font-black text-[#e5b84b]">+</p>
+                    <p className="mt-4 text-5xl font-black text-[#e5b84b]">
+                      +
+                    </p>
 
                     <p className="mt-3 text-sm leading-relaxed text-white/60">
                       Comprende cuándo cargar una cuenta.
@@ -327,7 +331,9 @@ export default function CuentasContablesPage() {
                       Haber
                     </p>
 
-                    <p className="mt-4 text-5xl font-black text-[#e5b84b]">−</p>
+                    <p className="mt-4 text-5xl font-black text-[#e5b84b]">
+                      −
+                    </p>
 
                     <p className="mt-3 text-sm leading-relaxed text-white/60">
                       Comprende cuándo abonar una cuenta.
@@ -345,7 +351,6 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Beneficios: resultados concretos que obtiene el comprador */}
         <section className="relative bg-[#031a36] text-white">
           <div className="mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
             <div className="mx-auto max-w-[820px] text-center">
@@ -382,16 +387,72 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Contenido de la guía e identificación del público ideal */}
+        {/* CTA intermedio */}
+        <section className="relative overflow-hidden bg-[#061c36] px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+          <div className="gold-grid absolute inset-0 opacity-10" />
+          <div className="absolute -left-20 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#e5b84b]/15 blur-3xl" />
+          <div className="absolute -right-24 -top-16 h-72 w-72 rounded-full bg-[#c99124]/20 blur-3xl" />
+
+          <div className="relative mx-auto grid max-w-[1160px] overflow-hidden border border-[#e5b84b]/35 bg-[linear-gradient(120deg,#04162d_0%,#0b2f55_54%,#062546_100%)] p-7 shadow-[0_28px_70px_rgba(0,0,0,.3)] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12 lg:p-12">
+            <div className="absolute inset-y-0 right-0 hidden w-[34%] bg-[linear-gradient(135deg,transparent_0%,rgba(229,184,75,.1)_100%)] lg:block" />
+
+            <div className="relative">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="border border-[#e5b84b]/55 bg-[#e5b84b]/10 px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#f5ce6a]">
+                  Domina la base antes de avanzar
+                </span>
+
+                <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/50">
+                  Claridad · Práctica · Seguridad
+                </span>
+              </div>
+
+              <h2 className="mt-6 max-w-3xl text-4xl font-black leading-[1.02] sm:text-5xl lg:text-6xl">
+                No memorices cargos y abonos.
+                <span className="mt-2 block text-[#e5b84b]">
+                  Entiende la lógica y registra con seguridad.
+                </span>
+              </h2>
+
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
+                Aprende a identificar cada cuenta, analizar operaciones y
+                registrar con mayor claridad, incluso cuando enfrentes casos que
+                antes te generaban dudas.
+              </p>
+            </div>
+
+            <div className="relative mt-8 w-full border border-[#e5b84b]/35 bg-[#020d20]/70 p-6 text-center backdrop-blur sm:p-7 lg:mt-0 lg:w-[300px]">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/45">
+                Acceso inmediato
+              </p>
+
+              <p className="mt-2 text-4xl font-black text-[#e5b84b] sm:text-5xl">
+                $297 MXN
+              </p>
+
+              <p className="mt-3 text-sm font-bold text-white/65">
+                Pago único · Sin mensualidades
+              </p>
+
+              <a
+                href={CHECKOUT_URL}
+                onClick={handleCheckout}
+                className="cta-shine mt-6 inline-flex min-h-14 w-full items-center justify-center bg-[#e5b84b] px-6 text-sm font-black uppercase text-[#071426] transition hover:-translate-y-1 hover:bg-[#f5ce6a] sm:text-base"
+              >
+                {CTA_LABEL}
+                <span className="ml-3 text-2xl">→</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-[#f3f0e8] text-[#071a3f]">
-          {" "}
           <div className="mx-auto grid max-w-[1180px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.25fr_0.75fr] lg:px-10 lg:py-28">
             <div>
               <p className="eyebrow">Qué aprenderás</p>
 
               <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-                Los fundamentos para comprender cualquier registro
-                contable.{" "}
+                Los fundamentos para comprender cualquier registro contable.
               </h2>
 
               <div className="mt-10 grid border-l border-t border-[#b88828]/25 sm:grid-cols-2 lg:grid-cols-3">
@@ -440,7 +501,6 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Transformación: contraste entre el estado actual y el resultado esperado */}
         <section className="bg-[#031a36] text-white">
           <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:px-10">
             <div className="relative overflow-hidden border border-[#e5b84b]/25 bg-[#061f3e] p-7 sm:p-10">
@@ -455,7 +515,6 @@ export default function CuentasContablesPage() {
                 </h2>
 
                 <div className="mt-9 grid gap-5 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-                  {/* Situación actual */}
                   <div className="border border-white/10 bg-[#03152d] p-6">
                     <p className="text-center text-sm font-black uppercase tracking-[0.18em] text-white/55">
                       Antes
@@ -473,7 +532,6 @@ export default function CuentasContablesPage() {
                     ›
                   </span>
 
-                  {/* Resultado esperado */}
                   <div className="bg-[#e5b84b] p-6 text-[#071426]">
                     <p className="text-center text-sm font-black uppercase tracking-[0.18em]">
                       Después
@@ -492,10 +550,8 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Oferta final: repite el precio y concentra la decisión de compra */}
         <section id="comprar" className="relative overflow-hidden bg-[#031a36]">
           <div className="gold-grid absolute inset-0 opacity-10" />
-
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_50%,rgba(229,184,75,.18),transparent_30%)]" />
 
           <div className="relative mx-auto grid max-w-[1120px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-10 lg:py-24">
@@ -520,7 +576,7 @@ export default function CuentasContablesPage() {
               </p>
 
               <p className="mt-2 text-5xl font-black text-[#e5b84b] sm:text-6xl">
-                $298 MXN
+                $297 MXN
               </p>
 
               <a
@@ -528,7 +584,7 @@ export default function CuentasContablesPage() {
                 onClick={handleCheckout}
                 className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-[#e5b84b] px-7 text-lg font-black uppercase text-[#071426] transition hover:-translate-y-1 hover:bg-[#f5ce6a]"
               >
-                Quiero aprender ahora
+                {CTA_LABEL}
                 <span className="ml-4 text-2xl">→</span>
               </a>
 
@@ -538,13 +594,15 @@ export default function CuentasContablesPage() {
             </div>
           </div>
         </section>
-        {/* Preguntas frecuentes: resuelve las últimas objeciones */}
+
         <section className="bg-[#f3f0e8] text-[#071a3f]">
           <div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24">
             <p className="eyebrow text-center">Preguntas frecuentes</p>
+
             <h2 className="mt-4 text-center text-4xl font-black sm:text-5xl">
               Antes de comenzar
             </h2>
+
             <div className="mt-10 border-t border-[#08285c]/15">
               {faqs.map((faq) => (
                 <details
@@ -553,10 +611,12 @@ export default function CuentasContablesPage() {
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black">
                     {faq.question}
+
                     <span className="text-2xl text-[#b18124] transition group-open:rotate-45">
                       +
                     </span>
                   </summary>
+
                   <p className="max-w-3xl pt-4 leading-relaxed text-black/60">
                     {faq.answer}
                   </p>
@@ -566,11 +626,12 @@ export default function CuentasContablesPage() {
           </div>
         </section>
 
-        {/* Pie de página */}
-<footer className="border-t border-[#e5b84b]/15 bg-[#020d20]">
+        <footer className="border-t border-[#e5b84b]/15 bg-[#020d20]">
           <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-3 px-5 py-7 text-center text-sm text-white/40 sm:flex-row sm:px-8 sm:text-left">
             <span className="text-xl font-black text-white">CEFIN</span>
+
             <p>Fundamentos sólidos para crecer en contabilidad.</p>
+
             <a
               href="https://cefin.mx"
               className="font-bold transition hover:text-white"
@@ -580,15 +641,17 @@ export default function CuentasContablesPage() {
           </div>
         </footer>
 
-        {/* Estilos globales exclusivos de esta landing */}
         <style jsx global>{`
           html {
             scroll-behavior: smooth;
           }
 
-          .blue-grid {
+          .gold-grid {
             background-image:
-              linear-gradient(rgba(229, 184, 75. 0.08) 1px, transparent 1px),
+              linear-gradient(
+                rgba(229, 184, 75, 0.08) 1px,
+                transparent 1px
+              ),
               linear-gradient(
                 90deg,
                 rgba(229, 184, 75, 0.08) 1px,
@@ -642,6 +705,7 @@ export default function CuentasContablesPage() {
               opacity: 0;
               transform: translateY(28px);
             }
+
             to {
               opacity: 1;
               transform: translateY(0);
@@ -653,6 +717,7 @@ export default function CuentasContablesPage() {
             66% {
               transform: translateX(-140%);
             }
+
             92%,
             100% {
               transform: translateX(140%);
