@@ -7,6 +7,7 @@ import {
   trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import { useEffect, type MouseEvent, useRef } from "react";
 
 const CHECKOUT_URL = "https://pay.hotmart.com/R105211548E?off=2fonqwf3&checkoutMode=10&bid=1783529102396";
 const PRODUCT_PRICE = 3687;
@@ -63,12 +64,31 @@ const FAQS = [
 ];
 
 export default function AsesorFiscalPFInscripcionPage() {
-  const trackCheckout = (ctaLocation: string) => {
+    const isRedirectingRef = useRef(false);
+  useEffect(() => {
+  document.title = "Asesor Fiscal PF | Inscripción";
+
+  trackMetaEvent("ViewContent", {
+    content_name: "Asesor Fiscal PF | Inscripción",
+    content_category: "Curso de pago",
+    currency: "MXN",
+    value: PRODUCT_PRICE,
+  });
+}, []);
+
+const handleCheckoutClick =
+  (ctaLocation: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    if (isRedirectingRef.current) return;
+    isRedirectingRef.current = true;
+
     trackMetaEvent("InitiateCheckout", {
       content_name: "Asesor Fiscal PF | Inscripción",
       content_category: "Curso de pago",
       currency: "MXN",
       value: PRODUCT_PRICE,
+      source: ctaLocation,
     });
 
     trackMetaCustomEvent("ClickCheckout", {
@@ -79,6 +99,10 @@ export default function AsesorFiscalPFInscripcionPage() {
       source: ctaLocation,
       status: "checkout_opened",
     });
+
+    window.setTimeout(() => {
+      window.location.href = CHECKOUT_URL;
+    }, 700);
   };
 
   return (
@@ -124,7 +148,7 @@ export default function AsesorFiscalPFInscripcionPage() {
 
             <a
               href={CHECKOUT_URL}
-              onClick={() => trackCheckout("header")}
+              onClick={handleCheckoutClick("header")}
               className="hidden rounded-full border border-white/15 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.16em] text-[#3A241D] shadow-[0_16px_45px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:bg-[#FFF4E8] sm:inline-flex"
             >
               Inscribirme ya
@@ -173,7 +197,7 @@ export default function AsesorFiscalPFInscripcionPage() {
               <div className="hero-reveal hero-reveal-delay-5 mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
                 <a
                   href={CHECKOUT_URL}
-                  onClick={() => trackCheckout("hero")}
+                  onClick={handleCheckoutClick("hero")}
                   className="cta-pulse group relative flex min-h-[64px] w-full max-w-[430px] items-center justify-center overflow-hidden rounded-[1.4rem] border border-white/20 bg-gradient-to-r from-[#E18452] via-[#C66A42] to-[#9F4F31] px-7 py-5 text-center text-base font-black uppercase tracking-[0.1em] text-white shadow-[0_24px_65px_rgba(0,0,0,0.55)] ring-4 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.62)] active:translate-y-0 active:scale-[0.98] sm:w-auto sm:px-11"
                 >
                   <span className="absolute inset-y-0 left-[-35%] w-[30%] rotate-12 bg-white/30 blur-md transition duration-700 group-hover:left-[120%]" />
@@ -319,7 +343,7 @@ export default function AsesorFiscalPFInscripcionPage() {
 
                 <a
                   href={CHECKOUT_URL}
-                  onClick={() => trackCheckout("price_card")}
+                  onClick={handleCheckoutClick("price_card")}
                   className="mt-6 flex min-h-[60px] w-full items-center justify-center rounded-[1.25rem] bg-gradient-to-r from-[#E18452] via-[#C66A42] to-[#9F4F31] px-6 py-4 text-center text-sm font-black uppercase tracking-[0.12em] text-white shadow-[0_18px_45px_rgba(159,79,49,0.38)] transition hover:-translate-y-1"
                 >
                   Inscribirme ya
@@ -426,7 +450,7 @@ export default function AsesorFiscalPFInscripcionPage() {
               </p>
               <a
                 href={CHECKOUT_URL}
-                onClick={() => trackCheckout("instructor")}
+                onClick={handleCheckoutClick("instructor")}
                 className="mt-7 inline-flex min-h-[58px] items-center justify-center rounded-[1.25rem] bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.14em] text-[#3A241D] shadow-[0_18px_45px_rgba(0,0,0,0.26)] transition hover:-translate-y-1 hover:bg-[#FFF4E8]"
               >
                 Inscribirme ya por {PRODUCT_PRICE_LABEL}
@@ -477,7 +501,7 @@ export default function AsesorFiscalPFInscripcionPage() {
             </p>
             <a
               href={CHECKOUT_URL}
-              onClick={() => trackCheckout("final_cta")}
+              onClick={handleCheckoutClick("final_cta")}
               className="mx-auto mt-7 flex min-h-[62px] w-full max-w-[430px] items-center justify-center rounded-[1.35rem] bg-gradient-to-r from-[#E18452] via-[#C66A42] to-[#9F4F31] px-8 py-5 text-center text-base font-black uppercase tracking-[0.12em] text-white shadow-[0_18px_45px_rgba(159,79,49,0.38)] transition hover:-translate-y-1"
             >
               Inscribirme ya por {PRODUCT_PRICE_LABEL}
