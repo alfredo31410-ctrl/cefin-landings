@@ -1,4 +1,5 @@
 import "./globals.css";
+import { HotmartUtmTracking } from "@/components/hotmart-utm-tracking";
 /*
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <HotmartUtmTracking />
+        {children}
+      </body>
     </html>
   );
 }
