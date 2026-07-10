@@ -27,6 +27,8 @@ const ASSET_BASE =
 
 const MEDICAL_BACKGROUND_IMAGE_URL = `${ASSET_BASE}/medicos/Fondo-medicos.jpg`;
 const MARISOL_IMAGE_URL = `${ASSET_BASE}/medicos/Marisol-medicos.png`;
+const MARISOL_IMAGE_TABLET_URL = `${ASSET_BASE}/medicos/Marisol-medicos-1024.png`;
+const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`;
 
 export default function GraciasAsesorFiscalMedicosPage() {
   useEffect(() => {
@@ -113,7 +115,11 @@ const handleWhatsAppClick = () => {
           {/* Marisol desktop */}
           <img
             src={MARISOL_IMAGE_URL}
+            srcSet={`${MARISOL_IMAGE_TABLET_URL} 1024w, ${MARISOL_IMAGE_URL} 1367w`}
+            sizes="(min-width: 1900px) 60vw, (min-width: 1700px) 58vw, 54vw"
             alt=""
+            loading="lazy"
+            decoding="async"
             onError={(event) => {
               event.currentTarget.style.display = "none";
             }}
@@ -122,8 +128,12 @@ const handleWhatsAppClick = () => {
 
           {/* Marisol móvil y tablet */}
           <img
-            src={MARISOL_IMAGE_URL}
+            src={MARISOL_IMAGE_MOBILE_URL}
+            srcSet={`${MARISOL_IMAGE_MOBILE_URL} 720w, ${MARISOL_IMAGE_TABLET_URL} 1024w`}
+            sizes="(max-width: 767px) 58vw, 48vw"
             alt=""
+            loading="lazy"
+            decoding="async"
             onError={(event) => {
               event.currentTarget.style.display = "none";
             }}

@@ -24,6 +24,8 @@ const ASSET_BASE =
 
 const MEDICAL_BACKGROUND_IMAGE_URL = `${ASSET_BASE}/medicos/Fondo-medicos.jpg`;
 const MARISOL_IMAGE_URL = `${ASSET_BASE}/medicos/Marisol-medicos.png`;
+const MARISOL_IMAGE_TABLET_URL = `${ASSET_BASE}/medicos/Marisol-medicos-1024.png`;
+const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`;
 
 const EVENT_DATE = "Martes 14 de julio";
 const EVENT_TIME = "11:00 AM";
@@ -130,8 +132,12 @@ export default function AsesorFiscalMedicosPage() {
 
           {/* Marisol para móvil y tablet */}
           <img
-            src={MARISOL_IMAGE_URL}
+            src={MARISOL_IMAGE_MOBILE_URL}
+            srcSet={`${MARISOL_IMAGE_MOBILE_URL} 720w, ${MARISOL_IMAGE_TABLET_URL} 1024w`}
+            sizes="(max-width: 767px) 65vw, 58vw"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="medical-mobile-portrait absolute bottom-[-3%] right-[-10%] h-[74%] w-auto max-w-none object-contain object-bottom opacity-30 drop-shadow-[0_32px_68px_rgba(0,0,0,0.78)] lg:hidden"
           />
 
@@ -252,7 +258,11 @@ export default function AsesorFiscalMedicosPage() {
 
               <img
                 src={MARISOL_IMAGE_URL}
+                srcSet={`${MARISOL_IMAGE_TABLET_URL} 1024w, ${MARISOL_IMAGE_URL} 1367w`}
+                sizes="(min-width: 1900px) 860px, (min-width: 1700px) 790px, (min-width: 1440px) 720px, 650px"
                 alt="C.P. Marisol Galván"
+                fetchPriority="high"
+                decoding="async"
                 className="medical-portrait relative z-10 h-[min(78vh,790px)] w-full max-w-[650px] object-contain object-bottom drop-shadow-[0_35px_70px_rgba(0,0,0,0.72)]"
               />
             </div>
