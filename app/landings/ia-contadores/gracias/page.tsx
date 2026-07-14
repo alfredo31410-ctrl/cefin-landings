@@ -15,8 +15,7 @@ type WindowWithMetaPixel = Window & {
 };
 
 export default function GraciasIA() {
-  const whatsappUrl =
-    "https://chat.whatsapp.com/CC6fYelBK82B3gvIBURdFg";
+  const whatsappUrl = "https://chat.whatsapp.com/H7ujhBBf7SvAG6awJhJGTk";
 
 useEffect(() => {
   document.title =
