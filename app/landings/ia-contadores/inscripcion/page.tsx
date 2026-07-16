@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const PRICE = 497;
+const PRICE = 987;
 const CHECKOUT_URL = "https://pay.hotmart.com/L106373757U?off=eb9vgnqz&checkoutMode=10&bid=1781880440085";
 const ASSET_BASE = "https://cefin-landings-z9uk.vercel.app";
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/alfredo.png`;
@@ -244,7 +244,7 @@ export default function MasterIAInscripcionPage() {
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <p className="border border-lime-300/35 bg-lime-300/10 px-6 py-4 text-3xl font-black text-lime-300">
-                    $497 MXN
+                    $987 MXN
                   </p>
 
                   <a
@@ -566,7 +566,7 @@ export default function MasterIAInscripcionPage() {
               <p className="text-sm font-black uppercase tracking-[0.22em] text-cyan-300">
                 Master-IA CEFIN
               </p>
-              <p className="mt-3 text-5xl font-black text-lime-300">$497 MXN</p>
+              <p className="mt-3 text-5xl font-black text-lime-300">$987 MXN</p>
               <p className="mt-3 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                 {EVENT_DATE_TEXT}
               </p>
