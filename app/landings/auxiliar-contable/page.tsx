@@ -25,7 +25,7 @@ export default function LandingCEFIN() {
       const script = document.createElement("script");
       script.id = "ac-script-loader";
       script.src =
-        "https://cefincapacitacion.activehosted.com/f/embed.php?id=169";
+        "https://cefincapacitacion.activehosted.com/f/embed.php?id=283";
       script.type = "text/javascript";
       script.charset = "utf-8";
       script.async = true;
@@ -119,7 +119,7 @@ export default function LandingCEFIN() {
 
               <div className="pt-4">
                 <p className="text-4xl sm:text-6xl font-black text-fuchsia-500 leading-none uppercase italic drop-shadow-md">
-                  MARTES 14 DE ABRIL
+                  MARTES 28 DE JULIO
                 </p>
                 <div className="text-xl font-bold mt-2 flex items-center justify-center lg:justify-start gap-3">
                   11:00 AM - (CDMX)
@@ -208,7 +208,7 @@ export default function LandingCEFIN() {
                   Asegura tu <span className="text-fuchsia-600">Lugar</span>
                 </h2>
                 <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest">
-                  Entrenamiento 14 de Abril
+                  Entrenamiento 28 de Julio
                 </p>
               </div>
 
