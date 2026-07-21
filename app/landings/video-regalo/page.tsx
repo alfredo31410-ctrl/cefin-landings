@@ -189,7 +189,7 @@ export default function VideoRecursoPage() {
         />
       </noscript>
 
-      <main className="relative min-h-dvh overflow-x-hidden bg-[#06080f] text-white">
+      <main className="relative min-h-dvh overflow-x-hidden overflow-y-visible bg-[#06080f] text-white [touch-action:pan-y]">
         {/* Estas capas fijas cubren siempre el viewport aunque el formulario aumente la altura. */}
         <div className="pointer-events-none fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_15%,rgba(6,182,212,0.22),transparent_34%),radial-gradient(circle_at_88%_10%,rgba(147,51,234,0.18),transparent_32%),linear-gradient(145deg,#07131b_0%,#090b16_52%,#080611_100%)]" />

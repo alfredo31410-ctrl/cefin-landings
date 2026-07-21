@@ -73,7 +73,7 @@ export default function VideoDesbloqueadoPage() {
     <>
       <Script id="meta-pixel-video-desbloqueado" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }} />
       <noscript><img height="1" width="1" style={{ display: "none" }} src={getMetaPixelNoscriptUrl()} alt="" /></noscript>
-      <main className="relative min-h-dvh overflow-hidden bg-[#06080f] px-5 py-10 text-white sm:px-8">
+      <main className="relative min-h-dvh overflow-x-hidden overflow-y-visible bg-[#06080f] px-5 py-10 text-white [touch-action:pan-y] sm:px-8">
         {/* El fondo fijo evita cortes en pantallas altas o al rotar un dispositivo móvil. */}
         <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(6,182,212,.2),transparent_35%),radial-gradient(circle_at_85%_15%,rgba(147,51,234,.18),transparent_32%),linear-gradient(145deg,#07131b,#080611)]" />
         <section className="relative mx-auto max-w-5xl text-center">
