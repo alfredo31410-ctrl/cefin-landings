@@ -26,7 +26,7 @@ const bonuses = [
   ["BONO #2", "Agentes Contables y Fiscales con Claude", "En vivo · 12 y 13 de noviembre", "$1,987 MXN"],
   ["BONO #3", "Incubadora de Despachos Contables", "Acompañamiento para estructurar y fortalecer tu despacho", "$4,787 MXN"],
   ["BONO #4", "Rompe tus Techos Mentales", "Desarrolla la mentalidad que te llevará al siguiente nivel", "$1,987 MXN"],
-  ["BONO #5", "3 meses de Sesiones en Vivo del Factor CEFIN", "Todos los lunes a las 11:00 AM · 12 sesiones", "$7,764 MXN"],
+  ["BONO #5", "6 meses de Sesiones en Vivo del Factor CEFIN", "Todos los lunes a las 11:00 AM · 24 sesiones", "$7,764 MXN"],
 ];
 
 const workshopItems = [
@@ -68,6 +68,45 @@ export default function EcosistemaPage() {
   useEffect(() => {
     document.title = "EstrategIA CEFIN | Evolución Contable con Inteligencia Artificial";
     trackMetaEvent("ViewContent", { content_name: "EstrategIA CEFIN", content_category: "Ecosistema IA", value: 9987, currency: "MXN" });
+  }, []);
+
+  useEffect(() => {
+    const decoder = document.createElement("textarea");
+    const walker = document.createTreeWalker(
+      document.querySelector("main") ?? document.body,
+      NodeFilter.SHOW_TEXT,
+    );
+    const textNodes: Text[] = [];
+    let node: Node | null;
+
+    while ((node = walker.nextNode())) {
+      if (node.textContent?.includes("&")) textNodes.push(node as Text);
+    }
+
+    textNodes.forEach((textNode) => {
+      decoder.innerHTML = textNode.textContent ?? "";
+      textNode.textContent = decoder.value;
+    });
+
+    const conciseAnswers = [
+      "No. Est&aacute; pensado para contadores y no requiere programar.",
+      "Taller, cinco agentes CEFIN y cinco bonos exclusivos.",
+      "Un a&ntilde;o para talleres y bonos; acceso vitalicio para los agentes.",
+      "Hotmart confirma tu compra y te env&iacute;a las instrucciones de acceso.",
+    ];
+
+    document.querySelectorAll("main details").forEach((detail, index) => {
+      if (index >= conciseAnswers.length) {
+        detail.remove();
+        return;
+      }
+
+      const answer = detail.querySelector("p");
+      if (answer) {
+        decoder.innerHTML = conciseAnswers[index];
+        answer.textContent = decoder.value;
+      }
+    });
   }, []);
 
   return (
@@ -147,7 +186,11 @@ export default function EcosistemaPage() {
           @keyframes network-pulse { 0%,100%{filter:drop-shadow(0 0 0 rgba(34,211,238,0))} 50%{filter:drop-shadow(0 0 18px rgba(34,211,238,.2))} }
           @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto}.hero-grid::before,.hero-grid::after,.hero-grid > div,.hero-grid aside,.hero-grid .relative.hidden,.cta-shine::after{animation:none}.glow-card,.bonus-card{transition:none}.glow-card:hover,.bonus-card:hover{transform:none} }
         `}</style>
-      </main>
+        <section className="border-y border-cyan-400/15 bg-[#020b1b] px-4 py-16 sm:px-8 lg:px-12"><div className="mx-auto max-w-7xl"><div className="max-w-3xl"><p className="eyebrow">Despu&eacute;s de pagar</p><h2 className="mt-3 text-3xl font-black uppercase italic sm:text-5xl">Entra hoy y empieza con claridad.</h2><p className="mt-4 text-lg leading-7 text-slate-300">Tu compra no se queda en una promesa: recibir&aacute;s instrucciones claras para comenzar a usar tu ecosistema de formaci&oacute;n y agentes.</p></div><div className="mt-10 grid gap-4 md:grid-cols-4"><article className="glow-card"><p className="text-3xl font-black text-cyan-300">01</p><h3 className="mt-4 font-black uppercase">Confirma tu pago</h3><p className="mt-2 text-sm leading-6 text-slate-400">Hotmart procesa tu compra y env&iacute;a la confirmaci&oacute;n a tu correo.</p></article><article className="glow-card"><p className="text-3xl font-black text-cyan-300">02</p><h3 className="mt-4 font-black uppercase">Recibe tus accesos</h3><p className="mt-2 text-sm leading-6 text-slate-400">Encontrar&aacute;s las indicaciones para entrar al taller y a los bonos incluidos.</p></article><article className="glow-card"><p className="text-3xl font-black text-cyan-300">03</p><h3 className="mt-4 font-black uppercase">Activa tus agentes</h3><p className="mt-2 text-sm leading-6 text-slate-400">Tendr&aacute;s acceso vitalicio a la Suite de Agentes de Inteligencia Artificial CEFIN.</p></article><article className="glow-card"><p className="text-3xl font-black text-cyan-300">04</p><h3 className="mt-4 font-black uppercase">Implementa</h3><p className="mt-2 text-sm leading-6 text-slate-400">Trabaja con la formaci&oacute;n durante un a&ntilde;o y avanza con las sesiones en vivo.</p></article></div></div></section>
+
+        <section className="bg-[#02040a] px-4 py-16 sm:px-8 lg:px-12"><div className="mx-auto max-w-4xl"><div className="text-center"><p className="eyebrow">&Uacute;ltimas objeciones</p><h2 className="mt-3 text-3xl font-black uppercase italic sm:text-5xl">Preguntas frecuentes</h2></div><div className="mt-10 border-t border-white/10">{[["&iquest;Necesito conocimientos t&eacute;cnicos?","No. La oferta est&aacute; pensada para contadores y profesionales que quieren implementar IA sin programar."],["&iquest;Qu&eacute; incluye exactamente mi compra?","Incluye el Taller de Inteligencia Artificial y Excel para Contadores, la Suite de cinco Agentes CEFIN y los cinco bonos exclusivos."],["&iquest;Cu&aacute;nto tiempo tendr&eacute; acceso?","Tendr&aacute;s acceso por un a&ntilde;o al taller principal y a los talleres incluidos en los bonos. Los Agentes de Inteligencia Artificial tienen acceso vitalicio."],["&iquest;C&oacute;mo recibir&eacute; los bonos?","Despu&eacute;s del pago recibir&aacute;s en tu correo las instrucciones de acceso y las fechas o enlaces correspondientes a cada actividad."],["&iquest;Qu&eacute; pasa despu&eacute;s de pagar?","Hotmart te mostrar&aacute; la confirmaci&oacute;n de compra y recibir&aacute;s los siguientes pasos para entrar a tu formaci&oacute;n y activar tus accesos."]].map(([question,answer])=><details key={question} className="group border-b border-white/10 py-5"><summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-black text-white">{question}<span className="text-2xl text-lime-300 transition group-open:rotate-45">+</span></summary><p className="max-w-3xl pt-4 leading-7 text-slate-400">{answer}</p></details>)}</div></div></section>
+
+        </main>
     </>
   );
 }
