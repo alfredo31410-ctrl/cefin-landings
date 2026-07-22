@@ -12,7 +12,7 @@ declare global {
 
 export default function GraciasAuxiliar() {
   //CAMBIO DE GRUPO DE WHATSAPP
-  const whatsappUrl = "https://chat.whatsapp.com/BoLvdJQRxLFEhVH6X84GB8";
+  const whatsappUrl = "https://chat.whatsapp.com/KvgpzDVOCR3LHCW5qkI08s";
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
     if (typeof window !== "undefined" && window.fbq) {
