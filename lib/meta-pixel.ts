@@ -12,7 +12,8 @@ declare global {
   }
 }
 
-function runWhenMetaPixelReady(callback: () => void, attempts = 20) {
+// Espera brevemente al script externo para no perder eventos que ocurren al montar la página.
+function runWhenMetaPixelReady(callback: () => void, attempts = 30) {
   if (typeof window === "undefined") return;
 
   if (window.fbq) {
@@ -20,9 +21,9 @@ function runWhenMetaPixelReady(callback: () => void, attempts = 20) {
     return;
   }
 
-  if (attempts <= 0) return;
-
-  window.setTimeout(() => runWhenMetaPixelReady(callback, attempts - 1), 150);
+  if (attempts > 0) {
+    window.setTimeout(() => runWhenMetaPixelReady(callback, attempts - 1), 150);
+  }
 }
 
 function sendMetaEvent(
@@ -32,14 +33,22 @@ function sendMetaEvent(
 ) {
   runWhenMetaPixelReady(() => {
     if (!window.fbq) return;
-
-    if (data) {
-      window.fbq(command, event, data);
-      return;
-    }
-
-    window.fbq(command, event);
+    window.fbq(command, event, data ?? {});
   });
+}
+
+// Añade contexto común sin obligar a cada página a duplicar metadatos de diagnóstico.
+export function buildMetaEventData(
+  landingSlug: string,
+  eventSource: string,
+  data: MetaEventPayload = {},
+): MetaEventPayload {
+  return {
+    ...data,
+    landing_slug: landingSlug,
+    event_source: eventSource,
+    event_timestamp: Math.floor(Date.now() / 1000),
+  };
 }
 
 export function trackMetaEvent(event: string, data?: MetaEventPayload) {
@@ -50,6 +59,7 @@ export function trackMetaCustomEvent(event: string, data?: MetaEventPayload) {
   sendMetaEvent("trackCustom", event, data);
 }
 
+// El guard global evita inicializar dos veces el mismo Pixel durante navegación cliente.
 export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
   return `
     !function(f,b,e,v,n,t,s)
@@ -72,6 +82,3 @@ export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
 export function getMetaPixelNoscriptUrl(pixelId = META_PIXEL_ID) {
   return `https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`;
 }
-
-
-
