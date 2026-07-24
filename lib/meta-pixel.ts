@@ -1,6 +1,8 @@
 export const META_PIXEL_ID = "733425513099672";
 export const META_CURRENCY = "MXN";
 export const NIF_TRAFFIC_SOURCE_STORAGE_KEY = "nifTrafficSource";
+export const NIF_REGISTRATION_ATTEMPT_STORAGE_KEY = "nifRegistrationAttempt";
+export const NIF_REGISTRATION_COMPLETION_STORAGE_KEY = "nifRegistrationComplete";
 
 export type MetaEventPayload = Record<string, unknown>;
 type MetaEventCommand = "track" | "trackCustom";
