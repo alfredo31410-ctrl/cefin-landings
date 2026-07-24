@@ -15,12 +15,15 @@ export async function POST() {
     });
     return response;
   } catch (error) {
-    console.error("[NIF intento]", {
-      hasSecret: Boolean(process.env.NIF_REGISTRATION_CONFIRMATION_SECRET),
-      secretLength: process.env.NIF_REGISTRATION_CONFIRMATION_SECRET?.length ?? 0,
-      errorName: error instanceof Error ? error.name : "Unknown",
-      errorMessage: error instanceof Error ? error.message : String(error),
-    });
-    return NextResponse.json({ ok: false }, { status: 503 });
+    return NextResponse.json(
+      {
+        ok: false,
+        hasSecret: Boolean(
+          process.env.NIF_REGISTRATION_CONFIRMATION_SECRET,
+        ),
+        errorType: error instanceof Error ? error.name : "UnknownError",
+      },
+      { status: 503 },
+    );
   }
 }
