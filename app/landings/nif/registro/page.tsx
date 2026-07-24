@@ -100,7 +100,12 @@ export default function NifRegistroPage() {
       const submit = formRoot.querySelector<HTMLButtonElement>(
         "button[type='submit'], ._submit",
       );
-      if (submit) submit.textContent = "¡REGISTRARME GRATIS Y CONTINUAR!";
+      if (
+        submit &&
+        submit.textContent !== "¡REGISTRARME GRATIS Y CONTINUAR!"
+      ) {
+        submit.textContent = "¡REGISTRARME GRATIS Y CONTINUAR!";
+      }
     };
 
     const observer = new MutationObserver(markAttemptAndCustomizeButton);
