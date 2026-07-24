@@ -114,23 +114,18 @@ export default function NifRegistroPage() {
     };
   }, []);
 
-  useEffect(() => {
-    const scriptId = "ac-nif-form-script";
-    if (document.getElementById(scriptId)) return;
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <>
       <Script
         id="meta-pixel-nif-registro"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
+      />
+      <Script
+        id="activecampaign-nif-form-293"
+        src={`https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`}
+        strategy="afterInteractive"
+        charSet="utf-8"
       />
       <noscript>
         <img
