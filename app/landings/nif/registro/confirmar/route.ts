@@ -9,12 +9,13 @@ import {
 
 const registerPath = "/landings/nif/registro";
 const thanksPath = "/landings/nif/registro/gracias";
+const canonicalOrigin = "https://cefin.mx";
 
 export async function GET(request: NextRequest) {
   const intent = verifyRegistrationToken(
     request.cookies.get(NIF_REGISTRATION_INTENT_COOKIE)?.value,
   );
-  const target = new URL(intent ? thanksPath : registerPath, request.url);
+  const target = new URL(intent ? thanksPath : registerPath, canonicalOrigin);
   const response = NextResponse.redirect(target);
 
   if (!intent) return response;
@@ -31,6 +32,6 @@ export async function GET(request: NextRequest) {
     );
     return response;
   } catch {
-    return NextResponse.redirect(new URL(registerPath, request.url));
+    return NextResponse.redirect(new URL(registerPath, canonicalOrigin));
   }
 }
