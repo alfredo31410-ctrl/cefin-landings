@@ -14,7 +14,13 @@ export async function POST() {
       maxAge: 10 * 60,
     });
     return response;
-  } catch {
+  } catch (error) {
+    console.error("[NIF intento]", {
+      hasSecret: Boolean(process.env.NIF_REGISTRATION_CONFIRMATION_SECRET),
+      secretLength: process.env.NIF_REGISTRATION_CONFIRMATION_SECRET?.length ?? 0,
+      errorName: error instanceof Error ? error.name : "Unknown",
+      errorMessage: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json({ ok: false }, { status: 503 });
   }
 }
