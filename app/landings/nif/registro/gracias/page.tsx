@@ -7,26 +7,26 @@ import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   META_CURRENCY,
-  NIF_REGISTRATION_ATTEMPT_STORAGE_KEY,
   NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
+  NIF_REGISTRATION_SUCCESS_STORAGE_KEY,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
 const JOIN_ROUTE = "/landings/nif/unirse-whatsapp";
 
 function markRegistrationComplete() {
-  const rawAttempt = window.sessionStorage.getItem(NIF_REGISTRATION_ATTEMPT_STORAGE_KEY);
-  if (!rawAttempt || window.sessionStorage.getItem(NIF_REGISTRATION_COMPLETION_STORAGE_KEY)) return;
+  const rawSuccess = window.sessionStorage.getItem(NIF_REGISTRATION_SUCCESS_STORAGE_KEY);
+  if (!rawSuccess || window.sessionStorage.getItem(NIF_REGISTRATION_COMPLETION_STORAGE_KEY)) return;
 
   try {
-    const attempt = JSON.parse(rawAttempt) as { createdAt?: number };
-    if (!attempt.createdAt || Date.now() - attempt.createdAt > 30 * 60 * 1000) return;
+    const success = JSON.parse(rawSuccess) as { createdAt?: number };
+    if (!success.createdAt || Date.now() - success.createdAt > 30 * 60 * 1000) return;
   } catch {
     return;
   }
 
   window.sessionStorage.setItem(NIF_REGISTRATION_COMPLETION_STORAGE_KEY, "true");
-  trackMetaEvent("CompleteRegistration", {
+  trackMetaEvent("Lead", {
     content_name: "ABC de las NIF | Registro válido",
     content_category: "Clase gratuita en vivo",
     status: "activecampaign_redirected_to_thanks",

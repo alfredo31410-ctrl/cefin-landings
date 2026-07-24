@@ -7,6 +7,7 @@ import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   NIF_REGISTRATION_ATTEMPT_STORAGE_KEY,
+  NIF_REGISTRATION_SUCCESS_STORAGE_KEY,
   NIF_TRAFFIC_SOURCE_STORAGE_KEY,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
@@ -61,8 +62,28 @@ export default function NifRegistroPage() {
   }, []);
 
   useEffect(() => {
+    const handleActiveCampaignSuccess = () => {
+      if (window.sessionStorage.getItem(NIF_REGISTRATION_SUCCESS_STORAGE_KEY)) {
+        return;
+      }
+
+      window.sessionStorage.setItem(
+        NIF_REGISTRATION_SUCCESS_STORAGE_KEY,
+        JSON.stringify({ createdAt: Date.now() }),
+      );
+      window.location.assign("/landings/nif/registro/gracias");
+    };
+
+    window._form_callback = handleActiveCampaignSuccess;
+
     const formRoot = document.querySelector(`.${FORM_CLASS}`);
-    if (!formRoot) return;
+    if (!formRoot) {
+      return () => {
+        if (window._form_callback === handleActiveCampaignSuccess) {
+          delete window._form_callback;
+        }
+      };
+    }
 
     const markAttemptAndCustomizeButton = () => {
       const form = formRoot.querySelector("form");
@@ -85,7 +106,12 @@ export default function NifRegistroPage() {
     const observer = new MutationObserver(markAttemptAndCustomizeButton);
     observer.observe(formRoot, { childList: true, subtree: true });
     markAttemptAndCustomizeButton();
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (window._form_callback === handleActiveCampaignSuccess) {
+        delete window._form_callback;
+      }
+    };
   }, []);
 
   useEffect(() => {
