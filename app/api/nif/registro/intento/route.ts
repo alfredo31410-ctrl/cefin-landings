@@ -14,16 +14,7 @@ export async function POST() {
       maxAge: 10 * 60,
     });
     return response;
-  } catch (error) {
-    return NextResponse.json(
-      {
-        ok: false,
-        hasSecret: Boolean(
-          process.env.NIF_REGISTRATION_CONFIRMATION_SECRET,
-        ),
-        errorType: error instanceof Error ? error.name : "UnknownError",
-      },
-      { status: 503 },
-    );
+  } catch {
+    return NextResponse.json({ ok: false }, { status: 503 });
   }
 }
