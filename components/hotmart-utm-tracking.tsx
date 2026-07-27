@@ -1,12 +1,19 @@
 const HOTMART_UTM_TRACKING_SCRIPT = `
 (function () {
   var storageKey = "cefinHotmartUtmParams";
-  var utmParamNames = [
+  var attributionParamNames = [
     "utm_source",
     "utm_medium",
     "utm_campaign",
     "utm_content",
-    "utm_term"
+    "utm_term",
+    "fbclid",
+    "campaign_id",
+    "adset_id",
+    "ad_id",
+    "placement",
+    "landing",
+    "producto"
   ];
 
   function hasParams(params) {
@@ -17,7 +24,7 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
     var searchParams = new URLSearchParams(search);
     var utms = {};
 
-    utmParamNames.forEach(function (name) {
+    attributionParamNames.forEach(function (name) {
       var value = searchParams.get(name);
 
       if (value) {
@@ -50,7 +57,7 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
       var parsedValue = JSON.parse(storedValue);
       var utms = {};
 
-      utmParamNames.forEach(function (name) {
+      attributionParamNames.forEach(function (name) {
         if (typeof parsedValue[name] === "string" && parsedValue[name]) {
           utms[name] = parsedValue[name];
         }

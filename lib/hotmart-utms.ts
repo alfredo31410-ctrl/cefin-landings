@@ -1,14 +1,23 @@
 export const HOTMART_UTM_STORAGE_KEY = "cefinHotmartUtmParams";
 
-export const UTM_PARAM_NAMES = [
+export const HOTMART_ATTRIBUTION_PARAM_NAMES = [
   "utm_source",
   "utm_medium",
   "utm_campaign",
   "utm_content",
   "utm_term",
+  "fbclid",
+  "campaign_id",
+  "adset_id",
+  "ad_id",
+  "placement",
+  "landing",
+  "producto",
 ] as const;
 
-export type UtmParamName = (typeof UTM_PARAM_NAMES)[number];
+export const UTM_PARAM_NAMES = HOTMART_ATTRIBUTION_PARAM_NAMES;
+
+export type UtmParamName = (typeof HOTMART_ATTRIBUTION_PARAM_NAMES)[number];
 export type UtmParams = Partial<Record<UtmParamName, string>>;
 
 function hasUtmParams(params: UtmParams) {
@@ -16,7 +25,7 @@ function hasUtmParams(params: UtmParams) {
 }
 
 function isUtmParamName(name: string): name is UtmParamName {
-  return UTM_PARAM_NAMES.includes(name as UtmParamName);
+  return HOTMART_ATTRIBUTION_PARAM_NAMES.includes(name as UtmParamName);
 }
 
 function isHotmartUrl(url: URL) {
@@ -27,7 +36,7 @@ export function readUtmParamsFromSearch(search: string) {
   const searchParams = new URLSearchParams(search);
   const utmParams: UtmParams = {};
 
-  UTM_PARAM_NAMES.forEach((name) => {
+  HOTMART_ATTRIBUTION_PARAM_NAMES.forEach((name) => {
     const value = searchParams.get(name);
 
     if (value) {
@@ -105,4 +114,3 @@ export function withHotmartUtmParams(href: string, utmParams: UtmParams) {
     return href;
   }
 }
-

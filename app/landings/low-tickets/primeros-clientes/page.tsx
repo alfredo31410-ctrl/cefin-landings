@@ -1,11 +1,12 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   META_CURRENCY,
+  trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
@@ -112,8 +113,13 @@ const faqs = [
 ];
 
 export default function PrimerosClientesPage() {
+  const viewContentSent = useRef(false);
+
   useEffect(() => {
     document.title = "Tus Primeros 5 Clientes Contables | CEFIN";
+
+    if (viewContentSent.current) return;
+    viewContentSent.current = true;
 
     trackMetaEvent("ViewContent", {
       content_name: "Tus Primeros 5 Clientes Contables",
@@ -124,11 +130,10 @@ export default function PrimerosClientesPage() {
   }, []);
 
   const handleCheckout = () => {
-    trackMetaEvent("InitiateCheckout", {
+    trackMetaCustomEvent("CheckoutButtonClick", {
       content_name: "Tus Primeros 5 Clientes Contables",
       content_category: "Low ticket evergreen",
-      value: PRICE,
-      currency: META_CURRENCY,
+      button_name: "QUIERO OBTENER LA GUÍA",
     });
   };
 
@@ -225,7 +230,7 @@ export default function PrimerosClientesPage() {
                     onClick={handleCheckout}
                     className="cta-shine inline-flex min-h-16 items-center justify-center bg-[#079fe9] px-8 text-base font-black transition duration-300 hover:-translate-y-1 hover:bg-[#18b8ff] sm:text-lg"
                   >
-                    INSCRIBIRME AHORA
+                    QUIERO OBTENER LA GUÍA
                     <span className="ml-4 text-2xl">→</span>
                   </a>
                 </div>
@@ -323,6 +328,60 @@ export default function PrimerosClientesPage() {
             </div>
           </div>
         </section>
+        <section className="bg-[#f7fbfd] text-[#090c11]">
+          <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center lg:px-10 lg:py-28">
+            <div>
+              <p className="eyebrow">Esto es lo que recibirás</p>
+              <h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">Una guía para ejecutar, no otro contenido para guardar.</h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-black/60">Al comprar obtienes una ruta práctica para pasar de no saber a quién contactar a tener conversaciones comerciales ordenadas.</p>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {[
+                  ["01", "Ruta de 6 pasos", "Del servicio que ofreces al siguiente paso comercial."],
+                  ["02", "Mensajes de inicio", "Puntos de partida para abrir conversaciones profesionales."],
+                  ["03", "Guía de seguimiento", "Una forma clara de no dejar oportunidades a medias."],
+                  ["04", "Acceso inmediato", "Empieza a revisar el material después de confirmar el pago."],
+                ].map(([number, title, text]) => (
+                  <article key={number} className="border border-black/10 bg-white p-5 shadow-[0_12px_35px_rgba(8,30,45,.06)]">
+                    <span className="text-xs font-black tracking-[0.2em] text-[#078fd1]">{number}</span>
+                    <h3 className="mt-4 text-lg font-black">{title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-black/58">{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="mx-auto w-full max-w-[440px]">
+              <div className="relative aspect-[4/5] overflow-hidden border border-[#0b8dca]/30 bg-[#07131d] p-6 shadow-[18px_22px_0_#b9e7f8] sm:p-8">
+                <div className="absolute right-0 top-0 h-32 w-32 bg-[#079fe9]/20 blur-3xl" />
+                <p className="relative text-xs font-black uppercase tracking-[0.24em] text-[#32c7ff]">CEFIN · Guía digital</p>
+                <p className="relative mt-16 text-sm font-black uppercase tracking-[0.18em] text-white/55">Crecimiento de despacho</p>
+                <h3 className="relative mt-4 text-5xl font-black leading-[.88] text-white sm:text-6xl">Tus primeros<span className="mt-2 block text-[#18b8ff]">5 clientes</span></h3>
+                <div className="relative mt-10 border-l-2 border-[#18b8ff] pl-4 text-sm leading-relaxed text-white/65">Define · Contacta · Presenta · Sigue · Convierte</div>
+                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between border-t border-white/15 pt-4 text-xs font-bold uppercase tracking-[0.16em] text-white/45 sm:left-8 sm:right-8"><span>Implementación</span><span>$297 MXN</span></div>
+              </div>
+              <p className="mt-8 text-center text-xs font-bold uppercase tracking-[0.14em] text-black/40">Representación visual de la guía y su estructura de trabajo.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white text-[#090c11]">
+          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+            <div className="max-w-3xl">
+              <p className="eyebrow">El mecanismo</p>
+              <h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">Captar clientes se vuelve un proceso visible.</h2>
+              <p className="mt-5 text-lg leading-relaxed text-black/60">La guía organiza el trabajo en una secuencia que puedes repetir: elegir un perfil, iniciar conversaciones, presentar una solución y dar seguimiento hasta acordar un siguiente paso.</p>
+            </div>
+            <div className="mt-12 grid gap-0 border-l border-t border-black/10 sm:grid-cols-3">
+              {[
+                ["1", "Encuentra", "Define a quién ayudas y dónde encontrar prospectos con ese problema."],
+                ["2", "Conversa", "Abre el contacto con un mensaje claro, profesional y fácil de responder."],
+                ["3", "Avanza", "Presenta tu servicio, retoma la conversación y acuerda el siguiente paso."],
+              ].map(([number, title, text]) => (
+                <article key={number} className="border-b border-r border-black/10 p-7 sm:p-8"><span className="text-4xl font-black text-[#079fe9]">{number}</span><h3 className="mt-8 text-2xl font-black">{title}</h3><p className="mt-3 leading-relaxed text-black/58">{text}</p></article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA intermedio */}
         <section className="relative overflow-hidden bg-[#07131d]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(0,163,255,.18),transparent_34%),radial-gradient(circle_at_85%_30%,rgba(0,163,255,.1),transparent_28%)]" />
@@ -360,7 +419,7 @@ export default function PrimerosClientesPage() {
                   onClick={handleCheckout}
                   className="cta-shine mt-5 inline-flex min-h-16 w-full items-center justify-center bg-[#079fe9] px-7 text-center text-base font-black transition duration-300 hover:-translate-y-1 hover:bg-[#18b8ff] sm:w-auto sm:text-lg"
                 >
-                  INSCRIBIRME AHORA
+                  QUIERO OBTENER LA GUÍA
                   <span className="ml-4 text-2xl">→</span>
                 </a>
 
@@ -434,6 +493,25 @@ export default function PrimerosClientesPage() {
           </div>
         </section>
 
+        <section className="bg-white text-[#090c11]">
+          <div className="mx-auto max-w-[1080px] px-5 py-20 sm:px-8 lg:py-24">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="eyebrow">Qué ocurre después de comprar</p>
+              <h2 className="mt-4 text-4xl font-black sm:text-5xl">Empiezas sin esperar una nueva convocatoria.</h2>
+            </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              {[
+                ["01", "Confirmas tu pago", "Hotmart procesa la compra y te muestra la confirmación correspondiente."],
+                ["02", "Recibes el acceso", "El acceso al material se habilita de acuerdo con la entrega configurada para el producto."],
+                ["03", "Aplicas la ruta", "Revisas la guía a tu ritmo y conviertes cada bloque en una acción para tu despacho."],
+              ].map(([number, title, text]) => (
+                <article key={number} className="border-t-2 border-[#079fe9] bg-[#f7fbfd] p-6"><span className="text-xs font-black tracking-[0.2em] text-[#078fd1]">{number}</span><h3 className="mt-4 text-xl font-black">{title}</h3><p className="mt-3 leading-relaxed text-black/58">{text}</p></article>
+              ))}
+            </div>
+            <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-black/48">La disponibilidad es evergreen: puedes comenzar hoy porque la guía no depende de una fecha de clase o de una apertura temporal.</p>
+          </div>
+        </section>
+
         <section className="border-y border-white/10 bg-[#080b0f]">
           <div className="mx-auto grid max-w-[1240px] sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -486,7 +564,7 @@ export default function PrimerosClientesPage() {
                 onClick={handleCheckout}
                 className="cta-shine mt-7 inline-flex min-h-16 w-full items-center justify-center bg-[#079fe9] px-7 text-lg font-black transition duration-300 hover:-translate-y-1 hover:bg-[#18b8ff]"
               >
-                INSCRIBIRME AHORA
+                QUIERO OBTENER LA GUÍA
                 <span className="ml-4 text-2xl">→</span>
               </a>
 
@@ -522,6 +600,16 @@ export default function PrimerosClientesPage() {
                   <p className="max-w-3xl pt-4 leading-relaxed text-black/60">
                     {faq.answer}
                   </p>
+                </details>
+              ))}
+              {[
+                ["¿Qué tipo de implementación propone la guía?", "Trabajarás sobre la definición de tu oferta, la búsqueda de prospectos, el primer mensaje, la presentación y el seguimiento."],
+                ["¿Necesito publicar contenido todos los días?", "No es el requisito central. La ruta se enfoca en conversaciones, presentación de servicios y seguimiento comercial."],
+                ["¿La guía garantiza conseguir cinco clientes?", "No se promete un resultado garantizado. La guía entrega un proceso práctico; el resultado depende de tu oferta, mercado y ejecución."],
+              ].map(([question, answer]) => (
+                <details key={question} className="group border-b border-black/15 py-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black">{question}<span className="text-2xl text-[#078fd1] transition group-open:rotate-45">+</span></summary>
+                  <p className="max-w-3xl pt-4 leading-relaxed text-black/60">{answer}</p>
                 </details>
               ))}
             </div>

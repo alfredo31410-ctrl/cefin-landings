@@ -1,6 +1,5 @@
 "use client";
 
-import { Bebas_Neue } from "next/font/google";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import {
@@ -30,11 +29,6 @@ const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`
 const EVENT_DATE = "Martes 14 de julio";
 const EVENT_TIME = "11:00 AM";
 const EVENT_TIMEZONE = "Hora CDMX";
-
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-});
 
 export default function AsesorFiscalMedicosPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -176,7 +170,7 @@ export default function AsesorFiscalMedicosPage() {
               </p>
 
               <h1
-                className={`${bebasNeue.className} medical-title landing-reveal landing-reveal--4 hero-word mt-2 inline-block bg-[#02040a]/90 px-4 py-3 uppercase leading-[0.82] tracking-[-0.015em] text-white sm:px-5 sm:py-4 lg:mt-3`}
+                className={`medical-display medical-title landing-reveal landing-reveal--4 hero-word mt-2 inline-block bg-[#02040a]/90 px-4 py-3 uppercase leading-[0.82] tracking-[-0.015em] text-white sm:px-5 sm:py-4 lg:mt-3`}
               >
                 Médicos
               </h1>
@@ -307,7 +301,7 @@ export default function AsesorFiscalMedicosPage() {
                   </h2>
 
                   <p
-                    className={`${bebasNeue.className} mt-1 text-[3.4rem] uppercase leading-none tracking-wide text-cyan-300`}
+                    className={`medical-display mt-1 text-[3.4rem] uppercase leading-none tracking-wide text-cyan-300`}
                   >
                     Médicos
                   </p>
@@ -332,6 +326,11 @@ export default function AsesorFiscalMedicosPage() {
         )}
 
         <style jsx global>{`
+          .medical-display {
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-weight: 400;
+          }
+
           .medical-landing {
             isolation: isolate;
           }

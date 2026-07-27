@@ -75,9 +75,9 @@ export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
 
     if (!window.__cefinMetaPixelInitialized) {
       fbq('init', '${pixelId}');
+      fbq('track', 'PageView');
       window.__cefinMetaPixelInitialized = true;
     }
-    fbq('track', 'PageView');
   `;
 }
 
