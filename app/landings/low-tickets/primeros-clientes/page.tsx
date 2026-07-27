@@ -363,6 +363,57 @@ export default function PrimerosClientesPage() {
           </div>
         </section>
 
+        <section className="border-y border-black/10 bg-[#f7fbfd] text-[#090c11]">
+          <div className="mx-auto grid max-w-[1160px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[220px_1fr] lg:items-center lg:px-10 lg:py-20">
+            <div className="mx-auto w-full max-w-[220px]">
+              <div className="aspect-square overflow-hidden border border-[#079fe9]/25 bg-[#dceff7]">
+                <img
+                  src={ALFREDO_IMAGE_URL}
+                  alt="Mtro. Alfredo Cobos"
+                  className="h-full w-full object-contain object-bottom"
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="eyebrow">Conoce a quien creó esta guía</p>
+              <h2 className="mt-3 text-3xl font-black sm:text-4xl">Mtro. Alfredo Cobos</h2>
+              <p className="mt-2 font-bold text-[#078fd1]">Contador público y maestro en impuestos · Fundador de CEFIN · Director de la Red CEFIN</p>
+              <p className="mt-5 max-w-3xl leading-relaxed text-black/65">
+                Cuenta con más de 15 años de experiencia en asesoría fiscal,
+                consultoría empresarial y capacitación profesional. Ha asesorado
+                a más de 260 empresas y capacitado a más de 15.000 contadores en México.
+              </p>
+              <p className="mt-4 max-w-3xl leading-relaxed text-black/65">
+                También es cofundador de C&amp;G Consultores PYME, despacho desde
+                el que ha trabajado con micro, pequeñas y medianas empresas.
+              </p>
+
+              <div className="mt-6 grid max-w-3xl gap-3 text-sm font-bold text-black/70 sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  "+15 años de experiencia",
+                  "+260 empresas asesoradas",
+                  "+15.000 contadores capacitados",
+                  "Instructor certificado por CONOCER",
+                  "Consultor certificado por CONOCER",
+                  "Fundador de CEFIN",
+                ].map((credential) => (
+                  <div key={credential} className="border-l-2 border-[#079fe9] pl-3">{credential}</div>
+                ))}
+              </div>
+
+              <a
+                href="https://cefin.mx/instructores/alfredo-cobos"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-flex text-xs font-black uppercase tracking-[0.14em] text-black/45 underline decoration-black/20 underline-offset-4 transition hover:text-[#078fd1]"
+              >
+                Ver perfil institucional
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-white text-[#090c11]">
           <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
             <div className="max-w-3xl">
