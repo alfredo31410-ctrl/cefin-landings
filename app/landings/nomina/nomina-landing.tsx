@@ -263,7 +263,7 @@ export default function NominaLanding() {
       <footer className="nomina-footer shell">
         <span className="footer-brand">CEFIN</span>
         <span>Centro de Estudios Fiscales, Innovación y Negocios</span>
-        <span>Registro gratuito · Sin tracking activo</span>
+        <span>Registro gratuito · Acceso en dos pasos</span>
       </footer>
       {showSticky && (
         <button className="sticky-cta" onClick={scrollToRegistration}>
