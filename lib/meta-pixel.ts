@@ -6,6 +6,7 @@ export const NIF_REGISTRATION_COMPLETION_STORAGE_KEY = "nifRegistrationComplete"
 
 export type MetaEventPayload = Record<string, unknown>;
 type MetaEventCommand = "track" | "trackCustom";
+type MetaPixelScriptOptions = { trackPageView?: boolean };
 
 declare global {
   interface Window {
@@ -62,7 +63,10 @@ export function trackMetaCustomEvent(event: string, data?: MetaEventPayload) {
   sendMetaEvent("trackCustom", event, data);
 }
 
-export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
+export function getMetaPixelScript(
+  pixelId = META_PIXEL_ID,
+  { trackPageView = true }: MetaPixelScriptOptions = {},
+) {
   return `
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -75,7 +79,7 @@ export function getMetaPixelScript(pixelId = META_PIXEL_ID) {
 
     if (!window.__cefinMetaPixelInitialized) {
       fbq('init', '${pixelId}');
-      fbq('track', 'PageView');
+      ${trackPageView ? "fbq('track', 'PageView');" : ""}
       window.__cefinMetaPixelInitialized = true;
     }
   `;

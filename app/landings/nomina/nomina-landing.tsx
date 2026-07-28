@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
+import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "./config";
+import { NominaFormSubmitTracker } from "./nomina-tracking-client";
 import "./nomina.css";
 
 const IconArrow = () => (
@@ -54,8 +56,14 @@ export default function NominaLanding() {
   }, []);
 
   return (
-    <main className="nomina-page">
-      <div className="nomina-grid" aria-hidden="true" />
+    <>
+      <Script
+        id="meta-pixel-nomina"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
+      />
+      <main className="nomina-page">
+        <div className="nomina-grid" aria-hidden="true" />
       <header className="nomina-header shell">
         <a href="#top" className="brand-lockup" aria-label="CEFIN, inicio">
           <span className="brand-mark">C</span>
@@ -263,7 +271,8 @@ export default function NominaLanding() {
           <IconArrow />
         </button>
       )}
-    </main>
+      </main>
+    </>
   );
 }
 
@@ -485,6 +494,7 @@ function ActiveCampaignForm() {
 
   return (
     <div className="nomina-form-shell">
+      <NominaFormSubmitTracker formRef={formRef} />
       <Script
         id="activecampaign-form-295"
         src="https://cefincapacitacion.activehosted.com/f/embed.php?id=295"

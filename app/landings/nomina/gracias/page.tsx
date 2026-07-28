@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { landingConfig as config } from "../config";
+import { NominaWhatsAppIntentLink } from "../unirse-whatsapp/redirect-to-whatsapp";
+import { NominaConversionClient } from "./nomina-conversion-client";
 import "./gracias.css";
 
 export const metadata: Metadata = {
@@ -19,7 +21,8 @@ export default function NominaGraciasPage() {
   const { thankYou, instructor, eventType, dates, time, timezone, platform } = config;
 
   return (
-    <main className="nomina-thankyou-page">
+    <>
+      <main className="nomina-thankyou-page">
       <div className="thankyou-grid" aria-hidden="true" />
       <header className="thankyou-header">
         <Link href="/landings/nomina" className="thankyou-brand" aria-label="CEFIN, volver a la landing del reto">
@@ -38,7 +41,7 @@ export default function NominaGraciasPage() {
 
           {thankYou.whatsappEnabled ? (
             <div className="thankyou-action">
-              <Link className="thankyou-cta" href={thankYou.whatsappRedirectPath}>ENTRAR AL GRUPO OFICIAL <span aria-hidden="true">→</span></Link>
+              <NominaWhatsAppIntentLink className="thankyou-cta" href={thankYou.whatsappRedirectPath}>ENTRAR AL GRUPO OFICIAL <span aria-hidden="true">→</span></NominaWhatsAppIntentLink>
               <p>Cuando se abra WhatsApp, toca “Unirme al grupo” para terminar.</p>
             </div>
           ) : (
@@ -70,6 +73,8 @@ export default function NominaGraciasPage() {
       </section>
 
       <footer className="thankyou-footer">CEFIN · Registro guardado · Sin tracking activo</footer>
-    </main>
+      </main>
+      <NominaConversionClient />
+    </>
   );
 }
