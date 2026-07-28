@@ -31,7 +31,7 @@ export const landingConfig = {
     name: "Mtro. Alfredo Cobos",
     specialty: "Contador público y maestro en impuestos",
     bio: "Contador público y maestro en impuestos, fundador de CEFIN, con amplia experiencia en asesoría fiscal y capacitación profesional.",
-    image: "/academia-contabilidad/alfredo.png",
+    image: "/alfredo.png",
     imageAlt: "Mtro. Alfredo Cobos, instructor de CEFIN",
   },
   heroImage: "/alfredo.png",
