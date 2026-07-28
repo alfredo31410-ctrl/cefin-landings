@@ -1343,3 +1343,176 @@
     max-width: 100%;
   }
 }
+
+/* Premium editorial layer: animation is opt-in so content remains visible without JS. */
+[data-nomina-reveal].is-ready {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-nomina-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+[data-nomina-reveal="hero-title"] { transition-delay: 70ms; }
+[data-nomina-reveal="hero-lede"] { transition-delay: 130ms; }
+[data-nomina-reveal="hero-details"] { transition-delay: 190ms; }
+[data-nomina-reveal="hero-cta"] { transition-delay: 250ms; }
+[data-nomina-reveal="hero-process"] { transition-delay: 310ms; }
+[data-nomina-reveal="hero-image"] { transition-delay: 170ms; }
+
+.nomina-page {
+  background:
+    radial-gradient(circle at 78% 8%, #1c476d55 0, transparent 28rem),
+    linear-gradient(180deg, #07111f 0%, #081522 48%, #07111f 100%);
+}
+.hero-copy {
+  max-width: 680px;
+}
+.hero-portrait img {
+  filter: drop-shadow(0 24px 34px #0008);
+}
+.primary-cta,
+.sticky-cta,
+.secondary-cta {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.primary-cta:hover,
+.sticky-cta:hover,
+.secondary-cta:hover {
+  box-shadow: 0 16px 36px #e749454d;
+}
+.primary-cta:active,
+.sticky-cta:active,
+.secondary-cta:active {
+  transform: translateY(0) scale(0.985);
+}
+.primary-cta:focus-visible,
+.sticky-cta:focus-visible,
+.secondary-cta:focus-visible,
+.carousel-control:focus-visible,
+.pagination button:focus-visible,
+.faq-list summary:focus-visible {
+  outline: 3px solid #8bc9ff;
+  outline-offset: 4px;
+}
+.challenge-card,
+.signal-card,
+.day-card,
+.transform-card,
+.audience-panel,
+.outcomes-grid li,
+.thankyou-event {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+.signal-card:hover,
+.day-card:hover,
+.transform-card:hover,
+.outcomes-grid li:hover {
+  border-color: #4da3ff55;
+  background-color: #ffffff0c;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px #0002;
+}
+.registration-cta-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-block: 16px 28px;
+  text-align: center;
+}
+.secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  border: 1px solid #e7494588;
+  border-radius: 9px;
+  background: #e7494514;
+  color: #fff;
+  padding: 0 22px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.secondary-cta + p {
+  margin: 0;
+  color: #91a3b7;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.registration-meta {
+  font-size: 14px;
+}
+.signal-card p,
+.day-card p,
+.check-list li,
+.outcomes-grid li {
+  font-size: 15px;
+}
+.faq-list summary {
+  font-size: 16px;
+}
+.faq-list details p {
+  font-size: 15px;
+}
+.faq-list details[open] {
+  background: #ffffff05;
+}
+.faq-list summary span {
+  transition: transform 180ms ease, color 180ms ease;
+}
+.nomina-registration ._form_295 input:focus,
+.nomina-registration ._form_295 select:focus,
+.nomina-registration ._form_295 textarea:focus,
+.nomina-registration ._form_295 button:focus-visible,
+.nomina-registration ._form_295 input[type="submit"]:focus-visible {
+  outline: 3px solid #8bc9ff;
+  outline-offset: 2px;
+}
+@media (max-width: 700px) {
+  .registration-cta-section {
+    flex-direction: column;
+    gap: 10px;
+    padding-block: 10px 22px;
+  }
+  .secondary-cta {
+    width: 100%;
+  }
+  .secondary-cta + p {
+    font-size: 15px;
+  }
+  .hero-lede {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-nomina-reveal].is-ready,
+  .primary-cta,
+  .sticky-cta,
+  .secondary-cta,
+  .challenge-card,
+  .signal-card,
+  .day-card,
+  .transform-card,
+  .outcomes-grid li,
+  .faq-list summary span {
+    transition: none;
+  }
+  [data-nomina-reveal].is-ready {
+    opacity: 1;
+    transform: none;
+  }
+}

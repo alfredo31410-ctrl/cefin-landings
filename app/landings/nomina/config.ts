@@ -22,8 +22,8 @@ export const landingConfig = {
     "Descubre cómo detectar errores que el sistema no siempre te muestra, revisar aspectos clave de ISR e IMSS y reconocer fallas en la integración salarial.",
   dates: "4, 5 y 6 de agosto de 2026",
   time: "11:00 a. m.",
-  timezone: "Hora de Ciudad de México",
-  platform: "En vivo por YouTube",
+  timezone: "CDMX",
+  platform: "EN VIVO",
   ctaLabel: "RESERVAR MI LUGAR GRATIS",
   processCopy:
     "Paso 1 de 2. Guarda tus datos y después completa tu acceso en el grupo oficial de WhatsApp.",

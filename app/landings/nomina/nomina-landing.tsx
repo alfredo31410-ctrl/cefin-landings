@@ -5,6 +5,7 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "./config";
+import { NominaRevealObserver } from "./nomina-reveal";
 import { NominaFormSubmitTracker } from "./nomina-tracking-client";
 import "./nomina.css";
 
@@ -62,6 +63,7 @@ export default function NominaLanding() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
+      <NominaRevealObserver />
       <main className="nomina-page">
         <div className="nomina-grid" aria-hidden="true" />
       <header className="nomina-header shell">
@@ -77,13 +79,13 @@ export default function NominaLanding() {
 
       <section id="top" className="hero shell">
         <div className="hero-copy">
-          <p className="eyebrow">
+          <p className="eyebrow" data-nomina-reveal="hero-eyebrow">
             <span className="live-dot" />
             {config.eventType}
           </p>
-          <h1>{config.title}</h1>
-          <p className="hero-lede">{config.promise}</p>
-          <div className="event-details" aria-label="Datos del evento">
+          <h1 data-nomina-reveal="hero-title">{config.title}</h1>
+          <p className="hero-lede" data-nomina-reveal="hero-lede">{config.promise}</p>
+          <div className="event-details" aria-label="Datos del evento" data-nomina-reveal="hero-details">
             <div>
               <span className="detail-icon" aria-hidden="true">
                 ◷
@@ -105,16 +107,19 @@ export default function NominaLanding() {
               </span>
             </div>
           </div>
-          <button className="primary-cta" onClick={scrollToRegistration}>
+          <button className="primary-cta" data-nomina-reveal="hero-cta" onClick={scrollToRegistration}>
             {config.ctaLabel}
             <IconArrow />
           </button>
-          <p className="process-copy">{config.processCopy}</p>
+          <p className="process-copy" data-nomina-reveal="hero-process">{config.processCopy}</p>
         </div>
-        <HeroPortrait />
+        <div data-nomina-reveal="hero-image">
+          <HeroPortrait />
+        </div>
       </section>
 
       <ChallengeMap />
+      <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
 
       <section className="section problem-section shell">
         <div className="section-intro">
@@ -191,6 +196,8 @@ export default function NominaLanding() {
         </div>
       </section>
 
+      <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
+
       <section className="section audience-section shell">
         <div className="audience-panel">
           <div className="section-intro">
@@ -250,9 +257,9 @@ export default function NominaLanding() {
               paso: entrar al grupo oficial de WhatsApp.
             </p>
             <div className="registration-meta">
-              <span>4, 5 y 6 de agosto</span>
-              <span>11:00 a. m. · CDMX</span>
-              <span>En vivo por YouTube</span>
+              <span>{config.dates}</span>
+              <span>{config.time} · {config.timezone}</span>
+              <span>{config.platform}</span>
             </div>
           </div>
           <ActiveCampaignForm />
@@ -290,9 +297,21 @@ function HeroPortrait() {
       />
       <div className="hero-event-chip">
         <strong>3 DÍAS</strong>
-        <span>En vivo · YouTube</span>
+        <span>{config.platform}</span>
       </div>
     </div>
+  );
+}
+
+function RegistrationCta({ microcopy }: { microcopy: string }) {
+  return (
+    <section className="registration-cta-section shell" data-nomina-reveal="secondary-cta">
+      <button className="secondary-cta" onClick={scrollToRegistration}>
+        {config.ctaLabel}
+        <IconArrow />
+      </button>
+      <p>{microcopy}</p>
+    </section>
   );
 }
 
