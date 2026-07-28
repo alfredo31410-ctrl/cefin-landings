@@ -547,25 +547,45 @@
 }
 .instructor-section {
   display: grid;
-  grid-template-columns: 290px 1fr;
-  gap: 70px;
+  grid-template-columns: 340px minmax(0, 1fr);
+  grid-template-areas:
+    "portrait copy"
+    "portrait authority";
+  gap: 54px;
   align-items: center;
 }
 .instructor-portrait {
+  grid-area: portrait;
   position: relative;
   height: 340px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 18px;
-  background: #16334e;
-  border: 1px solid #ffffff20;
+  background: linear-gradient(160deg, #16334e, #0d2034);
+  border: 1px solid #ffffff16;
+  box-shadow: 0 24px 54px #0003;
+  isolation: isolate;
+}
+.instructor-portrait:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8% -12% -8%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #4d8dbb55 0%, #17334d22 48%, transparent 74%);
+  filter: blur(18px);
+  pointer-events: none;
 }
 .instructor-portrait img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  mix-blend-mode: screen;
-  opacity: 0.83;
+  object-fit: contain;
+  object-position: center bottom;
+  mix-blend-mode: normal;
+  opacity: 1;
+  filter: none;
 }
 .portrait-label {
   position: absolute;
@@ -574,6 +594,13 @@
   color: #dceaf5;
   font-size: 9px;
   letter-spacing: 0.16em;
+}
+.instructor-copy {
+  grid-area: copy;
+}
+.instructor-section > .authority-pills {
+  grid-area: authority;
+  margin-top: 0;
 }
 .instructor-role {
   color: #ef6b63 !important;
@@ -855,12 +882,21 @@
     padding: 27px 21px;
   }
   .instructor-section {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 28px;
   }
+  .instructor-copy { order: 1; }
+  .instructor-portrait { order: 2; }
+  .instructor-section > .authority-pills {
+    order: 3;
+    width: 100%;
+    margin-top: -8px;
+  }
   .instructor-portrait {
-    height: 320px;
-    max-width: 280px;
+    height: 350px;
+    max-width: 300px;
+    margin-inline: auto;
   }
   .instructor-copy h2 {
     font-size: 35px;

@@ -232,11 +232,11 @@ export default function NominaLanding() {
           <h2>Aprende con el Mtro. Alfredo Cobos</h2>
           <p className="instructor-role">{config.instructor.specialty}</p>
           <p>{config.instructor.bio}</p>
-          <div className="authority-pills">
-            <span>Fundador de CEFIN</span>
-            <span>Asesoría fiscal</span>
-            <span>Capacitación profesional</span>
-          </div>
+        </div>
+        <div className="authority-pills">
+          <span>Fundador de CEFIN</span>
+          <span>Asesoría fiscal</span>
+          <span>Capacitación profesional</span>
         </div>
       </section>
 
