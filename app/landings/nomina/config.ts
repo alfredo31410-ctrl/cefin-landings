@@ -101,6 +101,12 @@ export const landingConfig = {
   activeCampaign: { enabled: false, embedCode: null },
   whatsapp: { enabled: false, groupUrl: null },
   tracking: { enabled: false, pixelId: null },
+  thankYou: {
+    enabled: true,
+    whatsappRedirectPath: "/landings/nomina/unirse-whatsapp",
+    whatsappEnabled: false,
+    whatsappGroupUrl: null,
+  },
 } as const;
 
 export type LandingConfig = typeof landingConfig;
