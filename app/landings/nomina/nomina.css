@@ -1285,3 +1285,61 @@
     font-size: 16px;
   }
 }
+/* ActiveCampaign form integration is scoped to this landing only. */
+.nomina-registration {
+  scroll-margin-top: 20px;
+}
+.nomina-form-shell {
+  position: relative;
+  min-height: 520px;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow-x: clip;
+  border-radius: 14px;
+  background: #07142166;
+  padding: 12px;
+}
+.nomina-form-status {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  margin: 0;
+  color: #9fb4c6;
+  font-size: 14px;
+  text-align: center;
+}
+.nomina-form-error {
+  color: #f0a39c;
+}
+.nomina-registration ._form_295 {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: visible;
+}
+.nomina-registration ._form_295 form {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.nomina-registration ._form_295 input,
+.nomina-registration ._form_295 select,
+.nomina-registration ._form_295 textarea {
+  font-size: 16px;
+}
+.nomina-registration ._form_295 button,
+.nomina-registration ._form_295 input[type="submit"] {
+  min-height: 44px;
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .nomina-form-shell {
+    min-height: 560px;
+    padding: 4px;
+  }
+  .nomina-registration ._form_295,
+  .nomina-registration ._form_295 form {
+    max-width: 100%;
+  }
+}

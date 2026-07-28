@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { landingConfig as config } from "./config";
 import "./nomina.css";
@@ -227,7 +228,7 @@ export default function NominaLanding() {
       <section
         ref={registrationRef}
         id="registration"
-        className="section registration-section shell"
+        className="section registration-section shell nomina-registration"
         aria-labelledby="registration-heading"
       >
         <div className="registration-panel">
@@ -246,7 +247,7 @@ export default function NominaLanding() {
               <span>En vivo por YouTube</span>
             </div>
           </div>
-          <ActiveCampaignFormPlaceholder />
+          <ActiveCampaignForm />
         </div>
       </section>
 
@@ -449,25 +450,64 @@ function TransformCard({
     </div>
   );
 }
-function ActiveCampaignFormPlaceholder() {
+function ActiveCampaignForm() {
+  const formRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">(
+    "loading",
+  );
+
+  useEffect(() => {
+    const formRoot = formRef.current;
+    if (!formRoot) return;
+
+    const hasInjectedForm = () => {
+      const formExists = Boolean(
+        formRoot.querySelector("form, ._form-content, ._form_element"),
+      );
+      if (formExists) setStatus("ready");
+    };
+
+    const observer = new MutationObserver(hasInjectedForm);
+    observer.observe(formRoot, { childList: true, subtree: true });
+    hasInjectedForm();
+
+    const timeout = window.setTimeout(() => {
+      if (!formRoot.querySelector("form, ._form-content, ._form_element")) {
+        setStatus("error");
+      }
+    }, 12000);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timeout);
+    };
+  }, []);
+
   return (
-    <div
-      className="ac-placeholder"
-      aria-label="Espacio reservado para formulario de registro"
-    >
-      <div className="placeholder-icon">+</div>
-      <h3>Formulario de registro</h3>
-      <p>El formulario oficial se integrará aquí en la siguiente etapa.</p>
-      {process.env.NODE_ENV === "development" && (
-        <small>
-          Desarrollo: falta insertar el embed aprobado de ActiveCampaign.
-        </small>
+    <div className="nomina-form-shell">
+      <Script
+        id="activecampaign-form-295"
+        src="https://cefincapacitacion.activehosted.com/f/embed.php?id=295"
+        strategy="afterInteractive"
+        charSet="utf-8"
+        onError={() => setStatus("error")}
+      />
+      {status === "loading" && (
+        <p className="nomina-form-status" role="status">
+          Cargando formulario…
+        </p>
       )}
-      <div className="form-reserved-fields" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
+      {status === "error" && (
+        <p className="nomina-form-status nomina-form-error" role="alert">
+          No pudimos cargar el formulario. Recarga la página e inténtalo
+          nuevamente.
+        </p>
+      )}
+      <div
+        ref={formRef}
+        className="_form_295"
+        aria-label="Formulario de registro"
+      />
     </div>
   );
 }
