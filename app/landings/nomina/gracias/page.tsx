@@ -33,7 +33,7 @@ export default function NominaGraciasPage() {
         <div className="thankyou-card">
           <p className="thankyou-eyebrow">PASO 2 DE 2 · NO CIERRES ESTA PÁGINA</p>
           <h1 id="thankyou-title">Solo falta entrar al grupo oficial de WhatsApp</h1>
-          <p className="thankyou-lede">Tus datos ya fueron guardados correctamente. Para completar tu acceso al reto, entra al grupo oficial donde recibirás los enlaces de las sesiones, recordatorios, avisos importantes y materiales.</p>
+          <p className="thankyou-lede">Tus datos ya fueron guardados correctamente. Entra ahora al grupo oficial para recibir los enlaces de las sesiones, recordatorios y avisos importantes.</p>
           <p className="thankyou-status">Tu registro está guardado, pero el proceso todavía no está completo.</p>
 
           {thankYou.whatsappEnabled ? (
@@ -69,7 +69,6 @@ export default function NominaGraciasPage() {
         </div>
       </section>
 
-      {/* TODO: antes de activar CompleteRegistration, controlar accesos directos, recargas, historial y eventos duplicados. */}
       <footer className="thankyou-footer">CEFIN · Registro guardado · Sin tracking activo</footer>
     </main>
   );
