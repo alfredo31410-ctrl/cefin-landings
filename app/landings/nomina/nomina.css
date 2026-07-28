@@ -179,7 +179,8 @@
     background 0.2s;
 }
 .primary-cta:hover,
-.sticky-cta:hover {
+.sticky-cta:hover,
+.secondary-cta:hover {
   background: #f15c55;
   transform: translateY(-2px);
 }
@@ -1473,9 +1474,9 @@
   justify-content: center;
   gap: 12px;
   min-height: 52px;
-  border: 1px solid #e7494588;
+  border: 0;
   border-radius: 9px;
-  background: #e7494514;
+  background: var(--red);
   color: #fff;
   padding: 0 22px;
   font-size: 12px;
