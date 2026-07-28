@@ -16,7 +16,7 @@ export const landingConfig = {
   brand: "CEFIN",
   institutionalName: "Centro de Estudios Fiscales, Innovación y Negocios",
   eventType: "Reto gratuito en vivo · 3 días",
-  title: "Deja de solo timbrar nóminas y aprende a revisarlas con criterio",
+  title: "Deja de solo timbrar nóminas y aprende a revisarlas con estrategia",
   challengeName: "De cero a especialista en nómina",
   promise:
     "Descubre cómo detectar errores que el sistema no siempre te muestra, revisar aspectos clave de ISR e IMSS y reconocer fallas en la integración salarial.",
@@ -67,6 +67,12 @@ export const landingConfig = {
     "Trabajas en contabilidad, nómina o recursos humanos.",
     "Deseas detectar inconsistencias antes de que se conviertan en problemas.",
     "Quieres desarrollar una visión más analítica y menos operativa.",
+  ],
+  outcomes: [
+    "Detectar señales de error que el sistema no siempre muestra.",
+    "Revisar información relacionada con ISR e IMSS.",
+    "Identificar problemas de integración salarial.",
+    "Saber qué revisar antes de analizar y recomendar.",
   ],
   faq: [
     {
