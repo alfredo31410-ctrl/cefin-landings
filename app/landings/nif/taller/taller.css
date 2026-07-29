@@ -111,6 +111,11 @@
   padding: 64px 0 72px;
 }
 
+.taller-hero-copy {
+  grid-column: 1;
+  animation: taller-fade-up 640ms ease both;
+}
+
 .taller-hero h1 {
   max-width: 780px;
   margin: 16px 0 0;
@@ -143,12 +148,49 @@
 }
 
 .taller-event-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  row-gap: 4px;
   padding: 14px;
   border-radius: 12px;
   color: #f0f0f0;
   font-size: 0.83rem;
   font-weight: 750;
   line-height: 1.35;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.taller-event-item:hover {
+  border-color: rgba(249, 115, 22, 0.42);
+  background: rgba(249, 115, 22, 0.08);
+  transform: translateY(-2px);
+}
+
+.taller-event-icon {
+  display: grid;
+  grid-row: span 2;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgba(253, 224, 71, 0.35);
+  border-radius: 8px;
+  color: var(--taller-yellow);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.taller-event-label {
+  color: var(--taller-yellow-soft);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.taller-event-item strong {
+  color: #fff;
+  font-size: 0.82rem;
 }
 
 .taller-hero-visual {
@@ -162,6 +204,7 @@
   background:
     linear-gradient(160deg, rgba(249, 115, 22, 0.18), rgba(253, 224, 71, 0.06) 54%, rgba(255, 255, 255, 0.025));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+  animation: taller-fade-up 700ms ease 100ms both;
 }
 
 .taller-hero-visual::before {
@@ -437,6 +480,25 @@
   font-weight: 800;
 }
 
+.taller-pain,
+.taller-outcome,
+.taller-focus,
+.taller-ai-grid div,
+.taller-reframe-list div,
+.taller-faq details {
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.taller-pain:hover,
+.taller-outcome:hover,
+.taller-focus:hover,
+.taller-ai-grid div:hover,
+.taller-reframe-list div:hover,
+.taller-faq details:hover {
+  border-color: rgba(249, 115, 22, 0.36);
+  transform: translateY(-2px);
+}
+
 .taller-faq {
   display: grid;
   gap: 12px;
@@ -511,6 +573,23 @@
   text-align: center;
 }
 
+@keyframes taller-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.taller-section,
+.taller-cta-band {
+  animation: taller-fade-up 640ms ease both;
+}
+
 @media (min-width: 700px) {
   .taller-shell {
     width: min(1120px, calc(100% - 64px));
@@ -521,7 +600,9 @@
   }
 
   .taller-event-strip {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .taller-pain-grid,
@@ -587,6 +668,8 @@
 
   .taller-hero-visual {
     min-height: 480px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 
   .taller-reframe,
@@ -615,6 +698,7 @@
   .nif-taller *::before,
   .nif-taller *::after {
     scroll-behavior: auto !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
 }

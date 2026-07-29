@@ -7,12 +7,11 @@ const CHECKOUT_URL =
   "https://pay.hotmart.com/G106884758Y?off=anbe55e7&checkoutMode=10";
 
 const eventDetails = [
-  "24 al 28 de agosto de 2026",
-  "11:00 a. m. · Hora CDMX",
-  "En vivo",
-  "100 % en línea",
-  "5 días",
-];
+  { icon: "▣", label: "Fecha", value: "24 al 28 de agosto de 2026" },
+  { icon: "◷", label: "Horario", value: "11:00 a. m. · Hora CDMX" },
+  { icon: "◉", label: "Modalidad", value: "En vivo · 100 % en línea" },
+  { icon: "5", label: "Duración", value: "5 días" },
+] as const;
 
 const pains = [
   "La operación parece sencilla, pero no sabes qué NIF sustenta el tratamiento.",
@@ -81,7 +80,7 @@ export default function TallerNifPage() {
           </header>
 
           <div className="taller-hero-grid">
-            <div>
+            <div className="taller-hero-copy">
               <p className="taller-kicker">
                 Taller en vivo para contadores y profesionales del área contable
               </p>
@@ -94,13 +93,6 @@ export default function TallerNifPage() {
                 y sustentar el tratamiento contable con un método práctico potenciado
                 con inteligencia artificial.
               </p>
-              <div className="taller-event-strip" aria-label="Datos del taller">
-                {eventDetails.map((detail) => (
-                  <div className="taller-event-item" key={detail}>
-                    {detail}
-                  </div>
-                ))}
-              </div>
               <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
               <p className="taller-microcopy">
                 Serás dirigido a Hotmart para completar tu inscripción de forma segura.
@@ -113,14 +105,24 @@ export default function TallerNifPage() {
                 <strong>Potenciado con Inteligencia Artificial</strong>
               </div>
               <Image
-                src="/contrato-servicios-contables/alfredo-servicios-contables.png"
+                src="/alfredo.png"
                 alt="Mtro. Alfredo Cobos, instructor del Taller Práctico de NIF"
                 width={800}
                 height={800}
                 priority
-                sizes="(max-width: 959px) 80vw, 35vw"
+                sizes="(max-width: 699px) 82vw, (max-width: 959px) 70vw, 35vw"
               />
               <span className="taller-instructor-label">Mtro. Alfredo Cobos</span>
+            </div>
+
+            <div className="taller-event-strip" aria-label="Datos del taller">
+              {eventDetails.map((detail) => (
+                <div className="taller-event-item" key={detail.label}>
+                  <span className="taller-event-icon" aria-hidden="true">{detail.icon}</span>
+                  <span className="taller-event-label">{detail.label}</span>
+                  <strong>{detail.value}</strong>
+                </div>
+              ))}
             </div>
           </div>
         </div>
