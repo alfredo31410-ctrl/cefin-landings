@@ -85,12 +85,12 @@ export default function TallerNifPage() {
                 Taller en vivo para contadores y profesionales del área contable
               </p>
               <h1>
-                No basta con que el asiento cuadre. Debes poder explicar qué NIF
-                sustenta tu <em>decisión.</em>
+                Taller Práctico de NIF: deja de registrar por inercia y aprende a
+                sustentar cada decisión contable.
               </h1>
               <p className="taller-copy">
-                Aprende a analizar operaciones reales, identificar la norma aplicable
-                y sustentar el tratamiento contable con un método práctico potenciado
+                Analiza operaciones reales, identifica qué NIF necesitas revisar y
+                estructura tratamientos contables con un método práctico potenciado
                 con inteligencia artificial.
               </p>
               <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
@@ -159,9 +159,9 @@ export default function TallerNifPage() {
               </p>
             </div>
             <div className="taller-reframe-list">
-              <div><strong>La IA puede ayudarte a ordenar.</strong><span>Pero tú validas la información.</span></div>
-              <div><strong>La IA puede estructurar preguntas.</strong><span>Pero tú identificas qué NIF necesitas revisar.</span></div>
-              <div><strong>La IA puede apoyar el análisis.</strong><span>Pero tú sustentas la decisión contable.</span></div>
+              <div>La IA puede ayudarte a ordenar. Pero tú validas la información.</div>
+              <div>La IA puede estructurar preguntas. Pero tú identificas qué NIF necesitas revisar.</div>
+              <div>La IA puede apoyar el análisis. Pero tú sustentas la decisión contable.</div>
             </div>
           </div>
         </section>
