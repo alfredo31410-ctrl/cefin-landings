@@ -506,7 +506,7 @@
 .taller-footer {
   padding: 24px 0;
   background: #030303;
-  color: rgba(230, 239, 255, 0.58);
+  color: rgba(255, 255, 255, 0.58);
   font-size: 0.8rem;
   text-align: center;
 }
@@ -562,6 +562,11 @@
 
   .taller-offer-card {
     padding: 24px;
+  }
+
+  .taller-cta-band .taller-cta {
+    width: 100%;
+    align-self: stretch;
   }
 }
 

@@ -11,7 +11,7 @@ const eventDetails = [
   "11:00 a. m. · Hora CDMX",
   "En vivo",
   "100 % en línea",
-  "5 días · 1 hora diaria",
+  "5 días",
 ];
 
 const pains = [
@@ -22,26 +22,27 @@ const pains = [
 ];
 
 const outcomes = [
-  ["01", "Analizar operaciones", "Entenderás qué revisar antes de pensar en el registro."],
-  ["02", "Identificar la NIF", "Relacionarás la operación con la norma aplicable."],
-  ["03", "Detectar faltantes", "Reconocerás qué información necesitas para continuar."],
-  ["04", "Sustentar decisiones", "Podrás explicar con mayor criterio profesional por qué decidiste."],
+  ["01", "Explicar el tratamiento", "Explicarás por qué elegiste un tratamiento contable."],
+  ["02", "Detectar información", "Detectarás cuándo falta información relevante."],
+  ["03", "Analizar antes de registrar", "Evitarás registrar automáticamente sin analizar."],
+  ["04", "Comunicar conclusiones", "Comunicarás una conclusión con mayor claridad."],
+  ["05", "Sustentar decisiones", "Sustentarás una decisión con mayor criterio profesional."],
 ] as const;
 
 const practicalFocus = [
-  ["Analiza", "Entiende la operación antes de pensar en el asiento."],
-  ["Ordena", "Separa los datos disponibles y la información relevante."],
-  ["Detecta", "Identifica qué información falta para continuar."],
-  ["Relaciona", "Busca la NIF que corresponde al caso."],
-  ["Estructura", "Organiza el razonamiento contable."],
-  ["Sustenta", "Explica la decisión con mayor claridad profesional."],
+  ["Analiza", "Analiza la operación antes de pensar en el registro."],
+  ["Ordena", "Ordena la información disponible del caso."],
+  ["Detecta", "Detecta los datos faltantes para continuar."],
+  ["Identifica", "Identifica qué NIF necesitas revisar."],
+  ["Estructura", "Estructura el análisis contable."],
+  ["Sustenta", "Sustenta la decisión contable."],
 ] as const;
 
 const faqs = [
   ["¿Cuándo se realizará el taller?", "Del 24 al 28 de agosto de 2026."],
   ["¿A qué hora será?", "A las 11:00 a. m., hora de CDMX."],
   ["¿Cómo se impartirá?", "Será en vivo y 100 % en línea."],
-  ["¿Cuánto dura?", "Son 5 días, con 1 hora diaria."],
+  ["¿Cuánto dura?", "Son 5 días."],
   ["¿Cuál es el precio?", "El precio es de $587 MXN."],
 ] as const;
 
@@ -74,8 +75,8 @@ export default function TallerNifPage() {
             <Link href="#inicio" className="taller-brand">
               CEFIN
             </Link>
-            <a className="taller-header-link" href="#oferta">
-              Reservar mi lugar
+            <a className="taller-header-link" href="#metodo">
+              Ver el programa
             </a>
           </header>
 
@@ -100,7 +101,7 @@ export default function TallerNifPage() {
                   </div>
                 ))}
               </div>
-              <CheckoutLink>Quiero reservar mi lugar por $587 MXN</CheckoutLink>
+              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
               <p className="taller-microcopy">
                 Serás dirigido a Hotmart para completar tu inscripción de forma segura.
               </p>
@@ -157,7 +158,7 @@ export default function TallerNifPage() {
             </div>
             <div className="taller-reframe-list">
               <div><strong>La IA puede ayudarte a ordenar.</strong><span>Pero tú validas la información.</span></div>
-              <div><strong>La IA puede estructurar preguntas.</strong><span>Pero tú identificas la NIF aplicable.</span></div>
+              <div><strong>La IA puede estructurar preguntas.</strong><span>Pero tú identificas qué NIF necesitas revisar.</span></div>
               <div><strong>La IA puede apoyar el análisis.</strong><span>Pero tú sustentas la decisión contable.</span></div>
             </div>
           </div>
@@ -190,11 +191,11 @@ export default function TallerNifPage() {
               <h2>Aprende a sustentar cada decisión contable.</h2>
               <p>Reserva tu lugar por $587 MXN.</p>
             </div>
-            <CheckoutLink>Quiero reservar mi lugar</CheckoutLink>
+            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
           </div>
         </section>
 
-        <section className="taller-section taller-light-section">
+        <section className="taller-section taller-light-section" id="metodo">
           <div className="taller-shell">
             <p className="taller-kicker">Ejes prácticos del taller</p>
             <h2 className="taller-heading">Esto es lo que trabajarás durante el taller.</h2>
@@ -244,6 +245,16 @@ export default function TallerNifPage() {
           </div>
         </section>
 
+        <section className="taller-cta-band">
+          <div className="taller-shell">
+            <div>
+              <p className="taller-kicker">Método práctico con IA</p>
+              <h2>Inscríbete y lleva el análisis a casos reales.</h2>
+            </div>
+            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+          </div>
+        </section>
+
         <section className="taller-section taller-dark-section">
           <div className="taller-shell">
             <p className="taller-kicker">Preguntas frecuentes</p>
@@ -262,7 +273,7 @@ export default function TallerNifPage() {
         <section className="taller-section taller-final" id="oferta">
           <div className="taller-shell taller-final-grid">
             <div>
-              <p className="taller-kicker">Cierre de inscripción</p>
+              <p className="taller-kicker">Reserva tu lugar</p>
               <h2 className="taller-heading">No basta con que el asiento cuadre.</h2>
               <p className="taller-copy">
                 Aprende a explicar qué NIF sustenta tu decisión y lleva tu análisis
@@ -273,8 +284,21 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Taller Práctico de NIF</p>
               <p className="taller-price">$587<span>MXN</span></p>
               <p>24 al 28 de agosto de 2026 · 11:00 a. m. · Hora CDMX</p>
-              <CheckoutLink>Quiero reservar mi lugar por $587 MXN</CheckoutLink>
+              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <p className="taller-microcopy">
+                Serás dirigido a Hotmart para completar tu inscripción de forma segura.
+              </p>
             </div>
+          </div>
+        </section>
+
+        <section className="taller-cta-band taller-final-cta">
+          <div className="taller-shell">
+            <div>
+              <p className="taller-kicker">Reserva tu lugar</p>
+              <h2>Da el siguiente paso para sustentar tus decisiones contables.</h2>
+            </div>
+            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
           </div>
         </section>
       </main>
