@@ -76,7 +76,7 @@ export default function TallerNifPage() {
               CEFIN
             </Link>
             <a className="taller-header-link" href="#metodo">
-              Ver el programa
+              Inscribirme ya
             </a>
           </header>
 
@@ -101,7 +101,7 @@ export default function TallerNifPage() {
                   </div>
                 ))}
               </div>
-              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <CheckoutLink>Inscribirme ya por $587 MXN</CheckoutLink>
               <p className="taller-microcopy">
                 Serás dirigido a Hotmart para completar tu inscripción de forma segura.
               </p>
@@ -191,7 +191,7 @@ export default function TallerNifPage() {
               <h2>Aprende a sustentar cada decisión contable.</h2>
               <p>Reserva tu lugar por $587 MXN.</p>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <CheckoutLink>Inscribirme ya por $587 MXN</CheckoutLink>
           </div>
         </section>
 
@@ -251,7 +251,7 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Método práctico con IA</p>
               <h2>Inscríbete y lleva el análisis a casos reales.</h2>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <CheckoutLink>Inscribirme ya por $587 MXN</CheckoutLink>
           </div>
         </section>
 
@@ -284,7 +284,7 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Taller Práctico de NIF</p>
               <p className="taller-price">$587<span>MXN</span></p>
               <p>24 al 28 de agosto de 2026 · 11:00 a. m. · Hora CDMX</p>
-              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <CheckoutLink>Inscribirme ya por $587 MXN</CheckoutLink>
               <p className="taller-microcopy">
                 Serás dirigido a Hotmart para completar tu inscripción de forma segura.
               </p>
@@ -298,7 +298,7 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Reserva tu lugar</p>
               <h2>Da el siguiente paso para sustentar tus decisiones contables.</h2>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <CheckoutLink>Inscribirme ya por $587 MXN</CheckoutLink>
           </div>
         </section>
       </main>
