@@ -105,7 +105,7 @@ export const landingConfig = {
     enabled: true,
     whatsappRedirectPath: "/landings/nomina/unirse-whatsapp",
     whatsappEnabled: true,
-    whatsappGroupUrl: "https://chat.whatsapp.com/JbbSCjXHcAACyfWhnepryd?s=cl&p=a&ilr=1",
+    whatsappGroupUrl: "https://chat.whatsapp.com/IemtfbpyV5o7PAF7ml2lfP?s=cl&p=a&ilr=1",
   },
 } as const;
 
