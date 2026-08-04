@@ -127,7 +127,7 @@ export default function RestaurantesLandingPage() {
         />
       </noscript>
 
-      <main className="relative h-[100svh] overflow-hidden bg-[#0b0806] text-white">
+      <main className="relative min-h-[100svh] overflow-x-hidden bg-[#0b0806] text-white lg:h-[100svh] lg:overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_44%,rgba(173,77,12,0.32),transparent_30%),radial-gradient(circle_at_14%_80%,rgba(91,35,9,0.34),transparent_32%),linear-gradient(115deg,#030303_0%,#0b0806_52%,#160c05_100%)]" />
           <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,153,51,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,153,51,0.12)_1px,transparent_1px)] [background-size:42px_42px]" />
@@ -142,19 +142,19 @@ export default function RestaurantesLandingPage() {
           </span>
         </header>
 
-        <section className="relative z-10 mx-auto h-[calc(100svh-88px)] max-w-7xl overflow-hidden px-6 pb-6 pt-2 sm:px-10 lg:px-14 lg:pb-8">
-          <div className="relative z-20 max-w-3xl py-8 lg:max-w-[68%] lg:py-10">
+        <section className="relative z-10 mx-auto h-auto min-h-[calc(100svh-88px)] max-w-7xl overflow-visible px-6 pb-8 pt-2 sm:px-10 lg:h-[calc(100svh-88px)] lg:overflow-hidden lg:px-14 lg:pb-8">
+          <div className="relative z-20 flex max-w-3xl flex-col py-8 lg:max-w-[68%] lg:py-10">
             <p className="inline-flex items-center gap-2 rounded-full border border-orange-400/35 bg-black/40 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-orange-200 backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_16px_rgba(251,146,60,0.9)]" />
               Para contadores y asesores fiscales
             </p>
-            <p className="mt-7 text-xl font-black uppercase leading-tight tracking-[0.04em] text-[#f5e6d0] sm:text-3xl">
+            <p className="mt-7 text-balance text-xl font-black uppercase leading-tight tracking-[0.04em] text-[#f5e6d0] sm:text-3xl">
               Aprende a asesorar fiscalmente a
             </p>
-            <h1 aria-label="Aprende a asesorar fiscalmente a restaurantes y negocios de comida" className="mt-1 max-w-full bg-gradient-to-r from-orange-300 via-orange-500 to-red-500 bg-clip-text text-6xl font-black uppercase leading-[0.84] tracking-[-0.075em] text-transparent sm:text-8xl lg:text-[clamp(4rem,5.4vw,5.8rem)]">
+            <h1 aria-label="Aprende a asesorar fiscalmente a restaurantes y negocios de comida" className="mt-1 max-w-full text-balance bg-gradient-to-r from-orange-300 via-orange-500 to-red-500 bg-clip-text text-[clamp(2.8rem,12.5vw,4rem)] font-black uppercase leading-[0.9] tracking-[-0.075em] text-transparent sm:text-8xl lg:text-[clamp(4rem,5.4vw,5.8rem)]">
               Restaurantes
             </h1>
-            <p className="mt-4 max-w-xl text-xl font-black uppercase leading-tight text-[#f5e6d0] sm:text-3xl">
+            <p className="mt-4 max-w-xl text-balance text-xl font-black uppercase leading-tight text-[#f5e6d0] sm:text-3xl">
               y negocios de comida
             </p>
             <div className="hidden mt-7 max-w-2xl border-l-4 border-orange-500 bg-black/45 px-5 py-4 backdrop-blur-sm sm:px-7 sm:py-5">
@@ -167,26 +167,26 @@ export default function RestaurantesLandingPage() {
               Descubre qué debes revisar, preguntar y considerar para atender
               con mayor seguridad a restaurantes, cafeterías y negocios de alimentos.
             </p>
-            <ul className="mt-4 grid max-w-2xl grid-cols-3 gap-2 text-[11px] font-bold leading-tight text-white/85 sm:gap-3 sm:text-sm">
+            <ul className="order-last mt-6 grid max-w-2xl grid-cols-1 gap-3 text-xs font-bold leading-tight text-white/85 sm:grid-cols-3 sm:gap-3 sm:text-sm">
               <li className="flex items-start gap-2"><span className="text-orange-400">✓</span>Identifica los puntos fiscales que debes revisar.</li>
               <li className="flex items-start gap-2"><span className="text-orange-400">✓</span>Evita errores al recibir este tipo de clientes.</li>
               <li className="flex items-start gap-2"><span className="text-orange-400">✓</span>Brinda una asesoría con mayor criterio y seguridad.</li>
             </ul>
 
-            <div className="mt-5 grid max-w-2xl grid-cols-3 overflow-hidden rounded-2xl border border-orange-500/45 bg-black/65 text-[10px] font-black uppercase leading-tight tracking-[0.06em] backdrop-blur sm:text-xs">
+            <div className="mt-5 grid max-w-2xl grid-cols-1 overflow-hidden rounded-2xl border border-orange-500/45 bg-black/65 text-[10px] font-black uppercase leading-tight tracking-[0.06em] backdrop-blur sm:grid-cols-3 sm:text-xs">
               <div className="hidden">
                 <span className="block text-orange-400">Clase</span>
                 <span className="mt-1 block text-white">Gratuita</span>
               </div>
-              <div className="border-r border-orange-500/25 px-2 py-3 sm:px-4">
+              <div className="border-b border-orange-500/25 px-3 py-2.5 sm:border-b-0 sm:border-r sm:px-4 sm:py-3">
                 <span className="block text-orange-400">Fecha</span>
                 <span className="mt-1 block text-white">11 de agosto</span>
               </div>
-              <div className="border-r border-orange-500/25 px-2 py-3 sm:px-4">
+              <div className="border-b border-orange-500/25 px-3 py-2.5 sm:border-b-0 sm:border-r sm:px-4 sm:py-3">
                 <span className="block text-orange-400">Hora</span>
                 <span className="mt-1 block text-white">11:00 AM CDMX</span>
               </div>
-              <div className="px-2 py-3 sm:px-4">
+              <div className="px-3 py-2.5 sm:px-4 sm:py-3">
                 <span className="block text-orange-400">Modalidad</span>
                 <span className="mt-1 block text-white">En línea</span>
               </div>
@@ -199,7 +199,7 @@ export default function RestaurantesLandingPage() {
               type="button"
               ref={triggerRef}
               onClick={() => setIsModalOpen(true)}
-              className="mt-5 inline-flex min-h-[56px] items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 px-7 py-4 text-sm font-black uppercase tracking-[0.04em] text-white shadow-[0_18px_50px_rgba(234,88,12,0.3)] transition hover:-translate-y-1 hover:from-orange-400 hover:to-red-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-300 active:translate-y-0 sm:text-base"
+              className="mt-5 inline-flex min-h-[56px] w-full items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-red-500 px-7 py-4 text-center text-sm font-black uppercase tracking-[0.04em] text-white shadow-[0_18px_50px_rgba(234,88,12,0.3)] transition hover:-translate-y-1 hover:from-orange-400 hover:to-red-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-300 active:translate-y-0 sm:w-auto sm:text-base"
             >
               Reservar mi lugar gratis
               <span className="ml-3 text-xl" aria-hidden="true">→</span>
@@ -209,7 +209,7 @@ export default function RestaurantesLandingPage() {
             </p>
           </div>
 
-          <div className="pointer-events-none absolute bottom-0 right-0 z-10 h-[34svh] w-[62%] sm:h-[40svh] sm:w-[52%] lg:h-[54svh] lg:w-[48%]">
+          <div className="pointer-events-none relative z-10 mx-auto mt-8 h-[300px] w-[78%] sm:h-[360px] sm:w-[58%] lg:absolute lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-[54svh] lg:w-[48%]">
             <Image
               src={alfredoRestaurantes}
               alt="Mtro. Alfredo Cobos"

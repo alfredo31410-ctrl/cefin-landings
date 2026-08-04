@@ -76,7 +76,7 @@ export default function RestaurantesGraciasPage() {
         />
       </noscript>
 
-      <main className="relative h-[100svh] overflow-hidden bg-[#0b0806] px-5 text-white sm:px-8 lg:px-12">
+      <main className="relative min-h-[100svh] overflow-x-hidden bg-[#0b0806] px-5 text-white sm:px-8 lg:h-[100svh] lg:overflow-hidden lg:px-12">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_35%,rgba(173,77,12,0.3),transparent_30%),linear-gradient(115deg,#030303,#160c05)]" />
           <div className="absolute -right-24 top-[-10%] h-[70%] w-[45%] rounded-full bg-orange-700/20 blur-[100px]" />
@@ -90,7 +90,7 @@ export default function RestaurantesGraciasPage() {
           </span>
         </header>
 
-        <section className="relative z-10 mx-auto h-[calc(100svh-60px)] max-w-6xl overflow-hidden pt-3 sm:pt-6 lg:pt-8">
+        <section className="relative z-10 mx-auto h-auto min-h-[calc(100svh-60px)] max-w-6xl overflow-visible pt-3 sm:pt-6 lg:h-[calc(100svh-60px)] lg:overflow-hidden lg:pt-8">
           <div className="relative z-20 max-w-2xl lg:max-w-[68%]">
             <p className="inline-flex rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-orange-200">
               Registro recibido
@@ -134,7 +134,7 @@ export default function RestaurantesGraciasPage() {
             </p>
           </div>
 
-          <div className="pointer-events-none absolute bottom-0 right-0 z-10 h-[33svh] w-[59%] sm:h-[40svh] sm:w-[50%] lg:h-[52svh] lg:w-[46%]">
+          <div className="pointer-events-none relative z-10 mx-auto mt-8 h-[280px] w-[76%] sm:h-[340px] sm:w-[56%] lg:absolute lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:h-[52svh] lg:w-[46%]">
             <Image
               src={alfredoRestaurantes}
               alt="Mtro. Alfredo Cobos"
