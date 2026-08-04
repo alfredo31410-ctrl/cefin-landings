@@ -11,7 +11,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 293;
+const ACTIVE_CAMPAIGN_FORM_ID = 307;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 const benefits = [
@@ -107,7 +107,7 @@ export default function NifRegistroPage() {
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
       <Script
-        id="activecampaign-nif-form-293"
+        id="activecampaign-nif-form-307"
         src={`https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`}
         strategy="afterInteractive"
         charSet="utf-8"
@@ -124,7 +124,7 @@ export default function NifRegistroPage() {
 
       <main className="min-h-screen overflow-x-hidden bg-[#090b0d] text-white">
         <div className="flex flex-col items-center justify-center gap-3 border-b border-white/10 bg-[#12121a] px-4 py-3 text-center text-[11px] font-black uppercase tracking-[0.12em] text-white sm:flex-row sm:justify-between sm:px-8 sm:text-sm">
-          <span>Clase gratuita en vivo · 31 de julio de 2026</span>
+          <span>Clase gratuita en vivo · 20 de agosto de 2026</span>
           <button
             type="button"
             onClick={scrollToForm}
@@ -159,7 +159,7 @@ export default function NifRegistroPage() {
 
               <div className="mt-7 grid gap-3 text-sm font-black uppercase tracking-[0.08em] sm:grid-cols-3">
                 <div className="rounded-xl border border-white/15 bg-white/[0.07] p-4">
-                  31 de julio de 2026
+                  20 de agosto de 2026
                 </div>
                 <div className="rounded-xl border border-white/15 bg-white/[0.07] p-4">
                   11:00 a. m. · Hora de CDMX
@@ -295,7 +295,7 @@ export default function NifRegistroPage() {
               financiera con mayor criterio contable.
             </p>
             <p className="mt-6 text-sm font-black uppercase tracking-[0.12em]">
-              31 de julio de 2026 · 11:00 a. m. · Hora de CDMX
+              20 de agosto de 2026 · 11:00 a. m. · Hora de CDMX
             </p>
             <button
               type="button"
