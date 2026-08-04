@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Script from "next/script";
+import alfredoRestaurantes from "../../../public/restaurantes/alfredo-restaurantes.png";
 import { useEffect, useRef, useState } from "react";
 import {
   getMetaPixelNoscriptUrl,
@@ -126,7 +127,7 @@ export default function RestaurantesLandingPage() {
         />
       </noscript>
 
-      <main className="relative overflow-x-hidden bg-[#0b0806] text-white">
+      <main className="relative h-[100svh] overflow-hidden bg-[#0b0806] text-white">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_44%,rgba(173,77,12,0.32),transparent_30%),radial-gradient(circle_at_14%_80%,rgba(91,35,9,0.34),transparent_32%),linear-gradient(115deg,#030303_0%,#0b0806_52%,#160c05_100%)]" />
           <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,153,51,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,153,51,0.12)_1px,transparent_1px)] [background-size:42px_42px]" />
@@ -141,8 +142,8 @@ export default function RestaurantesLandingPage() {
           </span>
         </header>
 
-        <section className="relative z-10 mx-auto flex max-w-7xl flex-col gap-3 px-6 pb-6 pt-2 sm:px-10 lg:grid lg:min-h-[calc(100svh-88px)] lg:grid-cols-[minmax(0,1.18fr)_minmax(300px,0.62fr)] lg:items-center lg:gap-0 lg:px-14 lg:pb-16">
-          <div className="relative z-20 order-1 max-w-3xl py-8 lg:order-none lg:py-12">
+        <section className="relative z-10 mx-auto h-[calc(100svh-88px)] max-w-7xl overflow-hidden px-6 pb-6 pt-2 sm:px-10 lg:px-14 lg:pb-8">
+          <div className="relative z-20 max-w-3xl py-8 lg:max-w-[68%] lg:py-10">
             <p className="inline-flex items-center gap-2 rounded-full border border-orange-400/35 bg-black/40 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-orange-200 backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_16px_rgba(251,146,60,0.9)]" />
               Para contadores y asesores fiscales
@@ -208,19 +209,18 @@ export default function RestaurantesLandingPage() {
             </p>
           </div>
 
-          <div className="pointer-events-none relative z-10 order-2 mt-[-1rem] h-[340px] w-full sm:h-[430px] lg:order-none lg:mt-0 lg:h-[calc(100svh-120px)] lg:min-h-[560px] lg:w-full lg:pl-12 lg:pr-2">
-            <div className="absolute inset-[8%] bg-[radial-gradient(circle,rgba(185,83,18,0.34),transparent_68%)]" />
+          <div className="pointer-events-none absolute bottom-0 right-0 z-10 h-[34svh] w-[62%] sm:h-[40svh] sm:w-[52%] lg:h-[54svh] lg:w-[48%]">
             <Image
-              src="/restaurantes/alfredo-restaurantes.png"
+              src={alfredoRestaurantes}
               alt="Mtro. Alfredo Cobos"
               width={800}
               height={800}
               priority
               unoptimized
               sizes="(min-width: 1024px) 44vw, 72vw"
-              className="absolute bottom-0 left-1/2 h-full w-auto max-w-[96%] -translate-x-1/2 object-contain object-bottom opacity-95 mix-blend-screen drop-shadow-[0_26px_50px_rgba(0,0,0,0.75)] lg:left-auto lg:right-0 lg:max-w-[88%] lg:translate-x-0"
+              className="absolute bottom-0 right-0 h-full w-auto max-w-full object-contain object-bottom opacity-95 mix-blend-screen drop-shadow-[0_26px_50px_rgba(0,0,0,0.75)]"
             />
-            <div className="absolute bottom-5 right-3 z-20 text-right sm:right-8">
+            <div className="absolute bottom-2 right-2 z-20 text-right sm:right-8 lg:bottom-4">
               <p className="text-sm font-black text-white">Mtro. Alfredo Cobos</p>
               <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-orange-200">Especialista fiscal · CEFIN</p>
             </div>
