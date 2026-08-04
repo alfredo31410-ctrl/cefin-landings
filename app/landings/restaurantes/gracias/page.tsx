@@ -140,6 +140,7 @@ export default function RestaurantesGraciasPage() {
               alt="Mtro. Alfredo Cobos"
               width={800}
               height={800}
+              unoptimized
               sizes="35vw"
               className="relative z-10 h-full max-h-[560px] w-auto max-w-[90%] object-contain object-bottom mix-blend-screen drop-shadow-[0_26px_50px_rgba(0,0,0,0.75)]"
             />

@@ -216,6 +216,7 @@ export default function RestaurantesLandingPage() {
               width={800}
               height={800}
               priority
+              unoptimized
               sizes="(min-width: 1024px) 44vw, 72vw"
               className="absolute bottom-0 left-1/2 h-full w-auto max-w-[96%] -translate-x-1/2 object-contain object-bottom opacity-95 mix-blend-screen drop-shadow-[0_26px_50px_rgba(0,0,0,0.75)] lg:left-auto lg:right-0 lg:max-w-[88%] lg:translate-x-0"
             />
