@@ -14,12 +14,21 @@ export default function UnirseWhatsAppPage() {
 
   return (
     <main className="nomina-whatsapp-redirect">
-      <section className="whatsapp-redirect-card" aria-labelledby="whatsapp-redirect-title">
+      <section
+        className="whatsapp-redirect-card"
+        aria-labelledby="whatsapp-redirect-title"
+      >
         <p className="whatsapp-redirect-eyebrow">CEFIN · PASO 2 DE 2</p>
-        <h1 id="whatsapp-redirect-title">Estamos abriendo el grupo oficial de WhatsApp…</h1>
-        <p className="whatsapp-redirect-copy">Cuando se abra WhatsApp, toca “Unirme al grupo” para terminar.</p>
+        <h1 id="whatsapp-redirect-title">
+          Estamos abriendo el grupo oficial de WhatsApp…
+        </h1>
+        <p className="whatsapp-redirect-copy">
+          Cuando se abra WhatsApp, toca “Unirme al grupo” para terminar.
+        </p>
         <RedirectToWhatsApp whatsappGroupUrl={thankYou.whatsappGroupUrl} />
-        <p className="whatsapp-redirect-note">Si WhatsApp no se abre automáticamente, usa el botón.</p>
+        <p className="whatsapp-redirect-note">
+          Si WhatsApp no se abre automáticamente, usa el botón.
+        </p>
       </section>
     </main>
   );

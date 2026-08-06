@@ -66,218 +66,232 @@ export default function NominaLanding() {
       <NominaRevealObserver />
       <main className="nomina-page">
         <div className="nomina-grid" aria-hidden="true" />
-      <header className="nomina-header shell">
-        <a href="#top" className="brand-lockup" aria-label="CEFIN, inicio">
-          <span className="brand-mark">C</span>
-          <span>
-            <strong>CEFIN</strong>
-            <small>Centro de Estudios Fiscales</small>
-          </span>
-        </a>
-        <span className="header-tag">Reto profesional en vivo</span>
-      </header>
+        <header className="nomina-header shell">
+          <a href="#top" className="brand-lockup" aria-label="CEFIN, inicio">
+            <span className="brand-mark">C</span>
+            <span>
+              <strong>CEFIN</strong>
+              <small>Centro de Estudios Fiscales</small>
+            </span>
+          </a>
+          <span className="header-tag">Reto profesional en vivo</span>
+        </header>
 
-      <section id="top" className="hero shell">
-        <div className="hero-copy">
-          <p className="eyebrow" data-nomina-reveal="hero-eyebrow">
-            <span className="live-dot" />
-            {config.eventType}
-          </p>
-          <h1 data-nomina-reveal="hero-title">{config.title}</h1>
-          <p className="hero-lede" data-nomina-reveal="hero-lede">{config.promise}</p>
-          <div className="event-details" aria-label="Datos del evento" data-nomina-reveal="hero-details">
-            <div>
-              <span className="detail-icon" aria-hidden="true">
-                ◷
-              </span>
-              <span>
-                <b>{config.dates}</b>
-                <small>
-                  {config.time} · {config.timezone}
-                </small>
-              </span>
+        <section id="top" className="hero shell">
+          <div className="hero-copy">
+            <p className="eyebrow" data-nomina-reveal="hero-eyebrow">
+              <span className="live-dot" />
+              {config.eventType}
+            </p>
+            <h1 data-nomina-reveal="hero-title">{config.title}</h1>
+            <p className="hero-lede" data-nomina-reveal="hero-lede">
+              {config.promise}
+            </p>
+            <div
+              className="event-details"
+              aria-label="Datos del evento"
+              data-nomina-reveal="hero-details"
+            >
+              <div>
+                <span className="detail-icon" aria-hidden="true">
+                  ◷
+                </span>
+                <span>
+                  <b>{config.dates}</b>
+                  <small>
+                    {config.time} · {config.timezone}
+                  </small>
+                </span>
+              </div>
+              <div>
+                <span className="detail-icon" aria-hidden="true">
+                  ◉
+                </span>
+                <span>
+                  <b>{config.platform}</b>
+                  <small>Acceso gratuito con registro previo</small>
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="detail-icon" aria-hidden="true">
-                ◉
-              </span>
-              <span>
-                <b>{config.platform}</b>
-                <small>Acceso gratuito con registro previo</small>
-              </span>
-            </div>
+            <button
+              className="primary-cta"
+              data-nomina-reveal="hero-cta"
+              onClick={scrollToRegistration}
+            >
+              {config.ctaLabel}
+              <IconArrow />
+            </button>
+            <p className="process-copy" data-nomina-reveal="hero-process">
+              {config.processCopy}
+            </p>
           </div>
-          <button className="primary-cta" data-nomina-reveal="hero-cta" onClick={scrollToRegistration}>
-            {config.ctaLabel}
-            <IconArrow />
-          </button>
-          <p className="process-copy" data-nomina-reveal="hero-process">{config.processCopy}</p>
-        </div>
-        <div data-nomina-reveal="hero-image">
-          <HeroPortrait />
-        </div>
-      </section>
-
-      <ChallengeMap />
-      <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
-
-      <section className="section problem-section shell">
-        <div className="section-intro">
-          <p className="section-kicker">El punto de partida</p>
-          <h2>Una nómina timbrada también puede estar mal.</h2>
-          <p>
-            El sistema puede procesar y timbrar la información, pero no
-            reemplaza el criterio necesario para revisar cálculos, detectar
-            inconsistencias y evaluar una integración salarial.
-          </p>
-        </div>
-        <div className="signal-grid">
-          <SignalCard
-            number="01"
-            title="ISR"
-            text="Revisa los elementos que intervienen en el cálculo y reconoce señales que merecen atención."
-          />
-          <SignalCard
-            number="02"
-            title="IMSS"
-            text="Observa la relación entre la información de nómina y los aspectos que deben verificarse."
-          />
-          <SignalCard
-            number="03"
-            title="Integración salarial"
-            text="Identifica por qué una integración incorrecta puede afectar cálculos y obligaciones."
-          />
-        </div>
-      </section>
-
-      <section className="section outcomes-section shell" id="temario">
-        <div className="section-intro">
-          <p className="section-kicker">La claridad que buscas</p>
-          <h2>Al terminar el reto tendrás mayor claridad para…</h2>
-        </div>
-        <ul className="outcomes-grid">
-          {config.outcomes.map((outcome) => (
-            <li key={outcome}>
-              <span>+</span>
-              {outcome}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section transformation-section shell">
-        <div className="section-intro">
-          <p className="section-kicker">La evolución</p>
-          <h2>Pasa de operar la nómina a revisarla con mayor criterio.</h2>
-        </div>
-        <div className="transformation-grid">
-          <TransformCard
-            label="Antes"
-            items={[
-              "Captura",
-              "Timbra",
-              "Corrige lo evidente",
-              "Depende del sistema",
-            ]}
-            muted
-          />
-          <div className="transform-arrow" aria-hidden="true">
-            <IconArrow />
+          <div data-nomina-reveal="hero-image">
+            <HeroPortrait />
           </div>
-          <TransformCard
-            label="Después"
-            items={[
-              "Revisa",
-              "Analiza",
-              "Detecta inconsistencias",
-              "Recomienda con criterio",
-            ]}
-          />
-        </div>
-      </section>
+        </section>
 
-      <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
+        <ChallengeMap />
+        <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
 
-      <section className="section audience-section shell">
-        <div className="audience-panel">
+        <section className="section problem-section shell">
           <div className="section-intro">
-            <p className="section-kicker">Para quién es</p>
-            <h2>Este reto es para ti si…</h2>
+            <p className="section-kicker">El punto de partida</p>
+            <h2>Una nómina timbrada también puede estar mal.</h2>
+            <p>
+              El sistema puede procesar y timbrar la información, pero no
+              reemplaza el criterio necesario para revisar cálculos, detectar
+              inconsistencias y evaluar una integración salarial.
+            </p>
           </div>
-          <ul className="check-list">
-            {config.audience.map((item) => (
-              <li key={item}>
-                <span>✓</span>
-                {item}
+          <div className="signal-grid">
+            <SignalCard
+              number="01"
+              title="ISR"
+              text="Revisa los elementos que intervienen en el cálculo y reconoce señales que merecen atención."
+            />
+            <SignalCard
+              number="02"
+              title="IMSS"
+              text="Observa la relación entre la información de nómina y los aspectos que deben verificarse."
+            />
+            <SignalCard
+              number="03"
+              title="Integración salarial"
+              text="Identifica por qué una integración incorrecta puede afectar cálculos y obligaciones."
+            />
+          </div>
+        </section>
+
+        <section className="section outcomes-section shell" id="temario">
+          <div className="section-intro">
+            <p className="section-kicker">La claridad que buscas</p>
+            <h2>Al terminar el reto tendrás mayor claridad para…</h2>
+          </div>
+          <ul className="outcomes-grid">
+            {config.outcomes.map((outcome) => (
+              <li key={outcome}>
+                <span>+</span>
+                {outcome}
               </li>
             ))}
           </ul>
-        </div>
-      </section>
+        </section>
 
-      <section className="section instructor-section shell">
-        <div className="instructor-portrait">
-          <Image
-            src={config.instructor.image}
-            alt={config.instructor.imageAlt}
-            width={600}
-            height={720}
-            loading="lazy"
-            sizes="(max-width: 600px) 280px, 290px"
-          />
-          <span className="portrait-label">CEFIN / DOCENTE</span>
-        </div>
-        <div className="instructor-copy">
-          <p className="section-kicker">La mirada detrás del reto</p>
-          <h2>Aprende con el Mtro. Alfredo Cobos</h2>
-          <p className="instructor-role">{config.instructor.specialty}</p>
-          <p>{config.instructor.bio}</p>
-        </div>
-        <div className="authority-pills">
-          <span>Fundador de CEFIN</span>
-          <span>Asesoría fiscal</span>
-          <span>Capacitación profesional</span>
-        </div>
-      </section>
-
-      <section
-        ref={registrationRef}
-        id="registration"
-        className="section registration-section shell nomina-registration"
-        aria-labelledby="registration-heading"
-      >
-        <div className="registration-panel">
-          <div className="registration-copy">
-            <p className="section-kicker">Paso 1 de 2</p>
-            <h2 id="registration-heading" tabIndex={-1}>
-              Reserva tu lugar gratis
-            </h2>
-            <p>
-              Deja tus datos para guardar tu lugar. Después pasarás al último
-              paso: entrar al grupo oficial de WhatsApp.
-            </p>
-            <div className="registration-meta">
-              <span>{config.dates}</span>
-              <span>{config.time} · {config.timezone}</span>
-              <span>{config.platform}</span>
-            </div>
+        <section className="section transformation-section shell">
+          <div className="section-intro">
+            <p className="section-kicker">La evolución</p>
+            <h2>Pasa de operar la nómina a revisarla con mayor criterio.</h2>
           </div>
-          <ActiveCampaignForm />
-        </div>
-      </section>
+          <div className="transformation-grid">
+            <TransformCard
+              label="Antes"
+              items={[
+                "Captura",
+                "Timbra",
+                "Corrige lo evidente",
+                "Depende del sistema",
+              ]}
+              muted
+            />
+            <div className="transform-arrow" aria-hidden="true">
+              <IconArrow />
+            </div>
+            <TransformCard
+              label="Después"
+              items={[
+                "Revisa",
+                "Analiza",
+                "Detecta inconsistencias",
+                "Recomienda con criterio",
+              ]}
+            />
+          </div>
+        </section>
 
-      <Faq />
-      <footer className="nomina-footer shell">
-        <span className="footer-brand">CEFIN</span>
-        <span>Centro de Estudios Fiscales, Innovación y Negocios</span>
-        <span>Registro gratuito · Acceso en dos pasos</span>
-      </footer>
-      {showSticky && (
-        <button className="sticky-cta" onClick={scrollToRegistration}>
-          {config.ctaLabel}
-          <IconArrow />
-        </button>
-      )}
+        <RegistrationCta microcopy="Registro gratuito · Completa los 2 pasos para recibir tu acceso." />
+
+        <section className="section audience-section shell">
+          <div className="audience-panel">
+            <div className="section-intro">
+              <p className="section-kicker">Para quién es</p>
+              <h2>Este reto es para ti si…</h2>
+            </div>
+            <ul className="check-list">
+              {config.audience.map((item) => (
+                <li key={item}>
+                  <span>✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="section instructor-section shell">
+          <div className="instructor-portrait">
+            <Image
+              src={config.instructor.image}
+              alt={config.instructor.imageAlt}
+              width={600}
+              height={720}
+              loading="lazy"
+              sizes="(max-width: 600px) 280px, 290px"
+            />
+            <span className="portrait-label">CEFIN / DOCENTE</span>
+          </div>
+          <div className="instructor-copy">
+            <p className="section-kicker">La mirada detrás del reto</p>
+            <h2>Aprende con el Mtro. Alfredo Cobos</h2>
+            <p className="instructor-role">{config.instructor.specialty}</p>
+            <p>{config.instructor.bio}</p>
+          </div>
+          <div className="authority-pills">
+            <span>Fundador de CEFIN</span>
+            <span>Asesoría fiscal</span>
+            <span>Capacitación profesional</span>
+          </div>
+        </section>
+
+        <section
+          ref={registrationRef}
+          id="registration"
+          className="section registration-section shell nomina-registration"
+          aria-labelledby="registration-heading"
+        >
+          <div className="registration-panel">
+            <div className="registration-copy">
+              <p className="section-kicker">Paso 1 de 2</p>
+              <h2 id="registration-heading" tabIndex={-1}>
+                Reserva tu lugar gratis
+              </h2>
+              <p>
+                Deja tus datos para guardar tu lugar. Después pasarás al último
+                paso: entrar al grupo oficial de WhatsApp.
+              </p>
+              <div className="registration-meta">
+                <span>{config.dates}</span>
+                <span>
+                  {config.time} · {config.timezone}
+                </span>
+                <span>{config.platform}</span>
+              </div>
+            </div>
+            <ActiveCampaignForm />
+          </div>
+        </section>
+
+        <Faq />
+        <footer className="nomina-footer shell">
+          <span className="footer-brand">CEFIN</span>
+          <span>Centro de Estudios Fiscales, Innovación y Negocios</span>
+          <span>Registro gratuito · Acceso en dos pasos</span>
+        </footer>
+        {showSticky && (
+          <button className="sticky-cta" onClick={scrollToRegistration}>
+            {config.ctaLabel}
+            <IconArrow />
+          </button>
+        )}
       </main>
     </>
   );
@@ -305,7 +319,10 @@ function HeroPortrait() {
 
 function RegistrationCta({ microcopy }: { microcopy: string }) {
   return (
-    <section className="registration-cta-section shell" data-nomina-reveal="secondary-cta">
+    <section
+      className="registration-cta-section shell"
+      data-nomina-reveal="secondary-cta"
+    >
       <button className="secondary-cta" onClick={scrollToRegistration}>
         {config.ctaLabel}
         <IconArrow />

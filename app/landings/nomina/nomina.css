@@ -572,7 +572,12 @@
   z-index: -1;
   inset: 8% -12% -8%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, #4d8dbb55 0%, #17334d22 48%, transparent 74%);
+  background: radial-gradient(
+    ellipse at center,
+    #4d8dbb55 0%,
+    #17334d22 48%,
+    transparent 74%
+  );
   filter: blur(18px);
   pointer-events: none;
 }
@@ -887,8 +892,12 @@
     flex-direction: column;
     gap: 28px;
   }
-  .instructor-copy { order: 1; }
-  .instructor-portrait { order: 2; }
+  .instructor-copy {
+    order: 1;
+  }
+  .instructor-portrait {
+    order: 2;
+  }
   .instructor-section > .authority-pills {
     order: 3;
     width: 100%;
@@ -1393,12 +1402,24 @@
   opacity: 1;
   transform: none;
 }
-[data-nomina-reveal="hero-title"] { transition-delay: 70ms; }
-[data-nomina-reveal="hero-lede"] { transition-delay: 130ms; }
-[data-nomina-reveal="hero-details"] { transition-delay: 190ms; }
-[data-nomina-reveal="hero-cta"] { transition-delay: 250ms; }
-[data-nomina-reveal="hero-process"] { transition-delay: 310ms; }
-[data-nomina-reveal="hero-image"] { transition-delay: 170ms; }
+[data-nomina-reveal="hero-title"] {
+  transition-delay: 70ms;
+}
+[data-nomina-reveal="hero-lede"] {
+  transition-delay: 130ms;
+}
+[data-nomina-reveal="hero-details"] {
+  transition-delay: 190ms;
+}
+[data-nomina-reveal="hero-cta"] {
+  transition-delay: 250ms;
+}
+[data-nomina-reveal="hero-process"] {
+  transition-delay: 310ms;
+}
+[data-nomina-reveal="hero-image"] {
+  transition-delay: 170ms;
+}
 
 .nomina-page {
   background:
@@ -1509,7 +1530,9 @@
   background: #ffffff05;
 }
 .faq-list summary span {
-  transition: transform 180ms ease, color 180ms ease;
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
 }
 .nomina-registration ._form_295 input:focus,
 .nomina-registration ._form_295 select:focus,

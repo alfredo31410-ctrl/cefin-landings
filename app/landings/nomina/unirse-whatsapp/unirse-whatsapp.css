@@ -1,2 +1,75 @@
-.nomina-whatsapp-redirect{display:grid;place-items:center;min-height:100svh;padding:24px 16px;padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden;background:#07111f;color:#f7fafc;font-family:Arial,Helvetica,sans-serif}.whatsapp-redirect-card{width:min(100%,560px);padding:32px 24px;border:1px solid #4da3ff38;border-radius:18px;background:linear-gradient(145deg,#112b44e8,#0b1829e8);box-shadow:0 24px 75px #0004;text-align:center}.whatsapp-redirect-eyebrow{margin:0;color:#f2766d;font-size:11px;font-weight:900;letter-spacing:.16em}.whatsapp-redirect-card h1{margin:18px 0 16px;font-size:clamp(30px,7vw,52px);line-height:1;letter-spacing:-.045em}.whatsapp-redirect-copy{margin:0;color:#c2d0dc;font-size:16px;line-height:1.6}.whatsapp-redirect-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:25px;padding:0 20px;border-radius:9px;background:#25d366;color:#07111f;font-size:12px;font-weight:900;letter-spacing:.06em;text-decoration:none}.whatsapp-redirect-button:focus-visible{outline:2px solid #8bc9ff;outline-offset:4px}.whatsapp-redirect-note{margin:14px 0 0;color:#91a3b7;font-size:13px;line-height:1.5}.whatsapp-redirect-error{margin:24px 0 0;color:#f4bd82;font-size:14px;line-height:1.5}
-@media (prefers-reduced-motion:reduce){.whatsapp-redirect-button{transition:none}}
+.nomina-whatsapp-redirect {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 24px 16px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  overflow-x: hidden;
+  background: #07111f;
+  color: #f7fafc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.whatsapp-redirect-card {
+  width: min(100%, 560px);
+  padding: 32px 24px;
+  border: 1px solid #4da3ff38;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #112b44e8, #0b1829e8);
+  box-shadow: 0 24px 75px #0004;
+  text-align: center;
+}
+.whatsapp-redirect-eyebrow {
+  margin: 0;
+  color: #f2766d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+.whatsapp-redirect-card h1 {
+  margin: 18px 0 16px;
+  font-size: clamp(30px, 7vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+.whatsapp-redirect-copy {
+  margin: 0;
+  color: #c2d0dc;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.whatsapp-redirect-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 25px;
+  padding: 0 20px;
+  border-radius: 9px;
+  background: #25d366;
+  color: #07111f;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+.whatsapp-redirect-button:focus-visible {
+  outline: 2px solid #8bc9ff;
+  outline-offset: 4px;
+}
+.whatsapp-redirect-note {
+  margin: 14px 0 0;
+  color: #91a3b7;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.whatsapp-redirect-error {
+  margin: 24px 0 0;
+  color: #f4bd82;
+  font-size: 14px;
+  line-height: 1.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-redirect-button {
+    transition: none;
+  }
+}

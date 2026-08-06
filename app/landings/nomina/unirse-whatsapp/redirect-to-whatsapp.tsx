@@ -17,13 +17,20 @@ type RedirectToWhatsAppProps = {
 function isValidWhatsAppGroupUrl(value: string) {
   try {
     const url = new URL(value);
-    return url.protocol === "https:" && url.hostname === "chat.whatsapp.com" && !url.username && !url.password;
+    return (
+      url.protocol === "https:" &&
+      url.hostname === "chat.whatsapp.com" &&
+      !url.username &&
+      !url.password
+    );
   } catch {
     return false;
   }
 }
 
-export function RedirectToWhatsApp({ whatsappGroupUrl }: RedirectToWhatsAppProps) {
+export function RedirectToWhatsApp({
+  whatsappGroupUrl,
+}: RedirectToWhatsAppProps) {
   const redirectedRef = useRef(false);
   const isValidUrl = isValidWhatsAppGroupUrl(whatsappGroupUrl);
 
@@ -84,7 +91,11 @@ export function RedirectToWhatsApp({ whatsappGroupUrl }: RedirectToWhatsAppProps
         }}
       />
       {isValidUrl ? (
-        <a className="whatsapp-redirect-button" href={whatsappGroupUrl} rel="noopener noreferrer">
+        <a
+          className="whatsapp-redirect-button"
+          href={whatsappGroupUrl}
+          rel="noopener noreferrer"
+        >
           ABRIR EL GRUPO MANUALMENTE
         </a>
       ) : (
@@ -106,7 +117,11 @@ export function NominaWhatsAppIntentLink({
   children: React.ReactNode;
 }) {
   return (
-    <a className={className} href={href} onClick={() => createNominaWhatsAppIntent()}>
+    <a
+      className={className}
+      href={href}
+      onClick={() => createNominaWhatsAppIntent()}
+    >
       {children}
     </a>
   );

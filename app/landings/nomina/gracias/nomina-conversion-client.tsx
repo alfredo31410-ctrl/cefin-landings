@@ -19,7 +19,10 @@ export function NominaConversionClient() {
     const attempt = consumeNominaRegistrationAttempt();
     if (!attempt) return;
 
-    const eventKey = getNominaEventKey("complete_registration_sent", attempt.id);
+    const eventKey = getNominaEventKey(
+      "complete_registration_sent",
+      attempt.id,
+    );
     try {
       if (window.sessionStorage.getItem(eventKey)) return;
     } catch {
@@ -28,7 +31,12 @@ export function NominaConversionClient() {
 
     return waitForNominaMetaPixel(
       () => {
-        window.fbq?.("track", "CompleteRegistration", {}, { eventID: attempt.id });
+        window.fbq?.(
+          "track",
+          "CompleteRegistration",
+          {},
+          { eventID: attempt.id },
+        );
         try {
           window.sessionStorage.setItem(eventKey, "true");
         } catch {
@@ -37,7 +45,9 @@ export function NominaConversionClient() {
       },
       () => {
         if (process.env.NODE_ENV !== "production") {
-          console.warn("Meta Pixel no estuvo disponible para CompleteRegistration.");
+          console.warn(
+            "Meta Pixel no estuvo disponible para CompleteRegistration.",
+          );
         }
       },
     );

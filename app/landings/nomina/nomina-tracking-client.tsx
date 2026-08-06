@@ -4,7 +4,11 @@ import { useEffect } from "react";
 import type { RefObject } from "react";
 import { createNominaRegistrationAttempt } from "@/lib/nomina-tracking-session";
 
-export function NominaFormSubmitTracker({ formRef }: { formRef: RefObject<HTMLDivElement | null> }) {
+export function NominaFormSubmitTracker({
+  formRef,
+}: {
+  formRef: RefObject<HTMLDivElement | null>;
+}) {
   useEffect(() => {
     const formRoot = formRef.current;
     if (!formRoot) return;
@@ -30,7 +34,9 @@ export function NominaFormSubmitTracker({ formRef }: { formRef: RefObject<HTMLDi
 
     return () => {
       observer.disconnect();
-      boundForms.forEach((handler, form) => form.removeEventListener("submit", handler));
+      boundForms.forEach((handler, form) =>
+        form.removeEventListener("submit", handler),
+      );
     };
   }, [formRef]);
 
