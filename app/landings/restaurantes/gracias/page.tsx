@@ -16,7 +16,7 @@ import {
 import { waitForNominaMetaPixel } from "@/lib/nomina-tracking-session";
 
 const WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/EZTKXIJDObQ4QZCwMKakQx";
+  "https://chat.whatsapp.com/E7tlonFlIylH9eWPKwssAG?s=cl&p=a&ilr=1";
 
 export default function RestaurantesGraciasPage() {
   useEffect(() => {
