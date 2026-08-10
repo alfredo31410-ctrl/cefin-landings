@@ -1,0 +1,87 @@
+"use client";
+
+import Image from "next/image";
+import Script from "next/script";
+import { FormEvent, useEffect, useState } from "react";
+import { getMetaPixelNoscriptUrl, getMetaPixelScript } from "@/lib/meta-pixel";
+import { captureMedicosTraffic, getMedicosTraffic } from "./tracking";
+import { medicosConfig } from "./config";
+
+const CTA = "RESERVAR MI LUGAR GRATIS";
+
+export default function MedicosLanding() {
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [error, setError] = useState("");
+
+  useEffect(() => { captureMedicosTraffic(); }, []);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "loading") return;
+    const form = event.currentTarget;
+    setStatus("loading"); setError("");
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      phone: String(data.get("phone") ?? "").trim(),
+      traffic: getMedicosTraffic(),
+    };
+    try {
+      const response = await fetch("/api/medicos/register", {
+        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload),
+      });
+      const result = await response.json() as { ok?: boolean; message?: string };
+      if (!response.ok || !result.ok) throw new Error(result.message ?? "No pudimos guardar tus datos.");
+      window.location.assign("/landings/medicos/gracias");
+    } catch (submissionError) {
+      setStatus("error");
+      setError(submissionError instanceof Error ? submissionError.message : "Intenta nuevamente en unos segundos.");
+    }
+  }
+
+  return <>
+    <Script id="meta-pixel-medicos" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }} />
+    <noscript><img height="1" width="1" style={{ display: "none" }} src={getMetaPixelNoscriptUrl()} alt="" /></noscript>
+    <main className="medicos-page">
+      <section className="medicos-hero" aria-labelledby="medicos-title">
+        <div className="medicos-hero-copy">
+          <p className="medicos-eyebrow">CEFIN · CURSO GRATUITO EN VIVO</p>
+          <p className="medicos-kicker">Asesor Fiscal de</p>
+          <h1 id="medicos-title">MÉDICOS</h1>
+          <span className="medicos-badge">CURSO GRATIS · EN VIVO</span>
+          <p className="medicos-promise">Especialízate en la atención fiscal del sector médico y fortalece el valor de tus servicios profesionales.</p>
+          <div className="medicos-facts" aria-label="Información del evento">
+            <div><small>FECHA</small><strong>{medicosConfig.date}</strong></div>
+            <div><small>HORA</small><strong>{medicosConfig.time} · {medicosConfig.timezone}</strong></div>
+            <div><small>MODALIDAD</small><strong>{medicosConfig.modality}</strong></div>
+            <div><small>IMPARTE</small><strong>{medicosConfig.instructor}</strong></div>
+          </div>
+          <a className="medicos-cta" href="#registro">{CTA}</a>
+          <p className="medicos-microcopy">Paso 1 de 2 · Registra tus datos y después entra al grupo oficial de WhatsApp para completar tu acceso.</p>
+        </div>
+        <div className="medicos-hero-image">
+          <Image src={medicosConfig.assets.portrait} alt="Marisol Galván" fill priority sizes="(min-width: 1024px) 55vw, 100vw" />
+        </div>
+      </section>
+
+      <section className="medicos-section medicos-value" aria-labelledby="value-title">
+        <p className="medicos-section-label">UNA SESIÓN ENFOCADA</p><h2 id="value-title">Una mirada fiscal más precisa para el sector médico</h2>
+        <p>Conoce criterios y enfoques para conversar con mayor claridad sobre las necesidades fiscales de profesionales de la salud.</p>
+        <div className="medicos-columns"><div><b>01</b><h3>Especialización</h3><p>Enfoca tu asesoría en un nicho profesional concreto.</p></div><div><b>02</b><h3>Claridad</h3><p>Ordena mejor la conversación con tus prospectos médicos.</p></div><div><b>03</b><h3>Registro gratuito</h3><p>Reserva tu lugar y completa el acceso desde WhatsApp.</p></div></div>
+      </section>
+
+      <section className="medicos-section medicos-audience"><div><p className="medicos-section-label">¿PARA QUIÉN ES?</p><h2>Para profesionales que quieren atender médicos</h2><p>Para contadores y asesores fiscales que buscan fortalecer su propuesta de valor en este sector. El curso es gratuito y se realiza online, en vivo.</p></div><div className="medicos-instructor"><p className="medicos-section-label">INSTRUCTORA</p><h2>{medicosConfig.instructor}</h2><p>La sesión será impartida por Marisol Galván. La información de fecha, hora y detalles del entrenamiento se actualizará desde la configuración central de esta campaña.</p></div></section>
+
+      <section id="registro" className="medicos-form-section" aria-labelledby="form-title"><div className="medicos-form-card"><p className="medicos-section-label">PASO 1 DE 2</p><h2 id="form-title">Reserva tu lugar gratuito</h2><p>Deja tus datos para registrar tu lugar. Después pasarás al último paso: entrar al grupo oficial de WhatsApp.</p><form onSubmit={submit} noValidate><label htmlFor="medicos-name">Nombre completo</label><input id="medicos-name" name="name" autoComplete="name" required minLength={2} /><label htmlFor="medicos-email">Correo electrónico</label><input id="medicos-email" name="email" type="email" autoComplete="email" required /><label htmlFor="medicos-phone">WhatsApp</label><input id="medicos-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={7} /><button type="submit" disabled={status === "loading"}>{status === "loading" ? "GUARDANDO…" : "GUARDAR MIS DATOS Y CONTINUAR"}</button>{error && <p className="medicos-form-error" role="alert">{error}</p>}</form></div></section>
+
+      <section className="medicos-faq medicos-section" aria-labelledby="faq-title"><p className="medicos-section-label">PREGUNTAS LOGÍSTICAS</p><h2 id="faq-title">Lo esencial antes de registrarte</h2><details><summary>¿El curso tiene costo?</summary><p>No. El registro es gratuito.</p></details><details><summary>¿Cómo completo mi acceso?</summary><p>Después de guardar tus datos, entrarás al grupo oficial de WhatsApp.</p></details><details><summary>¿Dónde recibiré los avisos?</summary><p>En el grupo oficial de WhatsApp, una vez que completes el segundo paso.</p></details></section>
+      <section className="medicos-final-cta"><h2>Reserva tu lugar gratis</h2><a className="medicos-cta" href="#registro">{CTA}</a></section>
+    </main>
+    <style jsx global>{styles}</style>
+  </>;
+}
+
+const styles = `
+:root{--med-black:#050505;--med-ink:#10110d;--med-orange:#ee8b32;--med-olive:#566044;--med-line:#2b3027}*{box-sizing:border-box}.medicos-page{background:var(--med-black);color:#fff;font-family:Arial,sans-serif;overflow:hidden}.medicos-hero{min-height:clamp(720px,100svh,920px);display:grid;grid-template-columns:minmax(0,45%) minmax(0,55%);max-width:1440px;margin:auto;position:relative;background:linear-gradient(100deg,#050505 0%,#080907 55%,#182016 100%)}.medicos-hero-copy{padding:clamp(34px,6vw,88px) clamp(22px,5vw,78px);position:relative;z-index:2;align-self:center}.medicos-eyebrow,.medicos-section-label{color:#c5ceae;font-size:11px;font-weight:800;letter-spacing:.18em;margin:0 0 24px}.medicos-kicker{font-size:clamp(22px,2.2vw,34px);font-weight:800;margin:0 0 4px}.medicos-hero h1{font-family:Impact,'Arial Narrow',sans-serif;font-stretch:condensed;font-size:clamp(76px,10vw,156px);letter-spacing:.01em;line-height:.82;margin:0 0 26px}.medicos-badge{display:inline-block;background:var(--med-orange);color:#17100a;font-size:12px;font-weight:900;letter-spacing:.08em;padding:10px 14px;border-radius:999px}.medicos-promise{color:#f5f5f0;font-size:clamp(16px,1.4vw,20px);line-height:1.55;max-width:560px;margin:24px 0}.medicos-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:26px 0}.medicos-facts div{border-left:2px solid var(--med-olive);padding:9px 12px;background:#ffffff08}.medicos-facts small{display:block;color:#aeb9a0;font-size:10px;font-weight:800;letter-spacing:.14em;margin-bottom:5px}.medicos-facts strong{display:block;font-size:14px;line-height:1.35}.medicos-cta{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 22px;background:var(--med-orange);color:#17100a;text-decoration:none;font-size:13px;font-weight:900;letter-spacing:.07em;border-radius:4px;transition:transform .2s,background .2s}.medicos-cta:hover,.medicos-cta:focus-visible{background:#ffad54;transform:translateY(-2px)}.medicos-microcopy{color:#b4b8ae;font-size:12px;line-height:1.5;max-width:480px;margin:12px 0 0}.medicos-hero-image{position:relative;min-height:640px}.medicos-hero-image:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#050505 0%,transparent 22%),linear-gradient(0deg,#05050508,transparent 60%);pointer-events:none}.medicos-hero-image img{object-fit:cover;object-position:center top}.medicos-section{max-width:1120px;margin:auto;padding:100px 24px}.medicos-section h2,.medicos-final-cta h2{font-size:clamp(32px,4vw,58px);line-height:1.02;letter-spacing:-.04em;margin:0 0 20px;max-width:760px}.medicos-section>p:not(.medicos-section-label),.medicos-audience p{color:#c9cdc5;line-height:1.7;max-width:660px}.medicos-value{border-top:1px solid var(--med-line)}.medicos-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--med-line);margin-top:48px}.medicos-columns>div{background:var(--med-black);padding:28px 24px;min-height:180px}.medicos-columns b{color:var(--med-orange);font-size:12px}.medicos-columns h3{font-size:22px;margin:30px 0 8px}.medicos-columns p{color:#aeb2aa;line-height:1.5;margin:0}.medicos-audience{display:grid;grid-template-columns:1fr 1fr;gap:70px;background:#11150f;max-width:none;padding-left:max(24px,calc((100% - 1120px)/2));padding-right:max(24px,calc((100% - 1120px)/2))}.medicos-instructor{border-left:2px solid var(--med-orange);padding-left:30px}.medicos-form-section{background:#ebe9e2;color:#111;padding:100px 24px}.medicos-form-card{max-width:580px;margin:auto;background:#fff;padding:clamp(26px,5vw,58px);box-shadow:0 18px 60px #0002}.medicos-form-card .medicos-section-label{color:#67705a}.medicos-form-card h2{font-size:clamp(32px,5vw,52px);line-height:1;margin:0 0 16px}.medicos-form-card>p:not(.medicos-section-label){color:#4c5149;line-height:1.6}.medicos-form-card form{display:grid;gap:9px;margin-top:28px}.medicos-form-card label{font-size:13px;font-weight:800;margin-top:8px}.medicos-form-card input{min-height:48px;border:1px solid #c5c9c0;padding:12px;font-size:16px;background:#fff}.medicos-form-card input:focus{outline:3px solid #ee8b3255;border-color:var(--med-orange)}.medicos-form-card button{min-height:54px;border:0;background:#151912;color:#fff;font-weight:900;letter-spacing:.04em;padding:14px;margin-top:14px;cursor:pointer}.medicos-form-card button:disabled{opacity:.6;cursor:wait}.medicos-form-error{color:#a5281c;font-size:14px}.medicos-faq details{border-top:1px solid var(--med-line);padding:20px 0}.medicos-faq summary{cursor:pointer;font-size:18px;font-weight:700}.medicos-faq details p{color:#b8beb4;line-height:1.6}.medicos-final-cta{background:var(--med-olive);text-align:center;padding:80px 24px}.medicos-final-cta h2{margin:0 auto 28px}.medicos-final-cta .medicos-cta{background:#fff}.medicos-final-cta .medicos-cta:hover{background:#f5f0e5}@media(max-width:767px){.medicos-hero{display:flex;flex-direction:column;min-height:auto}.medicos-hero-copy{padding:34px 20px 28px}.medicos-eyebrow{margin-bottom:18px}.medicos-hero h1{font-size:clamp(72px,23vw,112px);margin-bottom:20px}.medicos-promise{margin:18px 0}.medicos-facts{gap:8px;margin:20px 0}.medicos-facts div{padding:8px}.medicos-facts strong{font-size:12px}.medicos-hero-image{min-height:380px;height:52vw}.medicos-hero-image img{object-position:center 14%;}.medicos-hero-image:after{background:linear-gradient(0deg,#050505 0%,transparent 36%),linear-gradient(90deg,#05050522,transparent)}.medicos-section{padding:68px 20px}.medicos-columns,.medicos-audience{grid-template-columns:1fr}.medicos-audience{gap:44px;padding-left:20px;padding-right:20px}.medicos-instructor{padding-left:20px}.medicos-form-section{padding:68px 16px}.medicos-form-card{padding:28px 20px}.medicos-final-cta{padding:62px 20px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.medicos-cta{transition:none}}
+`;
