@@ -7,12 +7,13 @@ import {
   getMetaPixelScript,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import { captureMedicosTraffic } from "../medicos/tracking";
 
 /* ==========================================================================
    CONFIGURACIÓN RÁPIDA
    ========================================================================== */
 
-const ACTIVE_CAMPAIGN_FORM_ID = 275;
+const ACTIVE_CAMPAIGN_FORM_ID = 319;
 
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
@@ -26,7 +27,7 @@ const MARISOL_IMAGE_URL = `${ASSET_BASE}/medicos/Marisol-medicos.png`;
 const MARISOL_IMAGE_TABLET_URL = `${ASSET_BASE}/medicos/Marisol-medicos-1024.png`;
 const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`;
 
-const EVENT_DATE = "Martes 14 de julio";
+const EVENT_DATE = "Lunes 17 de agosto";
 const EVENT_TIME = "11:00 AM";
 const EVENT_TIMEZONE = "Hora CDMX";
 
@@ -34,6 +35,7 @@ export default function AsesorFiscalMedicosPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    captureMedicosTraffic();
     document.title =
       "Contabilidad e Impuestos para Médicos | Clase Gratis | CEFIN";
 
