@@ -1411,6 +1411,48 @@ export default function AsesorFiscalMedicosPage() {
           .ac-modal-wrapper label {
             color: #475569 !important;
           }
+
+          @media (max-width: 767px) {
+            .modal-backdrop {
+              align-items: flex-start !important;
+              padding: 0.5rem !important;
+            }
+
+            .modal-card {
+              max-height: calc(100svh - 1rem) !important;
+              border-radius: 1rem !important;
+            }
+
+            .modal-card > div:nth-of-type(2) {
+              padding: 2rem 1rem 1rem !important;
+            }
+
+            .modal-card > div:nth-of-type(2) h2 {
+              margin-top: 0.65rem !important;
+              font-size: 1.65rem !important;
+            }
+
+            .modal-card > div:nth-of-type(2) .medical-display {
+              font-size: 2.8rem !important;
+            }
+
+            .modal-card > div:nth-of-type(2) p:nth-of-type(2) {
+              margin-top: 0.75rem !important;
+              font-size: 0.8rem !important;
+            }
+
+            .modal-card > div:nth-of-type(2) p:nth-of-type(3) {
+              margin-top: 0.5rem !important;
+              font-size: 0.68rem !important;
+            }
+
+            .modal-card > div:nth-of-type(3) {
+              min-height: 0 !important;
+              overflow-y: auto !important;
+              padding: 1rem !important;
+              -webkit-overflow-scrolling: touch;
+            }
+          }
         `}</style>
       </main>
     </>
