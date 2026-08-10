@@ -7,6 +7,7 @@ import {
   getMetaPixelScript,
   META_CURRENCY,
   trackMetaEvent,
+  trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
 
 /* ==========================================================================
@@ -30,10 +31,25 @@ const MARISOL_IMAGE_URL = `${ASSET_BASE}/medicos/Marisol-medicos.png`;
 const MARISOL_IMAGE_TABLET_URL = `${ASSET_BASE}/medicos/Marisol-medicos-1024.png`;
 const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`;
 
+const COMPLETE_REGISTRATION_KEY = "cefin_asesor_fiscal_medicos_complete_registration";
+const JOIN_GROUP_KEY = "cefin_asesor_fiscal_medicos_join_group";
+
+function claimSessionEvent(key: string) {
+  try {
+    if (sessionStorage.getItem(key) === "1") return false;
+    sessionStorage.setItem(key, "1");
+    return true;
+  } catch {
+    return true;
+  }
+}
+
 export default function GraciasAsesorFiscalMedicosPage() {
   useEffect(() => {
     document.title =
       "Último paso | Contabilidad e Impuestos para Médicos | CEFIN";
+
+    if (!claimSessionEvent(COMPLETE_REGISTRATION_KEY)) return;
 
     trackMetaEvent("CompleteRegistration", {
       content_name:
@@ -46,7 +62,12 @@ export default function GraciasAsesorFiscalMedicosPage() {
   }, []);
 
 const handleWhatsAppClick = () => {
-  trackMetaEvent("WhatsAppGroupClick", {
+  if (!claimSessionEvent(JOIN_GROUP_KEY)) {
+    if (WHATSAPP_URL) window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  trackMetaCustomEvent("JoinGroup", {
     content_name:
       "Contabilidad e Impuestos para Médicos | Click grupo WhatsApp",
     content_category: "Grupo de WhatsApp",
