@@ -22,3 +22,32 @@ body {
   overflow: visible !important;
   max-height: none !important;
 }
+
+.restaurant-inscripcion-grid {
+  background-image:
+    linear-gradient(rgba(251, 146, 60, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 146, 60, 0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.restaurant-inscripcion-eyebrow {
+  color: #fdba74;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: #fdba74;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

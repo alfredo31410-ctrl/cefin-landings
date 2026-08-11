@@ -63,6 +63,26 @@ export function trackMetaCustomEvent(event: string, data?: MetaEventPayload) {
   sendMetaEvent("trackCustom", event, data);
 }
 
+/**
+ * Sends a voluntary interaction event without waiting for Meta Pixel.
+ * Navigation must never be held up by analytics availability.
+ */
+export function trackMetaCustomEventImmediate(
+  event: string,
+  data?: MetaEventPayload,
+) {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") {
+    return;
+  }
+
+  if (data) {
+    window.fbq("trackCustom", event, data);
+    return;
+  }
+
+  window.fbq("trackCustom", event);
+}
+
 export function getMetaPixelScript(
   pixelId = META_PIXEL_ID,
   { trackPageView = true }: MetaPixelScriptOptions = {},

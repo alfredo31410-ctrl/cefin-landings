@@ -123,23 +123,9 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
       var trackedHref = getTrackedHotmartHref(anchor);
       if (!trackedHref || trackedHref === anchor.href) return;
 
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (typeof event.stopImmediatePropagation === "function") {
-        event.stopImmediatePropagation();
-      }
-
-      window.setTimeout(function () {
-        var targetWindow = anchor.getAttribute("target");
-
-        if (targetWindow && targetWindow !== "_self") {
-          window.open(trackedHref, targetWindow, "noopener,noreferrer");
-          return;
-        }
-
-        window.location.href = trackedHref;
-      }, 0);
+      // Mutate the known Hotmart link and let the browser perform its normal
+      // navigation immediately. Analytics must never delay checkout loading.
+      anchor.setAttribute("href", trackedHref);
     },
     true
   );
