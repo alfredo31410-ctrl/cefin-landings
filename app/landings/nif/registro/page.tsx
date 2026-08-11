@@ -15,15 +15,15 @@ const ACTIVE_CAMPAIGN_FORM_ID = 307;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 const benefits = [
-  "Qué son las NIF y por qué son esenciales para interpretar información financiera.",
-  "Cómo relacionar las bases de las NIF con la lectura de estados financieros.",
-  "Cómo detectar errores comunes al analizar reportes contables.",
-  "Cómo pasar de observar números aislados a interpretarlos con mayor criterio.",
+  "Qué son las NIF y por qué son esenciales en la contabilidad.",
+  "Cómo construir tus bases de NIF desde cero.",
+  "Cómo relacionar las NIF con situaciones contables reales.",
+  "Cómo avanzar de los conceptos básicos a la aplicación práctica.",
 ];
 
 const audience = [
   "Estudias o trabajas en contabilidad.",
-  "Tienes contacto con estados financieros, pero todavía tienes dudas al interpretarlos.",
+  "Quieres aprender NIF desde cero y llevarlas a la práctica.",
   "Quieres fortalecer tus bases en las NIF.",
   "Buscas entender mejor lo que realmente reflejan los números de una empresa.",
 ];
@@ -44,7 +44,7 @@ function scrollToForm(event: React.MouseEvent<HTMLButtonElement>) {
 export default function NifRegistroPage() {
   useEffect(() => {
     trackMetaEvent("ViewContent", {
-      content_name: "ABC de las NIF",
+      content_name: "ABC PRÁCTICO DE NIF",
       content_category: "Clase gratuita en vivo",
       landing_slug: "nif-registro",
     });
@@ -144,17 +144,16 @@ export default function NifRegistroPage() {
           <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-12 lg:py-20">
             <div className="nif-reveal">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#a79bff]">
-                ABC de las NIF
+                ABC PRÁCTICO DE NIF
               </p>
               <h1 className="mt-4 max-w-4xl text-4xl font-black leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
-                Aprende a interpretar estados financieros con las bases
-                esenciales de las NIF
+                Aprende NIF desde cero con un enfoque
+                práctico y claro
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/72 sm:text-lg">
                 Participa en una clase gratuita y en vivo para comprender cómo
-                se aplican las Normas de Información Financiera, leer reportes
-                con mayor criterio contable y evitar errores comunes al analizar
-                una empresa.
+                funcionan las Normas de Información Financiera y construir una
+                base práctica para aplicarlas en situaciones contables reales.
               </p>
 
               <div className="mt-7 grid gap-3 text-sm font-black uppercase tracking-[0.08em] sm:grid-cols-3">

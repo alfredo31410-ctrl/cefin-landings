@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Completa tu acceso | ABC de las NIF | CEFIN",
+  title: "Completa tu acceso | ABC PRÁCTICO DE NIF | CEFIN",
   robots: { index: false, follow: false },
 };
 

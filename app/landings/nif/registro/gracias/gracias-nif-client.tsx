@@ -53,7 +53,7 @@ export default function GraciasNifClient() {
         trackMetaEvent(
           "CompleteRegistration",
           {
-            content_name: "ABC de las NIF",
+            content_name: "ABC PRÁCTICO DE NIF",
             content_category: "Clase gratuita en vivo",
             status: "completed",
             value: 0,

@@ -55,7 +55,7 @@ export default function JoinWhatsappClient({ groupUrl }: { groupUrl: string }) {
       <main className="flex min-h-screen items-center justify-center bg-[#08080b] px-5 py-12 text-white">
         <section className="w-full max-w-xl rounded-3xl border border-white/10 bg-[#121819] p-7 text-center shadow-2xl sm:p-10">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-[#c9c2ff]">
-            ABC de las NIF · Paso final
+            ABC PRÁCTICO DE NIF · Paso final
           </p>
           <h1 className="mt-5 text-3xl font-black uppercase leading-tight sm:text-5xl">
             Estamos abriendo el grupo oficial…

@@ -19,7 +19,7 @@ const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/alfredo.png";
 
-export default function EstadosFinancierosLandingPage() {
+export default function NifLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const trackEvent = (event: string, data?: Record<string, unknown>) => {
@@ -34,10 +34,10 @@ export default function EstadosFinancierosLandingPage() {
   };
 
   useEffect(() => {
-    document.title = "ABC de las NIF | Curso gratuito en vivo | CEFIN";
+    document.title = "ABC PRÁCTICO DE NIF | Curso gratuito en vivo | CEFIN";
 
     trackEvent("ViewContent", {
-      content_name: "ABC de las NIF",
+      content_name: "ABC PRÁCTICO DE NIF",
       content_category: "Clase gratuita",
     });
 
@@ -96,9 +96,9 @@ export default function EstadosFinancierosLandingPage() {
   }, [isModalOpen]);
 
   const bullets = [
-    "Aprende a interpretar estados financieros con las bases de las NIF.",
-    "Conecta la informacion financiera con decisiones contables reales.",
-    "Detecta errores comunes al analizar reportes contables.",
+    "Aprende las bases de las NIF desde cero.",
+    "Conoce los conceptos esenciales de la informacion financiera.",
+    "Relaciona las NIF con situaciones contables reales.",
     "Participa en un curso gratuito, en vivo y enfocado en practica.",
   ];
 
@@ -106,8 +106,8 @@ export default function EstadosFinancierosLandingPage() {
     {
       day: "Curso en vivo",
       date: "20 de agosto de 2026",
-      title: "ABC de las NIF",
-      detail: "Una clase practica para interpretar informacion financiera con mayor criterio contable.",
+      title: "ABC PRÁCTICO DE NIF",
+      detail: "Una clase practica para construir tus bases de NIF desde cero.",
     },
   ];
 
@@ -115,8 +115,8 @@ export default function EstadosFinancierosLandingPage() {
     "Base y mentalidad NIF",
     "Postulados basicos aplicados",
     "Registro contable con logica real",
-    "Estados financieros que si sirven",
-    "De contador operativo a asesor estrategico",
+    "Aplicacion practica de las NIF",
+    "De las bases NIF a la practica contable",
   ];
 
   return (
@@ -303,7 +303,7 @@ export default function EstadosFinancierosLandingPage() {
                   Registro gratuito
                 </p>
                 <h2 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  ABC de las NIF
+                  ABC PRÁCTICO DE NIF
                 </h2>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.

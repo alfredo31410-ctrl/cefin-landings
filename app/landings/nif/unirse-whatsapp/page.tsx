@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import JoinWhatsappClient from "./join-whatsapp-client";
 
 export const metadata: Metadata = {
-  title: "Abriendo el grupo oficial | ABC de las NIF",
+  title: "Abriendo el grupo oficial | ABC PRÁCTICO DE NIF",
   robots: { index: false, follow: false },
 };
 
