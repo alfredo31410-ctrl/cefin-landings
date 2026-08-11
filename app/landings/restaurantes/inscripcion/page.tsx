@@ -4,7 +4,7 @@ import {
   RestaurantesInscripcionAnalytics,
 } from "./restaurantes-inscripcion-tracking";
 
-const PRICE_LABEL = "$4,787 MXN";
+const PRICE_LABEL = "$3,687 MXN";
 const ALFREDO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/restaurantes/alfredo-restaurantes.png";
 

@@ -10,7 +10,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const PRICE = 4787;
+const PRICE = 3687;
 const CHECKOUT_URL = "https://pay.hotmart.com/X106026238J?checkoutMode=10";
 const VIEW_CONTENT_KEY = "restaurantesInscripcionViewContentSent";
 const PRODUCT_EVENT = {
