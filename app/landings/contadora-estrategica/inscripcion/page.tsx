@@ -10,7 +10,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const PRICE = 3687;
+const PRICE = 4787;
 const CHECKOUT_URL: string = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
@@ -145,7 +145,7 @@ export default function ContadoraEstrategicaPagoPage() {
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <p className="rounded-[1.2rem] bg-[#111] px-6 py-4 text-4xl font-black italic text-white shadow-[0_18px_50px_rgba(0,0,0,.22)]">
-                    $3,687 MXN
+                    $4,787 MXN
                   </p>
 
                   <button
@@ -304,7 +304,7 @@ export default function ContadoraEstrategicaPagoPage() {
                 Inversión por participante
               </p>
               <p className="mt-4 text-[clamp(3rem,7vw,6rem)] font-black italic leading-none">
-                $3,687
+                $4,787
               </p>
               <p className="mt-2 text-2xl font-black uppercase text-white/75">
                 MXN

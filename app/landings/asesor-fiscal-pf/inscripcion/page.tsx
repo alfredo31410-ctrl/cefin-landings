@@ -10,8 +10,8 @@ import {
 import { useEffect, type MouseEvent, useRef } from "react";
 
 const CHECKOUT_URL = "https://pay.hotmart.com/R105211548E?off=2fonqwf3&checkoutMode=10&bid=1783529102396";
-const PRODUCT_PRICE = 3687;
-const PRODUCT_PRICE_LABEL = "$3,687 MXN";
+const PRODUCT_PRICE = 4787;
+const PRODUCT_PRICE_LABEL = "$4,787 MXN";
 const REGULAR_PRICE_LABEL = "$13,848 MXN";
 
 const ASSET_BASE =
