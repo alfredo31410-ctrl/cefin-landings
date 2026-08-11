@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 const HOTMART_UTM_TRACKING_SCRIPT = `
 (function () {
   var storageKey = "cefinHotmartUtmParams";
@@ -136,8 +138,9 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
 
 export function HotmartUtmTracking() {
   return (
-    <script
+    <Script
       id="hotmart-utm-tracking"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{ __html: HOTMART_UTM_TRACKING_SCRIPT }}
     />
   );
