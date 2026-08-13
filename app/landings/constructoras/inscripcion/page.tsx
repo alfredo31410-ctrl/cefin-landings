@@ -13,8 +13,8 @@ const PAYMENT_URL =
   "https://pay.hotmart.com/M105254402Q?off=hpfi29f1&checkoutMode=10&bid=1778088304149";
 
 const PRODUCT_NAME = "Impuestos y Contabilidad para Constructoras";
-const PRICE = "$4,387 MXN";
-const PRODUCT_VALUE = 4387;
+const PRICE = "$4,787 MXN";
+const PRODUCT_VALUE = 4787;
 
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png";
