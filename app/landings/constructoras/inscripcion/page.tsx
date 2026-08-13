@@ -13,9 +13,8 @@ const PAYMENT_URL =
   "https://pay.hotmart.com/M105254402Q?off=hpfi29f1&checkoutMode=10&bid=1778088304149";
 
 const PRODUCT_NAME = "Impuestos y Contabilidad para Constructoras";
-const PRICE = "$3,387 MXN";
-const OLD_PRICE = "$6,707 MXN";
-const PRODUCT_VALUE = 3387;
+const PRICE = "$4,387 MXN";
+const PRODUCT_VALUE = 4387;
 const INSTALLMENT_TEXT = "o en 12 cuotas de $340.06";
 const INSTALLMENT_NOTE = "* con tarjeta de credito";
 
@@ -42,7 +41,7 @@ const bonuses = [
   "4 sesiones de preguntas y respuestas",
 ];
 
-export default function ConstructorasRetargetingPage() {
+export default function ConstructorasSalesPage() {
   const handleCheckoutClick = () => {
     trackMetaEvent("InitiateCheckout", {
       content_name: PRODUCT_NAME,
@@ -53,7 +52,7 @@ export default function ConstructorasRetargetingPage() {
   };
 
   useEffect(() => {
-    document.title = "Constructoras | Oferta Especial CEFIN";
+    document.title = "Constructoras | Programa CEFIN";
 
     trackMetaEvent("ViewContent", {
       content_name: PRODUCT_NAME,
@@ -66,7 +65,7 @@ export default function ConstructorasRetargetingPage() {
   return (
     <>
       <Script
-        id="meta-pixel-retargeting-constructoras"
+        id="meta-pixel-constructoras"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
@@ -119,7 +118,7 @@ export default function ConstructorasRetargetingPage() {
               <div>
                 <p className="text-2xl font-black tracking-tight">CEFIN</p>
                 <p className="text-[10px] uppercase tracking-[0.28em] text-white/60">
-                  Oferta especial para constructoras
+                  Formación contable y fiscal para constructoras
                 </p>
               </div>
             </div>
@@ -156,14 +155,14 @@ export default function ConstructorasRetargetingPage() {
               </div>
 
               <div className="mt-8 inline-flex items-center rounded-full bg-black px-6 py-4 text-lg font-black uppercase tracking-tight text-lime-300 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                Oferta especial por tiempo limitado
+                Programa completo para constructoras
               </div>
 
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
                 Si ya viste la clase gratuita y te diste cuenta de que el giro
                 constructor necesita una lectura mas fina en contabilidad,
                 costos e impuestos, esta es tu oportunidad para entrar al
-                programa completo con una oferta especial.
+                programa completo con acceso inmediato.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -176,7 +175,7 @@ export default function ConstructorasRetargetingPage() {
                 </a>
 
                 <a
-                  href="#oferta"
+                  href="#programa"
                   className="inline-flex items-center justify-center rounded-2xl border border-lime-300/20 bg-white/[0.03] px-8 py-5 text-base font-black uppercase tracking-tight text-white transition hover:bg-white/[0.06] sm:text-lg"
                 >
                   Ver lo que incluye
@@ -198,11 +197,11 @@ export default function ConstructorasRetargetingPage() {
 
             <div className="lg:col-span-4">
               <div
-                id="oferta"
+                id="programa"
                 className="rounded-[2rem] border border-lime-300/15 bg-white/[0.05] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:ml-auto lg:max-w-[390px]"
               >
                 <p className="text-sm font-black uppercase tracking-[0.22em] text-lime-300">
-                  Oferta activa
+                  Acceso al programa
                 </p>
 
                 <h2 className="mt-4 text-3xl font-black uppercase leading-none text-white">
@@ -229,14 +228,7 @@ export default function ConstructorasRetargetingPage() {
 
                 <div className="mt-8">
                   <p className="text-sm font-bold uppercase text-white/45">
-                    Inversion normal
-                  </p>
-                  <p className="text-2xl font-black text-white/35 line-through">
-                    {OLD_PRICE}
-                  </p>
-
-                  <p className="mt-4 text-sm font-bold uppercase text-lime-300">
-                    Hoy puedes entrar por
+                    Inversión
                   </p>
                   <p className="text-5xl font-black tracking-tight text-white">
                     {PRICE}
@@ -288,12 +280,11 @@ export default function ConstructorasRetargetingPage() {
                   onClick={handleCheckoutClick}
                   className="mt-8 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-lg font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98]"
                 >
-                  Inscribirme con precio especial
+                  Comprar el programa
                 </a>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-white/45">
-                  Oferta dirigida a personas que ya mostraron interes en la
-                  clase gratuita de constructoras.
+                  Pago seguro y acceso inmediato al programa completo.
                 </p>
               </div>
             </div>
@@ -360,14 +351,14 @@ export default function ConstructorasRetargetingPage() {
 
             <div className="rounded-[2rem] border border-lime-300/15 bg-lime-300/[0.08] p-8">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-lime-300">
-                Cierre de oferta
+                Da el siguiente paso
               </p>
               <h2 className="mt-4 text-3xl font-black uppercase leading-none text-white">
                 Entra hoy y lleva el giro constructor con mas claridad
               </h2>
               <p className="mt-5 leading-relaxed text-white/75">
                 Si ya viste la clase gratuita, este es el momento de pasar de
-                interes a aplicacion real con una oferta especial.
+                interes a aplicacion real con acceso inmediato al programa.
               </p>
               <a
                 href={PAYMENT_URL}
