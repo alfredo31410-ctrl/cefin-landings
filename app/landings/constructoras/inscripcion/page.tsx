@@ -15,8 +15,6 @@ const PAYMENT_URL =
 const PRODUCT_NAME = "Impuestos y Contabilidad para Constructoras";
 const PRICE = "$4,387 MXN";
 const PRODUCT_VALUE = 4387;
-const INSTALLMENT_TEXT = "o en 12 cuotas de $340.06";
-const INSTALLMENT_NOTE = "* con tarjeta de credito";
 
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png";
@@ -128,7 +126,7 @@ export default function ConstructorasSalesPage() {
               onClick={handleCheckoutClick}
               className="hidden rounded-full border border-lime-300/20 bg-white/8 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white backdrop-blur transition hover:bg-white/12 md:inline-flex"
             >
-              Inscribirme ahora
+              INSCRIBIRME AHORA
             </a>
           </div>
         </header>
@@ -171,7 +169,7 @@ export default function ConstructorasSalesPage() {
                   onClick={handleCheckoutClick}
                   className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-base font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98] sm:text-lg"
                 >
-                  Quiero entrar ahora
+                  INSCRIBIRME AHORA
                 </a>
 
                 <a
@@ -233,10 +231,6 @@ export default function ConstructorasSalesPage() {
                   <p className="text-5xl font-black tracking-tight text-white">
                     {PRICE}
                   </p>
-                  <p className="mt-2 text-sm font-semibold text-white/65">
-                    {INSTALLMENT_TEXT}
-                  </p>
-                  <p className="text-xs text-white/45">{INSTALLMENT_NOTE}</p>
                 </div>
 
                 <div className="mt-8 space-y-3">
@@ -280,7 +274,7 @@ export default function ConstructorasSalesPage() {
                   onClick={handleCheckoutClick}
                   className="mt-8 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-lg font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98]"
                 >
-                  Comprar el programa
+                  INSCRIBIRME AHORA
                 </a>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-white/45">
@@ -365,7 +359,7 @@ export default function ConstructorasSalesPage() {
                 onClick={handleCheckoutClick}
                 className="mt-8 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-lg font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98]"
               >
-                Quiero mi acceso ahora
+                INSCRIBIRME AHORA
               </a>
             </div>
           </div>
