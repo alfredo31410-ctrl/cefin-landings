@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const fallbackGroupUrl = "https://chat.whatsapp.com/K9xChqDdrbEHWWcCld3l57?s=cl&p=a&ilr=1";
+const fallbackGroupUrl = "https://chat.whatsapp.com/KcyxexpHGeMFxzdytu5kHu";
 
 export default function JoinWhatsappPage() {
   const groupUrl = process.env.NIF_WHATSAPP_GROUP_URL || fallbackGroupUrl;
