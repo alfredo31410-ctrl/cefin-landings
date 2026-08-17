@@ -974,6 +974,183 @@
   overflow-x: clip;
   overflow-y: visible;
 }
+
+.nomina-sale-page {
+  min-height: 100vh;
+}
+.nomina-sale-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  gap: 48px;
+  align-items: center;
+  padding-block: 78px 88px;
+}
+.nomina-sale-copy h1 {
+  max-width: 700px;
+  margin: 18px 0 22px;
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: .92;
+  letter-spacing: -.065em;
+}
+.nomina-sale-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 26px 0 30px;
+}
+.nomina-sale-points span {
+  padding: 9px 12px;
+  border: 1px solid #4da3ff45;
+  border-radius: 999px;
+  color: #b9cee0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.nomina-sale-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-height: 56px;
+  border-radius: 9px;
+  background: var(--red);
+  color: #fff;
+  padding: 0 25px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-decoration: none;
+  box-shadow: 0 14px 32px #e7494545;
+  transition: transform .18s ease, background-color .18s ease;
+}
+.nomina-sale-cta:hover {
+  background: #f15c55;
+  transform: translateY(-2px);
+}
+.nomina-sale-note {
+  margin: 12px 0 0;
+  color: #8196aa;
+  font-size: 11px;
+}
+.nomina-sale-portrait {
+  position: relative;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  min-height: 500px;
+}
+.nomina-sale-portrait img {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 540px);
+  height: auto;
+  filter: drop-shadow(0 25px 34px #0009);
+}
+.nomina-sale-portrait .portrait-halo {
+  right: 8%;
+  bottom: 8%;
+  width: 85%;
+  height: 76%;
+}
+.nomina-sale-badge {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 42px;
+  display: grid;
+  gap: 4px;
+  padding: 13px 15px;
+  border: 1px solid #ffffff25;
+  border-radius: 10px;
+  background: #0b1b2be8;
+  box-shadow: 0 16px 32px #0005;
+}
+.nomina-sale-badge strong { color: #f2766d; font-size: 11px; letter-spacing: .18em; }
+.nomina-sale-badge span { color: #b8c8d7; font-size: 11px; }
+.nomina-sale-section {
+  padding-block: 90px;
+  border-top: 1px solid #ffffff12;
+}
+.nomina-sale-module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+}
+.nomina-sale-module {
+  min-height: 230px;
+  padding: 24px;
+  border: 1px solid #ffffff14;
+  border-top: 2px solid var(--blue);
+  border-radius: 15px;
+  background: #ffffff07;
+}
+.nomina-sale-module > span { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: .16em; }
+.nomina-sale-module h3 { margin: 40px 0 9px; font-size: 21px; line-height: 1.05; }
+.nomina-sale-module p { color: #9aafc0; font-size: 14px; line-height: 1.6; }
+.nomina-sale-dark-section { background: #091827; }
+.nomina-sale-timeline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 38px;
+}
+.nomina-sale-timeline div {
+  min-height: 145px;
+  padding: 17px 14px;
+  border: 1px solid #ffffff14;
+  border-top: 2px solid var(--red);
+  border-radius: 12px;
+  background: #ffffff07;
+}
+.nomina-sale-timeline strong { display: grid; place-items: center; width: 31px; height: 31px; border: 1px solid var(--blue); border-radius: 50%; color: #fff; font-size: 13px; }
+.nomina-sale-timeline p { margin: 24px 0 0; color: #b9c9d6; font-size: 12px; line-height: 1.45; }
+.nomina-sale-bonus-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 38px 0; }
+.nomina-sale-bonus-grid div { min-height: 155px; padding: 19px; border: 1px solid #ffffff14; border-radius: 13px; background: #ffffff07; }
+.nomina-sale-bonus-grid span { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: .14em; }
+.nomina-sale-bonus-grid p { margin: 22px 0 0; color: #b9c9d6; font-size: 13px; line-height: 1.5; }
+.nomina-sale-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+  max-width: 800px;
+  margin: 34px 0;
+}
+.nomina-sale-benefits div { display: flex; gap: 13px; align-items: flex-start; padding: 19px; border: 1px solid #ffffff14; border-radius: 12px; background: #ffffff07; }
+.nomina-sale-benefits span { color: #f06a61; font-weight: 900; }
+.nomina-sale-benefits p { margin: 0; color: #b9c9d6; font-size: 14px; line-height: 1.5; }
+.nomina-sale-instructor { display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: center; padding-block: 90px; }
+.nomina-sale-instructor-image { overflow: hidden; min-height: 330px; border: 1px solid #ffffff16; border-radius: 18px; background: linear-gradient(160deg,#16334e,#0d2034); }
+.nomina-sale-instructor-image img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.nomina-sale-instructor h2 { margin: 13px 0 18px; font-size: clamp(34px, 4vw, 52px); line-height: 1; letter-spacing: -.05em; }
+.nomina-sale-instructor > div:last-child > p:not(.section-kicker) { max-width: 600px; color: #9fb0c0; line-height: 1.7; }
+.nomina-sale-faq { background: #07111f; }
+.nomina-sale-final-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 70px; padding: 30px; border: 1px solid #4da3ff35; border-radius: 16px; background: #ffffff07; }
+.nomina-sale-final-cta h2 { max-width: 600px; margin: 0; font-size: clamp(26px, 3vw, 40px); line-height: 1; letter-spacing: -.04em; }
+.nomina-sale-price { margin: 18px 0 0; color: #fff; font-size: 32px; font-weight: 900; }
+.nomina-sale-price small { color: #9fb0c0; font-size: 12px; font-weight: 700; }
+@media (max-width: 900px) {
+  .nomina-sale-hero { grid-template-columns: 1fr; }
+  .nomina-sale-portrait { min-height: 420px; }
+  .nomina-sale-module-grid { grid-template-columns: repeat(2, 1fr); }
+  .nomina-sale-timeline { grid-template-columns: repeat(3, 1fr); }
+  .nomina-sale-bonus-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .nomina-sale-hero { padding-block: 48px 62px; }
+  .nomina-sale-copy h1 { font-size: clamp(44px, 13vw, 62px); }
+  .nomina-sale-cta { width: 100%; }
+  .nomina-sale-portrait { min-height: 355px; }
+  .nomina-sale-badge { right: 4px; bottom: 24px; }
+  .nomina-sale-section, .nomina-sale-instructor { padding-block: 64px; }
+  .nomina-sale-module-grid, .nomina-sale-benefits { grid-template-columns: 1fr; }
+  .nomina-sale-timeline, .nomina-sale-bonus-grid { grid-template-columns: 1fr; }
+  .nomina-sale-instructor { display: flex; flex-direction: column; gap: 30px; }
+  .nomina-sale-instructor-image { width: min(100%, 300px); min-height: 330px; }
+  .nomina-sale-final-cta { display: grid; margin-top: 48px; padding: 23px; }
+}
 .nomina-page:before,
 .nomina-grid {
   pointer-events: none;
