@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const NO_STORE_HEADERS = { "cache-control": "no-store" };
+const PLATAFORMAS_PRODUCTION_ORIGIN = "https://cefin.mx";
 
 export function isSameOrigin(request: NextRequest) {
   const origin = request.headers.get("origin");
-  return Boolean(origin && origin === request.nextUrl.origin);
+  return Boolean(
+    origin &&
+      (origin === request.nextUrl.origin ||
+        origin === PLATAFORMAS_PRODUCTION_ORIGIN),
+  );
 }
 
 export function getContentType(request: Request) {
