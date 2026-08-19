@@ -54,7 +54,7 @@ function writeDeliveryState(eventId: string, state: DeliveryState["state"]) {
 
 async function markDeliveryAsSent(eventId: string) {
   try {
-    await fetch("/api/plataformas/registro/completar", {
+    await fetch("/landings/plataformas/api/registro/completar", {
       method: "POST",
       credentials: "same-origin",
       headers: { "content-type": "application/json" },

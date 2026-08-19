@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import type { RefObject } from "react";
 
 const ACTIVE_CAMPAIGN_ORIGIN = "https://cefincapacitacion.activehosted.com";
-const REGISTRATION_START_ENDPOINT = "/api/plataformas/registro/iniciar";
-const PROXY_ENDPOINT = "/api/plataformas/registro";
+const REGISTRATION_START_ENDPOINT =
+  "/landings/plataformas/api/registro/iniciar";
+const PROXY_ENDPOINT = "/landings/plataformas/api/registro";
 const THANK_YOU_PATH = "/landings/plataformas/gracias";
 const PROXY_INSTALL_TIMEOUT_MS = 15_000;
 const REGISTRATION_LOCK_NAME = "cefin-plataformas-registration";
