@@ -25,26 +25,6 @@ export function jsonNoStore(
   });
 }
 
-export function methodNotAllowed() {
-  return new NextResponse(null, {
-    status: 405,
-    headers: {
-      ...NO_STORE_HEADERS,
-      allow: "POST, OPTIONS",
-    },
-  });
-}
-
-export function optionsResponse() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      ...NO_STORE_HEADERS,
-      allow: "POST, OPTIONS",
-    },
-  });
-}
-
 type BoundedBodyResult =
   | { ok: true; body: string }
   | { ok: false; reason: "invalid_length" | "too_large" | "unreadable" };

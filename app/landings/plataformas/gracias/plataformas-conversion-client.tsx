@@ -7,48 +7,28 @@ import { webinarEvent } from "../config";
 
 const PIXEL_WAIT_TIMEOUT_MS = 30_000;
 const PIXEL_RETRY_INTERVAL_MS = 250;
-const SENDING_LEASE_MS = 60_000;
-
-type DeliveryState = {
-  state: "sending" | "sent";
-  updatedAt: number;
-};
-
-declare global {
-  interface Window {
-    __cefinPlataformasCompleteRegistration?: Record<string, boolean>;
-  }
-}
+const deliveredEventIds = new Set<string>();
 
 function getStorageKey(eventId: string) {
   return `cefin_plataformas_complete_registration_${eventId}`;
 }
 
-function readDeliveryState(eventId: string): DeliveryState | null {
+function wasDelivered(eventId: string) {
+  if (deliveredEventIds.has(eventId)) return true;
+
   try {
-    const serialized = window.localStorage.getItem(getStorageKey(eventId));
-    if (!serialized) return null;
-    const state = JSON.parse(serialized) as DeliveryState;
-    if (
-      (state.state !== "sending" && state.state !== "sent") ||
-      !Number.isFinite(state.updatedAt)
-    ) {
-      return null;
-    }
-    return state;
+    return window.localStorage.getItem(getStorageKey(eventId)) === "sent";
   } catch {
-    return null;
+    return false;
   }
 }
 
-function writeDeliveryState(eventId: string, state: DeliveryState["state"]) {
+function rememberDelivery(eventId: string) {
+  deliveredEventIds.add(eventId);
   try {
-    window.localStorage.setItem(
-      getStorageKey(eventId),
-      JSON.stringify({ state, updatedAt: Date.now() }),
-    );
+    window.localStorage.setItem(getStorageKey(eventId), "sent");
   } catch {
-    // The in-memory lock and signed cookie remain available if storage fails.
+    // The in-memory marker and signed cookie remain available.
   }
 }
 
@@ -61,7 +41,7 @@ async function markDeliveryAsSent(eventId: string) {
       body: JSON.stringify({ eventId }),
     });
   } catch {
-    // A later reload retries this idempotent transition without resending Meta.
+    // Reload retries this idempotent transition without resending Meta.
   }
 }
 
@@ -71,57 +51,41 @@ export function PlataformasConversionClient({ eventId }: { eventId: string }) {
     let timeoutId: number | undefined;
     const deadline = Date.now() + PIXEL_WAIT_TIMEOUT_MS;
 
-    const inMemoryDelivery =
-      (window.__cefinPlataformasCompleteRegistration ??= {});
-
     const check = () => {
       if (cancelled) return;
 
-      const delivery = readDeliveryState(eventId);
-      if (delivery?.state === "sent") {
+      if (wasDelivered(eventId)) {
         void markDeliveryAsSent(eventId);
         return;
       }
-
-      if (
-        delivery?.state === "sending" &&
-        Date.now() - delivery.updatedAt < SENDING_LEASE_MS
-      ) {
-        if (Date.now() >= deadline) return;
-        timeoutId = window.setTimeout(check, PIXEL_RETRY_INTERVAL_MS);
-        return;
-      }
-
-      if (inMemoryDelivery[eventId]) return;
 
       if (window.fbq) {
-        inMemoryDelivery[eventId] = true;
-        writeDeliveryState(eventId, "sending");
-        window.fbq(
-          "track",
-          "CompleteRegistration",
-          {
-            ...webinarEvent,
-            status: "registered",
-            source: "thank_you_page",
-          },
-          { eventID: eventId },
-        );
-        writeDeliveryState(eventId, "sent");
-        void markDeliveryAsSent(eventId);
-        return;
-      }
-
-      if (Date.now() >= deadline) {
-        if (process.env.NODE_ENV !== "production") {
-          console.warn(
-            "Meta Pixel no estuvo disponible; el registro permanece pendiente.",
+        deliveredEventIds.add(eventId);
+        try {
+          window.fbq(
+            "track",
+            "CompleteRegistration",
+            {
+              ...webinarEvent,
+              status: "registered",
+              source: "thank_you_page",
+            },
+            { eventID: eventId },
           );
+          rememberDelivery(eventId);
+          void markDeliveryAsSent(eventId);
+        } catch {
+          deliveredEventIds.delete(eventId);
+          if (Date.now() < deadline) {
+            timeoutId = window.setTimeout(check, PIXEL_RETRY_INTERVAL_MS);
+          }
         }
         return;
       }
 
-      timeoutId = window.setTimeout(check, PIXEL_RETRY_INTERVAL_MS);
+      if (Date.now() < deadline) {
+        timeoutId = window.setTimeout(check, PIXEL_RETRY_INTERVAL_MS);
+      }
     };
 
     check();

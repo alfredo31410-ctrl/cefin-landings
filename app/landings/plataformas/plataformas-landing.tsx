@@ -9,10 +9,6 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 import { landingConfig as config, webinarEvent } from "./config";
-import {
-  PlataformasActiveCampaignUtmBridge,
-  PlataformasAttributionSession,
-} from "./plataformas-activecampaign-utm-bridge";
 import { PlataformasActiveCampaignSubmissionProxy } from "./plataformas-tracking-client";
 
 const { activeCampaign, assets } = config;
@@ -96,7 +92,6 @@ export default function PlataformasLanding() {
 
   return (
     <>
-      <PlataformasAttributionSession />
       <Script
         id="meta-pixel-plataformas"
         strategy="afterInteractive"
@@ -469,7 +464,6 @@ function ActiveCampaignForm() {
 
   return (
     <>
-      <PlataformasActiveCampaignUtmBridge formRef={formRef} />
       <PlataformasActiveCampaignSubmissionProxy formRef={formRef} />
       <div
         ref={formRef}
