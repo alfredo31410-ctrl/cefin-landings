@@ -1,7 +1,15 @@
 "use client";
 
+import Image, { type StaticImageData } from "next/image";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
+import airbnbLogo from "@/public/plataformas/airbnb.png";
+import alfredoImage from "@/public/honorarios-contables/alfredo-honorarios-contables.png";
+import amazonLogo from "@/public/plataformas/amazon.png";
+import didiLogo from "@/public/plataformas/didi.png";
+import mercadoLibreLogo from "@/public/plataformas/mercado-libre.png";
+import uberEatsLogo from "@/public/plataformas/uber-eats.png";
+import uberLogo from "@/public/plataformas/uber.png";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -11,19 +19,15 @@ import {
 import { landingConfig as config, webinarEvent } from "./config";
 import { PlataformasActiveCampaignSubmissionProxy } from "./plataformas-tracking-client";
 
-const { activeCampaign, assets } = config;
-const {
-  instructorImageUrl: ALFREDO_IMAGE_URL,
-  platformAssetBase: PLATFORM_ASSET_BASE,
-} = assets;
+const { activeCampaign } = config;
 
-const platformLogos = [
-  { name: "DiDi", src: `${PLATFORM_ASSET_BASE}/didi.png` },
-  { name: "Mercado Libre", src: `${PLATFORM_ASSET_BASE}/mercado-libre.png` },
-  { name: "Amazon", src: `${PLATFORM_ASSET_BASE}/amazon.png` },
-  { name: "Uber Eats", src: `${PLATFORM_ASSET_BASE}/uber-eats.png` },
-  { name: "Uber", src: `${PLATFORM_ASSET_BASE}/uber.png` },
-  { name: "Airbnb", src: `${PLATFORM_ASSET_BASE}/airbnb.png` },
+const platformLogos: Array<{ name: string; src: StaticImageData }> = [
+  { name: "DiDi", src: didiLogo },
+  { name: "Mercado Libre", src: mercadoLibreLogo },
+  { name: "Amazon", src: amazonLogo },
+  { name: "Uber Eats", src: uberEatsLogo },
+  { name: "Uber", src: uberLogo },
+  { name: "Airbnb", src: airbnbLogo },
 ];
 
 const classPoints = [
@@ -106,35 +110,35 @@ export default function PlataformasLanding() {
             </span>
           </header>
 
-          <div className="mt-9 grid items-center gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(330px,.85fr)] lg:gap-12 xl:gap-16">
+          <div className="mt-9 grid items-center gap-8 lg:mt-11 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,.9fr)] lg:gap-10 xl:gap-14">
             <div className="min-w-0">
               <div className="inline-flex rounded-full border border-purple-400/30 bg-purple-400/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-purple-200 min-[390px]:text-xs">
                 Inscripciones abiertas
               </div>
 
-              <h1 className="mt-5 max-w-[780px] text-[2.625rem] font-black uppercase leading-[0.92] tracking-[-0.055em] min-[390px]:text-[3rem] min-[412px]:text-[3.35rem] sm:text-[4rem] md:text-[4.75rem] lg:text-[5.75rem] xl:text-[6.5rem] 2xl:text-[7rem]">
+              <h1 className="mt-5 max-w-[760px] text-[2.625rem] font-black uppercase leading-[0.94] tracking-[-0.052em] min-[390px]:text-[3rem] min-[412px]:text-[3.25rem] sm:text-[3.75rem] md:text-[4.4rem] lg:text-[4.9rem] xl:text-[5.5rem] 2xl:text-[5.8rem]">
                 <span className="block text-white">Plataformas</span>
                 <span className="block bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
                   Tecnológicas
                 </span>
               </h1>
 
-              <p className="mt-6 max-w-2xl text-[17px] font-semibold leading-relaxed text-white/76 min-[412px]:text-lg sm:text-xl lg:text-[22px]">
+              <p className="mt-6 max-w-[680px] text-[17px] font-semibold leading-relaxed text-white/80 min-[412px]:text-lg sm:text-xl lg:text-[22px]">
                 Aprende qué obligaciones fiscales debes revisar al recibir
                 ingresos por plataformas digitales y evita errores al declarar
                 ante el SAT.
               </p>
 
-              <div className="mt-7 grid max-w-2xl grid-cols-1 gap-2 min-[390px]:grid-cols-3 sm:gap-3">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+              <div className="mt-7 flex max-w-[680px] flex-wrap gap-x-5 gap-y-3 border-y border-white/10 py-4">
+                <div className="min-w-[138px] flex-1">
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Fecha</p>
                   <p className="mt-1 text-sm font-black min-[412px]:text-base">1 de septiembre</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+                <div className="min-w-[138px] flex-1 min-[390px]:border-l min-[390px]:border-white/10 min-[390px]:pl-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Hora</p>
                   <p className="mt-1 text-sm font-black min-[412px]:text-base">11:00 AM · CDMX</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+                <div className="min-w-[138px] flex-1 min-[600px]:border-l min-[600px]:border-white/10 min-[600px]:pl-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Modalidad</p>
                   <p className="mt-1 text-sm font-black min-[412px]:text-base">Online en vivo</p>
                 </div>
@@ -153,56 +157,59 @@ export default function PlataformasLanding() {
               </div>
             </div>
 
-            <aside className="relative mx-auto w-full max-w-[460px] lg:max-w-none" aria-label="Instructor de la clase">
-              <div className="relative min-h-[350px] overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_50%_22%,rgba(99,102,241,.34),transparent_44%),linear-gradient(160deg,rgba(30,41,99,.9),rgba(3,3,10,.96))] min-[390px]:min-h-[390px] sm:min-h-[470px] lg:min-h-[540px]">
-                <div className="absolute inset-x-5 top-5 z-10 rounded-2xl border border-white/10 bg-black/30 px-4 py-3 backdrop-blur-md sm:inset-x-7 sm:top-7">
-                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Impartido por</p>
-                  <p className="mt-1 text-lg font-black sm:text-xl">Mtro. Alfredo Cobos</p>
-                </div>
-                <img
-                  src={ALFREDO_IMAGE_URL}
+            <aside className="relative mx-auto w-full max-w-[430px] lg:max-w-none" aria-label="Instructor de la clase">
+              <div className="pointer-events-none absolute inset-x-[8%] bottom-[8%] top-[18%] rounded-full bg-[radial-gradient(circle,rgba(76,94,255,.34),rgba(120,55,220,.14)_48%,transparent_72%)] blur-2xl" aria-hidden="true" />
+              <figure className="relative flex min-h-[330px] flex-col justify-end overflow-hidden min-[390px]:min-h-[370px] sm:min-h-[440px] lg:min-h-[500px]">
+                <Image
+                  src={alfredoImage}
                   alt="Mtro. Alfredo Cobos"
-                  width="512"
-                  height="630"
-                  className="absolute bottom-0 left-1/2 h-[88%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom min-[390px]:h-[90%] lg:h-[91%]"
+                  sizes="(max-width: 1023px) 430px, 40vw"
+                  loading="eager"
+                  fetchPriority="high"
+                  unoptimized
+                  className="absolute bottom-0 left-1/2 h-[94%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom lg:h-[96%]"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#03030a] to-transparent" />
-              </div>
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#03030a] via-[#03030a]/74 to-transparent" />
+                <figcaption className="relative z-10 mx-auto mb-2 w-fit px-4 text-center lg:mb-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-300">Impartido por</p>
+                  <p className="mt-1 text-lg font-black sm:text-xl">Mtro. Alfredo Cobos</p>
+                </figcaption>
+              </figure>
             </aside>
           </div>
 
-          <div className="mt-10 grid gap-3 md:mt-14 md:grid-cols-3">
+          <div className="mt-10 grid gap-7 border-t border-white/10 pt-8 md:mt-14 md:grid-cols-3 md:gap-8 md:pt-10">
             {classPoints.map((point, index) => (
               <article
                 key={point}
-                className="rounded-2xl border border-purple-400/20 bg-white/[0.05] p-5 backdrop-blur-sm sm:p-6"
+                className="relative pl-11"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-xs font-black">
+                <span className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-[11px] font-black shadow-[0_8px_24px_rgba(99,102,241,.28)]">
                   {index + 1}
                 </span>
-                <p className="mt-4 text-base font-bold leading-relaxed text-white/82 sm:text-lg">
+                <p className="text-base font-bold leading-relaxed text-white/82 sm:text-lg">
                   {point}
                 </p>
               </article>
             ))}
           </div>
 
-          <div className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 sm:mt-10 sm:p-7">
+          <div className="mt-10 sm:mt-12">
             <p className="text-center text-xs font-black uppercase tracking-[0.16em] text-white/55 sm:text-sm">
               Ejemplos de plataformas que abordaremos
             </p>
-            <div className="mt-5 grid grid-cols-2 gap-3 min-[430px]:grid-cols-3 sm:grid-cols-6">
+            <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-5 rounded-3xl bg-white/[0.94] px-5 py-6 min-[430px]:grid-cols-3 sm:grid-cols-6 sm:px-7">
               {platformLogos.map((logo) => (
                 <div
                   key={logo.name}
-                  className="flex min-h-20 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.96] p-3"
+                  className="flex min-h-16 items-center justify-center px-2"
                 >
-                  <img
+                  <Image
                     src={logo.src}
                     alt={logo.name}
-                    width="140"
-                    height="56"
-                    className="max-h-10 w-auto max-w-full object-contain"
+                    sizes="(max-width: 429px) 40vw, (max-width: 639px) 28vw, 140px"
+                    unoptimized
+                    className="h-11 w-full object-contain"
                   />
                 </div>
               ))}

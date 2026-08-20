@@ -21,11 +21,6 @@ export const landingConfig = {
     whatsappEnabled: true,
     whatsappGroupUrl: "https://chat.whatsapp.com/JeFabJpd1VyIPkWyAdVpDr",
   },
-  assets: {
-    instructorImageUrl:
-      "/honorarios-contables/alfredo-honorarios-contables.png",
-    platformAssetBase: "/plataformas",
-  },
 } as const;
 
 export const webinarEvent = {
