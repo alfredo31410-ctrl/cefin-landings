@@ -1,0 +1,108 @@
+.plataformas-whatsapp-redirect {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 24px 16px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgb(79 70 229 / 30%), transparent 38%),
+    linear-gradient(90deg, #02010d, rgb(4 8 40 / 96%)),
+    repeating-linear-gradient(#1820d8 0 1px, transparent 1px 44px);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.whatsapp-redirect-card {
+  width: min(100%, 560px);
+  padding: 32px 24px;
+  border: 1px solid rgb(168 85 247 / 35%);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgb(30 41 99 / 95%), rgb(8 8 24 / 96%));
+  box-shadow: 0 24px 75px rgb(0 0 0 / 45%);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.whatsapp-redirect-eyebrow {
+  margin: 0;
+  color: #bef264;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.whatsapp-redirect-card h1 {
+  margin: 18px 0 16px;
+  font-size: clamp(30px, 7vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.whatsapp-redirect-copy {
+  margin: 0;
+  color: #d8d9ef;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.whatsapp-redirect-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 25px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: #a3e635;
+  color: #07111f;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.whatsapp-redirect-button:hover {
+  background: #bef264;
+  transform: translateY(-2px);
+}
+
+.whatsapp-redirect-button:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 4px;
+}
+
+.whatsapp-redirect-note {
+  margin: 14px 0 0;
+  color: #a9acc8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.whatsapp-redirect-error {
+  margin: 24px 0 0;
+  color: #fdba74;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 430px) {
+  .plataformas-whatsapp-redirect {
+    padding-inline: 12px;
+  }
+
+  .whatsapp-redirect-card {
+    padding: 28px 18px;
+    border-radius: 20px;
+  }
+
+  .whatsapp-redirect-card h1 {
+    font-size: clamp(30px, 9vw, 38px);
+  }
+
+  .whatsapp-redirect-button {
+    width: 100%;
+    min-height: 54px;
+  }
+}

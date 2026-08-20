@@ -18,13 +18,13 @@ export const landingConfig = {
   thankYou: {
     path: "/landings/plataformas/gracias",
     whatsappRedirectPath: "/landings/plataformas/unirse-whatsapp",
-    whatsappEnabled: false,
-    whatsappGroupUrl: null,
+    whatsappEnabled: true,
+    whatsappGroupUrl: "https://chat.whatsapp.com/JeFabJpd1VyIPkWyAdVpDr",
   },
   assets: {
     instructorImageUrl:
-      "https://cefin-landings-z9uk.vercel.app/honorarios-contables/alfredo-honorarios-contables.png",
-    platformAssetBase: "https://cefin-landings-z9uk.vercel.app/plataformas",
+      "/honorarios-contables/alfredo-honorarios-contables.png",
+    platformAssetBase: "/plataformas",
   },
 } as const;
 

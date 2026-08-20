@@ -18,54 +18,18 @@ const {
 } = assets;
 
 const platformLogos = [
-  {
-    name: "DiDi",
-    src: `${PLATFORM_ASSET_BASE}/didi.png`,
-    className: "left-[8px] top-[8px] w-20",
-    mobileClassName: "left-2 top-4 w-16",
-    imageClassName: "w-11",
-  },
-  {
-    name: "Mercado Libre",
-    src: `${PLATFORM_ASSET_BASE}/mercado-libre.png`,
-    className: "left-[122px] top-[22px] w-32",
-    mobileClassName: "right-1 top-8 w-28",
-    imageClassName: "w-24",
-  },
-  {
-    name: "Amazon",
-    src: `${PLATFORM_ASSET_BASE}/amazon.png`,
-    className: "left-[-8px] top-[92px] w-32",
-    mobileClassName: "left-0 top-[100px] w-28",
-    imageClassName: "w-24",
-  },
-  {
-    name: "Uber Eats",
-    src: `${PLATFORM_ASSET_BASE}/uber-eats.png`,
-    className: "left-[22px] top-[174px] w-28",
-    mobileClassName: "left-6 bottom-8 w-24",
-    imageClassName: "w-20",
-  },
-  {
-    name: "Uber",
-    src: `${PLATFORM_ASSET_BASE}/uber.png`,
-    className: "left-[168px] top-[132px] w-24",
-    mobileClassName: "right-8 top-[130px] w-20",
-    imageClassName: "w-14",
-  },
-  {
-    name: "Airbnb",
-    src: `${PLATFORM_ASSET_BASE}/airbnb.png`,
-    className: "left-[150px] top-[220px] w-24",
-    mobileClassName: "right-3 bottom-5 w-20",
-    imageClassName: "w-16",
-  },
+  { name: "DiDi", src: `${PLATFORM_ASSET_BASE}/didi.png` },
+  { name: "Mercado Libre", src: `${PLATFORM_ASSET_BASE}/mercado-libre.png` },
+  { name: "Amazon", src: `${PLATFORM_ASSET_BASE}/amazon.png` },
+  { name: "Uber Eats", src: `${PLATFORM_ASSET_BASE}/uber-eats.png` },
+  { name: "Uber", src: `${PLATFORM_ASSET_BASE}/uber.png` },
+  { name: "Airbnb", src: `${PLATFORM_ASSET_BASE}/airbnb.png` },
 ];
 
 const classPoints = [
-  "Identifica obligaciones fiscales de ingresos por plataformas.",
+  "Identifica tus obligaciones fiscales por ingresos de plataformas.",
   "Evita errores comunes al declarar operaciones digitales.",
-  "Aprende qué revisar antes de presentar información al SAT.",
+  "Conoce qué revisar antes de presentar información al SAT.",
 ];
 
 export default function PlataformasLanding() {
@@ -79,6 +43,15 @@ export default function PlataformasLanding() {
       source: "landing_page",
     });
   }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isModalOpen]);
 
   const openRegistrationModal = () => {
     setHasOpenedRegistrationModal(true);
@@ -108,337 +81,223 @@ export default function PlataformasLanding() {
         />
       </noscript>
 
-      <main className="relative min-h-screen overflow-x-hidden bg-black text-white">
-        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(#1820d8_1px,transparent_1px)] bg-[length:100%_7px] opacity-55" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,#02010d_0%,rgba(4,8,40,.92)_46%,rgba(0,0,0,.58)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-[48%] bg-[radial-gradient(circle_at_20%_84%,rgba(168,85,247,.55),transparent_28%),linear-gradient(to_top,#000_4%,rgba(0,0,0,.82)_42%,transparent_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-[34%] opacity-60 [background-image:linear-gradient(115deg,transparent_0%,transparent_42%,rgba(168,85,247,.45)_43%,transparent_44%),linear-gradient(65deg,transparent_0%,transparent_54%,rgba(59,130,246,.42)_55%,transparent_56%)] [background-size:120px_80px]" />
-          <div className="absolute bottom-[8%] left-0 h-px w-full bg-purple-400/35" />
-          <div className="absolute bottom-[16%] left-0 h-px w-full bg-blue-400/20" />
-          <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-black via-black/80 to-transparent" />
+      <main className="relative min-h-screen overflow-x-hidden bg-[#03030a] text-white">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(77,89,255,.09)_1px,transparent_1px),linear-gradient(90deg,rgba(77,89,255,.07)_1px,transparent_1px)] bg-[size:44px_44px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
+          <div className="absolute -left-32 top-16 h-80 w-80 rounded-full bg-blue-700/20 blur-[110px]" />
+          <div className="absolute -right-24 top-56 h-96 w-96 rounded-full bg-purple-600/20 blur-[130px]" />
         </div>
 
-        <div className="pointer-events-none fixed inset-y-0 right-0 z-10 hidden w-[46%] lg:block">
-          <img
-            src={ALFREDO_IMAGE_URL}
-            alt="Mtro. Alfredo Cobos"
-            className="absolute bottom-0 right-[-2%] h-[92%] w-auto max-w-none object-contain"
-          />
-          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black via-black/70 to-transparent" />
-        </div>
-
-        <div className="pointer-events-none fixed inset-0 z-10 lg:hidden">
-          <img
-            src={ALFREDO_IMAGE_URL}
-            alt="Mtro. Alfredo Cobos"
-            className="absolute right-[-92px] top-[118px] h-[330px] w-auto max-w-none object-contain opacity-38 sm:right-[-64px] sm:top-[112px] sm:h-[440px] sm:opacity-44 md:right-[-32px] md:top-[96px] md:h-[560px] md:opacity-48"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,.16)_0%,rgba(0,0,0,.5)_42%,rgba(0,0,0,.96)_100%)]" />
-          <div className="absolute inset-y-0 left-0 w-[72%] bg-gradient-to-r from-black via-black/92 to-transparent" />
-        </div>
-
-        <section className="relative z-20 mx-auto flex min-h-screen max-w-[1400px] items-start px-5 py-8 sm:px-8 sm:py-10 lg:items-center lg:px-12">
-          <div className="w-full max-w-[880px] pt-4 sm:pt-8 lg:pt-0">
-            <div className="mb-8 inline-flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-400/40 bg-blue-500/15 text-sm font-black text-blue-200">
+        <section className="relative mx-auto w-full max-w-[1240px] px-4 pb-12 pt-5 min-[390px]:px-5 sm:px-8 sm:pb-16 sm:pt-8 lg:px-10 lg:pb-20 xl:px-6 2xl:py-12">
+          <header className="flex items-center justify-between gap-4">
+            <div className="inline-flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/35 bg-blue-500/10 text-sm font-black text-blue-200">
                 C
               </span>
               <div>
-                <p className="text-lg font-black">CEFIN</p>
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">
+                <p className="text-base font-black leading-none">CEFIN</p>
+                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/50">
                   Capacitación fiscal y contable
                 </p>
               </div>
             </div>
+            <span className="hidden rounded-full border border-lime-300/25 bg-lime-300/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-lime-200 sm:inline-flex">
+              Clase online gratuita
+            </span>
+          </header>
 
-            <p className="text-[clamp(2.8rem,13vw,7rem)] font-black leading-none tracking-tight text-white drop-shadow-[0_8px_0_rgba(0,0,0,.45)]">
-              Plataformas
-            </p>
-
-            <h1 className="mt-3 inline-flex max-w-full rounded-[1.4rem] bg-gradient-to-r from-blue-700 via-indigo-500 to-purple-500 px-4 py-3 text-[clamp(2.15rem,10.5vw,6.5rem)] font-black uppercase leading-none tracking-wide text-white shadow-[0_24px_80px_rgba(89,52,255,.32)] sm:rounded-[2rem] sm:px-5 sm:py-4">
-              Tecnológicas
-            </h1>
-
-            <div className="mt-7 max-w-2xl rounded-full bg-gradient-to-r from-blue-700 to-purple-500 px-5 py-2 text-center text-sm font-black uppercase tracking-[0.22em] text-white shadow-[0_16px_55px_rgba(91,73,255,.2)] sm:mt-10 sm:px-7 sm:text-2xl sm:tracking-[0.28em]">
-              Inscripciones abiertas
-            </div>
-
-            <div className="mt-8 max-w-3xl text-center lg:mt-10 lg:text-left">
-              <p className="text-base font-black uppercase tracking-[0.2em] text-white sm:text-2xl sm:tracking-[0.22em]">
-                Impartido por el Mtro.
-              </p>
-              <p className="mt-3 text-xl font-black uppercase tracking-[0.22em] text-white sm:text-3xl">
-                Alfredo Cobos
-              </p>
-              <p className="mt-6 text-xl font-black uppercase tracking-[0.1em] text-white sm:mt-7 sm:text-4xl sm:tracking-[0.12em]">
-                {config.dateTimeLabel}
-              </p>
-            </div>
-
-            <div className="mt-7 flex flex-col gap-4 sm:mt-8 sm:flex-row sm:items-center">
-              <button
-                onClick={openRegistrationModal}
-                className="inline-flex min-h-16 items-center justify-center rounded-full bg-white px-9 text-base font-black uppercase tracking-wide text-black shadow-[0_0_70px_rgba(147,51,234,.45)] transition hover:-translate-y-1 hover:bg-purple-100 sm:text-lg"
-              >
-                Registrarme gratis
-              </button>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-purple-200">
-                Clase gratuita en vivo
-              </p>
-            </div>
-
-            <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
-              {classPoints.map((point) => (
-                <div
-                  key={point}
-                  className="border border-purple-400/20 bg-white/[0.06] p-4 text-sm font-bold leading-relaxed text-white/78 backdrop-blur"
-                >
-                  {point}
-                </div>
-              ))}
-            </div>
-
-            <div className="relative mx-auto mt-10 h-[290px] w-full max-w-[380px] lg:hidden">
-              <div className="platform-shadow absolute bottom-4 left-1/2 h-10 w-44 -translate-x-1/2 rounded-full bg-black/70 blur-sm" />
-              <div className="platform-phone absolute bottom-12 left-[calc(50%-40px)] h-36 w-20 rotate-[-15deg] rounded-[1.5rem] border border-white/15 bg-gradient-to-br from-slate-900 via-indigo-900 to-black shadow-[0_25px_60px_rgba(0,0,0,.55)]">
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/uber.png`}
-                  alt="Uber"
-                  className="absolute bottom-5 left-4 w-10 opacity-80"
-                />
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/airbnb.png`}
-                  alt="Airbnb"
-                  className="absolute left-5 top-5 w-8 opacity-90"
-                />
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/uber-eats.png`}
-                  alt="Uber Eats"
-                  className="absolute right-2 top-16 w-10 opacity-95"
-                />
+          <div className="mt-9 grid items-center gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(330px,.85fr)] lg:gap-12 xl:gap-16">
+            <div className="min-w-0">
+              <div className="inline-flex rounded-full border border-purple-400/30 bg-purple-400/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-purple-200 min-[390px]:text-xs">
+                Inscripciones abiertas
               </div>
 
-              {platformLogos.map((logo, index) => (
-                <div
-                  key={logo.name}
-                  className={`platform-logo absolute flex min-h-11 items-center justify-center rounded-2xl border border-white/15 bg-white/85 px-3 py-2 shadow-[0_16px_32px_rgba(0,0,0,.4)] backdrop-blur ${logo.mobileClassName}`}
-                  style={{
-                    animationDelay: `${index * 0.45}s`,
-                    animationDuration: `${5.8 + index * 0.35}s`,
-                  }}
-                >
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    className={`platform-logo-image h-auto max-h-8 object-contain ${logo.imageClassName}`}
-                  />
+              <h1 className="mt-5 max-w-[780px] text-[2.625rem] font-black uppercase leading-[0.92] tracking-[-0.055em] min-[390px]:text-[3rem] min-[412px]:text-[3.35rem] sm:text-[4rem] md:text-[4.75rem] lg:text-[5.75rem] xl:text-[6.5rem] 2xl:text-[7rem]">
+                <span className="block text-white">Plataformas</span>
+                <span className="block bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                  Tecnológicas
+                </span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-[17px] font-semibold leading-relaxed text-white/76 min-[412px]:text-lg sm:text-xl lg:text-[22px]">
+                Aprende qué obligaciones fiscales debes revisar al recibir
+                ingresos por plataformas digitales y evita errores al declarar
+                ante el SAT.
+              </p>
+
+              <div className="mt-7 grid max-w-2xl grid-cols-1 gap-2 min-[390px]:grid-cols-3 sm:gap-3">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Fecha</p>
+                  <p className="mt-1 text-sm font-black min-[412px]:text-base">1 de septiembre</p>
                 </div>
-              ))}
+                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Hora</p>
+                  <p className="mt-1 text-sm font-black min-[412px]:text-base">11:00 AM · CDMX</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Modalidad</p>
+                  <p className="mt-1 text-sm font-black min-[412px]:text-base">Online en vivo</p>
+                </div>
+              </div>
+
+              <div className="mt-7 flex max-w-2xl flex-col gap-3 sm:flex-row sm:items-center">
+                <button
+                  onClick={openRegistrationModal}
+                  className="inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-white px-6 text-sm font-black uppercase tracking-[0.04em] text-slate-950 shadow-[0_18px_55px_rgba(99,102,241,.3)] transition hover:-translate-y-0.5 hover:bg-purple-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:min-h-16 sm:w-auto sm:px-9 sm:text-base"
+                >
+                  Reservar mi lugar gratis
+                </button>
+                <p className="text-center text-xs font-bold leading-relaxed text-white/55 sm:max-w-48 sm:text-left">
+                  Cupo gratuito. Regístrate para recibir tu acceso.
+                </p>
+              </div>
             </div>
+
+            <aside className="relative mx-auto w-full max-w-[460px] lg:max-w-none" aria-label="Instructor de la clase">
+              <div className="relative min-h-[350px] overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_50%_22%,rgba(99,102,241,.34),transparent_44%),linear-gradient(160deg,rgba(30,41,99,.9),rgba(3,3,10,.96))] min-[390px]:min-h-[390px] sm:min-h-[470px] lg:min-h-[540px]">
+                <div className="absolute inset-x-5 top-5 z-10 rounded-2xl border border-white/10 bg-black/30 px-4 py-3 backdrop-blur-md sm:inset-x-7 sm:top-7">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">Impartido por</p>
+                  <p className="mt-1 text-lg font-black sm:text-xl">Mtro. Alfredo Cobos</p>
+                </div>
+                <img
+                  src={ALFREDO_IMAGE_URL}
+                  alt="Mtro. Alfredo Cobos"
+                  width="512"
+                  height="630"
+                  className="absolute bottom-0 left-1/2 h-[88%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom min-[390px]:h-[90%] lg:h-[91%]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#03030a] to-transparent" />
+              </div>
+            </aside>
           </div>
 
-          <div className="pointer-events-none absolute bottom-[15%] right-[20%] z-20 hidden lg:block">
-            <div className="relative h-80 w-80">
-              <div className="platform-shadow absolute bottom-3 left-1/2 h-12 w-48 -translate-x-1/2 rounded-full bg-black/70 blur-sm" />
-              <div className="platform-phone absolute bottom-14 left-[108px] h-40 w-24 rotate-[-16deg] rounded-[1.7rem] border border-white/15 bg-gradient-to-br from-slate-900 via-indigo-900 to-black shadow-[0_25px_60px_rgba(0,0,0,.55)]">
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/uber.png`}
-                  alt="Uber"
-                  className="absolute bottom-5 left-4 w-12 opacity-80"
-                />
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/airbnb.png`}
-                  alt="Airbnb"
-                  className="absolute left-6 top-6 w-10 opacity-90"
-                />
-                <img
-                  src={`${PLATFORM_ASSET_BASE}/uber-eats.png`}
-                  alt="Uber Eats"
-                  className="absolute right-2 top-[72px] w-12 opacity-95"
-                />
-              </div>
-              {platformLogos.map((logo, index) => (
+          <div className="mt-10 grid gap-3 md:mt-14 md:grid-cols-3">
+            {classPoints.map((point, index) => (
+              <article
+                key={point}
+                className="rounded-2xl border border-purple-400/20 bg-white/[0.05] p-5 backdrop-blur-sm sm:p-6"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-xs font-black">
+                  {index + 1}
+                </span>
+                <p className="mt-4 text-base font-bold leading-relaxed text-white/82 sm:text-lg">
+                  {point}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 sm:mt-10 sm:p-7">
+            <p className="text-center text-xs font-black uppercase tracking-[0.16em] text-white/55 sm:text-sm">
+              Ejemplos de plataformas que abordaremos
+            </p>
+            <div className="mt-5 grid grid-cols-2 gap-3 min-[430px]:grid-cols-3 sm:grid-cols-6">
+              {platformLogos.map((logo) => (
                 <div
                   key={logo.name}
-                  className={`platform-logo absolute flex min-h-12 items-center justify-center rounded-2xl border border-white/15 bg-white/85 px-4 py-2 shadow-[0_16px_32px_rgba(0,0,0,.4)] backdrop-blur ${logo.className}`}
-                  style={{
-                    animationDelay: `${index * 0.45}s`,
-                    animationDuration: `${5.8 + index * 0.35}s`,
-                  }}
+                  className="flex min-h-20 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.96] p-3"
                 >
                   <img
                     src={logo.src}
                     alt={logo.name}
-                    className={`platform-logo-image h-auto max-h-9 object-contain ${logo.imageClassName}`}
+                    width="140"
+                    height="56"
+                    className="max-h-10 w-auto max-w-full object-contain"
                   />
                 </div>
               ))}
             </div>
           </div>
         </section>
-
-        <style jsx global>{`
-          .platform-logo {
-            animation: platform-float 4.8s ease-in-out infinite alternate;
-            transform-origin: center;
-            will-change: transform, filter;
-          }
-
-          .platform-logo::after {
-            position: absolute;
-            inset: -1px;
-            border-radius: 1rem;
-            content: "";
-            background: linear-gradient(
-              110deg,
-              transparent 18%,
-              rgba(255, 255, 255, 0.65) 48%,
-              transparent 72%
-            );
-            opacity: 0;
-            transform: translateX(-60%);
-            animation: platform-shine 5.8s ease-in-out infinite;
-            pointer-events: none;
-          }
-
-          .platform-phone {
-            animation: phone-float 5.4s ease-in-out infinite alternate;
-            transform-origin: center;
-            will-change: transform;
-          }
-
-          .platform-logo-image {
-            animation: logo-pulse 3.8s ease-in-out infinite alternate;
-          }
-
-          .platform-shadow {
-            animation: shadow-pulse 7s ease-in-out infinite;
-          }
-
-          @keyframes platform-float {
-            0%,
-            100% {
-              filter: drop-shadow(0 12px 20px rgba(147, 51, 234, 0.08));
-              transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-            }
-            35% {
-              filter: drop-shadow(0 18px 26px rgba(147, 51, 234, 0.24));
-              transform: translate3d(18px, -18px, 0) rotate(3deg) scale(1.04);
-            }
-            70% {
-              filter: drop-shadow(0 14px 24px rgba(59, 130, 246, 0.2));
-              transform: translate3d(-14px, 10px, 0) rotate(-2.4deg) scale(0.98);
-            }
-          }
-
-          @keyframes platform-shine {
-            0%,
-            62% {
-              opacity: 0;
-              transform: translateX(-70%);
-            }
-            74% {
-              opacity: 0.55;
-            }
-            92%,
-            100% {
-              opacity: 0;
-              transform: translateX(70%);
-            }
-          }
-
-          @keyframes phone-float {
-            0%,
-            100% {
-              transform: translate3d(0, 0, 0) rotate(-16deg);
-            }
-            50% {
-              transform: translate3d(8px, -18px, 0) rotate(-11deg);
-            }
-          }
-
-          @keyframes logo-pulse {
-            0% {
-              opacity: 0.82;
-              transform: scale(1);
-            }
-            100% {
-              opacity: 1;
-              transform: scale(1.08);
-            }
-          }
-
-          @keyframes shadow-pulse {
-            0%,
-            100% {
-              opacity: 0.72;
-              transform: translateX(-50%) scaleX(1);
-            }
-            50% {
-              opacity: 0.45;
-              transform: translateX(-50%) scaleX(0.78);
-            }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .platform-logo,
-            .platform-logo::after,
-            .platform-phone,
-            .platform-shadow,
-            .platform-logo-image {
-              animation-duration: 10s;
-            }
-          }
-
-          @media (max-width: 1023px) {
-            .platform-logo,
-            .platform-logo::after,
-            .platform-phone,
-            .platform-shadow,
-            .platform-logo-image {
-              animation: none;
-            }
-          }
-        `}</style>
       </main>
+
       {hasOpenedRegistrationModal && (
         <div
-          className={`${isModalOpen ? "flex" : "hidden"} fixed inset-0 items-center justify-center bg-black/85 p-4 backdrop-blur-md`}
+          className={`${isModalOpen ? "flex" : "hidden"} fixed inset-0 items-center justify-center bg-black/85 p-3 backdrop-blur-md sm:p-6`}
           style={{ zIndex: 2147483647, isolation: "isolate" }}
           role="dialog"
           aria-modal="true"
           aria-hidden={!isModalOpen}
           aria-labelledby="plataformas-registration-title"
         >
-          <div className="relative max-h-[92vh] w-full max-w-[540px] overflow-y-auto rounded-[2rem] bg-white p-6 text-black shadow-[0_30px_100px_rgba(0,0,0,.6)]">
+          <div className="relative max-h-[calc(100dvh-24px)] w-[calc(100vw-24px)] max-w-[580px] overflow-x-hidden overflow-y-auto rounded-3xl bg-white p-4 text-black shadow-[0_30px_100px_rgba(0,0,0,.6)] sm:max-h-[calc(100dvh-48px)] sm:p-7">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-5 top-4 z-10 text-2xl font-black text-slate-400 transition hover:text-slate-900"
+              className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-2xl font-black text-slate-500 transition hover:bg-slate-200 hover:text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 sm:right-5 sm:top-5"
               aria-label="Cerrar formulario"
             >
               ×
             </button>
 
-            <p className="text-center text-xs font-black uppercase tracking-[0.28em] text-purple-600">
-              Registro gratuito
-            </p>
-            <h2
-              id="plataformas-registration-title"
-              className="mt-2 text-center text-3xl font-black uppercase text-slate-950"
-            >
-              Plataformas Tecnológicas
-            </h2>
-            <p className="mt-2 text-center text-sm font-semibold text-slate-500">
-              {config.compactDateTimeLabel}
-            </p>
+            <div className="pr-10 sm:pr-12">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-purple-600">
+                Registro gratuito
+              </p>
+              <h2
+                id="plataformas-registration-title"
+                className="mt-2 text-2xl font-black uppercase leading-tight text-slate-950 sm:text-3xl"
+              >
+                Reserva tu lugar
+              </h2>
+              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-500">
+                {config.compactDateTimeLabel}
+              </p>
+            </div>
 
-            <div className="relative z-0 mt-6 isolate bg-white">
+            <div className="plataformas-form-shell relative z-0 mt-5 isolate bg-white sm:mt-6">
               <ActiveCampaignForm />
             </div>
           </div>
         </div>
       )}
+
+      <style jsx global>{`
+        .plataformas-form-shell,
+        .plataformas-form-shell ._form_323,
+        .plataformas-form-shell ._form_323 form,
+        .plataformas-form-shell ._form-content {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin-inline: 0 !important;
+          box-sizing: border-box !important;
+        }
+
+        .plataformas-form-shell ._form_323 {
+          padding: 0 !important;
+        }
+
+        .plataformas-form-shell ._form_element,
+        .plataformas-form-shell ._form-label,
+        .plataformas-form-shell ._form-fieldset,
+        .plataformas-form-shell ._checkbox-radio {
+          max-width: 100% !important;
+          box-sizing: border-box !important;
+        }
+
+        .plataformas-form-shell input:not([type="checkbox"]):not([type="radio"]),
+        .plataformas-form-shell select,
+        .plataformas-form-shell textarea,
+        .plataformas-form-shell button[type="submit"] {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-height: 48px;
+          box-sizing: border-box !important;
+        }
+
+        .plataformas-form-shell label,
+        .plataformas-form-shell ._form-label,
+        .plataformas-form-shell ._checkbox-radio label {
+          overflow-wrap: anywhere;
+          line-height: 1.45 !important;
+        }
+
+        @media (max-width: 430px) {
+          .plataformas-form-shell ._form_323,
+          .plataformas-form-shell ._form-content {
+            font-size: 14px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
