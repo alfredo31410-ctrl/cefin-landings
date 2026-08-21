@@ -10,7 +10,6 @@ import {
 } from "@/lib/hotmart-utms";
 import { landingConfig as config } from "./config";
 
-const ACTIVE_CAMPAIGN_ORIGIN = "https://cefincapacitacion.activehosted.com";
 const PROXY_ENDPOINT =
   "/landings/despierta-tu-potencial-contable/api/registro";
 const THANK_YOU_PATH = config.thankYou.path;
@@ -23,15 +22,8 @@ const VERIFIED_ACTIVE_CAMPAIGN_FIELDS = Object.entries(
   typeof entry[1] === "number",
 );
 
-type ActiveCampaignScriptLoader = (
-  url: string,
-  callback?: (() => void) | null,
-  isSubmit?: boolean,
-) => void;
-
 declare global {
   interface Window {
-    _load_script?: ActiveCampaignScriptLoader;
     _show_error?: (id: string, message: string, html?: string) => void;
   }
 }
@@ -75,26 +67,17 @@ function appendAttribution(
 }
 
 function getFormSubmission(
-  url: string,
+  form: HTMLFormElement,
   attribution: Record<UtmParamName, string>,
 ) {
-  try {
-    const requestUrl = new URL(url, window.location.href);
-    if (
-      requestUrl.origin !== ACTIVE_CAMPAIGN_ORIGIN ||
-      requestUrl.pathname !== "/proc.php" ||
-      requestUrl.searchParams.get("f") !==
-        String(config.activeCampaign.formId)
-    ) {
-      return null;
-    }
+  const params = new URLSearchParams();
 
-    requestUrl.searchParams.delete("jsonp");
-    appendAttribution(requestUrl.searchParams, attribution);
-    return requestUrl.searchParams;
-  } catch {
-    return null;
+  for (const [name, value] of new FormData(form).entries()) {
+    if (typeof value === "string") params.append(name, value);
   }
+
+  appendAttribution(params, attribution);
+  return params;
 }
 
 function showActiveCampaignError(params: URLSearchParams) {
@@ -187,6 +170,17 @@ function unlockForm(form: HTMLFormElement) {
   removeIntegrationStatus(form);
 }
 
+function setSubmitting(form: HTMLFormElement, isSubmitting: boolean) {
+  const submitButton = getSubmitButton(form);
+  if (!submitButton) return;
+
+  submitButton.disabled = isSubmitting;
+  submitButton.setAttribute("aria-disabled", String(isSubmitting));
+  submitButton.classList.toggle("processing", isSubmitting);
+
+  if (!isSubmitting) submitButton.removeAttribute("aria-disabled");
+}
+
 async function submitThroughServer(
   params: URLSearchParams,
   signal: AbortSignal,
@@ -229,8 +223,6 @@ export function DespiertaActiveCampaignSubmissionProxy({
 
     const attribution = normalizeAttribution(getActiveUtmParams());
     let observer: MutationObserver | null = null;
-    let originalLoader: ActiveCampaignScriptLoader | undefined;
-    let proxyLoader: ActiveCampaignScriptLoader | undefined;
     let timeoutId: number | undefined;
     let activeController: AbortController | null = null;
     let requestInFlight = false;
@@ -255,38 +247,10 @@ export function DespiertaActiveCampaignSubmissionProxy({
       lockForm(form, "Preparando el formulario seguro...");
       enhanceKnownFormFields(form);
 
-      if (
-        !window._load_script ||
-        !syncVerifiedAttributionFields(form, attribution)
-      ) {
+      if (!syncVerifiedAttributionFields(form, attribution)) {
         return false;
       }
 
-      originalLoader = window._load_script;
-      proxyLoader = function despiertaActiveCampaignLoader(
-        url,
-        callback,
-        isSubmit,
-      ) {
-        const params = isSubmit ? getFormSubmission(url, attribution) : null;
-        if (!params) {
-          originalLoader?.call(window, url, callback, isSubmit);
-          return;
-        }
-
-        if (requestInFlight) return;
-        requestInFlight = true;
-
-        const controller = new AbortController();
-        activeController = controller;
-        void submitThroughServer(params, controller.signal, () => active).finally(
-          () => {
-            if (activeController === controller) activeController = null;
-            requestInFlight = false;
-          },
-        );
-      };
-      window._load_script = proxyLoader;
       integrationReady = true;
       unlockForm(form);
       return true;
@@ -321,17 +285,34 @@ export function DespiertaActiveCampaignSubmissionProxy({
         return;
       }
 
-      if (
-        integrationReady &&
-        proxyLoader &&
-        window._load_script === proxyLoader
-      ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      if (!integrationReady) {
+        showIntegrationError();
         return;
       }
 
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      showIntegrationError();
+      if (!form.reportValidity() || requestInFlight) return;
+
+      if (!syncVerifiedAttributionFields(form, attribution)) {
+        showIntegrationError();
+        return;
+      }
+
+      const params = getFormSubmission(form, attribution);
+      requestInFlight = true;
+      setSubmitting(form, true);
+
+      const controller = new AbortController();
+      activeController = controller;
+      void submitThroughServer(params, controller.signal, () => active).finally(
+        () => {
+          if (activeController === controller) activeController = null;
+          requestInFlight = false;
+          if (active && !controller.signal.aborted) setSubmitting(form, false);
+        },
+      );
     };
 
     formRoot.addEventListener("submit", protectSubmission, true);
@@ -354,9 +335,6 @@ export function DespiertaActiveCampaignSubmissionProxy({
       activeController = null;
       formRoot.removeEventListener("submit", protectSubmission, true);
       stopObserving();
-      if (proxyLoader && window._load_script === proxyLoader && originalLoader) {
-        window._load_script = originalLoader;
-      }
     };
   }, [formRef]);
 
