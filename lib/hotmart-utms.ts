@@ -20,7 +20,7 @@ export const UTM_PARAM_NAMES = HOTMART_ATTRIBUTION_PARAM_NAMES;
 export type UtmParamName = (typeof HOTMART_ATTRIBUTION_PARAM_NAMES)[number];
 export type UtmParams = Partial<Record<UtmParamName, string>>;
 
-function hasUtmParams(params: UtmParams) {
+export function hasUtmParams(params: UtmParams) {
   return Object.keys(params).length > 0;
 }
 
@@ -39,8 +39,9 @@ export function readUtmParamsFromSearch(search: string) {
   HOTMART_ATTRIBUTION_PARAM_NAMES.forEach((name) => {
     const value = searchParams.get(name);
 
-    if (value) {
-      utmParams[name] = value;
+    const normalized = value?.trim();
+    if (normalized) {
+      utmParams[name] = normalized;
     }
   });
 
@@ -50,29 +51,48 @@ export function readUtmParamsFromSearch(search: string) {
 export function saveUtmParams(params: UtmParams) {
   if (!hasUtmParams(params) || typeof window === "undefined") return;
 
-  window.sessionStorage.setItem(
-    HOTMART_UTM_STORAGE_KEY,
-    JSON.stringify(params),
-  );
-}
-
-export function getStoredUtmParams() {
-  if (typeof window === "undefined") return {};
+  const serialized = JSON.stringify(params);
+  try {
+    window.sessionStorage.setItem(HOTMART_UTM_STORAGE_KEY, serialized);
+  } catch {
+    // Attribution must never interrupt navigation or registration.
+  }
 
   try {
-    const storedValue = window.sessionStorage.getItem(HOTMART_UTM_STORAGE_KEY);
+    window.localStorage.setItem(HOTMART_UTM_STORAGE_KEY, serialized);
+  } catch {
+    // Local storage is only a fallback when session storage is unavailable.
+  }
+}
+
+function readStoredUtmParams(storage: Storage) {
+  try {
+    const storedValue = storage.getItem(HOTMART_UTM_STORAGE_KEY);
     if (!storedValue) return {};
 
     const parsedValue = JSON.parse(storedValue) as Record<string, unknown>;
     const utmParams: UtmParams = {};
 
     Object.entries(parsedValue).forEach(([name, value]) => {
-      if (isUtmParamName(name) && typeof value === "string" && value) {
-        utmParams[name] = value;
+      if (isUtmParamName(name) && typeof value === "string" && value.trim()) {
+        utmParams[name] = value.trim();
       }
     });
 
     return utmParams;
+  } catch {
+    return {};
+  }
+}
+
+export function getStoredUtmParams() {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const session = readStoredUtmParams(window.sessionStorage);
+    if (hasUtmParams(session)) return session;
+
+    return readStoredUtmParams(window.localStorage);
   } catch {
     return {};
   }

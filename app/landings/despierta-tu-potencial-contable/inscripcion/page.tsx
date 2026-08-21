@@ -2,22 +2,23 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  getActiveUtmParams,
+  withHotmartUtmParams,
+} from "@/lib/hotmart-utms";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   META_CURRENCY,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import { landingConfig as config } from "../config";
 
-const PRICE = 4787;
-const CHECKOUT_URL: string = "https://pay.hotmart.com/L106443767M?off=kmo127nh&checkoutMode=10&bid=1782760909751";
-const ASSET_BASE =
-  process.env.NODE_ENV === "production"
-    ? "https://cefin-landings-z9uk.vercel.app"
-    : "";
-const MARISOL_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/marisol-despierta-tu-potencial-contable.png`;
-const BANNER_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/banner-despierta-tu-potencial-contable.png`;
+const PRICE = config.checkout.price;
+const CHECKOUT_URL: string = config.checkout.url;
+const MARISOL_IMAGE_URL = config.assets.marisol;
+const BANNER_IMAGE_URL = config.assets.banner;
 
 const courses = [
   "Asesoría fiscal para personal médico",
@@ -53,8 +54,16 @@ const audience = [
 ];
 
 export default function DespiertaTuPotencialContablePagoPage() {
+  const [isCheckoutStarting, setIsCheckoutStarting] = useState(false);
+  const checkoutStartedRef = useRef(false);
+  const viewContentTrackedRef = useRef(false);
+
   useEffect(() => {
     document.title = "Despierta tu Potencial Contable | CEFIN";
+    getActiveUtmParams();
+
+    if (viewContentTrackedRef.current) return;
+    viewContentTrackedRef.current = true;
 
     trackMetaEvent("ViewContent", {
       content_name: "Despierta tu Potencial Contable",
@@ -65,6 +74,20 @@ export default function DespiertaTuPotencialContablePagoPage() {
   }, []);
 
   const handleCheckout = () => {
+    if (checkoutStartedRef.current) return;
+
+    if (!CHECKOUT_URL || CHECKOUT_URL === "#") {
+      console.warn("No hay una URL de checkout configurada.");
+      return;
+    }
+
+    checkoutStartedRef.current = true;
+    setIsCheckoutStarting(true);
+    const trackedCheckoutUrl = withHotmartUtmParams(
+      CHECKOUT_URL,
+      getActiveUtmParams(),
+    );
+
     trackMetaEvent("InitiateCheckout", {
       content_name: "Despierta tu Potencial Contable",
       content_category: "Programa de capacitación / Profesionales contables",
@@ -72,13 +95,8 @@ export default function DespiertaTuPotencialContablePagoPage() {
       currency: META_CURRENCY,
     });
 
-    if (!CHECKOUT_URL || CHECKOUT_URL=== "#") {
-      console.warn("No hay una URL de checkout configurada.");
-      return;
-    }
-
     window.setTimeout(() => {
-      window.location.href = CHECKOUT_URL;
+      window.location.assign(trackedCheckoutUrl);
     }, 250);
   };
 
@@ -118,6 +136,8 @@ export default function DespiertaTuPotencialContablePagoPage() {
               </span>
               <button
                 onClick={handleCheckout}
+                disabled={isCheckoutStarting}
+                aria-busy={isCheckoutStarting}
                 className="hidden min-h-11 items-center rounded-full bg-[#8c52ff] px-5 text-sm font-black uppercase text-white shadow-[0_0_34px_rgba(140,82,255,.3)] transition hover:-translate-y-0.5 hover:bg-[#7440e6] sm:inline-flex"
               >
                 Inscribirme ahora
@@ -150,6 +170,8 @@ export default function DespiertaTuPotencialContablePagoPage() {
 
                   <button
                     onClick={handleCheckout}
+                    disabled={isCheckoutStarting}
+                    aria-busy={isCheckoutStarting}
                     className="inline-flex min-h-16 items-center justify-center rounded-[1.2rem] bg-[#8c52ff] px-8 text-base font-black uppercase text-white shadow-[0_22px_70px_rgba(140,82,255,.38)] transition hover:-translate-y-1 hover:bg-[#7440e6]"
                   >
                     Inscribirme ahora
@@ -220,6 +242,8 @@ export default function DespiertaTuPotencialContablePagoPage() {
           <div className="mx-auto mt-10 flex max-w-[1180px] justify-center">
             <button
               onClick={handleCheckout}
+              disabled={isCheckoutStarting}
+              aria-busy={isCheckoutStarting}
               className="inline-flex min-h-16 items-center justify-center rounded-[1.2rem] bg-[#8c52ff] px-8 text-center text-base font-black uppercase text-white shadow-[0_22px_70px_rgba(140,82,255,.38)] transition hover:-translate-y-1 hover:bg-[#7440e6] sm:px-12"
             >
               INSCRIBIRME AHORA!!!
@@ -311,6 +335,8 @@ export default function DespiertaTuPotencialContablePagoPage() {
               </p>
               <button
                 onClick={handleCheckout}
+                disabled={isCheckoutStarting}
+                aria-busy={isCheckoutStarting}
                 className="mt-8 inline-flex min-h-16 w-full items-center justify-center rounded-[1.1rem] bg-white px-8 text-base font-black uppercase text-[#4c1d95] shadow-[0_20px_60px_rgba(0,0,0,.22)] transition hover:-translate-y-1 hover:bg-purple-100"
               >
                 Inscribirme ahora

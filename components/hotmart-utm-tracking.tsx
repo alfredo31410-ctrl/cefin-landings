@@ -28,9 +28,10 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
 
     attributionParamNames.forEach(function (name) {
       var value = searchParams.get(name);
+      var normalized = value && value.trim();
 
-      if (value) {
-        utms[name] = value;
+      if (normalized) {
+        utms[name] = normalized;
       }
     });
 
@@ -60,8 +61,8 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
       var utms = {};
 
       attributionParamNames.forEach(function (name) {
-        if (typeof parsedValue[name] === "string" && parsedValue[name]) {
-          utms[name] = parsedValue[name];
+        if (typeof parsedValue[name] === "string" && parsedValue[name].trim()) {
+          utms[name] = parsedValue[name].trim();
         }
       });
 
@@ -73,15 +74,14 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
 
   function getActiveUtms() {
     var currentUtms = readUtmsFromSearch(window.location.search);
+    var sessionUtms = readStoredUtms(window.sessionStorage);
 
     if (hasParams(currentUtms)) {
       saveUtms(currentUtms);
       return currentUtms;
     }
 
-    var sessionUtms = readStoredUtms(window.sessionStorage);
     if (hasParams(sessionUtms)) return sessionUtms;
-
     return readStoredUtms(window.localStorage);
   }
 
@@ -100,7 +100,7 @@ const HOTMART_UTM_TRACKING_SCRIPT = `
 
       if (!isHotmartUrl(url)) return null;
 
-      utmParamNames.forEach(function (name) {
+      attributionParamNames.forEach(function (name) {
         if (utms[name]) {
           url.searchParams.set(name, utms[name]);
         }
