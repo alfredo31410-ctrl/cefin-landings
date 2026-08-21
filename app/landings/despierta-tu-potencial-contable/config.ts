@@ -16,8 +16,8 @@ export const landingConfig = {
     formId: 325,
     formClass: "_form_325",
     formSelector: "form._form_325",
-    formUser: "6A88A280609C0",
-    formOrigin: "0b5d26ee-5f0d-40f1-b905-c9dc07e0c338",
+    formUser: "6A88AF728FA82",
+    formOrigin: "a4175311-740e-4055-b88d-9b3aada8fd11",
     embedUrl: "https://cefincapacitacion.activehosted.com/f/embed.php?id=325",
     attributionFieldIds: {
       utm_source: 7,
