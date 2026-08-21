@@ -24,22 +24,45 @@ function isValidWhatsAppGroupUrl(value: string) {
   }
 }
 
+function resolveWhatsAppGroup(
+  defaultWhatsappGroupUrl: string,
+  whatsappGroupUrlsByAdsetId: Readonly<Record<string, string>>,
+) {
+  const attribution = getActiveUtmParams();
+  const adsetId = attribution.adset_id?.trim() || "";
+  const routedGroupUrl =
+    whatsappGroupUrlsByAdsetId[adsetId] || defaultWhatsappGroupUrl;
+
+  return {
+    adsetId,
+    routedGroupUrl,
+    groupVariant: whatsappGroupUrlsByAdsetId[adsetId]
+      ? "adset_routed"
+      : "default",
+  };
+}
+
 export function RedirectToWhatsApp({
-  whatsappGroupUrl,
+  defaultWhatsappGroupUrl,
+  whatsappGroupUrlsByAdsetId,
 }: {
-  whatsappGroupUrl: string;
+  defaultWhatsappGroupUrl: string;
+  whatsappGroupUrlsByAdsetId: Readonly<Record<string, string>>;
 }) {
   const redirectedRef = useRef(false);
   const intentRef = useRef<
     ReturnType<typeof consumeDespiertaWhatsAppIntent> | undefined
   >(undefined);
   const joinGroupSentRef = useRef(false);
-  const isValidUrl = isValidWhatsAppGroupUrl(whatsappGroupUrl);
+  const isValidDefaultUrl = isValidWhatsAppGroupUrl(defaultWhatsappGroupUrl);
 
   useEffect(() => {
-    if (!isValidUrl) return;
+    const { adsetId, routedGroupUrl, groupVariant } = resolveWhatsAppGroup(
+      defaultWhatsappGroupUrl,
+      whatsappGroupUrlsByAdsetId,
+    );
+    if (!isValidWhatsAppGroupUrl(routedGroupUrl)) return;
 
-    getActiveUtmParams();
     if (intentRef.current === undefined) {
       intentRef.current = consumeDespiertaWhatsAppIntent();
     }
@@ -66,6 +89,8 @@ export function RedirectToWhatsApp({
                 source: "thank_you_page",
                 destination: "whatsapp_group",
                 status: "clicked",
+                adset_id: adsetId || undefined,
+                group_variant: groupVariant,
               },
               { eventID: intent.id },
             );
@@ -83,7 +108,7 @@ export function RedirectToWhatsApp({
       stopWaitingForPixel();
       if (redirectedRef.current) return;
       redirectedRef.current = true;
-      window.location.assign(whatsappGroupUrl);
+      window.location.assign(routedGroupUrl);
     }, 1500);
 
     return () => {
@@ -91,7 +116,7 @@ export function RedirectToWhatsApp({
       stopWaitingForPixel();
       window.clearTimeout(timeoutId);
     };
-  }, [isValidUrl, whatsappGroupUrl]);
+  }, [defaultWhatsappGroupUrl, whatsappGroupUrlsByAdsetId]);
 
   return (
     <>
@@ -102,10 +127,20 @@ export function RedirectToWhatsApp({
           __html: getMetaPixelScript(undefined, { trackPageView: false }),
         }}
       />
-      {isValidUrl ? (
+      {isValidDefaultUrl ? (
         <a
           className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[#25D366] px-6 text-sm font-black uppercase tracking-[0.03em] text-[#062c15] shadow-[0_20px_60px_rgba(37,211,102,.24)] transition hover:scale-[1.01] sm:w-auto sm:min-w-80 sm:text-base"
-          href={whatsappGroupUrl}
+          href={defaultWhatsappGroupUrl}
+          onClick={(event) => {
+            const { routedGroupUrl } = resolveWhatsAppGroup(
+              defaultWhatsappGroupUrl,
+              whatsappGroupUrlsByAdsetId,
+            );
+            if (!isValidWhatsAppGroupUrl(routedGroupUrl)) return;
+
+            event.preventDefault();
+            window.location.assign(routedGroupUrl);
+          }}
           rel="noopener noreferrer"
         >
           Abrir el grupo manualmente

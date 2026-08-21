@@ -31,7 +31,10 @@ export default function UnirseWhatsAppPage() {
           para terminar.
         </p>
         <RedirectToWhatsApp
-          whatsappGroupUrl={config.thankYou.whatsappGroupUrl}
+          defaultWhatsappGroupUrl={config.thankYou.whatsappGroupUrl}
+          whatsappGroupUrlsByAdsetId={
+            config.thankYou.whatsappGroupUrlsByAdsetId
+          }
         />
         <p className="mt-5 text-sm font-semibold text-white/55">
           Si WhatsApp no se abre automáticamente, utiliza el botón manual.

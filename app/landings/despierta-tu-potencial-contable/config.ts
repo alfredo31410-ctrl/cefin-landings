@@ -38,6 +38,10 @@ export const landingConfig = {
     whatsappRedirectPath:
       "/landings/despierta-tu-potencial-contable/unirse-whatsapp",
     whatsappGroupUrl: "https://chat.whatsapp.com/HaQoyKQgnRjJKTdL2zdIqP",
+    whatsappGroupUrlsByAdsetId: {
+      "52624960639641":
+        "https://chat.whatsapp.com/C5giRSFiEOpGi1yKNF5ArA",
+    },
   },
   checkout: {
     price: 4787,
