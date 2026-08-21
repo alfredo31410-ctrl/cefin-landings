@@ -31,6 +31,9 @@ const MAX_ATTRIBUTION_LENGTH = 250;
 const MAX_SUBSCRIPTION_SOURCE_LENGTH = 2048;
 const FORM_CONTENT_TYPE = "application/x-www-form-urlencoded";
 const CONTROL_CHARACTER = /[\u0000-\u001f\u007f]/;
+const ACTIVE_CAMPAIGN_FORM_USER = /^[A-F0-9]{13}$/;
+const ACTIVE_CAMPAIGN_FORM_ORIGIN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const VERIFIED_ACTIVE_CAMPAIGN_FIELDS = Object.entries(
   config.activeCampaign.attributionFieldIds,
@@ -108,15 +111,19 @@ function hasOnlyExpectedFields(params: URLSearchParams) {
 }
 
 function hasExpectedFormIdentity(params: URLSearchParams) {
-  const { activeCampaign } = config;
+  const formUser = getSingleValue(params, "u");
+  const formOrigin = getSingleValue(params, "or");
+
   return (
-    getSingleValue(params, "u") === activeCampaign.formUser &&
-    getSingleValue(params, "f") === String(activeCampaign.formId) &&
+    formUser !== null &&
+    ACTIVE_CAMPAIGN_FORM_USER.test(formUser) &&
+    formOrigin !== null &&
+    ACTIVE_CAMPAIGN_FORM_ORIGIN.test(formOrigin) &&
+    getSingleValue(params, "f") === String(config.activeCampaign.formId) &&
     getSingleValue(params, "c") === "0" &&
     getSingleValue(params, "m") === "0" &&
     getSingleValue(params, "act") === "sub" &&
-    getSingleValue(params, "v") === "2" &&
-    getSingleValue(params, "or") === activeCampaign.formOrigin
+    getSingleValue(params, "v") === "2"
   );
 }
 
@@ -155,6 +162,8 @@ function buildActiveCampaignParams(params: URLSearchParams) {
   const phone = normalizePhone(getSingleValue(params, "phone"));
   const smsConsent = getSingleValue(params, "sms_consent");
   const subscriptionSource = getSingleValue(params, "s");
+  const formUser = getSingleValue(params, "u");
+  const formOrigin = getSingleValue(params, "or");
   const attribution = readAttribution(params);
 
   if (
@@ -163,6 +172,8 @@ function buildActiveCampaignParams(params: URLSearchParams) {
     !email ||
     !phone ||
     smsConsent !== "on" ||
+    !formUser ||
+    !formOrigin ||
     subscriptionSource === null ||
     subscriptionSource.length > MAX_SUBSCRIPTION_SOURCE_LENGTH ||
     CONTROL_CHARACTER.test(subscriptionSource) ||
@@ -172,14 +183,14 @@ function buildActiveCampaignParams(params: URLSearchParams) {
   }
 
   const outgoing = new URLSearchParams();
-  outgoing.set("u", config.activeCampaign.formUser);
+  outgoing.set("u", formUser);
   outgoing.set("f", String(config.activeCampaign.formId));
   outgoing.set("s", subscriptionSource);
   outgoing.set("c", "0");
   outgoing.set("m", "0");
   outgoing.set("act", "sub");
   outgoing.set("v", "2");
-  outgoing.set("or", config.activeCampaign.formOrigin);
+  outgoing.set("or", formOrigin);
   outgoing.set("firstname", firstname);
   outgoing.set("lastname", lastname);
   outgoing.set("email", email);
