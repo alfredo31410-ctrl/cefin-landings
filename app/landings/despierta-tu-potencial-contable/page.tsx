@@ -9,14 +9,14 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 231;
+const ACTIVE_CAMPAIGN_FORM_ID = 325;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
-const MARISOL_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/marisol_contadora_estrategica.png`;
-const BANNER_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/banner-contadora-estrategica.png`;
+const MARISOL_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/marisol-despierta-tu-potencial-contable.png`;
+const BANNER_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/banner-despierta-tu-potencial-contable.png`;
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();
@@ -66,7 +66,7 @@ const buildAdvancedMatchData = (formRoot: ParentNode) => {
   return advancedMatchData;
 };
 
-export default function ContadoraEstrategicaPage() {
+export default function DespiertaTuPotencialContablePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const lastAdvancedMatchRef = useRef("");
 
@@ -84,10 +84,10 @@ export default function ContadoraEstrategicaPage() {
   }, []);
 
   useEffect(() => {
-    document.title = "Contadora Estrategica | Clase Gratuita | CEFIN";
+    document.title = "Despierta tu Potencial Contable | Clase Gratuita | CEFIN";
 
     trackMetaEvent("ViewContent", {
-      content_name: "Contadora Estrategica | Landing",
+      content_name: "Despierta tu Potencial Contable | Landing",
       content_category: "Clase gratuita",
     });
   }, []);
@@ -155,7 +155,7 @@ export default function ContadoraEstrategicaPage() {
   return (
     <>
       <Script
-        id="meta-pixel-contadora-estrategica"
+        id="meta-pixel-despierta-tu-potencial-contable"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
@@ -208,12 +208,12 @@ export default function ContadoraEstrategicaPage() {
           <div className="mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl items-center gap-8 px-6 pb-16 pt-4 lg:grid-cols-12 lg:px-10">
             <div className="lg:col-span-7">
               <p className="inline-flex rounded-full bg-[#08060c] px-5 py-2 text-xs font-black uppercase tracking-[0.28em] text-white shadow-[0_12px_28px_rgba(84,48,150,0.20)] sm:text-sm">
-                Clase gratuita para contadoras
+                Clase gratuita para profesionales contables
               </p>
 
               <h1 className="mt-6 max-w-4xl text-5xl font-black uppercase leading-[0.86] tracking-tight text-[#08060c] sm:text-7xl lg:text-8xl xl:text-[7rem]">
-                Contadora
-                <span className="block text-[#7d4cff]">Estrategica</span>
+                Despierta tu
+                <span className="block text-[#7d4cff]">Potencial Contable</span>
               </h1>
 
               <p className="mt-5 text-sm font-black uppercase tracking-[0.22em] text-[#08060c]">
@@ -222,8 +222,8 @@ export default function ContadoraEstrategicaPage() {
 
               <p className="mt-5 max-w-2xl text-xl font-medium leading-relaxed text-[#20182c] sm:text-2xl">
                 Aprende a dejar de operar solo como capturista y empieza a
-                posicionarte como una asesora que toma decisiones, comunica
-                valor y cobra mejor.
+                posicionarte como profesional de confianza: toma decisiones,
+                comunica valor y cobra mejor.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -269,13 +269,13 @@ export default function ContadoraEstrategicaPage() {
                 Para quien es
               </p>
               <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
-                Para contadoras que quieren crecer con direccion.
+                Para profesionales contables que quieren crecer con direccion.
               </h2>
             </div>
             <div className="space-y-5 text-lg leading-relaxed text-white/78 lg:col-span-7">
               <p>
-                Esta clase esta pensada para profesionales contables que ya
-                atienden clientes o quieren hacerlo con una propuesta mas
+                Esta clase esta pensada para quienes ejercen o estudian
+                contabilidad y quieren atender clientes con una propuesta mas
                 clara, rentable y estrategica.
               </p>
               <p>
@@ -295,7 +295,7 @@ export default function ContadoraEstrategicaPage() {
                     Reserva tu lugar
                   </p>
                   <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">
-                    Da el siguiente paso como Contadora Estrategica.
+                    Da el siguiente paso y despierta tu potencial contable.
                   </h3>
                   <p className="mt-2 max-w-2xl text-white/68">
                     Completa el formulario y recibe la informacion para entrar a
@@ -317,7 +317,10 @@ export default function ContadoraEstrategicaPage() {
         <footer className="relative z-30 border-t border-white/12 bg-[#4f2990] text-white">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-center text-sm text-white/45 lg:px-10">
             <p className="font-black tracking-[0.25em]">CEFIN</p>
-            <p>Formacion practica para contadoras que quieren crecer.</p>
+            <p>
+              Formacion practica para profesionales contables que quieren
+              crecer.
+            </p>
           </div>
         </footer>
 
@@ -337,7 +340,7 @@ export default function ContadoraEstrategicaPage() {
                   Clase gratuita
                 </p>
                 <h4 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  Contadora Estrategica
+                  Despierta tu Potencial Contable
                 </h4>
                 <p className="mt-2 text-sm text-slate-500">
                   Completa tus datos para asegurar tu lugar.

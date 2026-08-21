@@ -9,20 +9,20 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/GFdo1IiPXydJ4HWO8lYdOk";
+const WHATSAPP_URL = "https://chat.whatsapp.com/HaQoyKQgnRjJKTdL2zdIqP";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
-const MARISOL_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/marisol_contadora_estrategica.png`;
-const BANNER_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/banner-contadora-estrategica.png`;
+const MARISOL_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/marisol-despierta-tu-potencial-contable.png`;
+const BANNER_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/banner-despierta-tu-potencial-contable.png`;
 
-export default function GraciasContadoraEstrategicaPage() {
+export default function GraciasDespiertaTuPotencialContablePage() {
   useEffect(() => {
-    document.title = "Registro completado | Contadora Estrategica | CEFIN";
+    document.title = "Registro completado | Despierta tu Potencial Contable | CEFIN";
 
     trackMetaEvent("CompleteRegistration", {
-      content_name: "Contadora Estrategica | Registro completado",
+      content_name: "Despierta tu Potencial Contable | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
       value: 0,
@@ -32,7 +32,7 @@ export default function GraciasContadoraEstrategicaPage() {
 
   const handleWhatsAppClick = () => {
     trackMetaEvent("Lead", {
-      content_name: "Contadora Estrategica | Click grupo WhatsApp",
+      content_name: "Despierta tu Potencial Contable | Click grupo WhatsApp",
       content_category: "Grupo de WhatsApp",
       status: "whatsapp_group_click",
       value: 0,
@@ -47,7 +47,7 @@ export default function GraciasContadoraEstrategicaPage() {
   return (
     <>
       <Script
-        id="meta-pixel-contadora-estrategica-thankyou"
+        id="meta-pixel-despierta-tu-potencial-contable-thankyou"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
@@ -94,7 +94,7 @@ export default function GraciasContadoraEstrategicaPage() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#20182c] sm:text-xl">
               Tu registro para la clase gratuita de{" "}
               <span className="font-black text-[#7d4cff]">
-                Contadora Estrategica
+                Despierta tu Potencial Contable
               </span>{" "}
               ya quedo casi listo.
             </p>

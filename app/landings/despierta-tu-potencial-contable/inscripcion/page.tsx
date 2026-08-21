@@ -16,49 +16,49 @@ const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
-const MARISOL_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/marisol_contadora_estrategica.png`;
-const BANNER_IMAGE_URL = `${ASSET_BASE}/contadora-estrategica/banner-contadora-estrategica.png`;
+const MARISOL_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/marisol-despierta-tu-potencial-contable.png`;
+const BANNER_IMAGE_URL = `${ASSET_BASE}/despierta-tu-potencial-contable/banner-despierta-tu-potencial-contable.png`;
 
 const courses = [
-  "Asesor fiscal de médicos",
+  "Asesoría fiscal para personal médico",
   "ISR por actividades empresariales",
   "RESICO",
   "Contabilidad electrónica",
   "Facturación electrónica",
   "Operaciones con el público en general",
   "Contabilidad de costos e inventarios",
-  "El arte de saber cobrar para contadores",
+  "El arte de saber cobrar servicios contables",
   "Entrenamiento para la fuerza de ventas",
   "Marca personal",
 ];
 
 const bonuses = [
-  "Agente de inteligencia artificial Contadora Estratégica",
-  "6 mentorías en vivo: Contadora Estratégica en acción",
-  "Kit de inicio de la Contadora Estratégica",
+  "Agente de inteligencia artificial para potenciar tu práctica contable",
+  "6 mentorías en vivo: Potencial contable en acción",
+  "Kit de inicio: Despierta tu Potencial Contable",
 ];
 
 const outcomes = [
   ["01", "Decide con estrategia", "Deja de operar solo como capturista y aprende a tomar mejores decisiones."],
-  ["02", "Comunica valor", "Presenta tus servicios con claridad para que tus clientas entiendan lo que haces."],
+  ["02", "Comunica valor", "Presenta tus servicios con claridad para que tus clientes entiendan lo que haces."],
   ["03", "Cobra mejor", "Ordena tu oferta, tus honorarios y tu posicionamiento profesional."],
   ["04", "Crece con dirección", "Combina técnica, mentalidad comercial y marca personal para avanzar con estructura."],
 ];
 
 const audience = [
-  "Eres contadora y quieres dejar de competir solo por precio.",
+  "Eres profesional contable y quieres dejar de competir solo por precio.",
   "Quieres fortalecer tu criterio fiscal y contable con cursos prácticos.",
   "Buscas comunicar mejor tu valor profesional.",
   "Quieres una ruta para posicionarte, vender y cobrar con más seguridad.",
 ];
 
-export default function ContadoraEstrategicaPagoPage() {
+export default function DespiertaTuPotencialContablePagoPage() {
   useEffect(() => {
-    document.title = "Contadora Estratégica | CEFIN";
+    document.title = "Despierta tu Potencial Contable | CEFIN";
 
     trackMetaEvent("ViewContent", {
-      content_name: "Contadora Estratégica",
-      content_category: "Programa de capacitación / Contadoras",
+      content_name: "Despierta tu Potencial Contable",
+      content_category: "Programa de capacitación / Profesionales contables",
       value: PRICE,
       currency: META_CURRENCY,
     });
@@ -66,8 +66,8 @@ export default function ContadoraEstrategicaPagoPage() {
 
   const handleCheckout = () => {
     trackMetaEvent("InitiateCheckout", {
-      content_name: "Contadora Estratégica",
-      content_category: "Programa de capacitación / Contadoras",
+      content_name: "Despierta tu Potencial Contable",
+      content_category: "Programa de capacitación / Profesionales contables",
       value: PRICE,
       currency: META_CURRENCY,
     });
@@ -85,7 +85,7 @@ export default function ContadoraEstrategicaPagoPage() {
   return (
     <>
       <Script
-        id="meta-pixel-contadora-estrategica-pago"
+        id="meta-pixel-despierta-tu-potencial-contable-pago"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
@@ -127,20 +127,20 @@ export default function ContadoraEstrategicaPagoPage() {
             <div className="grid flex-1 items-center gap-8 py-10 lg:grid-cols-[1.03fr_0.97fr]">
               <div className="text-[#09070d]">
                 <p className="inline-flex rounded-full border border-[#8c52ff]/35 bg-white/65 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#7c3aed]">
-                  Programa para contadoras
+                  Programa para profesionales contables
                 </p>
 
-                <h1 className="mt-6 max-w-4xl text-[clamp(3.4rem,8vw,7.5rem)] font-black uppercase leading-[0.86] tracking-normal">
-                  Contadora
+                <h1 className="mt-6 max-w-4xl text-[clamp(3.4rem,8vw,6.5rem)] font-black uppercase leading-[0.86] tracking-normal">
+                  Despierta tu
                   <span className="block bg-gradient-to-r from-[#8c52ff] via-[#a855f7] to-[#5b21b6] bg-clip-text text-transparent">
-                    Estratégica
+                    Potencial Contable
                   </span>
                 </h1>
 
                 <p className="mt-5 max-w-2xl text-xl font-semibold leading-relaxed text-[#292334] sm:text-2xl">
                   Aprende a dejar de operar solo como capturista y empieza a
-                  posicionarte como una asesora que toma decisiones, comunica
-                  valor y cobra mejor.
+                  posicionarte como profesional de confianza: toma decisiones,
+                  comunica valor y cobra mejor.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -197,7 +197,7 @@ export default function ContadoraEstrategicaPagoPage() {
               Cursos que incluye
             </p>
             <h2 className="mt-3 text-center text-[clamp(2.1rem,5vw,4.6rem)] font-black uppercase leading-none">
-              Una ruta completa para crecer como contadora
+              Una ruta completa para desarrollar tu potencial contable
             </h2>
 
             <div className="mt-10 grid gap-3 md:grid-cols-2">
