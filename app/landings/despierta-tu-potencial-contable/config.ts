@@ -5,6 +5,11 @@ const assetBase =
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
 
+const whatsappGroupUrls = {
+  broad: "https://chat.whatsapp.com/HaQoyKQgnRjJKTdL2zdIqP",
+  seg: "https://chat.whatsapp.com/C5giRSFiEOpGi1yKNF5ArA",
+} as const;
+
 export const landingConfig = {
   slug: "despierta-tu-potencial-contable",
   title: "Despierta tu Potencial Contable",
@@ -37,10 +42,9 @@ export const landingConfig = {
     path: "/landings/despierta-tu-potencial-contable/gracias",
     whatsappRedirectPath:
       "/landings/despierta-tu-potencial-contable/unirse-whatsapp",
-    whatsappGroupUrl: "https://chat.whatsapp.com/HaQoyKQgnRjJKTdL2zdIqP",
-    whatsappGroupUrlsByAdsetId: {
-      "52624960639641":
-        "https://chat.whatsapp.com/C5giRSFiEOpGi1yKNF5ArA",
+    whatsapp: {
+      ...whatsappGroupUrls,
+      fallback: whatsappGroupUrls.broad,
     },
   },
   checkout: {

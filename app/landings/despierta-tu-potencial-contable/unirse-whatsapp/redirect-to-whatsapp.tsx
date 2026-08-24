@@ -9,6 +9,10 @@ import {
 import { getActiveUtmParams } from "@/lib/hotmart-utms";
 import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { campaignEvent } from "../config";
+import {
+  resolveAudienceWhatsAppGroup,
+  type WhatsAppGroupUrls,
+} from "../whatsapp-routing";
 
 function isValidWhatsAppGroupUrl(value: string) {
   try {
@@ -25,42 +29,38 @@ function isValidWhatsAppGroupUrl(value: string) {
 }
 
 function resolveWhatsAppGroup(
-  defaultWhatsappGroupUrl: string,
-  whatsappGroupUrlsByAdsetId: Readonly<Record<string, string>>,
+  whatsappGroupUrls: WhatsAppGroupUrls,
 ) {
   const attribution = getActiveUtmParams();
-  const adsetId = attribution.adset_id?.trim() || "";
-  const routedGroupUrl =
-    whatsappGroupUrlsByAdsetId[adsetId] || defaultWhatsappGroupUrl;
+  const utmTerm = attribution.utm_term?.trim() || "";
+  const { audienceVariant, routedGroupUrl } =
+    resolveAudienceWhatsAppGroup(utmTerm, whatsappGroupUrls);
 
   return {
-    adsetId,
+    adsetId: attribution.adset_id?.trim() || "",
+    audienceVariant,
     routedGroupUrl,
-    groupVariant: whatsappGroupUrlsByAdsetId[adsetId]
-      ? "adset_routed"
-      : "default",
+    utmTerm,
   };
 }
 
 export function RedirectToWhatsApp({
-  defaultWhatsappGroupUrl,
-  whatsappGroupUrlsByAdsetId,
+  whatsappGroupUrls,
 }: {
-  defaultWhatsappGroupUrl: string;
-  whatsappGroupUrlsByAdsetId: Readonly<Record<string, string>>;
+  whatsappGroupUrls: WhatsAppGroupUrls;
 }) {
   const redirectedRef = useRef(false);
   const intentRef = useRef<
     ReturnType<typeof consumeDespiertaWhatsAppIntent> | undefined
   >(undefined);
   const joinGroupSentRef = useRef(false);
-  const isValidDefaultUrl = isValidWhatsAppGroupUrl(defaultWhatsappGroupUrl);
+  const isValidFallbackUrl = isValidWhatsAppGroupUrl(
+    whatsappGroupUrls.fallback,
+  );
 
   useEffect(() => {
-    const { adsetId, routedGroupUrl, groupVariant } = resolveWhatsAppGroup(
-      defaultWhatsappGroupUrl,
-      whatsappGroupUrlsByAdsetId,
-    );
+    const { adsetId, audienceVariant, routedGroupUrl, utmTerm } =
+      resolveWhatsAppGroup(whatsappGroupUrls);
     if (!isValidWhatsAppGroupUrl(routedGroupUrl)) return;
 
     if (intentRef.current === undefined) {
@@ -90,7 +90,8 @@ export function RedirectToWhatsApp({
                 destination: "whatsapp_group",
                 status: "clicked",
                 adset_id: adsetId || undefined,
-                group_variant: groupVariant,
+                audience_variant: audienceVariant,
+                utm_term: utmTerm || undefined,
               },
               { eventID: intent.id },
             );
@@ -116,7 +117,7 @@ export function RedirectToWhatsApp({
       stopWaitingForPixel();
       window.clearTimeout(timeoutId);
     };
-  }, [defaultWhatsappGroupUrl, whatsappGroupUrlsByAdsetId]);
+  }, [whatsappGroupUrls]);
 
   return (
     <>
@@ -127,18 +128,18 @@ export function RedirectToWhatsApp({
           __html: getMetaPixelScript(undefined, { trackPageView: false }),
         }}
       />
-      {isValidDefaultUrl ? (
+      {isValidFallbackUrl ? (
         <a
           className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[#25D366] px-6 text-sm font-black uppercase tracking-[0.03em] text-[#062c15] shadow-[0_20px_60px_rgba(37,211,102,.24)] transition hover:scale-[1.01] sm:w-auto sm:min-w-80 sm:text-base"
-          href={defaultWhatsappGroupUrl}
+          href={whatsappGroupUrls.fallback}
           onClick={(event) => {
-            const { routedGroupUrl } = resolveWhatsAppGroup(
-              defaultWhatsappGroupUrl,
-              whatsappGroupUrlsByAdsetId,
-            );
+            const { routedGroupUrl } =
+              resolveWhatsAppGroup(whatsappGroupUrls);
             if (!isValidWhatsAppGroupUrl(routedGroupUrl)) return;
+            if (redirectedRef.current) return;
 
             event.preventDefault();
+            redirectedRef.current = true;
             window.location.assign(routedGroupUrl);
           }}
           rel="noopener noreferrer"
