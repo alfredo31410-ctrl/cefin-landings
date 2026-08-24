@@ -145,6 +145,17 @@ function readAttribution(params: URLSearchParams) {
   return values;
 }
 
+function appendVerifiedAttributionFields(
+  outgoing: URLSearchParams,
+  attribution: Record<UtmParamName, string>,
+) {
+  for (const [name, fieldId] of VERIFIED_ACTIVE_CAMPAIGN_FIELDS) {
+    // Nunca reenviar field[...] desde el navegador: reconstruirlo desde la
+    // atribuciÃ³n nominal ya validada por readAttribution().
+    outgoing.set(`field[${fieldId}]`, attribution[name]);
+  }
+}
+
 function buildActiveCampaignParams(params: URLSearchParams) {
   if (!hasOnlyExpectedFields(params) || !hasExpectedFormIdentity(params)) {
     return null;
@@ -197,9 +208,7 @@ function buildActiveCampaignParams(params: URLSearchParams) {
   outgoing.set("phone", phone);
   outgoing.set("sms_consent", "on");
 
-  for (const [name, fieldId] of VERIFIED_ACTIVE_CAMPAIGN_FIELDS) {
-    outgoing.set(`field[${fieldId}]`, attribution[name]);
-  }
+  appendVerifiedAttributionFields(outgoing, attribution);
 
   outgoing.set("jsonp", "true");
   return outgoing;

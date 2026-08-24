@@ -22,8 +22,8 @@ export const landingConfig = {
       utm_medium: 8,
       utm_campaign: 9,
       utm_content: 10,
+      utm_term: 11,
       // El formulario 325 no publica IDs para los siguientes parámetros.
-      utm_term: null,
       fbclid: null,
       campaign_id: null,
       adset_id: null,
