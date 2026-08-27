@@ -1,0 +1,161 @@
+.campaign {
+  --ef-petroleum: #071d24;
+  --ef-dark-surface: #102e35;
+  --ef-emerald: #19a974;
+  --ef-deep-green: #12805a;
+  --ef-accessible-green: #0b6f4c;
+  --ef-gold: #e0b84f;
+  --ef-ivory: #f6f3ea;
+  --ef-charcoal: #152a30;
+  --ef-warm-white: #f8faf7;
+  --ef-form: #fffdf7;
+  --ef-field: #ffffff;
+  --ef-form-border: #cad4cf;
+  --ef-muted: #53676a;
+  --ef-muted-dark: #c5d2cf;
+  --ef-emerald-soft: rgb(25 169 116 / 18%);
+  --ef-gold-soft: rgb(224 184 79 / 24%);
+  --ef-dark-overlay: rgb(7 29 36 / 72%);
+  --ef-shadow: rgb(7 29 36 / 32%);
+  --ef-cta-shadow: rgb(25 169 116 / 28%);
+  --ef-hero-gradient-mobile: linear-gradient(
+    90deg,
+    #071d24 0%,
+    rgb(7 29 36 / 97%) 38%,
+    rgb(7 29 36 / 80%) 68%,
+    rgb(16 46 53 / 34%) 100%
+  );
+  --ef-hero-gradient-desktop: linear-gradient(
+    90deg,
+    #071d24 0%,
+    rgb(7 29 36 / 98%) 35%,
+    rgb(7 29 36 / 80%) 61%,
+    rgb(16 46 53 / 18%) 100%
+  );
+  --ef-hero-bottom-gradient: linear-gradient(
+    to top,
+    #071d24 0%,
+    rgb(7 29 36 / 82%) 52%,
+    transparent 100%
+  );
+}
+
+.heroImageGuard {
+  background: var(--ef-hero-gradient-mobile);
+}
+
+.heroBottomGuard {
+  background: var(--ef-hero-bottom-gradient);
+}
+
+.heroGlowEmerald {
+  background: var(--ef-emerald-soft);
+}
+
+.heroGlowGold {
+  background: var(--ef-gold-soft);
+}
+
+.heroCopy > * {
+  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.heroCopy > :nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.heroCopy > :nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.heroCopy > :nth-child(3) {
+  animation-delay: 220ms;
+}
+
+.heroCopy > :nth-child(4) {
+  animation-delay: 290ms;
+}
+
+.heroCopy > :nth-child(5) {
+  animation-delay: 360ms;
+}
+
+.heroPortrait {
+  animation: portrait-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+.heroForm {
+  animation: form-enter 800ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes portrait-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 14px, 0) scale(0.98);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes form-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .scrollReveal {
+    animation: scroll-reveal 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+}
+
+@media (min-width: 64rem) {
+  .heroImageGuard {
+    background: var(--ef-hero-gradient-desktop);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy > *,
+  .heroPortrait,
+  .heroForm,
+  .scrollReveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
