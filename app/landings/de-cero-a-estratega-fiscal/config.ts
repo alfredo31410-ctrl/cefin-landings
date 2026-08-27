@@ -45,6 +45,7 @@ type CampaignConfig = {
   };
   activeCampaign: {
     enabled: boolean;
+    embedUrl: string | null;
     endpoint: string | null;
     formId: number | null;
     formUser: string | null;
@@ -162,13 +163,15 @@ export const landingConfig: CampaignConfig = {
   },
   activeCampaign: {
     enabled: true,
+    embedUrl:
+      "https://cefincapacitacion.activehosted.com/f/embed.php?id=333",
     // ActiveCampaign requiere este modo de respuesta para confirmar el alta.
     // La solicitud sigue siendo POST servidor-a-servidor y no coloca PII en la URL.
     endpoint:
       "https://cefincapacitacion.activehosted.com/proc.php?jsonp=true",
     formId: 333,
-    formUser: "6A906CD653B29",
-    formOrigin: "2ecd4dc9-db41-4469-8ed8-27da740cfc32",
+    formUser: "6A906FE1637F2",
+    formOrigin: "089651b9-1954-4f16-860c-725e5eba1140",
     attributionFieldIds: {
       utm_source: 7,
       utm_medium: 8,
