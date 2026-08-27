@@ -19,7 +19,7 @@ export const landingConfig = {
     path: "/landings/plataformas/gracias",
     whatsappRedirectPath: "/landings/plataformas/unirse-whatsapp",
     whatsappEnabled: true,
-    whatsappGroupUrl: "https://chat.whatsapp.com/Hz6dkaV0tzW2JRgd5qum2k",
+    whatsappGroupUrl: "https://chat.whatsapp.com/K9Wxy73ruMK7WvCurPA0Jk",
   },
 } as const;
 
