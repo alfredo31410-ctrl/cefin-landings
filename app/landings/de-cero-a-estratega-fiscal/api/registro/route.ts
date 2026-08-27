@@ -252,7 +252,9 @@ function failedRegistration(status: number, code: string) {
 }
 
 async function handleRegistration(request: NextRequest) {
-  if (!isSameOrigin(request)) return jsonNoStore({ ok: false }, 403);
+  if (!isSameOrigin(request, [config.routes.publicOrigin])) {
+    return jsonNoStore({ ok: false }, 403);
+  }
   if (getContentType(request) !== JSON_CONTENT_TYPE) {
     return jsonNoStore({ ok: false }, 415);
   }

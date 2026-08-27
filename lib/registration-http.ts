@@ -2,9 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 const NO_STORE_HEADERS = { "cache-control": "no-store" };
 
-export function isSameOrigin(request: NextRequest) {
+export function isSameOrigin(
+  request: NextRequest,
+  additionalAllowedOrigins: readonly string[] = [],
+) {
   const origin = request.headers.get("origin");
-  return Boolean(origin && origin === request.nextUrl.origin);
+  return Boolean(
+    origin &&
+      (origin === request.nextUrl.origin ||
+        additionalAllowedOrigins.includes(origin)),
+  );
 }
 
 export function getContentType(request: Request) {

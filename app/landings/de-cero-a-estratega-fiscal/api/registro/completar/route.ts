@@ -19,7 +19,9 @@ const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 async function handleCompletion(request: NextRequest) {
-  if (!isSameOrigin(request)) return jsonNoStore({ ok: false }, 403);
+  if (!isSameOrigin(request, [config.routes.publicOrigin])) {
+    return jsonNoStore({ ok: false }, 403);
+  }
   if (getContentType(request) !== JSON_CONTENT_TYPE) {
     return jsonNoStore({ ok: false }, 415);
   }

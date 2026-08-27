@@ -37,6 +37,7 @@ type CampaignConfig = {
     trackingEnabled: boolean;
   };
   routes: {
+    publicOrigin: string;
     root: string;
     thankYou: string;
     registrationApi: string;
@@ -151,6 +152,7 @@ export const landingConfig: CampaignConfig = {
     trackingEnabled: true,
   },
   routes: {
+    publicOrigin: "https://cefin.mx",
     root: "/landings/de-cero-a-estratega-fiscal",
     thankYou: "/landings/de-cero-a-estratega-fiscal/gracias",
     registrationApi:
