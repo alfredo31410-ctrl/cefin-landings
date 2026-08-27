@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import {
-  ESTRATEGA_FISCAL_REGISTRATION_COOKIE,
-  verifyEstrategaFiscalRegistrationProof,
-} from "@/lib/estratega-fiscal-registration";
 import { landingConfig as config } from "../config";
 import { WhatsAppRedirect } from "../gracias/whatsapp-redirect";
-import { getValidWhatsAppGroupUrl } from "../whatsapp";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: `Únete al grupo | ${config.campaignName} | CEFIN`,
@@ -16,40 +8,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function EstrategaFiscalJoinWhatsAppPage() {
-  const cookieStore = await cookies();
-  const proof = verifyEstrategaFiscalRegistrationProof(
-    cookieStore.get(ESTRATEGA_FISCAL_REGISTRATION_COOKIE)?.value,
-  );
-  const whatsappGroupUrl =
-    proof && config.activation.registrationEnabled
-      ? getValidWhatsAppGroupUrl(config.access.whatsappGroupUrl)
-      : null;
-
-  if (!proof) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#111827] px-4 py-12 text-white">
-        <section className="w-full max-w-xl rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-7 text-center sm:p-10">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-pink-300">
-            Acceso protegido
-          </p>
-          <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
-            Primero confirma tu registro
-          </h1>
-          <p className="mt-4 leading-relaxed text-slate-300">
-            Regístrate en la clase para poder continuar al grupo oficial de
-            WhatsApp.
-          </p>
-          <a
-            href={config.routes.root}
-            className="mt-7 inline-flex min-h-12 items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-black uppercase text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >
-            Ir al registro
-          </a>
-        </section>
-      </main>
-    );
-  }
+export default function EstrategaFiscalJoinWhatsAppPage() {
+  const whatsappGroupUrl = config.activation.registrationEnabled
+    ? config.access.whatsappGroupUrl
+    : null;
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#f7f4f8] px-4 py-12 text-slate-950">

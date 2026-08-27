@@ -5,56 +5,34 @@ import { useEffect } from "react";
 import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
-const deliveredEventIds = new Set<string>();
+const STORAGE_KEY = "cefin_estratega_fiscal_complete_registration";
 
-function getStorageKey(eventId: string) {
-  return `cefin_estratega_fiscal_complete_registration_${eventId}`;
-}
-
-function wasDelivered(eventId: string) {
-  if (deliveredEventIds.has(eventId)) return true;
+function wasDelivered() {
   try {
-    return window.localStorage.getItem(getStorageKey(eventId)) === "sent";
+    return window.sessionStorage.getItem(STORAGE_KEY) === "sent";
   } catch {
     return false;
   }
 }
 
-function rememberDelivery(eventId: string) {
-  deliveredEventIds.add(eventId);
+function rememberDelivery() {
   try {
-    window.localStorage.setItem(getStorageKey(eventId), "sent");
+    window.sessionStorage.setItem(STORAGE_KEY, "sent");
   } catch {
-    // The signed cookie still provides a server-verified fallback.
+    // El seguimiento no debe interrumpir la página de confirmación.
   }
 }
 
-async function markDeliveryAsSent(eventId: string) {
-  try {
-    await fetch(config.routes.completionApi, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ eventId }),
-    });
-  } catch {
-    // Analytics must not interrupt the confirmation page.
-  }
-}
-
-export function ConversionClient({ eventId }: { eventId: string }) {
+export function ConversionClient() {
   useEffect(() => {
-    if (wasDelivered(eventId)) {
-      void markDeliveryAsSent(eventId);
-      return;
-    }
+    if (wasDelivered()) return;
 
     let attempts = 30;
     let timeoutId: number | undefined;
     let cancelled = false;
 
     const deliver = () => {
-      if (cancelled || wasDelivered(eventId)) return;
+      if (cancelled || wasDelivered()) return;
       if (typeof window.fbq === "function") {
         window.fbq(
           "track",
@@ -67,10 +45,8 @@ export function ConversionClient({ eventId }: { eventId: string }) {
             value: 0,
             currency: "MXN",
           },
-          { eventID: eventId },
         );
-        rememberDelivery(eventId);
-        void markDeliveryAsSent(eventId);
+        rememberDelivery();
         return;
       }
       if (attempts <= 0) return;
@@ -83,7 +59,7 @@ export function ConversionClient({ eventId }: { eventId: string }) {
       cancelled = true;
       if (timeoutId !== undefined) window.clearTimeout(timeoutId);
     };
-  }, [eventId]);
+  }, []);
 
   return (
     <Script

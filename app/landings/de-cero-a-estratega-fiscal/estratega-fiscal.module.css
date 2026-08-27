@@ -40,10 +40,6 @@
   );
 }
 
-.activeCampaignShell :global(.sms_consent_message) {
-  color: #f8faf7 !important;
-}
-
 .heroImageGuard {
   background: var(--ef-hero-gradient-mobile);
 }

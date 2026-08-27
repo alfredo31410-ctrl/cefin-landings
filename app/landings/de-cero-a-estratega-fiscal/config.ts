@@ -1,5 +1,3 @@
-import type { UtmParamName } from "@/lib/hotmart-utms";
-
 type CampaignConfig = {
   campaignName: string;
   slug: string;
@@ -41,15 +39,11 @@ type CampaignConfig = {
     root: string;
     thankYou: string;
     joinWhatsApp: string;
-    registrationApi: string;
-    completionApi: string;
   };
   activeCampaign: {
     enabled: boolean;
-    embedUrl: string | null;
-    endpoint: string | null;
-    formId: number | null;
-    attributionFieldIds: Record<UtmParamName, number | null>;
+    embedUrl: string;
+    formId: number;
   };
   conversionEvent: {
     name: "CompleteRegistration";
@@ -157,35 +151,12 @@ export const landingConfig: CampaignConfig = {
     thankYou: "/landings/de-cero-a-estratega-fiscal/gracias",
     joinWhatsApp:
       "/landings/de-cero-a-estratega-fiscal/unirse-whatsapp",
-    registrationApi:
-      "/landings/de-cero-a-estratega-fiscal/api/registro",
-    completionApi:
-      "/landings/de-cero-a-estratega-fiscal/api/registro/completar",
   },
   activeCampaign: {
     enabled: true,
     embedUrl:
       "https://cefincapacitacion.activehosted.com/f/embed.php?id=333",
-    // ActiveCampaign requiere este modo de respuesta para confirmar el alta.
-    // La solicitud sigue siendo POST servidor-a-servidor y no coloca PII en la URL.
-    endpoint:
-      "https://cefincapacitacion.activehosted.com/proc.php?jsonp=true",
     formId: 333,
-    // `u` y `or` se regeneran y se leen del embed oficial al enviar.
-    attributionFieldIds: {
-      utm_source: 7,
-      utm_medium: 8,
-      utm_campaign: 9,
-      utm_content: 10,
-      utm_term: 11,
-      fbclid: null,
-      campaign_id: null,
-      adset_id: null,
-      ad_id: null,
-      placement: null,
-      landing: null,
-      producto: null,
-    },
   },
   conversionEvent: {
     name: "CompleteRegistration",
