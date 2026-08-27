@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Script from "next/script";
-import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 import styles from "../estratega-fiscal.module.css";
+import { ConversionClient } from "./conversion-client";
 
 export const metadata: Metadata = {
   title: `Completa tu registro | ${config.campaignName} | CEFIN`,
@@ -14,11 +13,7 @@ export default function EstrategaFiscalThankYouPage() {
   return (
     <>
       {config.activation.trackingEnabled && (
-        <Script
-          id="meta-pixel-estratega-fiscal-gracias"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
-        />
+        <ConversionClient />
       )}
       <main
         className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}

@@ -1,40 +1,45 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { landingConfig as config } from "./config";
 
-declare global {
-  interface Window {
-    _form_callback?: (id: string) => void;
-  }
-}
+const REGISTRATION_PENDING_KEY =
+  "cefin_estratega_fiscal_registration_pending";
 
 export default function RegistrationForm() {
-  const registrationTrackedRef = useRef(false);
-
   useEffect(() => {
     if (!config.activation.trackingEnabled) return;
 
-    const previousCallback = window._form_callback;
-    const handleActiveCampaignSuccess = (id: string) => {
-      previousCallback?.(id);
-      if (registrationTrackedRef.current) return;
+    const root = document.getElementById("registro");
+    if (!root) return;
 
-      const form = document.getElementById(`_form_${id}_`);
-      if (!form?.classList.contains(`_form_${config.activeCampaign.formId}`)) {
+    const markRegistrationAttempt = (event: Event) => {
+      const form = event.target;
+      if (
+        !(form instanceof HTMLFormElement) ||
+        !form.classList.contains(`_form_${config.activeCampaign.formId}`)
+      ) {
         return;
       }
 
-      registrationTrackedRef.current = true;
-      window.fbq?.("track", "CompleteRegistration");
+      try {
+        const id =
+          typeof crypto.randomUUID === "function"
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        window.sessionStorage.setItem(
+          REGISTRATION_PENDING_KEY,
+          JSON.stringify({ id, createdAt: Date.now() }),
+        );
+      } catch {
+        // El tracking nunca debe interferir con el formulario oficial.
+      }
     };
 
-    window._form_callback = handleActiveCampaignSuccess;
+    root.addEventListener("submit", markRegistrationAttempt, true);
     return () => {
-      if (window._form_callback === handleActiveCampaignSuccess) {
-        window._form_callback = previousCallback;
-      }
+      root.removeEventListener("submit", markRegistrationAttempt, true);
     };
   }, []);
 
