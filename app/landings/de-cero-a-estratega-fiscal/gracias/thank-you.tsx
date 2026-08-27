@@ -2,10 +2,10 @@ import { landingConfig as config } from "../config";
 
 export default function ThankYou({
   valid,
-  whatsappGroupUrl,
+  joinWhatsAppUrl,
 }: {
   valid: boolean;
-  whatsappGroupUrl: string | null;
+  joinWhatsAppUrl: string | null;
 }) {
   if (!valid) {
     return (
@@ -83,12 +83,12 @@ export default function ThankYou({
               {config.date.visible} · {config.date.time} · {config.date.timeZoneLabel}
             </p>
             <p className="mt-1 font-black">{config.modality}</p>
-            {whatsappGroupUrl ? (
+            {joinWhatsAppUrl ? (
               <a
-                href={whatsappGroupUrl}
+                href={joinWhatsAppUrl}
                 className="mt-6 inline-flex min-h-12 items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-sm font-black uppercase text-white transition hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700"
               >
-                Unirme al grupo de WhatsApp
+                Continuar a WhatsApp
               </a>
             ) : (
               <p className="mt-5 text-sm leading-relaxed text-slate-600">

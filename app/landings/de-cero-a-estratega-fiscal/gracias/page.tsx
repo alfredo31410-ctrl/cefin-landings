@@ -7,7 +7,6 @@ import {
 import { landingConfig as config } from "../config";
 import { ConversionClient } from "./conversion-client";
 import ThankYou from "./thank-you";
-import { WhatsAppRedirect } from "./whatsapp-redirect";
 import { getValidWhatsAppGroupUrl } from "../whatsapp";
 
 export const dynamic = "force-dynamic";
@@ -27,6 +26,9 @@ export default async function EstrategaFiscalThankYouPage() {
   const whatsappGroupUrl = registrationActive
     ? getValidWhatsAppGroupUrl(config.access.whatsappGroupUrl)
     : null;
+  const joinWhatsAppUrl = proof && whatsappGroupUrl
+    ? config.routes.joinWhatsApp
+    : null;
 
   return (
     <>
@@ -35,12 +37,9 @@ export default async function EstrategaFiscalThankYouPage() {
         proof?.state === "pending" && (
           <ConversionClient eventId={proof.eventId} />
         )}
-      {proof && whatsappGroupUrl && (
-        <WhatsAppRedirect groupUrl={whatsappGroupUrl} />
-      )}
       <ThankYou
         valid={Boolean(proof)}
-        whatsappGroupUrl={proof ? whatsappGroupUrl : null}
+        joinWhatsAppUrl={joinWhatsAppUrl}
       />
     </>
   );

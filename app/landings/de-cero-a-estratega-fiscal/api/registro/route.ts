@@ -19,7 +19,8 @@ import {
 } from "@/lib/registration-http";
 
 const MAX_BODY_BYTES = 12 * 1024;
-const MAX_NAME_LENGTH = 120;
+const MAX_FIRSTNAME_LENGTH = 120;
+const MAX_LASTNAME_LENGTH = 150;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_PHONE_LENGTH = 32;
 const MAX_ATTRIBUTION_LENGTH = 250;
@@ -30,11 +31,15 @@ const ACTIVE_CAMPAIGN_FORM_ORIGIN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const ALLOWED_INPUT_NAMES = new Set([
-  "name",
+  "firstname",
+  "lastname",
   "email",
   "phone",
   "consent",
   "website",
+  "activeFormId",
+  "activeFormUser",
+  "activeFormOrigin",
   ...HOTMART_ATTRIBUTION_PARAM_NAMES,
 ]);
 
@@ -56,10 +61,6 @@ function getActiveCampaignConfiguration() {
     !activeCampaign.endpoint ||
     !Number.isInteger(activeCampaign.formId) ||
     !activeCampaign.formId ||
-    !activeCampaign.formUser ||
-    !ACTIVE_CAMPAIGN_FORM_USER.test(activeCampaign.formUser) ||
-    !activeCampaign.formOrigin ||
-    !ACTIVE_CAMPAIGN_FORM_ORIGIN.test(activeCampaign.formOrigin) ||
     !fieldIdsAreValid
   ) {
     return null;
@@ -150,34 +151,46 @@ function buildActiveCampaignParams(
   }
   if ((getString(body, "website") || "").trim()) return null;
 
-  const name = normalizeText(getString(body, "name"), MAX_NAME_LENGTH);
+  const firstname = normalizeText(
+    getString(body, "firstname"),
+    MAX_FIRSTNAME_LENGTH,
+  );
+  const lastname = normalizeText(
+    getString(body, "lastname"),
+    MAX_LASTNAME_LENGTH,
+  );
   const email = normalizeEmail(getString(body, "email"));
   const phone = normalizePhone(getString(body, "phone"));
   const consent = body.consent === true;
   const attribution = readAttribution(body);
+  const activeFormId = body.activeFormId;
+  const activeFormUser = getString(body, "activeFormUser");
+  const activeFormOrigin = getString(body, "activeFormOrigin");
 
-  const nameParts = name?.split(" ").filter(Boolean) || [];
   if (
-    nameParts.length < 2 ||
+    !firstname ||
+    !lastname ||
     !email ||
     !phone ||
     !consent ||
-    !attribution
+    !attribution ||
+    activeFormId !== activeCampaign.formId ||
+    !activeFormUser ||
+    !ACTIVE_CAMPAIGN_FORM_USER.test(activeFormUser) ||
+    !activeFormOrigin ||
+    !ACTIVE_CAMPAIGN_FORM_ORIGIN.test(activeFormOrigin)
   ) {
     return null;
   }
-  const [firstname, ...lastnameParts] = nameParts;
-  const lastname = lastnameParts.join(" ");
-
   const outgoing = new FormData();
-  outgoing.set("u", activeCampaign.formUser!);
+  outgoing.set("u", activeFormUser);
   outgoing.set("f", String(activeCampaign.formId));
   outgoing.set("s", "");
   outgoing.set("c", "0");
   outgoing.set("m", "0");
   outgoing.set("act", "sub");
   outgoing.set("v", "2");
-  outgoing.set("or", activeCampaign.formOrigin!);
+  outgoing.set("or", activeFormOrigin);
   outgoing.set("firstname", firstname);
   outgoing.set("lastname", lastname);
   outgoing.set("email", email);

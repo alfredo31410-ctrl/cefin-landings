@@ -40,6 +40,7 @@ type CampaignConfig = {
     publicOrigin: string;
     root: string;
     thankYou: string;
+    joinWhatsApp: string;
     registrationApi: string;
     completionApi: string;
   };
@@ -48,8 +49,6 @@ type CampaignConfig = {
     embedUrl: string | null;
     endpoint: string | null;
     formId: number | null;
-    formUser: string | null;
-    formOrigin: string | null;
     attributionFieldIds: Record<UtmParamName, number | null>;
   };
   conversionEvent: {
@@ -156,6 +155,8 @@ export const landingConfig: CampaignConfig = {
     publicOrigin: "https://cefin.mx",
     root: "/landings/de-cero-a-estratega-fiscal",
     thankYou: "/landings/de-cero-a-estratega-fiscal/gracias",
+    joinWhatsApp:
+      "/landings/de-cero-a-estratega-fiscal/unirse-whatsapp",
     registrationApi:
       "/landings/de-cero-a-estratega-fiscal/api/registro",
     completionApi:
@@ -170,8 +171,7 @@ export const landingConfig: CampaignConfig = {
     endpoint:
       "https://cefincapacitacion.activehosted.com/proc.php?jsonp=true",
     formId: 333,
-    formUser: "6A906FE1637F2",
-    formOrigin: "089651b9-1954-4f16-860c-725e5eba1140",
+    // `u` y `or` se regeneran y se leen del embed oficial al enviar.
     attributionFieldIds: {
       utm_source: 7,
       utm_medium: 8,
