@@ -89,7 +89,8 @@ export const landingConfig: CampaignConfig = {
   instructor: {
     name: "Alfredo Cobos",
     bio: "Contador público y maestro en impuestos, fundador de CEFIN, con amplia experiencia en asesoría fiscal y capacitación profesional.",
-    image: "/academia-contabilidad/alfredo.png",
+    image:
+      "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo.png",
     imageAlt: "Alfredo Cobos, instructor de CEFIN",
     imageWidth: 518,
     imageHeight: 590,
@@ -164,8 +165,8 @@ export const landingConfig: CampaignConfig = {
     endpoint:
       "https://cefincapacitacion.activehosted.com/proc.php?jsonp=true",
     formId: 333,
-    formUser: "6A906781ADD11",
-    formOrigin: "5c0c0ee9-8052-4e7e-8304-2664a7d452b5",
+    formUser: "6A906CD653B29",
+    formOrigin: "2ecd4dc9-db41-4469-8ed8-27da740cfc32",
     attributionFieldIds: {
       utm_source: 7,
       utm_medium: 8,

@@ -77,6 +77,7 @@ export default function EstrategaFiscalLanding() {
                 width={config.instructor.imageWidth}
                 height={config.instructor.imageHeight}
                 sizes="(max-width: 639px) 82vw, (max-width: 1023px) 54vw, 510px"
+                unoptimized
                 preload
                 className={`${styles.heroPortrait} absolute right-[-1.25rem] top-2 z-0 h-[310px] w-auto max-w-none object-contain object-top opacity-85 sm:right-2 sm:h-[390px] md:right-8 md:h-[460px] lg:-right-16 lg:bottom-0 lg:top-auto lg:h-[570px] lg:opacity-100`}
               />
