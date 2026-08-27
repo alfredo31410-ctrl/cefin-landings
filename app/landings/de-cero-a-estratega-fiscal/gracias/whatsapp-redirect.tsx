@@ -6,17 +6,16 @@ import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
 const WHATSAPP_REDIRECT_DELAY_MS = 1800;
-const CONVERSION_STORAGE_KEY =
-  "cefin_estratega_fiscal_complete_registration";
+const JOIN_GROUP_STORAGE_KEY = "cefin_estratega_fiscal_join_group";
 
 function wasTracked() {
   try {
     const delivered =
-      window.localStorage.getItem(CONVERSION_STORAGE_KEY) === "sent" ||
-      window.sessionStorage.getItem(CONVERSION_STORAGE_KEY) === "sent";
+      window.localStorage.getItem(JOIN_GROUP_STORAGE_KEY) === "sent" ||
+      window.sessionStorage.getItem(JOIN_GROUP_STORAGE_KEY) === "sent";
 
     if (delivered) {
-      window.localStorage.setItem(CONVERSION_STORAGE_KEY, "sent");
+      window.localStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
     }
     return delivered;
   } catch {
@@ -26,8 +25,8 @@ function wasTracked() {
 
 function rememberTracking() {
   try {
-    window.localStorage.setItem(CONVERSION_STORAGE_KEY, "sent");
-    window.sessionStorage.setItem(CONVERSION_STORAGE_KEY, "sent");
+    window.localStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
+    window.sessionStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
   } catch {
     // El seguimiento nunca debe bloquear el acceso a WhatsApp.
   }
@@ -49,9 +48,10 @@ export function WhatsAppRedirect({ groupUrl }: { groupUrl: string }) {
         return;
       }
 
-      window.fbq("track", config.conversionEvent.name, {
+      window.fbq("trackCustom", "JoinGroup", {
         content_name: config.conversionEvent.contentName,
-        content_category: config.conversionEvent.contentCategory,
+        content_category: "Grupo de WhatsApp",
+        funnel_step: "join_group",
       });
       rememberTracking();
     };

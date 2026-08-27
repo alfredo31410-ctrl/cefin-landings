@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { landingConfig as config } from "../config";
 import styles from "../estratega-fiscal.module.css";
+import { ConversionClient } from "./conversion-client";
 
 export const metadata: Metadata = {
   title: `Completa tu registro | ${config.campaignName} | CEFIN`,
@@ -10,9 +11,11 @@ export const metadata: Metadata = {
 
 export default function EstrategaFiscalThankYouPage() {
   return (
-    <main
-      className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
-    >
+    <>
+      {config.activation.trackingEnabled && <ConversionClient />}
+      <main
+        className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
+      >
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true">
           <div className={`${styles.heroGlowEmerald} absolute -right-24 -top-32 h-80 w-80 rounded-full blur-3xl`} />
           <div className={`${styles.heroGlowGold} absolute -bottom-32 left-[-5rem] h-80 w-80 rounded-full blur-3xl`} />
@@ -70,6 +73,7 @@ export default function EstrategaFiscalThankYouPage() {
             </div>
           </section>
         </div>
-    </main>
+      </main>
+    </>
   );
 }
