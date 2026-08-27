@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function EstrategaFiscalJoinWhatsAppPage() {
+  const whatsappLinkId = "estratega-fiscal-whatsapp-link";
   const whatsappGroupUrl = config.activation.registrationEnabled
     ? config.access.whatsappGroupUrl
     : null;
@@ -18,7 +19,12 @@ export default function EstrategaFiscalJoinWhatsAppPage() {
     <main
       className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
     >
-      {whatsappGroupUrl && <WhatsAppRedirect groupUrl={whatsappGroupUrl} />}
+      {whatsappGroupUrl && (
+        <WhatsAppRedirect
+          groupUrl={whatsappGroupUrl}
+          linkId={whatsappLinkId}
+        />
+      )}
 
       <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true">
         <div className={`${styles.heroGlowEmerald} absolute -right-24 -top-32 h-80 w-80 rounded-full blur-3xl`} />
@@ -56,6 +62,7 @@ export default function EstrategaFiscalJoinWhatsAppPage() {
                 Te estamos llevando al grupo oficial…
               </p>
               <a
+                id={whatsappLinkId}
                 href={whatsappGroupUrl}
                 className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[var(--ef-emerald)] px-7 py-3 text-sm font-black uppercase tracking-[0.04em] text-[var(--ef-petroleum)] shadow-[0_16px_36px_var(--ef-cta-shadow)] transition hover:bg-[var(--ef-deep-green)] hover:text-[var(--ef-warm-white)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ef-gold)] sm:w-auto"
               >

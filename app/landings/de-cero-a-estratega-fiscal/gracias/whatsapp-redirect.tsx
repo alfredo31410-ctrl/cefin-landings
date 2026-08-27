@@ -1,73 +1,59 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
-const WHATSAPP_REDIRECT_DELAY_MS = 1800;
-const JOIN_GROUP_STORAGE_KEY = "cefin_estratega_fiscal_join_group";
+const WHATSAPP_REDIRECT_DELAY_MS = 3000;
+const TRACKING_SEND_DELAY_MS = 100;
 
-function wasTracked() {
-  try {
-    const delivered =
-      window.localStorage.getItem(JOIN_GROUP_STORAGE_KEY) === "sent" ||
-      window.sessionStorage.getItem(JOIN_GROUP_STORAGE_KEY) === "sent";
+export function WhatsAppRedirect({
+  groupUrl,
+  linkId,
+}: {
+  groupUrl: string;
+  linkId: string;
+}) {
+  const hasRedirectedRef = useRef(false);
 
-    if (delivered) {
-      window.localStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
-    }
-    return delivered;
-  } catch {
-    return false;
-  }
-}
-
-function rememberTracking() {
-  try {
-    window.localStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
-    window.sessionStorage.setItem(JOIN_GROUP_STORAGE_KEY, "sent");
-  } catch {
-    // El seguimiento nunca debe bloquear el acceso a WhatsApp.
-  }
-}
-
-export function WhatsAppRedirect({ groupUrl }: { groupUrl: string }) {
   useEffect(() => {
-    let attempts = 12;
-    let trackingTimeoutId: number | undefined;
+    const link = document.getElementById(linkId);
 
-    const trackRegistration = () => {
-      if (!config.activation.trackingEnabled || wasTracked()) return;
+    const goToWhatsApp = () => {
+      if (hasRedirectedRef.current) return;
+      hasRedirectedRef.current = true;
+      window.clearTimeout(redirectTimeoutId);
 
-      if (typeof window.fbq !== "function") {
-        if (attempts > 0) {
-          attempts -= 1;
-          trackingTimeoutId = window.setTimeout(trackRegistration, 100);
-        }
+      const pixelAvailable =
+        config.activation.trackingEnabled && typeof window.fbq === "function";
+      if (pixelAvailable) {
+        window.fbq?.("track", "Contact");
+        window.setTimeout(() => {
+          window.location.assign(groupUrl);
+        }, TRACKING_SEND_DELAY_MS);
         return;
       }
 
-      window.fbq("trackCustom", "JoinGroup", {
-        content_name: config.conversionEvent.contentName,
-        content_category: "Grupo de WhatsApp",
-        funnel_step: "join_group",
-      });
-      rememberTracking();
+      window.location.assign(groupUrl);
     };
 
-    trackRegistration();
-    const redirectTimeoutId = window.setTimeout(() => {
-      window.location.assign(groupUrl);
-    }, WHATSAPP_REDIRECT_DELAY_MS);
+    const handleManualClick = (event: Event) => {
+      event.preventDefault();
+      goToWhatsApp();
+    };
+
+    link?.addEventListener("click", handleManualClick);
+    const redirectTimeoutId = window.setTimeout(
+      goToWhatsApp,
+      WHATSAPP_REDIRECT_DELAY_MS,
+    );
 
     return () => {
+      link?.removeEventListener("click", handleManualClick);
       window.clearTimeout(redirectTimeoutId);
-      if (trackingTimeoutId !== undefined) {
-        window.clearTimeout(trackingTimeoutId);
-      }
     };
-  }, [groupUrl]);
+  }, [groupUrl, linkId]);
 
   if (!config.activation.trackingEnabled) return null;
 
@@ -75,9 +61,7 @@ export function WhatsAppRedirect({ groupUrl }: { groupUrl: string }) {
     <Script
       id="meta-pixel-estratega-fiscal-whatsapp"
       strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: getMetaPixelScript(undefined, { trackPageView: false }),
-      }}
+      dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
     />
   );
 }
