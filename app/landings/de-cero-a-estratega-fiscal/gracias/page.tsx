@@ -4,17 +4,20 @@ import styles from "../estratega-fiscal.module.css";
 import { ConversionClient } from "./conversion-client";
 
 export const metadata: Metadata = {
-  title: `Completa tu registro | ${config.campaignName} | CEFIN`,
-  description: "Último paso para completar tu registro a la clase gratuita de CEFIN.",
+  title: `Registro completado | ${config.campaignName} | CEFIN`,
+  description: "Registro completado para la clase gratuita de CEFIN.",
   robots: { index: false, follow: false },
 };
 
 export default function EstrategaFiscalThankYouPage() {
+  const fallbackLinkId = "estratega-fiscal-whatsapp-fallback";
+
   return (
     <>
-      {config.activation.trackingEnabled && (
-        <ConversionClient />
-      )}
+      <ConversionClient
+        groupUrl={config.access.whatsappGroupUrl}
+        fallbackLinkId={fallbackLinkId}
+      />
       <main
         className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
       >
@@ -29,7 +32,7 @@ export default function EstrategaFiscalThankYouPage() {
             CEFIN
           </a>
           <span className="text-right text-[10px] font-black uppercase tracking-[0.15em] text-[var(--ef-gold)] sm:text-xs">
-            Paso 1 de 2
+            Registro completado
           </span>
         </header>
 
@@ -40,10 +43,10 @@ export default function EstrategaFiscalThankYouPage() {
                 Recibimos tus datos
               </p>
               <h1 className="mt-4 max-w-3xl text-4xl font-black leading-[0.96] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-                Tu registro aún no está completo
+                ¡Gracias por registrarte!
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--ef-muted-dark)] sm:text-xl">
-                Para confirmar tu lugar y recibir el acceso a la clase, debes unirte al grupo oficial de WhatsApp.
+                Estamos abriendo automáticamente el grupo oficial de WhatsApp para que recibas el acceso y los recordatorios de la clase.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -58,20 +61,24 @@ export default function EstrategaFiscalThankYouPage() {
                 </article>
                 <article className="rounded-2xl border border-[var(--ef-emerald)]/40 bg-[var(--ef-emerald-soft)] p-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--ef-emerald)]">
-                    Paso obligatorio
+                    Acceso al grupo
                   </p>
                   <p className="mt-2 text-sm font-semibold leading-relaxed text-[var(--ef-warm-white)]">
-                    Entra al grupo para completar tu registro y recibir los recordatorios importantes.
+                    WhatsApp se abrirá automáticamente. No necesitas hacer otro clic.
                   </p>
                 </article>
               </div>
 
-              <a
-                href={config.routes.joinWhatsApp}
-                className="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[var(--ef-emerald)] px-7 py-3 text-center text-sm font-black uppercase tracking-[0.04em] text-[var(--ef-petroleum)] shadow-[0_16px_36px_var(--ef-cta-shadow)] transition hover:bg-[var(--ef-deep-green)] hover:text-[var(--ef-warm-white)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ef-gold)] sm:w-auto"
-              >
-                Completar registro en WhatsApp
-              </a>
+              {config.access.whatsappGroupUrl && (
+                <a
+                  id={fallbackLinkId}
+                  href={config.access.whatsappGroupUrl}
+                  hidden
+                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[var(--ef-emerald)] px-7 py-3 text-center text-sm font-black uppercase tracking-[0.04em] text-[var(--ef-petroleum)] shadow-[0_16px_36px_var(--ef-cta-shadow)] transition hover:bg-[var(--ef-deep-green)] hover:text-[var(--ef-warm-white)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ef-gold)] sm:w-auto"
+                >
+                  ¿No se abrió WhatsApp? Entrar al grupo
+                </a>
+              )}
             </div>
           </section>
         </div>

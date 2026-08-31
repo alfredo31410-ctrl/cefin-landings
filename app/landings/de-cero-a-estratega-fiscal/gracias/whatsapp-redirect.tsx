@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { getMetaPixelScript } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
-const WHATSAPP_REDIRECT_DELAY_MS = 3000;
+const WHATSAPP_REDIRECT_DELAY_MS = 0;
 const TRACKING_SEND_DELAY_MS = 100;
 
 export function WhatsAppRedirect({
