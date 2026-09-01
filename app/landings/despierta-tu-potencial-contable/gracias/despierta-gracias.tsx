@@ -1,10 +1,103 @@
 "use client";
 
-import { createDespiertaWhatsAppIntent } from "@/lib/despierta-potencial-tracking-session";
-import { landingConfig as config } from "../config";
+import Script from "next/script";
+import { type MouseEvent, useRef } from "react";
+import { getActiveUtmParams } from "@/lib/hotmart-utms";
+import { getMetaPixelScript } from "@/lib/meta-pixel";
+import { campaignEvent, landingConfig as config } from "../config";
+import { resolveAudienceWhatsAppGroup } from "../whatsapp-routing";
 
 const MARISOL_IMAGE_URL = config.assets.marisol;
 const BANNER_IMAGE_URL = config.assets.banner;
+
+function isValidWhatsAppGroupUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname === "chat.whatsapp.com" &&
+      !url.username &&
+      !url.password
+    );
+  } catch {
+    return false;
+  }
+}
+
+function createEventId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function WhatsAppGroupLink() {
+  const eventIdRef = useRef<string | null>(null);
+  const joinGroupSentRef = useRef(false);
+  const fallbackUrl = config.thankYou.whatsapp.fallback;
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const attribution = getActiveUtmParams();
+    const utmTerm = attribution.utm_term?.trim() || "";
+    const { audienceVariant, routedGroupUrl } =
+      resolveAudienceWhatsAppGroup(utmTerm, config.thankYou.whatsapp);
+    const destinationUrl = isValidWhatsAppGroupUrl(routedGroupUrl)
+      ? routedGroupUrl
+      : fallbackUrl;
+
+    if (!isValidWhatsAppGroupUrl(destinationUrl)) {
+      event.preventDefault();
+      return;
+    }
+
+    event.currentTarget.href = destinationUrl;
+
+    if (joinGroupSentRef.current || typeof window.fbq !== "function") return;
+
+    eventIdRef.current ??= createEventId();
+    try {
+      window.fbq(
+        "trackCustom",
+        "JoinGroup",
+        {
+          ...campaignEvent,
+          content_category: "Grupo de WhatsApp",
+          funnel_step: "join_group",
+          source: "thank_you_page",
+          destination: "whatsapp_group",
+          status: "clicked",
+          adset_id: attribution.adset_id?.trim() || undefined,
+          audience_variant: audienceVariant,
+          utm_term: utmTerm || undefined,
+        },
+        { eventID: eventIdRef.current },
+      );
+      joinGroupSentRef.current = true;
+    } catch {
+      // El tracking nunca debe retrasar la navegación hacia WhatsApp.
+    }
+  };
+
+  return (
+    <>
+      <Script
+        id="meta-pixel-despierta-whatsapp-link"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: getMetaPixelScript(undefined, { trackPageView: false }),
+        }}
+      />
+      <a
+        href={fallbackUrl}
+        onClick={handleClick}
+        rel="noopener noreferrer"
+        className="inline-flex w-full items-center justify-center rounded-lg bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.28)] transition hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto sm:min-w-[360px] sm:text-lg"
+      >
+        Entrar al grupo de WhatsApp
+      </a>
+    </>
+  );
+}
 
 export default function DespiertaGracias({
   isValidRegistration,
@@ -101,13 +194,7 @@ export default function DespiertaGracias({
                 </p>
               </div>
 
-              <a
-                href={config.thankYou.whatsappRedirectPath}
-                onClick={createDespiertaWhatsAppIntent}
-                className="inline-flex w-full items-center justify-center rounded-lg bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.28)] transition hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto sm:min-w-[360px] sm:text-lg"
-              >
-                Entrar al grupo de WhatsApp
-              </a>
+              <WhatsAppGroupLink />
 
               <p className="mt-3 text-sm font-semibold text-[#31233f]/62">
                 Cuando se abra WhatsApp, presiona “Unirme al grupo” para
