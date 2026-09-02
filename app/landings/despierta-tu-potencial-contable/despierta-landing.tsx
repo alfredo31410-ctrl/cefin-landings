@@ -174,7 +174,7 @@ export default function DespiertaLanding() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <div className="rounded-full bg-[#08060c] px-7 py-3 text-center text-sm font-black uppercase tracking-[0.16em] text-white">
-                  23 de junio
+                  08 de septiembre
                 </div>
                 <div className="rounded-full bg-[#7d4cff] px-7 py-3 text-center text-sm font-black uppercase tracking-[0.16em] text-white shadow-[0_16px_36px_rgba(125,76,255,0.28)]">
                   11:00 AM (Hora CDMX)

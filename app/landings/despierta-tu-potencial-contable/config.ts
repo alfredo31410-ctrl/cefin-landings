@@ -14,7 +14,7 @@ export const landingConfig = {
   slug: "despierta-tu-potencial-contable",
   title: "Despierta tu Potencial Contable",
   eventType: "Clase gratuita",
-  date: "23 de junio",
+  date: "08 de septiembre",
   time: "11:00 AM",
   timezone: "CDMX",
   activeCampaign: {
