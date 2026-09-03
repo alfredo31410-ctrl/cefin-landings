@@ -6,7 +6,7 @@ const assetBase =
     : "";
 
 const whatsappGroupUrls = {
-  broad: "https://chat.whatsapp.com/GJ1WF3Byb110RiCZEQ3Ixm",
+  broad: "https://chat.whatsapp.com/C5giRSFiEOpGi1yKNF5ArA",
   seg: "https://chat.whatsapp.com/C5giRSFiEOpGi1yKNF5ArA",
 } as const;
 
