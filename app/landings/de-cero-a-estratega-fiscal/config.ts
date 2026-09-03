@@ -170,6 +170,6 @@ export const landingConfig: CampaignConfig = {
     message:
       "Enviaremos el acceso y los recordatorios al correo y al WhatsApp que registres.",
     whatsappGroupUrl:
-      "https://chat.whatsapp.com/Kw4t4V7USSh1SzxRrtJAD4",
+      "https://chat.whatsapp.com/DqZcWpyAKxf6MnxPPF6WAP",
   },
 };
