@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { directSaleConfig as config } from "./config";
 import styles from "./inscripcion.module.css";
+import { EstrategaFiscalTracking, TrackedCheckoutLink } from "./tracking";
 
 function formatMoney(value: number) {
   return new Intl.NumberFormat("es-MX", {
@@ -11,21 +12,28 @@ function formatMoney(value: number) {
   }).format(value);
 }
 
-function PurchaseCta({ className = "" }: { className?: string }) {
+function PurchaseCta({
+  className = "",
+  location,
+}: {
+  className?: string;
+  location: string;
+}) {
   return (
-    <a
+    <TrackedCheckoutLink
       className={`${styles.purchaseCta} ${className}`}
-      href={config.checkout.url}
-      aria-label={`${config.checkout.buttonLabel}; continuar al pago seguro en Hotmart`}
+      location={location}
+      ariaLabel={`${config.checkout.buttonLabel}; continuar al pago seguro en Hotmart`}
     >
       {config.checkout.buttonLabel}
-    </a>
+    </TrackedCheckoutLink>
   );
 }
 
 export default function InscripcionLanding() {
   return (
     <main className={styles.page}>
+      <EstrategaFiscalTracking />
       <section className={styles.hero}>
         <div className={styles.heroGlow} aria-hidden="true" />
         <header className={styles.header}>
@@ -51,7 +59,7 @@ export default function InscripcionLanding() {
               ))}
             </ul>
 
-            <PurchaseCta />
+            <PurchaseCta location="hero" />
           </div>
 
           <div className={styles.productStage} aria-label={`Vista del programa ${config.product.name}`}>
@@ -104,7 +112,7 @@ export default function InscripcionLanding() {
           <p>Inversión</p>
           <strong>{formatMoney(config.pricing.salePrice)} <small>MXN</small></strong>
           <span>{config.pricing.taxNote}</span>
-          <PurchaseCta />
+          <PurchaseCta location="resumen-oferta" />
           <small>Serás dirigido al pago seguro de Hotmart.</small>
         </aside>
       </section>
@@ -211,7 +219,7 @@ export default function InscripcionLanding() {
             <p>Inversión única</p>
             <strong>{formatMoney(config.pricing.salePrice)}</strong>
             <small>MXN</small>
-            <PurchaseCta />
+            <PurchaseCta location="oferta-final" />
             <ul>
               <li>Pago procesado de forma segura por Hotmart</li>
               <li>Acceso a grabaciones durante un año</li>
@@ -247,7 +255,7 @@ export default function InscripcionLanding() {
             Aprende a aplicar estrategias reales y conviértelas en mejores resultados para tu práctica profesional y tus clientes.
           </p>
         </div>
-        <PurchaseCta className={styles.finalButton} />
+        <PurchaseCta className={styles.finalButton} location="cierre" />
       </section>
 
       <footer className={styles.footer}>
@@ -269,7 +277,7 @@ export default function InscripcionLanding() {
           <small>Inversión</small>
           <strong>{formatMoney(config.pricing.salePrice)} MXN</strong>
         </div>
-        <a href={config.checkout.url}>Inscribirme</a>
+        <TrackedCheckoutLink location="barra-movil">Inscribirme</TrackedCheckoutLink>
       </div>
     </main>
   );
