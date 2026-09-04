@@ -8,50 +8,35 @@ export type DirectSaleConfig = {
     format: string;
     access: string;
     level: string;
+    slogan: string;
   };
   pricing: {
     currency: "MXN";
-    regularPrice: number;
     salePrice: number;
-    installments: string;
     taxNote: string;
   };
   checkout: {
     enabled: boolean;
     url: string;
     buttonLabel: string;
-    demoLabel: string;
   };
   highlights: readonly string[];
   modules: readonly {
-    number: string;
+    day: string;
+    action: string;
     title: string;
     description: string;
   }[];
-  bonuses: readonly {
-    label: string;
+  inclusions: readonly {
     title: string;
     description: string;
-    value: number;
   }[];
-  audience: readonly string[];
   outcomes: readonly string[];
-  testimonials: readonly {
-    quote: string;
-    name: string;
-    role: string;
-  }[];
   instructor: {
     name: string;
     role: string;
-    bio: string;
     image: string;
     imageAlt: string;
-  };
-  guarantee: {
-    days: number;
-    title: string;
-    description: string;
   };
   faq: readonly {
     question: string;
@@ -64,171 +49,135 @@ export type DirectSaleConfig = {
 };
 
 /**
- * CONTENIDO EDITABLE DE LA LANDING DE VENTA DIRECTA
+ * CONTENIDO COMERCIAL DE ESTRATEGIA FISCAL PASO A PASO
  *
- * Todos los datos comerciales viven aquí para que la versión final se pueda
- * activar sin tocar la estructura ni los estilos de la página.
+ * Mantener aquí precio, checkout, temario y beneficios para que futuras
+ * actualizaciones no requieran modificar la estructura visual de la página.
  */
 export const directSaleConfig: DirectSaleConfig = {
-  isDemo: true,
+  isDemo: false,
   product: {
-    eyebrow: "Programa práctico para profesionales contables",
-    name: "Estratega Fiscal",
-    headline: "Deja de limitarte al cumplimiento y conviértete en el asesor que tus clientes necesitan.",
+    eyebrow: "Programa intensivo de estrategia fiscal",
+    name: "Estrategia Fiscal Paso a Paso",
+    headline: "5 días para convertirte en un estratega fiscal de gran nivel",
     promise:
-      "Una ruta práctica para analizar casos, detectar oportunidades y convertir tu conocimiento fiscal en un servicio profesional de mayor valor.",
-    format: "Programa 100% en línea",
-    access: "Acceso por 12 meses",
-    level: "De fundamentos a aplicación",
+      "Lleva tu conocimiento fiscal al siguiente nivel y aprende a aplicar estrategias reales en tu práctica profesional.",
+    format: "5 sesiones en vivo",
+    access: "Grabaciones por un año",
+    level: "1 hora diaria",
+    slogan: "Estrategia hoy; mejores resultados mañana.",
   },
   pricing: {
     currency: "MXN",
-    regularPrice: 6990,
-    salePrice: 3490,
-    installments: "o 3 pagos mensuales de $1,297 MXN",
-    taxNote: "Precio de demostración. Impuestos incluidos.",
+    salePrice: 987,
+    taxNote: "Inversión única de $987.00 MXN.",
   },
   checkout: {
-    enabled: false,
-    url: "",
-    buttonLabel: "Quiero convertirme en estratega fiscal",
-    demoLabel: "Compra disponible próximamente",
+    enabled: true,
+    url: "https://pay.hotmart.com/L107321129X?off=hs9wp3t0&checkoutMode=10&bid=1788550850213",
+    buttonLabel: "Inscribirme ahora por $987 MXN",
   },
   highlights: [
-    "Método paso a paso",
-    "Casos prácticos",
-    "Recursos descargables",
-    "Acceso inmediato",
+    "Sesión en vivo · 1 hora diaria",
+    "Certificado digital",
+    "Material de apoyo",
+    "Grabaciones disponibles un año",
   ],
   modules: [
     {
-      number: "01",
-      title: "Mentalidad de asesor",
+      day: "Día 1",
+      action: "Diagnosticar",
+      title: "Diagnóstico Fiscal Estratégico",
       description:
-        "La transición del trabajo operativo hacia una visión estratégica enfocada en decisiones y resultados.",
+        "Aprende a diagnosticar una empresa, detectar oportunidades y encontrar el punto de partida para construir estrategias fiscales.",
     },
     {
-      number: "02",
-      title: "Diagnóstico fiscal",
+      day: "Día 2",
+      action: "Comparar",
+      title: "Arquitectura Fiscal del Contribuyente",
       description:
-        "Un sistema para ordenar información, detectar riesgos y reconocer oportunidades relevantes para cada cliente.",
+        "Aprende a comparar escenarios y elegir la estructura fiscal más conveniente para cada contribuyente.",
     },
     {
-      number: "03",
-      title: "Diseño de estrategias",
+      day: "Día 3",
+      action: "Diseñar",
+      title: "Estrategia Fiscal Empresa–Socio",
       description:
-        "Criterios y procesos para convertir hallazgos técnicos en recomendaciones claras y accionables.",
+        "Aprende a crear estrategias para la empresa y diseñar mejores alternativas para la retribución de sus socios.",
     },
     {
-      number: "04",
-      title: "Presentación al cliente",
+      day: "Día 4",
+      action: "Planear",
+      title: "Planeación Estratégica de Deducciones",
       description:
-        "Cómo comunicar valor, entregar propuestas profesionales y sostener conversaciones de mayor nivel.",
+        "Aprende a planear las deducciones para reducir legalmente la carga fiscal y generar mejores resultados para tu cliente.",
     },
     {
-      number: "05",
-      title: "Modelo de servicio",
+      day: "Día 5",
+      action: "Convertir en un servicio",
+      title: "El Negocio de la Estrategia Fiscal",
       description:
-        "Una estructura inicial para delimitar, presentar y cobrar un servicio de asesoría fiscal.",
-    },
-    {
-      number: "06",
-      title: "Plan de implementación",
-      description:
-        "Una hoja de ruta para llevar lo aprendido a tu práctica profesional desde la primera semana.",
+        "Aprende a convertir todo lo anterior en un servicio que puedas ofrecer, cobrar y aplicar con tus propios clientes.",
     },
   ],
-  bonuses: [
+  inclusions: [
     {
-      label: "Bono 01",
-      title: "Plantilla de diagnóstico fiscal",
-      description: "Un formato editable para documentar hallazgos y oportunidades con orden.",
-      value: 790,
+      title: "Sesiones en vivo",
+      description: "Cinco sesiones de una hora, una por cada día del programa.",
     },
     {
-      label: "Bono 02",
-      title: "Guion para presentar tu asesoría",
-      description: "Una estructura de conversación para explicar tu propuesta con mayor claridad.",
-      value: 590,
+      title: "Certificado digital",
+      description: "Recibe un certificado digital por tu participación en el programa.",
     },
     {
-      label: "Bono 03",
-      title: "Modelo de propuesta profesional",
-      description: "Documento base para definir alcance, entregables y condiciones del servicio.",
-      value: 990,
+      title: "5 días de aprendizaje",
+      description: "Una ruta concentrada que avanza del diagnóstico a la creación de tu servicio.",
     },
-  ],
-  audience: [
-    "Eres contador y quieres ofrecer algo más valioso que el cumplimiento mensual.",
-    "Ya tienes clientes, pero todavía no estructuras ni cobras la asesoría por separado.",
-    "Quieres desarrollar criterio para comunicar recomendaciones con seguridad.",
-    "Buscas una ruta práctica para mejorar tu perfil y tus oportunidades profesionales.",
+    {
+      title: "Material de apoyo",
+      description: "Recursos para acompañar los contenidos y facilitar su aplicación profesional.",
+    },
+    {
+      title: "Grabaciones por un año",
+      description: "Consulta nuevamente las sesiones durante doce meses.",
+    },
   ],
   outcomes: [
-    "Analizar la situación de un cliente con una visión más estratégica.",
-    "Identificar riesgos y oportunidades que otros pasan por alto.",
-    "Convertir observaciones técnicas en recomendaciones comprensibles.",
-    "Estructurar una propuesta de asesoría con alcance y entregables claros.",
-    "Comunicar y cobrar tu trabajo con mayor seguridad profesional.",
-  ],
-  testimonials: [
-    {
-      quote:
-        "La metodología me ayudó a ordenar lo que ya sabía y presentarlo como un servicio mucho más profesional.",
-      name: "Nombre del alumno",
-      role: "Contador independiente",
-    },
-    {
-      quote:
-        "Ahora puedo detectar oportunidades y explicarlas a mis clientes sin quedarme solamente en la parte operativa.",
-      name: "Nombre del alumno",
-      role: "Titular de despacho",
-    },
-    {
-      quote:
-        "Recuperé la inversión con mi primera propuesta de asesoría. La estructura hizo toda la diferencia.",
-      name: "Nombre del alumno",
-      role: "Asesor fiscal",
-    },
+    "Diagnosticar una empresa y detectar oportunidades fiscales.",
+    "Comparar escenarios para elegir una estructura fiscal conveniente.",
+    "Diseñar estrategias para la empresa y la retribución de sus socios.",
+    "Planear deducciones para reducir legalmente la carga fiscal.",
+    "Convertir tu conocimiento en un servicio que puedas ofrecer y cobrar.",
   ],
   instructor: {
-    name: "Alfredo Cobos",
-    role: "Contador público, maestro en impuestos y fundador de CEFIN",
-    bio: "Ha dedicado su trayectoria a la práctica fiscal y a la formación de profesionales contables. En este programa comparte un método claro para transformar conocimiento técnico en una asesoría que genere valor real para el cliente.",
-    image: "/academia-contabilidad/alfredo.png",
-    imageAlt: "Alfredo Cobos, fundador de CEFIN",
-  },
-  guarantee: {
-    days: 7,
-    title: "Pruébalo con tranquilidad",
-    description:
-      "Tendrás 7 días naturales para revisar el programa. Si concluyes que no es para ti, podrás solicitar la devolución de tu inversión conforme a los términos aplicables.",
+    name: "Mtro. Alfredo Cobos",
+    role: "Instructor de Estrategia Fiscal Paso a Paso",
+    image: "/contrato-servicios-contables/alfredo-servicios-contables.png",
+    imageAlt: "Mtro. Alfredo Cobos, instructor del programa",
   },
   faq: [
     {
-      question: "¿Necesito experiencia en asesoría fiscal?",
+      question: "¿Cuánto dura el programa?",
       answer:
-        "No. El programa está planteado para construir la metodología desde sus fundamentos y avanzar hacia su aplicación profesional.",
+        "El programa se desarrolla durante cinco días, con una sesión en vivo de una hora cada día.",
     },
     {
-      question: "¿Cuándo puedo comenzar?",
+      question: "¿Podré volver a ver las sesiones?",
       answer:
-        "Una vez confirmado el pago recibirás las instrucciones de acceso. En la versión final aquí se indicará el tiempo exacto de entrega.",
+        "Sí. Las grabaciones estarán disponibles durante un año para que puedas consultar nuevamente el contenido.",
     },
     {
-      question: "¿Durante cuánto tiempo tendré acceso?",
+      question: "¿Incluye material de apoyo?",
       answer:
-        "La propuesta de muestra contempla 12 meses de acceso. Este dato podrá ajustarse cuando se definan las condiciones reales.",
+        "Sí. Tu inscripción incluye material de apoyo para acompañar el aprendizaje y facilitar la aplicación de los temas.",
     },
     {
-      question: "¿Entregan constancia?",
-      answer:
-        "Este beneficio está pendiente de confirmación y se actualizará antes de habilitar la venta.",
+      question: "¿Recibiré certificado?",
+      answer: "Sí. El programa incluye certificado digital.",
     },
     {
-      question: "¿Cómo funcionan los pagos?",
-      answer:
-        "La pasarela, los métodos de pago y las mensualidades se conectarán cuando exista una oferta comercial definitiva.",
+      question: "¿Cuál es la inversión?",
+      answer: "La inversión para acceder al programa completo es de $987.00 MXN.",
     },
   ],
   legal: {
@@ -236,4 +185,3 @@ export const directSaleConfig: DirectSaleConfig = {
     termsUrl: "",
   },
 };
-

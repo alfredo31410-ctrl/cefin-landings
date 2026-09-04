@@ -6,36 +6,26 @@ function formatMoney(value: number) {
   return new Intl.NumberFormat("es-MX", {
     style: "currency",
     currency: config.pricing.currency,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
 }
 
 function PurchaseCta({ className = "" }: { className?: string }) {
-  if (config.checkout.enabled && config.checkout.url) {
-    return (
-      <a className={`${styles.purchaseCta} ${className}`} href={config.checkout.url}>
-        {config.checkout.buttonLabel}
-      </a>
-    );
-  }
-
   return (
-    <button className={`${styles.purchaseCta} ${className}`} type="button" disabled>
-      {config.checkout.demoLabel}
-    </button>
+    <a
+      className={`${styles.purchaseCta} ${className}`}
+      href={config.checkout.url}
+      aria-label={`${config.checkout.buttonLabel}; continuar al pago seguro en Hotmart`}
+    >
+      {config.checkout.buttonLabel}
+    </a>
   );
 }
 
 export default function InscripcionLanding() {
   return (
     <main className={styles.page}>
-      {config.isDemo && (
-        <div className={styles.demoBar} role="status">
-          <span>Vista de demostración</span>
-          <p>El contenido, precio y beneficios todavía son provisionales.</p>
-        </div>
-      )}
-
       <section className={styles.hero}>
         <div className={styles.heroGlow} aria-hidden="true" />
         <header className={styles.header}>
@@ -43,7 +33,7 @@ export default function InscripcionLanding() {
             <span aria-hidden="true" />
             CEFIN
           </a>
-          <p>Formación para profesionales contables</p>
+          <p>Estrategia · Conocimiento · Resultados</p>
         </header>
 
         <div className={styles.heroGrid} id="inicio">
@@ -61,25 +51,32 @@ export default function InscripcionLanding() {
               ))}
             </ul>
 
-            <a className={styles.primaryCta} href="#oferta">
-              Conocer la oferta
-              <span aria-hidden="true">↓</span>
-            </a>
+            <PurchaseCta />
           </div>
 
           <div className={styles.productStage} aria-label={`Vista del programa ${config.product.name}`}>
             <div className={styles.productCardBack} aria-hidden="true" />
             <div className={styles.productCard}>
-              <span className={styles.productKicker}>Programa digital</span>
-              <span className={styles.productName}>{config.product.name}</span>
+              <span className={styles.productKicker}>Programa de 5 días</span>
+              <span className={styles.productName}>Estrategia Fiscal</span>
               <span className={styles.productLine} aria-hidden="true" />
-              <span className={styles.productTagline}>Método · criterio · implementación</span>
+              <span className={styles.productTagline}>Paso a paso</span>
+              <Image
+                src={config.instructor.image}
+                alt=""
+                width={460}
+                height={628}
+                sizes="330px"
+                className={styles.heroInstructorImage}
+                aria-hidden="true"
+                priority
+              />
               <div className={styles.productSeal}>CEFIN</div>
             </div>
             <div className={styles.accessCard}>
-              <span>Incluye</span>
-              <strong>Recursos de implementación</strong>
-              <small>Plantillas y materiales editables</small>
+              <span>Imparte</span>
+              <strong>{config.instructor.name}</strong>
+              <small>Sesiones en vivo y acceso a grabaciones</small>
             </div>
           </div>
         </div>
@@ -88,68 +85,33 @@ export default function InscripcionLanding() {
       <section className={styles.trustStrip} aria-label="Características del programa">
         <div>
           <p>{config.product.format}</p>
-          <p>{config.product.access}</p>
           <p>{config.product.level}</p>
+          <p>{config.product.access}</p>
         </div>
       </section>
 
       <section className={styles.previewOffer} id="oferta">
         <div>
-          <p className={styles.eyebrow}>Oferta de lanzamiento</p>
-          <h2>Todo lo necesario para comenzar a construir tu servicio de asesoría.</h2>
+          <p className={styles.eyebrow}>Estrategia Fiscal Paso a Paso</p>
+          <h2>Aprende a crear estrategias reales y llevarlas a tu práctica profesional.</h2>
           <p>
-            Esta primera versión permite validar el recorrido de compra y la presentación del precio antes de conectar una pasarela real.
+            Recorre en cinco días el proceso completo: diagnosticar, comparar, diseñar, planear y convertir lo aprendido en un servicio para tus clientes.
           </p>
         </div>
 
         <aside className={styles.priceCard}>
-          <p>Inversión de demostración</p>
-          <del>{formatMoney(config.pricing.regularPrice)}</del>
-          <strong>{formatMoney(config.pricing.salePrice)}</strong>
-          <small>{config.pricing.installments}</small>
-          <PurchaseCta />
+          <p>Inversión</p>
+          <strong>{formatMoney(config.pricing.salePrice)} <small>MXN</small></strong>
           <span>{config.pricing.taxNote}</span>
+          <PurchaseCta />
+          <small>Serás dirigido al pago seguro de Hotmart.</small>
         </aside>
-      </section>
-
-      <section className={styles.problemSection}>
-        <div className={styles.sectionIntro}>
-          <p className={styles.eyebrow}>Una evolución profesional</p>
-          <h2>No necesitas saber más normas. Necesitas convertir lo que sabes en decisiones valiosas.</h2>
-          <p>
-            Muchos contadores tienen el conocimiento técnico, pero siguen atrapados en tareas operativas porque nadie les enseñó a estructurar, presentar y cobrar su criterio.
-          </p>
-        </div>
-
-        <div className={styles.comparison}>
-          <article className={styles.beforeCard}>
-            <p>Antes</p>
-            <h3>El contador operativo</h3>
-            <ul>
-              <li>Reacciona a obligaciones y fechas límite.</li>
-              <li>Compite principalmente por precio.</li>
-              <li>Entrega datos, pero pocas recomendaciones.</li>
-              <li>Su experiencia no se refleja en sus honorarios.</li>
-            </ul>
-          </article>
-          <div className={styles.comparisonArrow} aria-hidden="true">→</div>
-          <article className={styles.afterCard}>
-            <p>Después</p>
-            <h3>El estratega fiscal</h3>
-            <ul>
-              <li>Analiza antes de que aparezca el problema.</li>
-              <li>Es reconocido por su criterio profesional.</li>
-              <li>Convierte hallazgos en decisiones claras.</li>
-              <li>Cobra por el valor de su asesoría.</li>
-            </ul>
-          </article>
-        </div>
       </section>
 
       <section className={styles.outcomesSection}>
         <div className={styles.sectionIntro}>
-          <p className={styles.eyebrow}>Tu nueva forma de trabajar</p>
-          <h2>Al terminar este programa podrás:</h2>
+          <p className={styles.eyebrow}>Conocimiento aplicado</p>
+          <h2>Del diagnóstico fiscal a un servicio que puedas ofrecer.</h2>
         </div>
         <ol className={styles.outcomesList}>
           {config.outcomes.map((outcome, index) => (
@@ -163,17 +125,18 @@ export default function InscripcionLanding() {
 
       <section className={styles.curriculumSection}>
         <div className={styles.sectionIntro}>
-          <p className={styles.eyebrow}>Contenido del programa</p>
-          <h2>Una ruta completa, de la mentalidad a la implementación.</h2>
+          <p className={styles.eyebrow}>Programa de 5 días</p>
+          <h2>Un paso concreto cada día.</h2>
           <p>
-            Los nombres y alcances de estos módulos son demostrativos. La estructura ya está preparada para recibir el temario definitivo.
+            Cada sesión desarrolla una etapa del proceso para que avances con orden desde el análisis hasta la creación de tu servicio.
           </p>
         </div>
         <div className={styles.moduleGrid}>
           {config.modules.map((module) => (
-            <article key={module.number} className={styles.moduleCard}>
-              <span>{module.number}</span>
+            <article key={module.day} className={styles.moduleCard}>
+              <span>{module.day}</span>
               <div>
+                <p className={styles.moduleAction}>{module.action}</p>
                 <h3>{module.title}</h3>
                 <p>{module.description}</p>
               </div>
@@ -185,40 +148,20 @@ export default function InscripcionLanding() {
       <section className={styles.bonusSection}>
         <div className={styles.bonusHeader}>
           <div>
-            <p className={styles.eyebrow}>Recursos incluidos</p>
-            <h2>Además, recibirás materiales para pasar de la teoría a la acción.</h2>
+            <p className={styles.eyebrow}>Tu inscripción incluye</p>
+            <h2>Todo lo que necesitas para completar la experiencia.</h2>
           </div>
-          <p>Bonos de demostración</p>
+          <p>Acceso completo</p>
         </div>
-        <div className={styles.bonusGrid}>
-          {config.bonuses.map((bonus) => (
-            <article key={bonus.label}>
-              <span>{bonus.label}</span>
-              <div className={styles.bonusIcon} aria-hidden="true">+</div>
-              <h3>{bonus.title}</h3>
-              <p>{bonus.description}</p>
-              <small>Valor de referencia: {formatMoney(bonus.value)}</small>
+        <div className={styles.inclusionGrid}>
+          {config.inclusions.map((item, index) => (
+            <article key={item.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
             </article>
           ))}
         </div>
-      </section>
-
-      <section className={styles.audienceSection}>
-        <div className={styles.audienceCopy}>
-          <p className={styles.eyebrow}>Este programa es para ti si...</p>
-          <h2>Estás listo para ocupar un lugar más estratégico.</h2>
-          <p>
-            No importa si trabajas de forma independiente, en un despacho o dentro de una empresa. Lo importante es que quieras convertir tu conocimiento en mejores decisiones.
-          </p>
-        </div>
-        <ul className={styles.audienceList}>
-          {config.audience.map((item) => (
-            <li key={item}>
-              <span aria-hidden="true">✓</span>
-              {item}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className={styles.instructorSection}>
@@ -234,87 +177,43 @@ export default function InscripcionLanding() {
           />
         </div>
         <div className={styles.instructorCopy}>
-          <p className={styles.eyebrow}>Tu instructor</p>
+          <p className={styles.eyebrow}>Imparte</p>
           <h2>{config.instructor.name}</h2>
           <strong>{config.instructor.role}</strong>
-          <p>{config.instructor.bio}</p>
-          <div className={styles.signature}>CEFIN · Formación con experiencia práctica</div>
-        </div>
-      </section>
-
-      <section className={styles.testimonialSection}>
-        <div className={styles.sectionIntro}>
-          <p className={styles.eyebrow}>Resultados de alumnos</p>
-          <h2>La transformación que buscamos generar.</h2>
-          <p>Estos testimonios son marcadores visuales y deberán sustituirse por casos reales antes del lanzamiento.</p>
-        </div>
-        <div className={styles.testimonialGrid}>
-          {config.testimonials.map((testimonial) => (
-            <figure key={`${testimonial.name}-${testimonial.role}`}>
-              <span className={styles.demoTag}>Testimonio de muestra</span>
-              <blockquote>“{testimonial.quote}”</blockquote>
-              <figcaption>
-                <span aria-hidden="true">{testimonial.name.charAt(0)}</span>
-                <div>
-                  <strong>{testimonial.name}</strong>
-                  <small>{testimonial.role}</small>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.guaranteeSection}>
-        <div className={styles.guaranteeSeal} aria-hidden="true">
-          <strong>{config.guarantee.days}</strong>
-          <span>días</span>
-        </div>
-        <div>
-          <p className={styles.eyebrow}>Garantía de satisfacción</p>
-          <h2>{config.guarantee.title}</h2>
-          <p>{config.guarantee.description}</p>
+          <p>
+            Acompaña tu aprendizaje durante las cinco sesiones y conoce un proceso práctico para llevar tu conocimiento fiscal al siguiente nivel.
+          </p>
+          <div className={styles.signature}>CEFIN · Estrategia · Conocimiento · Resultados</div>
         </div>
       </section>
 
       <section className={styles.offerSection}>
         <div className={styles.offerHeader}>
-          <p className={styles.eyebrow}>Resumen de tu acceso</p>
-          <h2>Todo el sistema. Una sola inversión.</h2>
+          <p className={styles.eyebrow}>Inscripción al programa</p>
+          <h2>{config.product.slogan}</h2>
         </div>
         <div className={styles.offerLayout}>
           <div className={styles.valueStack}>
             <div>
-              <span>Programa {config.product.name}</span>
-              <strong>{formatMoney(config.pricing.regularPrice)}</strong>
+              <span>Programa completo de 5 días</span>
+              <strong>Incluido</strong>
             </div>
-            {config.bonuses.map((bonus) => (
-              <div key={bonus.label}>
-                <span>{bonus.title}</span>
-                <strong>{formatMoney(bonus.value)}</strong>
+            {config.inclusions.map((item) => (
+              <div key={item.title}>
+                <span>{item.title}</span>
+                <strong>✓</strong>
               </div>
             ))}
-            <div className={styles.totalValue}>
-              <span>Valor total de referencia</span>
-              <strong>
-                {formatMoney(
-                  config.pricing.regularPrice +
-                    config.bonuses.reduce((total, bonus) => total + bonus.value, 0),
-                )}
-              </strong>
-            </div>
           </div>
           <aside className={styles.finalPriceCard}>
-            {config.isDemo && <span className={styles.demoPill}>Oferta de muestra</span>}
-            <p>Hoy puedes acceder por</p>
-            <del>{formatMoney(config.pricing.regularPrice)}</del>
+            <p>Inversión única</p>
             <strong>{formatMoney(config.pricing.salePrice)}</strong>
-            <small>{config.pricing.installments}</small>
+            <small>MXN</small>
             <PurchaseCta />
             <ul>
-              <li>Acceso digital seguro</li>
-              <li>Garantía de {config.guarantee.days} días</li>
-              <li>Pago todavía desactivado</li>
+              <li>Pago procesado de forma segura por Hotmart</li>
+              <li>Acceso a grabaciones durante un año</li>
+              <li>Certificado digital incluido</li>
             </ul>
           </aside>
         </div>
@@ -323,7 +222,7 @@ export default function InscripcionLanding() {
       <section className={styles.faqSection}>
         <div className={styles.sectionIntro}>
           <p className={styles.eyebrow}>Preguntas frecuentes</p>
-          <h2>Resuelve tus dudas antes de comenzar.</h2>
+          <h2>Lo que incluye tu inscripción.</h2>
         </div>
         <div className={styles.faqList}>
           {config.faq.map((item) => (
@@ -340,10 +239,10 @@ export default function InscripcionLanding() {
 
       <section className={styles.finalSection}>
         <div>
-          <p className={styles.eyebrow}>Tu siguiente nivel profesional</p>
-          <h2>El conocimiento técnico abre la puerta. El criterio estratégico cambia tu carrera.</h2>
+          <p className={styles.eyebrow}>Estrategia Fiscal Paso a Paso</p>
+          <h2>5 días para llevar tu conocimiento fiscal al siguiente nivel.</h2>
           <p>
-            La página está lista para recibir la oferta definitiva y empezar a vender en cuanto se habiliten los datos reales.
+            Aprende a aplicar estrategias reales y conviértelas en mejores resultados para tu práctica profesional y tus clientes.
           </p>
         </div>
         <PurchaseCta className={styles.finalButton} />
@@ -355,7 +254,7 @@ export default function InscripcionLanding() {
             <span aria-hidden="true" />
             CEFIN
           </a>
-          <p>Formación especializada para profesionales contables.</p>
+          <p>Centro de Estudios Fiscales, Innovación y Negocios.</p>
         </div>
         <nav aria-label="Información legal">
           <a href={config.legal.privacyUrl}>Aviso de privacidad</a>
@@ -365,10 +264,10 @@ export default function InscripcionLanding() {
 
       <div className={styles.mobileCta}>
         <div>
-          <small>Precio de muestra</small>
-          <strong>{formatMoney(config.pricing.salePrice)}</strong>
+          <small>Inversión</small>
+          <strong>{formatMoney(config.pricing.salePrice)} MXN</strong>
         </div>
-        <a href="#oferta">Ver oferta</a>
+        <a href={config.checkout.url}>Inscribirme</a>
       </div>
     </main>
   );
