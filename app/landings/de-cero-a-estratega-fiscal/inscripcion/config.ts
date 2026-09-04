@@ -152,7 +152,8 @@ export const directSaleConfig: DirectSaleConfig = {
   instructor: {
     name: "Mtro. Alfredo Cobos",
     role: "Instructor de Estrategia Fiscal Paso a Paso",
-    image: "/contrato-servicios-contables/alfredo-servicios-contables.png",
+    image:
+      "https://cefin-landings-z9uk.vercel.app/contrato-servicios-contables/alfredo-servicios-contables.png",
     imageAlt: "Mtro. Alfredo Cobos, instructor del programa",
   },
   faq: [

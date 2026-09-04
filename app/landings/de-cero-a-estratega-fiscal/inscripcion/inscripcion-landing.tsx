@@ -69,6 +69,7 @@ export default function InscripcionLanding() {
                 sizes="330px"
                 className={styles.heroInstructorImage}
                 aria-hidden="true"
+                unoptimized
                 priority
               />
               <div className={styles.productSeal}>CEFIN</div>
@@ -174,6 +175,7 @@ export default function InscripcionLanding() {
             height={590}
             sizes="(max-width: 800px) 82vw, 420px"
             className={styles.instructorImage}
+            unoptimized
           />
         </div>
         <div className={styles.instructorCopy}>
