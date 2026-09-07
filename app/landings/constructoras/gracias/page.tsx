@@ -2,67 +2,84 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { META_CURRENCY, META_PIXEL_ID } from "@/lib/meta-pixel";
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  META_CURRENCY,
+  trackMetaCustomEventImmediate,
+} from "@/lib/meta-pixel";
+import {
+  consumeConstructorasRegistrationAttempt,
+  getConstructorasEventKey,
+  waitForConstructorasMetaPixel,
+} from "@/lib/constructoras-tracking-session";
 
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
-
-const WHATSAPP_URL = "https://chat.whatsapp.com/KgwLhKrdk0EJeKAzHGM2l6"; // <-- cámbialo
+const WHATSAPP_URL = "https://chat.whatsapp.com/JwbIRHIqWm06M3myxyXTtK";
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 const BACKGROUND_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 
 export default function GraciasConstructorasPage() {
-  const trackEvent = (event: string, data?: Record<string, unknown>) => {
-    if (typeof window === "undefined" || !window.fbq) return;
-
-    if (data) {
-      window.fbq("track", event, data);
-      return;
-    }
-
-    window.fbq("track", event);
-  };
-
   useEffect(() => {
     document.title = "Registro completado | Constructoras | CEFIN";
+    const attempt = consumeConstructorasRegistrationAttempt();
+    if (!attempt) return;
 
-    trackEvent("CompleteRegistration", {
-      content_name: "Asesor Fiscal para Constructoras | Registro completado",
-      content_category: "Clase gratuita",
-      status: "completed",
-      value: 0,
-      currency: META_CURRENCY,
-    });
+    const eventKey = getConstructorasEventKey(
+      "complete_registration_sent",
+      attempt.id,
+    );
+    try {
+      if (window.sessionStorage.getItem(eventKey)) return;
+    } catch {
+      // The event ID still gives Meta a stable deduplication key.
+    }
+
+    return waitForConstructorasMetaPixel(
+      () => {
+        window.fbq?.(
+          "track",
+          "CompleteRegistration",
+          {
+            content_name: "Asesor Fiscal para Constructoras",
+            content_category: "Clase gratuita",
+            landing_slug: "constructoras",
+            event_date: "2026-09-15",
+            event_time: "11:00 AM CDMX",
+            status: "registered",
+            value: 0,
+            currency: META_CURRENCY,
+          },
+          { eventID: attempt.id },
+        );
+        try {
+          window.sessionStorage.setItem(eventKey, "true");
+        } catch {
+          // The event was already queued with a stable event ID.
+        }
+      },
+      () => undefined,
+    );
   }, []);
+
+  const handleWhatsAppClick = () => {
+    trackMetaCustomEventImmediate("WhatsAppClick", {
+      content_name: "Asesor Fiscal para Constructoras",
+      content_category: "Grupo de WhatsApp",
+      landing_slug: "constructoras",
+      source: "thank_you_page",
+      destination: "whatsapp_group",
+      status: "clicked",
+    });
+  };
 
   return (
     <>
       <Script
         id="meta-pixel-constructoras-thankyou"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -70,7 +87,7 @@ export default function GraciasConstructorasPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
@@ -158,7 +175,7 @@ export default function GraciasConstructorasPage() {
                     Fecha
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
-                    5 de mayo
+                    15 de septiembre
                   </p>
                 </div>
 
@@ -173,14 +190,15 @@ export default function GraciasConstructorasPage() {
               </div>
 
               <div className="mt-6">
-                <button
-                  onClick={() =>
-                    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")
-                  }
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsAppClick}
                   className="group inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
                 >
                   Entrar al grupo de WhatsApp
-                </button>
+                </a>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
                   Sin este paso podrías perder el acceso y los recordatorios.

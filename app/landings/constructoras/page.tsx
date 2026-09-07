@@ -2,41 +2,116 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
+import {
+  getMetaPixelNoscriptUrl,
+  getMetaPixelScript,
+  trackMetaCustomEvent,
+  trackMetaEvent,
+} from "@/lib/meta-pixel";
+import {
+  captureConstructorasAttribution,
+  createConstructorasRegistrationAttempt,
+  syncConstructorasAttributionFields,
+} from "@/lib/constructoras-tracking-session";
 
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
-}
-
-const ACTIVE_CAMPAIGN_FORM_ID = 185; // <-- cambialo
+const ACTIVE_CAMPAIGN_FORM_ID = 339;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
 const BACKGROUND_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cambialo
+const VIEW_CONTENT_KEY = "cefinConstructorasViewContentSent";
+const OPEN_FORM_KEY = "cefinConstructorasOpenFormSent";
+const WEBINAR_EVENT = {
+  content_name: "Asesor Fiscal para Constructoras",
+  content_category: "Clase gratuita",
+  landing_slug: "constructoras",
+  event_date: "2026-09-15",
+  event_time: "11:00 AM CDMX",
+} as const;
 
 export default function ConstructorasLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Asesor Fiscal para Constructoras | CEFIN";
+    captureConstructorasAttribution();
+
+    try {
+      if (window.sessionStorage.getItem(VIEW_CONTENT_KEY)) return;
+      window.sessionStorage.setItem(VIEW_CONTENT_KEY, "true");
+    } catch {
+      // Tracking storage must never interrupt the landing.
+    }
+
+    trackMetaEvent("ViewContent", {
+      ...WEBINAR_EVENT,
+      source: "landing_page",
+    });
   }, []);
+
+  const openRegistrationModal = () => {
+    setIsModalOpen(true);
+
+    try {
+      if (window.sessionStorage.getItem(OPEN_FORM_KEY)) return;
+      window.sessionStorage.setItem(OPEN_FORM_KEY, "true");
+    } catch {
+      // The event can still be sent when storage is unavailable.
+    }
+
+    trackMetaCustomEvent("OpenRegistrationModal", {
+      ...WEBINAR_EVENT,
+      source: "landing_cta",
+    });
+  };
 
   useEffect(() => {
     if (!isModalOpen) return;
 
-    const oldScript = document.getElementById("ac-script-loader");
+    const oldScript = document.getElementById(
+      "activecampaign-constructoras-form-339",
+    );
     if (oldScript) oldScript.remove();
 
+    const formContainer = document.querySelector(`.${FORM_CLASS}`);
+    if (formContainer) formContainer.innerHTML = "";
+
+    let boundForm: HTMLFormElement | null = null;
+    const handleSubmit = () => {
+      createConstructorasRegistrationAttempt();
+    };
+    const bindForm = () => {
+      const form = document.querySelector<HTMLFormElement>(
+        `.${FORM_CLASS} form`,
+      );
+      if (!form || form === boundForm) return;
+
+      boundForm?.removeEventListener("submit", handleSubmit);
+      boundForm = form;
+      syncConstructorasAttributionFields(form);
+      form.addEventListener("submit", handleSubmit);
+    };
+    const observer = new MutationObserver(bindForm);
+    observer.observe(document.body, { childList: true, subtree: true });
+
     const script = document.createElement("script");
-    script.id = "ac-script-loader";
-    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
+    script.id = "activecampaign-constructoras-form-339";
+    const embedUrl = new URL(
+      `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`,
+    );
+    embedUrl.searchParams.set("cefin_v", Date.now().toString());
+    script.src = embedUrl.toString();
     script.type = "text/javascript";
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
+
+    return () => {
+      observer.disconnect();
+      boundForm?.removeEventListener("submit", handleSubmit);
+      script.remove();
+    };
   }, [isModalOpen]);
 
   const modules = [
@@ -51,24 +126,7 @@ export default function ConstructorasLandingPage() {
       <Script
         id="meta-pixel-constructoras"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            if (!window.__cefinMetaPixelInitialized) {
-              fbq('init', '${META_PIXEL_ID}');
-              window.__cefinMetaPixelInitialized = true;
-            }
-            fbq('track', 'PageView');
-          `,
-        }}
+        dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
 
       <noscript>
@@ -76,7 +134,7 @@ export default function ConstructorasLandingPage() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={getMetaPixelNoscriptUrl()}
           alt=""
         />
       </noscript>
@@ -137,7 +195,7 @@ export default function ConstructorasLandingPage() {
             </div>
 
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={openRegistrationModal}
               className="hidden rounded-full border border-lime-300/20 bg-white/8 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white backdrop-blur transition hover:bg-white/12 md:inline-flex"
             >
               Registrarme
@@ -191,13 +249,15 @@ export default function ConstructorasLandingPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lime-300/15 text-xl text-lime-300">
-                    05
+                    15
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
                       Fecha
                     </p>
-                    <p className="text-lg font-black text-white">5 de mayo</p>
+                    <p className="text-lg font-black text-white">
+                      15 de septiembre
+                    </p>
                   </div>
                 </div>
 
@@ -218,7 +278,7 @@ export default function ConstructorasLandingPage() {
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={openRegistrationModal}
                   className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 px-8 py-5 text-base font-black uppercase tracking-tight text-[#081008] shadow-[0_18px_50px_rgba(174,255,78,0.28)] transition hover:scale-[1.01] hover:shadow-[0_24px_70px_rgba(174,255,78,0.38)] active:scale-[0.98] sm:text-lg"
                 >
                   Quiero mi lugar gratis
@@ -291,7 +351,7 @@ export default function ConstructorasLandingPage() {
                 </div>
 
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={openRegistrationModal}
                   className="inline-flex items-center justify-center rounded-2xl bg-lime-300 px-7 py-4 text-base font-black uppercase tracking-tight text-[#0b120a] transition hover:scale-[1.01] active:scale-[0.98]"
                 >
                   Registrarme gratis
