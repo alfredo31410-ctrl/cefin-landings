@@ -7,7 +7,10 @@ import { landingConfig as config } from "../config";
 
 const REGISTRATION_PENDING_KEY =
   "cefin_estratega_fiscal_registration_pending";
+const REGISTRATION_COMPLETED_KEY =
+  "cefin_estratega_fiscal_registration_completed";
 const REGISTRATION_MARKER_TTL_MS = 5 * 60 * 1000;
+const REGISTRATION_SESSION_TTL_MS = 24 * 60 * 60 * 1000;
 const PIXEL_RETRY_INTERVAL_MS = 50;
 const PIXEL_MAX_ATTEMPTS = 6;
 const TRACKING_SEND_DELAY_MS = 100;
@@ -17,22 +20,77 @@ type RegistrationMarker = {
   createdAt: number;
 };
 
-function consumeRegistrationMarker() {
-  try {
-    const serialized = window.sessionStorage.getItem(REGISTRATION_PENDING_KEY);
-    window.sessionStorage.removeItem(REGISTRATION_PENDING_KEY);
-    if (!serialized) return null;
+type RegistrationSession = RegistrationMarker & {
+  registrationTracked: boolean;
+  contactTracked: boolean;
+};
 
-    const marker = JSON.parse(serialized) as RegistrationMarker;
-    if (
-      !marker.id ||
-      !Number.isFinite(marker.createdAt) ||
-      Date.now() - marker.createdAt > REGISTRATION_MARKER_TTL_MS ||
-      marker.createdAt > Date.now()
-    ) {
+function isValidRegistrationMarker(
+  value: unknown,
+  ttlMs: number,
+): value is RegistrationMarker {
+  if (!value || typeof value !== "object") return false;
+
+  const marker = value as Partial<RegistrationMarker>;
+  return (
+    typeof marker.id === "string" &&
+    marker.id.length > 0 &&
+    Number.isFinite(marker.createdAt) &&
+    Date.now() - Number(marker.createdAt) <= ttlMs &&
+    Number(marker.createdAt) <= Date.now()
+  );
+}
+
+function persistRegistrationSession(session: RegistrationSession) {
+  try {
+    window.sessionStorage.setItem(
+      REGISTRATION_COMPLETED_KEY,
+      JSON.stringify(session),
+    );
+  } catch {
+    // El acceso al grupo sigue funcionando aunque el almacenamiento falle.
+  }
+}
+
+function getRegistrationSession() {
+  try {
+    const pendingSerialized = window.sessionStorage.getItem(
+      REGISTRATION_PENDING_KEY,
+    );
+    window.sessionStorage.removeItem(REGISTRATION_PENDING_KEY);
+
+    if (pendingSerialized) {
+      const pending = JSON.parse(pendingSerialized) as unknown;
+      if (isValidRegistrationMarker(pending, REGISTRATION_MARKER_TTL_MS)) {
+        const session: RegistrationSession = {
+          id: pending.id,
+          createdAt: pending.createdAt,
+          registrationTracked: false,
+          contactTracked: false,
+        };
+        persistRegistrationSession(session);
+        return session;
+      }
+    }
+
+    const completedSerialized = window.sessionStorage.getItem(
+      REGISTRATION_COMPLETED_KEY,
+    );
+    if (!completedSerialized) return null;
+
+    const completed = JSON.parse(completedSerialized) as unknown;
+    if (!isValidRegistrationMarker(completed, REGISTRATION_SESSION_TTL_MS)) {
+      window.sessionStorage.removeItem(REGISTRATION_COMPLETED_KEY);
       return null;
     }
-    return marker;
+
+    const session = completed as Partial<RegistrationSession>;
+    return {
+      id: completed.id,
+      createdAt: completed.createdAt,
+      registrationTracked: session.registrationTracked === true,
+      contactTracked: session.contactTracked === true,
+    } satisfies RegistrationSession;
   } catch {
     return null;
   }
@@ -64,17 +122,16 @@ export function ConversionClient({
   groupUrl: string | null;
   whatsappLinkId: string;
 }) {
-  const markerRef = useRef<RegistrationMarker | null | undefined>(undefined);
-  const registrationTrackedRef = useRef(false);
-  const contactTrackedRef = useRef(false);
+  const sessionRef = useRef<RegistrationSession | null | undefined>(undefined);
   const redirectedRef = useRef(false);
 
   useEffect(() => {
-    if (markerRef.current === undefined) {
-      markerRef.current = consumeRegistrationMarker();
+    if (sessionRef.current === undefined) {
+      sessionRef.current = getRegistrationSession();
     }
+    const session = sessionRef.current;
     const safeGroupUrl = getValidWhatsAppGroupUrl(groupUrl);
-    if (!markerRef.current || !safeGroupUrl) return;
+    if (!session || !safeGroupUrl) return;
 
     const whatsappLink = document.getElementById(whatsappLinkId);
     if (whatsappLink instanceof HTMLAnchorElement) {
@@ -110,10 +167,16 @@ export function ConversionClient({
         config.activation.trackingEnabled &&
         typeof window.fbq === "function"
       ) {
-        if (!registrationTrackedRef.current) {
-          registrationTrackedRef.current = true;
-          window.fbq("track", "CompleteRegistration");
-        }
+        if (session.registrationTracked) return;
+
+        session.registrationTracked = true;
+        persistRegistrationSession(session);
+        window.fbq(
+          "track",
+          "CompleteRegistration",
+          {},
+          { eventID: `registration-${session.id}` },
+        );
       }
     };
 
@@ -123,13 +186,25 @@ export function ConversionClient({
         config.activation.trackingEnabled &&
         typeof window.fbq === "function"
       ) {
-        if (!registrationTrackedRef.current) {
-          registrationTrackedRef.current = true;
-          window.fbq("track", "CompleteRegistration");
+        if (!session.registrationTracked) {
+          session.registrationTracked = true;
+          persistRegistrationSession(session);
+          window.fbq(
+            "track",
+            "CompleteRegistration",
+            {},
+            { eventID: `registration-${session.id}` },
+          );
         }
-        if (!contactTrackedRef.current) {
-          contactTrackedRef.current = true;
-          window.fbq("track", "Contact");
+        if (!session.contactTracked) {
+          session.contactTracked = true;
+          persistRegistrationSession(session);
+          window.fbq(
+            "track",
+            "Contact",
+            {},
+            { eventID: `contact-${session.id}` },
+          );
         }
         navigationTimeoutId = window.setTimeout(
           navigateToWhatsApp,
