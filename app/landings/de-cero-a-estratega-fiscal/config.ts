@@ -74,9 +74,9 @@ export const landingConfig: CampaignConfig = {
   eventType: "Clase gratuita",
   modality: "Transmisión en vivo",
   date: {
-    iso: "2026-09-04",
-    startsAt: "2026-09-04T11:00:00-06:00",
-    visible: "Viernes 4 de septiembre de 2026",
+    iso: "2026-09-17",
+    startsAt: "2026-09-17T11:00:00-06:00",
+    visible: "Jueves 17 de septiembre de 2026",
     time: "11:00 a. m.",
     timeZone: "America/Mexico_City",
     timeZoneLabel: "CDMX",
@@ -155,8 +155,8 @@ export const landingConfig: CampaignConfig = {
   activeCampaign: {
     enabled: true,
     embedUrl:
-      "https://cefincapacitacion.activehosted.com/f/embed.php?id=333",
-    formId: 333,
+      "https://cefincapacitacion.activehosted.com/f/embed.php?id=345",
+    formId: 345,
   },
   conversionEvent: {
     name: "CompleteRegistration",
