@@ -74,9 +74,9 @@ export const landingConfig: CampaignConfig = {
   eventType: "Clase gratuita",
   modality: "Transmisión en vivo",
   date: {
-    iso: "2026-09-17",
-    startsAt: "2026-09-17T11:00:00-06:00",
-    visible: "Jueves 17 de septiembre de 2026",
+    iso: "2026-09-24",
+    startsAt: "2026-09-24T11:00:00-06:00",
+    visible: "Jueves 24 de septiembre de 2026",
     time: "11:00 a. m.",
     timeZone: "America/Mexico_City",
     timeZoneLabel: "CDMX",
