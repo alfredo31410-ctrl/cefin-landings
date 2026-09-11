@@ -59,10 +59,10 @@ function getValidWhatsAppGroupUrl(value: string | null) {
 
 export function ConversionClient({
   groupUrl,
-  fallbackLinkId,
+  whatsappLinkId,
 }: {
   groupUrl: string | null;
-  fallbackLinkId: string;
+  whatsappLinkId: string;
 }) {
   const markerRef = useRef<RegistrationMarker | null | undefined>(undefined);
   const registrationTrackedRef = useRef(false);
@@ -76,30 +76,23 @@ export function ConversionClient({
     const safeGroupUrl = getValidWhatsAppGroupUrl(groupUrl);
     if (!markerRef.current || !safeGroupUrl) return;
 
-    const fallbackLink = document.getElementById(fallbackLinkId);
-    if (fallbackLink instanceof HTMLAnchorElement) {
-      fallbackLink.href = safeGroupUrl;
-      fallbackLink.hidden = false;
+    const whatsappLink = document.getElementById(whatsappLinkId);
+    if (whatsappLink instanceof HTMLAnchorElement) {
+      whatsappLink.href = safeGroupUrl;
+      whatsappLink.hidden = false;
     }
 
     let attempts = PIXEL_MAX_ATTEMPTS;
     let retryTimeoutId: number | undefined;
-    let redirectTimeoutId: number | undefined;
+    let navigationTimeoutId: number | undefined;
 
-    const redirectToWhatsApp = () => {
+    const navigateToWhatsApp = () => {
       if (redirectedRef.current) return;
       redirectedRef.current = true;
       window.location.assign(safeGroupUrl);
     };
 
-    const scheduleRedirect = (delayMs: number) => {
-      if (redirectTimeoutId !== undefined) {
-        window.clearTimeout(redirectTimeoutId);
-      }
-      redirectTimeoutId = window.setTimeout(redirectToWhatsApp, delayMs);
-    };
-
-    const trackAndRedirect = () => {
+    const trackRegistration = () => {
       if (
         config.activation.trackingEnabled &&
         typeof window.fbq !== "function" &&
@@ -107,7 +100,7 @@ export function ConversionClient({
       ) {
         attempts -= 1;
         retryTimeoutId = window.setTimeout(
-          trackAndRedirect,
+          trackRegistration,
           PIXEL_RETRY_INTERVAL_MS,
         );
         return;
@@ -121,39 +114,46 @@ export function ConversionClient({
           registrationTrackedRef.current = true;
           window.fbq("track", "CompleteRegistration");
         }
+      }
+    };
+
+    const handleWhatsAppClick = (event: Event) => {
+      event.preventDefault();
+      if (
+        config.activation.trackingEnabled &&
+        typeof window.fbq === "function"
+      ) {
+        if (!registrationTrackedRef.current) {
+          registrationTrackedRef.current = true;
+          window.fbq("track", "CompleteRegistration");
+        }
         if (!contactTrackedRef.current) {
           contactTrackedRef.current = true;
           window.fbq("track", "Contact");
         }
-        scheduleRedirect(TRACKING_SEND_DELAY_MS);
+        navigationTimeoutId = window.setTimeout(
+          navigateToWhatsApp,
+          TRACKING_SEND_DELAY_MS,
+        );
         return;
       }
 
-      scheduleRedirect(0);
+      navigateToWhatsApp();
     };
 
-    const handleFallbackClick = (event: Event) => {
-      event.preventDefault();
-      if (retryTimeoutId !== undefined) {
-        window.clearTimeout(retryTimeoutId);
-      }
-      attempts = 0;
-      trackAndRedirect();
-    };
-
-    fallbackLink?.addEventListener("click", handleFallbackClick);
-    trackAndRedirect();
+    whatsappLink?.addEventListener("click", handleWhatsAppClick);
+    trackRegistration();
 
     return () => {
-      fallbackLink?.removeEventListener("click", handleFallbackClick);
+      whatsappLink?.removeEventListener("click", handleWhatsAppClick);
       if (retryTimeoutId !== undefined) {
         window.clearTimeout(retryTimeoutId);
       }
-      if (redirectTimeoutId !== undefined) {
-        window.clearTimeout(redirectTimeoutId);
+      if (navigationTimeoutId !== undefined) {
+        window.clearTimeout(navigationTimeoutId);
       }
     };
-  }, [fallbackLinkId, groupUrl]);
+  }, [groupUrl, whatsappLinkId]);
 
   if (!config.activation.trackingEnabled) return null;
 

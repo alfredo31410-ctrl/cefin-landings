@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function EstrategaFiscalThankYouPage() {
-  const fallbackLinkId = "estratega-fiscal-whatsapp-fallback";
+  const whatsappLinkId = "estratega-fiscal-whatsapp-link";
 
   return (
     <>
       <ConversionClient
         groupUrl={config.access.whatsappGroupUrl}
-        fallbackLinkId={fallbackLinkId}
+        whatsappLinkId={whatsappLinkId}
       />
       <main
         className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
@@ -46,7 +46,7 @@ export default function EstrategaFiscalThankYouPage() {
                 ¡Gracias por registrarte!
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--ef-muted-dark)] sm:text-xl">
-                Estamos abriendo automáticamente el grupo oficial de WhatsApp para que recibas el acceso y los recordatorios de la clase.
+                Tu registro quedó confirmado. Ahora únete al grupo oficial de WhatsApp para recibir el acceso y los recordatorios de la clase.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -64,19 +64,19 @@ export default function EstrategaFiscalThankYouPage() {
                     Acceso al grupo
                   </p>
                   <p className="mt-2 text-sm font-semibold leading-relaxed text-[var(--ef-warm-white)]">
-                    WhatsApp se abrirá automáticamente. No necesitas hacer otro clic.
+                    Usa el botón para entrar al grupo oficial y completar el último paso.
                   </p>
                 </article>
               </div>
 
               {config.access.whatsappGroupUrl && (
                 <a
-                  id={fallbackLinkId}
+                  id={whatsappLinkId}
                   href={config.access.whatsappGroupUrl}
                   hidden
                   className="mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[var(--ef-emerald)] px-7 py-3 text-center text-sm font-black uppercase tracking-[0.04em] text-[var(--ef-petroleum)] shadow-[0_16px_36px_var(--ef-cta-shadow)] transition hover:bg-[var(--ef-deep-green)] hover:text-[var(--ef-warm-white)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ef-gold)] sm:w-auto"
                 >
-                  ¿No se abrió WhatsApp? Entrar al grupo
+                  Unirme al grupo de WhatsApp
                 </a>
               )}
             </div>
