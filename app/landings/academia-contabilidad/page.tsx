@@ -70,22 +70,19 @@ export default function AcademiaContabilidadPage() {
     const phoneSpacingTimeoutIds: number[] = [];
 
     const fixPhoneInputSpacing = (form: HTMLFormElement) => {
-      const phoneInput = form.querySelector<HTMLInputElement>(
-        'input[name="phone"]',
-      );
+      const phoneInput =
+        form.querySelector<HTMLInputElement>(".iti input.iti__tel-input") ??
+        form.querySelector<HTMLInputElement>(
+          '.iti input:not([type="hidden"])',
+        ) ??
+        form.querySelector<HTMLInputElement>(
+          'input[name="phone"]:not([type="hidden"])',
+        );
       if (!phoneInput) return;
 
-      const countrySelector = form.querySelector<HTMLElement>(
-        ".iti__selected-country",
-      );
-      const selectorWidth = countrySelector?.getBoundingClientRect().width ?? 64;
-      const leftPadding = Math.max(88, Math.ceil(selectorWidth) + 18);
-
-      phoneInput.style.setProperty(
-        "padding-left",
-        `${leftPadding}px`,
-        "important",
-      );
+      phoneInput.placeholder = "Número a 10 dígitos";
+      phoneInput.inputMode = "tel";
+      phoneInput.style.setProperty("padding-left", "96px", "important");
       phoneInput.style.setProperty("padding-right", "15px", "important");
     };
 
@@ -573,13 +570,21 @@ export default function AcademiaContabilidadPage() {
             :is(#cefin-academia-form, form[id^="_form_"])
             .iti
             input {
-            padding-left: 88px !important;
+            padding-left: 96px !important;
           }
 
           .${FORM_CLASS}.${FORM_CLASS}
             :is(#cefin-academia-form, form[id^="_form_"])
-            .iti__selected-flag {
-            padding: 0 12px !important;
+            .iti__country-container {
+            width: 78px !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__selected-country {
+            width: 78px !important;
+            justify-content: center !important;
+            padding: 0 10px !important;
             border-right: 1px solid #e2e8f0 !important;
             border-radius: 14px 0 0 14px !important;
             background: #f8fafc !important;
@@ -595,7 +600,10 @@ export default function AcademiaContabilidadPage() {
           .${FORM_CLASS}.${FORM_CLASS}
             :is(#cefin-academia-form, form[id^="_form_"])
             .iti__selected-country-primary {
-            padding: 0 6px !important;
+            width: 100% !important;
+            justify-content: center !important;
+            gap: 5px !important;
+            padding: 0 !important;
           }
 
           .${FORM_CLASS}.${FORM_CLASS}
@@ -698,7 +706,7 @@ export default function AcademiaContabilidadPage() {
               :is(#cefin-academia-form, form[id^="_form_"])
               .iti
               input {
-              padding-left: 88px !important;
+              padding-left: 96px !important;
             }
 
             .${FORM_CLASS}.${FORM_CLASS}
