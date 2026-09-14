@@ -436,6 +436,222 @@ export default function AcademiaContabilidadPage() {
               font-size: 14px !important;
             }
           }
+
+          /*
+           * ActiveCampaign injects ID-based rules after this page renders.
+           * The repeated wrapper plus :is() keeps these overrides scoped to
+           * form 347 while giving them enough specificity to win safely.
+           */
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"]) {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #1e293b !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._form-content {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #ffffff !important;
+            color: #1e293b !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._form_element {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 0 16px !important;
+            padding: 0 !important;
+            background: transparent !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._form-label {
+            display: block !important;
+            width: 100% !important;
+            margin: 0 0 7px !important;
+            color: #1e293b !important;
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            line-height: 1.35 !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            input:not([type="checkbox"]):not([type="radio"]),
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            select,
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            textarea:not(.g-recaptcha-response) {
+            display: block !important;
+            width: 100% !important;
+            min-height: 52px !important;
+            box-sizing: border-box !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            background: #ffffff !important;
+            padding: 13px 15px !important;
+            color: #0f172a !important;
+            font-size: 16px !important;
+            line-height: 1.35 !important;
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06) !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            input:not([type="checkbox"]):not([type="radio"]):focus,
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            select:focus,
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            textarea:not(.g-recaptcha-response):focus {
+            border-color: #c026d3 !important;
+            outline: none !important;
+            box-shadow:
+              0 0 0 4px rgba(192, 38, 211, 0.13),
+              0 5px 16px rgba(88, 28, 135, 0.1) !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti {
+            width: 100% !important;
+            color: #0f172a !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti
+            input {
+            padding-left: 92px !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__selected-flag {
+            padding: 0 12px !important;
+            border-right: 1px solid #e2e8f0 !important;
+            border-radius: 14px 0 0 14px !important;
+            background: #f8fafc !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__country-list {
+            min-width: 0 !important;
+            max-width: calc(100vw - 64px) !important;
+            color: #0f172a !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .sms_consent_checkbox {
+            display: flex !important;
+            align-items: flex-start !important;
+            width: 100% !important;
+            margin: 2px 0 4px !important;
+            padding: 8px 2px 4px !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .sms_consent_checkbox
+            input[type="checkbox"] {
+            display: block !important;
+            flex: 0 0 20px !important;
+            width: 20px !important;
+            height: 20px !important;
+            margin: 2px 11px 0 0 !important;
+            padding: 0 !important;
+            accent-color: #c026d3 !important;
+            box-shadow: none !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .sms_consent_message {
+            display: block !important;
+            float: none !important;
+            width: auto !important;
+            margin: 0 !important;
+            color: #475569 !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 1.5 !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._button-wrapper {
+            width: 100% !important;
+            margin: 14px 0 0 !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._submit {
+            width: 100% !important;
+            min-height: 56px !important;
+            margin: 0 !important;
+            border: 0 !important;
+            border-radius: 15px !important;
+            background: linear-gradient(
+              90deg,
+              #ff5e7a 0%,
+              #d85cff 55%,
+              #8b5cf6 100%
+            ) !important;
+            padding: 15px 18px !important;
+            color: #ffffff !important;
+            font-size: 15px !important;
+            font-weight: 900 !important;
+            line-height: 1.2 !important;
+            text-transform: uppercase !important;
+            box-shadow: 0 14px 34px rgba(168, 85, 247, 0.34) !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            ._form-thank-you {
+            color: #1e293b !important;
+          }
+
+          @media (max-width: 639px) {
+            .${FORM_CLASS}.${FORM_CLASS}
+              :is(#cefin-academia-form, form[id^="_form_"])
+              ._form_element {
+              margin-bottom: 13px !important;
+            }
+
+            .${FORM_CLASS}.${FORM_CLASS}
+              :is(#cefin-academia-form, form[id^="_form_"])
+              .iti
+              input {
+              padding-left: 88px !important;
+            }
+
+            .${FORM_CLASS}.${FORM_CLASS}
+              :is(#cefin-academia-form, form[id^="_form_"])
+              .sms_consent_message {
+              font-size: 11px !important;
+              line-height: 1.45 !important;
+            }
+          }
         `}</style>
       </main>
     </>
