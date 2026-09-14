@@ -26,9 +26,12 @@ export default function RegistrationForm() {
           typeof crypto.randomUUID === "function"
             ? crypto.randomUUID()
             : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        const debugTracking =
+          new URLSearchParams(window.location.search).get("debug_tracking") ===
+          "1";
         window.sessionStorage.setItem(
           REGISTRATION_PENDING_KEY,
-          JSON.stringify({ id, createdAt: Date.now() }),
+          JSON.stringify({ id, createdAt: Date.now(), debugTracking }),
         );
       } catch {
         // El comprobante local nunca debe interferir con el formulario oficial.

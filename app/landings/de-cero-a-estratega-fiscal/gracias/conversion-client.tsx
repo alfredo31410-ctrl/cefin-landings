@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import {
   getMetaPixelScript,
   initializeMetaPixel,
+  META_PIXEL_ID,
 } from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
@@ -14,11 +15,12 @@ const REGISTRATION_COMPLETED_KEY =
   "cefin_estratega_fiscal_registration_completed";
 const REGISTRATION_MARKER_TTL_MS = 5 * 60 * 1000;
 const REGISTRATION_SESSION_TTL_MS = 24 * 60 * 60 * 1000;
-const PIXEL_FLUSH_GRACE_MS = 50;
+const AUTO_REDIRECT_DELAY_MS = 800;
 
 type RegistrationMarker = {
   id: string;
   createdAt: number;
+  debugTracking?: boolean;
 };
 
 type RegistrationSession = RegistrationMarker & {
@@ -72,6 +74,7 @@ function getRegistrationSession() {
         const session: RegistrationSession = {
           id: pending.id,
           createdAt: pending.createdAt,
+          debugTracking: pending.debugTracking === true,
           registrationTracked: false,
           contactTracked: false,
         };
@@ -95,6 +98,7 @@ function getRegistrationSession() {
     return {
       id: completed.id,
       createdAt: completed.createdAt,
+      debugTracking: session.debugTracking === true,
       registrationTracked: session.registrationTracked === true,
       contactTracked: session.contactTracked === true,
     } satisfies RegistrationSession;
@@ -136,38 +140,65 @@ function showInvalidRegistration(status: HTMLElement | null) {
     "No pudimos comprobar un registro reciente. Vuelve al formulario para registrarte.";
 }
 
-function queueConversionEvents(session: RegistrationSession) {
-  if (!config.activation.trackingEnabled) return false;
+function isDebugTrackingEnabled(session: RegistrationSession) {
+  return (
+    new URLSearchParams(window.location.search).get("debug_tracking") === "1" ||
+    session.debugTracking === true
+  );
+}
 
+function logTrackingEvent(event: string, eventId?: string) {
+  console.info("[CEFIN tracking QA]", {
+    event,
+    eventId,
+    pixelId: META_PIXEL_ID,
+    timestamp: new Date().toISOString(),
+  });
+}
+
+function queueConversionEvents(
+  session: RegistrationSession,
+  debugTracking: boolean,
+) {
+  if (!config.activation.trackingEnabled) return;
+
+  const pixelWasInitialized = window.__cefinMetaPixelInitialized === true;
   initializeMetaPixel();
-  if (typeof window.fbq !== "function") return false;
+  if (typeof window.fbq !== "function") return;
 
-  let queuedEvent = false;
+  if (
+    debugTracking &&
+    !pixelWasInitialized &&
+    window.__cefinMetaPixelInitialized
+  ) {
+    logTrackingEvent("PageView");
+  }
 
   if (!session.registrationTracked) {
-    queuedEvent = true;
+    const eventId = `registration-${session.id}`;
     session.registrationTracked = true;
     window.fbq(
       "track",
       "CompleteRegistration",
       {},
-      { eventID: `registration-${session.id}` },
+      { eventID: eventId },
     );
+    if (debugTracking) logTrackingEvent("CompleteRegistration", eventId);
   }
 
   if (!session.contactTracked) {
-    queuedEvent = true;
+    const eventId = `contact-${session.id}`;
     session.contactTracked = true;
     window.fbq(
       "track",
       "Contact",
       {},
-      { eventID: `contact-${session.id}` },
+      { eventID: eventId },
     );
+    if (debugTracking) logTrackingEvent("Contact", eventId);
   }
 
   persistRegistrationSession(session);
-  return queuedEvent;
 }
 
 function navigateToWhatsApp(groupUrl: string) {
@@ -203,7 +234,8 @@ function getImmediateHandoffScript({
     completedKey: REGISTRATION_COMPLETED_KEY,
     markerTtlMs: REGISTRATION_MARKER_TTL_MS,
     sessionTtlMs: REGISTRATION_SESSION_TTL_MS,
-    pixelFlushGraceMs: PIXEL_FLUSH_GRACE_MS,
+    autoRedirectDelayMs: AUTO_REDIRECT_DELAY_MS,
+    pixelId: META_PIXEL_ID,
   });
   const pixelBootstrap = config.activation.trackingEnabled
     ? getMetaPixelScript()
@@ -247,6 +279,7 @@ function getImmediateHandoffScript({
             session = {
               id: pending.id,
               createdAt: pending.createdAt,
+              debugTracking: pending.debugTracking === true,
               registrationTracked: false,
               contactTracked: false,
             };
@@ -267,6 +300,7 @@ function getImmediateHandoffScript({
               session = {
                 id: completed.id,
                 createdAt: completed.createdAt,
+                debugTracking: completed.debugTracking === true,
                 registrationTracked: completed.registrationTracked === true,
                 contactTracked: completed.contactTracked === true,
               };
@@ -293,30 +327,62 @@ function getImmediateHandoffScript({
         link.removeAttribute("tabindex");
       }
 
+      const debugTracking =
+        new URLSearchParams(window.location.search).get("debug_tracking") ===
+          "1" || session.debugTracking === true;
+      session.debugTracking = debugTracking;
+
+      const logTrackingEvent = (event, eventId) => {
+        console.info("[CEFIN tracking QA]", {
+          event,
+          eventId,
+          pixelId: settings.pixelId,
+          timestamp: new Date().toISOString(),
+        });
+      };
+
+      if (debugTracking && status) {
+        status.textContent =
+          "Modo QA activo. La redirección automática está desactivada.";
+      }
+
       if (settings.trackingEnabled) {
+        const pixelWasInitialized =
+          window.__cefinMetaPixelInitialized === true;
         ${pixelBootstrap}
 
-        let queuedConversionEvent = false;
+        if (
+          debugTracking &&
+          !pixelWasInitialized &&
+          window.__cefinMetaPixelInitialized
+        ) {
+          logTrackingEvent("PageView");
+        }
+
         if (typeof window.fbq === "function") {
           if (!session.registrationTracked) {
-            queuedConversionEvent = true;
+            const eventId = "registration-" + session.id;
             session.registrationTracked = true;
             window.fbq(
               "track",
               "CompleteRegistration",
               {},
-              { eventID: "registration-" + session.id },
+              { eventID: eventId },
             );
+            if (debugTracking) {
+              logTrackingEvent("CompleteRegistration", eventId);
+            }
           }
           if (!session.contactTracked) {
-            queuedConversionEvent = true;
+            const eventId = "contact-" + session.id;
             session.contactTracked = true;
             window.fbq(
               "track",
               "Contact",
               {},
-              { eventID: "contact-" + session.id },
+              { eventID: eventId },
             );
+            if (debugTracking) logTrackingEvent("Contact", eventId);
           }
           try {
             sessionStorage.setItem(
@@ -325,15 +391,12 @@ function getImmediateHandoffScript({
             );
           } catch {}
         }
-
-        settings.redirectDelayMs = queuedConversionEvent &&
-          (typeof window.fbq !== "function" ||
-            typeof window.fbq.callMethod !== "function")
-          ? settings.pixelFlushGraceMs
-          : 0;
       }
 
-      if (!window.__cefinEstrategaFiscalHandoffAttempted) {
+      if (
+        !debugTracking &&
+        !window.__cefinEstrategaFiscalHandoffAttempted
+      ) {
         window.__cefinEstrategaFiscalHandoffAttempted = true;
         window.setTimeout(() => {
           try {
@@ -341,7 +404,7 @@ function getImmediateHandoffScript({
           } catch {
             window.location.href = validGroupUrl;
           }
-        }, settings.redirectDelayMs || 0);
+        }, settings.autoRedirectDelayMs);
       }
     })();
   `;
@@ -373,18 +436,19 @@ export function ConversionClient({
 
     const whatsappLink = document.getElementById(whatsappLinkId);
     enableWhatsAppLink(whatsappLink, safeGroupUrl);
-    const queuedConversionEvent = queueConversionEvents(session);
-    const runtimeFbq = window.fbq as
-      | { callMethod?: (...args: unknown[]) => void }
-      | undefined;
-    const redirectDelayMs =
-      queuedConversionEvent && typeof runtimeFbq?.callMethod !== "function"
-        ? PIXEL_FLUSH_GRACE_MS
-        : 0;
+    const debugTracking = isDebugTrackingEnabled(session);
+    session.debugTracking = debugTracking;
+    if (debugTracking && status) {
+      status.textContent =
+        "Modo QA activo. La redirección automática está desactivada.";
+    }
+    queueConversionEvents(session, debugTracking);
+
+    if (debugTracking) return;
 
     const redirectTimeoutId = window.setTimeout(
       () => navigateToWhatsApp(safeGroupUrl),
-      redirectDelayMs,
+      AUTO_REDIRECT_DELAY_MS,
     );
 
     return () => {

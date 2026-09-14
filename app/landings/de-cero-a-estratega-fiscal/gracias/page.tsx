@@ -53,8 +53,9 @@ export default function EstrategaFiscalThankYouPage() {
                     className="mt-5 text-center text-sm font-bold text-[var(--ef-warm-white)] sm:mt-7 sm:text-left"
                     role="status"
                     aria-live="polite"
+                    suppressHydrationWarning
                   >
-                    Registro completado. Abriendo WhatsApp…
+                    Registro completado. Te estamos llevando al grupo de WhatsApp…
                   </p>
                   <a
                     id={whatsappLinkId}
