@@ -14,7 +14,7 @@ import {
   waitForConstructorasMetaPixel,
 } from "@/lib/constructoras-tracking-session";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/EJzilgabVpn7dsnqAU4brV";
+const WHATSAPP_URL = "https://chat.whatsapp.com/ECyp8zk2ZR24zLCSefDB2g";
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/constructoras/alfredo-constructoras.png"; // <-- cámbialo
 const BACKGROUND_IMAGE_URL =
