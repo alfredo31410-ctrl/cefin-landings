@@ -161,18 +161,8 @@ export default function AcademiaContabilidadPage() {
           <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#1a0321] via-[#1a0321]/88 to-transparent" />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 z-10 lg:hidden">
-          <img
-            src={HERO_IMAGE_URL}
-            alt="Alfredo Cobos"
-            className="absolute bottom-0 left-[-10%] h-[56%] w-auto max-w-none object-contain opacity-70 sm:left-[-4%] sm:h-[62%]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(28,4,36,0.34)_0%,rgba(28,4,36,0.62)_45%,rgba(25,3,32,0.94)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1a0321] via-[#1a0321]/92 to-transparent" />
-        </div>
-
-        <header className="relative z-30 mx-auto flex max-w-7xl items-center justify-between px-6 py-7 lg:px-10">
-          <div className="text-3xl font-black tracking-tight">CEFIN</div>
+        <header className="relative z-30 mx-auto flex max-w-7xl items-center justify-between px-5 py-6 sm:px-8 sm:py-7 lg:px-10">
+          <div className="text-2xl font-black tracking-tight sm:text-3xl">CEFIN</div>
           <button
             onClick={() => setIsModalOpen(true)}
             className="hidden rounded-full bg-white px-6 py-3 text-sm font-black uppercase tracking-tight text-[#25072d] transition hover:scale-[1.02] md:inline-flex"
@@ -181,50 +171,60 @@ export default function AcademiaContabilidadPage() {
           </button>
         </header>
 
-        <section className="relative z-30 mx-auto flex min-h-[calc(100vh-92px)] max-w-7xl items-center px-6 pb-14 pt-4 lg:px-10">
-          <div className="ml-auto w-full max-w-4xl">
-            <div className="flex flex-col items-start gap-5 lg:items-end">
-              <div className="max-w-[520px] rounded-[2rem] border border-white/10 bg-white/12 px-5 py-4 text-left shadow-[0_18px_60px_rgba(255,94,122,0.18)] backdrop-blur sm:px-6 sm:py-5 lg:-mt-4 lg:text-right">
-                <p className="text-xl leading-tight text-white sm:text-3xl">
+        <section className="relative z-30 mx-auto flex min-h-[calc(100svh-76px)] max-w-7xl items-center overflow-hidden px-4 pb-12 pt-3 min-[380px]:px-5 sm:min-h-[calc(100svh-88px)] sm:px-8 sm:pb-14 sm:pt-4 lg:overflow-visible lg:px-10">
+          <div className="pointer-events-none absolute inset-0 z-0 lg:hidden">
+            <img
+              src={HERO_IMAGE_URL}
+              alt=""
+              className="absolute bottom-0 left-1/2 h-[52%] w-auto max-w-none -translate-x-1/2 object-contain opacity-55 sm:h-[60%]"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(28,4,36,0.12)_0%,rgba(28,4,36,0.48)_48%,rgba(25,3,32,0.94)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1a0321] via-[#1a0321]/92 to-transparent" />
+          </div>
+
+          <div className="relative z-10 ml-auto w-full max-w-4xl">
+            <div className="flex flex-col items-stretch gap-4 sm:gap-5 lg:items-end">
+              <div className="w-full max-w-[520px] rounded-[1.5rem] border border-white/10 bg-white/12 px-5 py-5 text-left shadow-[0_18px_60px_rgba(255,94,122,0.18)] backdrop-blur sm:rounded-[2rem] sm:px-6 sm:py-5 lg:-mt-4 lg:text-right">
+                <p className="text-[clamp(1.2rem,5.2vw,1.875rem)] leading-[1.18] text-white">
                   Aprende Contabilidad desde Cero y transforma tu forma de
                   entender los negocios.
                 </p>
-                <p className="mt-3 text-2xl font-black text-white sm:text-4xl">
+                <p className="mt-4 text-[clamp(1.65rem,7vw,2.25rem)] font-black leading-[1.12] text-white sm:mt-3">
                   Martes 22 de septiembre, 11:00 a. m. (CDMX)
                 </p>
               </div>
 
-              <div className="w-full text-center lg:text-right">
-                <p className="text-[2.1rem] font-black uppercase leading-none tracking-[0.28em] text-white/72 sm:text-[2.8rem] lg:text-[3.2rem]">
+              <div className="w-full max-w-full overflow-hidden py-1 text-center lg:overflow-visible lg:text-right">
+                <p className="text-[clamp(1.8rem,8.8vw,3.2rem)] font-black uppercase leading-none tracking-[0.2em] text-white/72 sm:tracking-[0.28em]">
                   Academia
                 </p>
                 <p
-                  className="mt-1 text-[4.4rem] font-black uppercase leading-[0.82] tracking-[-0.08em] text-transparent opacity-95 sm:text-[6.8rem] lg:text-[8.7rem]"
+                  className="mt-1 text-[clamp(3.4rem,18vw,8.7rem)] font-black uppercase leading-[0.82] tracking-[-0.08em] text-transparent opacity-95"
                   style={{ WebkitTextStroke: "2px #ff6a57" }}
                 >
                   BÁSICA
                 </p>
-                <h1 className="mt-[-8px] text-[3.1rem] font-black uppercase leading-[0.9] tracking-[0.02em] text-white sm:text-[5.1rem] lg:text-[6.7rem]">
+                <h1 className="mt-0 whitespace-nowrap text-[clamp(2.1rem,10.2vw,6.7rem)] font-black uppercase leading-[0.94] tracking-[-0.035em] text-white sm:-mt-2 sm:tracking-[0.01em]">
                   Contabilidad
                 </h1>
               </div>
 
               <div className="w-full max-w-[760px] text-center lg:text-right">
-                <p className="text-base font-medium text-white/82 sm:text-xl">
+                <p className="text-sm font-medium text-white/82 min-[380px]:text-base sm:text-xl">
                   Impartida por: Mtro. Alfredo Cobos
                 </p>
-                <p className="mt-5 text-2xl font-black text-white sm:text-4xl">
+                <p className="mt-4 text-[clamp(1.65rem,7vw,2.25rem)] font-black leading-tight text-white sm:mt-5">
                   Acceso 100% en línea
                 </p>
                 <div className="mx-auto mt-3 h-1 w-full max-w-[420px] bg-gradient-to-r from-[#ff5e7a] via-[#d85cff] to-[#8b5cf6] lg:mx-0 lg:ml-auto" />
               </div>
             </div>
 
-            <div className="mt-10 grid max-w-5xl gap-4 sm:grid-cols-3 lg:ml-auto">
+            <div className="mt-8 grid max-w-5xl gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4 lg:ml-auto">
               {bullets.map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-sm font-semibold text-white/82 backdrop-blur"
+                  className="rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-4 text-sm font-semibold leading-relaxed text-white/82 backdrop-blur sm:p-4"
                 >
                   <span className="mr-2 text-[#ff6a57]">•</span>
                   {item}
@@ -232,14 +232,14 @@ export default function AcademiaContabilidadPage() {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-end">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 lg:justify-end">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center justify-center rounded-2xl bg-white px-9 py-5 text-base font-black uppercase tracking-tight text-[#25072d] shadow-[0_18px_50px_rgba(255,255,255,0.18)] transition hover:scale-[1.01] active:scale-[0.98] sm:text-lg"
+                className="inline-flex min-h-16 w-full items-center justify-center rounded-2xl bg-white px-4 py-4 text-center text-sm font-black uppercase leading-tight tracking-tight text-[#25072d] shadow-[0_18px_50px_rgba(255,255,255,0.18)] transition hover:scale-[1.01] active:scale-[0.98] min-[380px]:px-6 min-[380px]:text-base sm:w-auto sm:px-9 sm:py-5 sm:text-lg"
               >
                 Quiero registrarme gratis
               </button>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/65">
+              <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-white/65 sm:text-left sm:text-sm">
                 Cupo limitado
               </p>
             </div>
@@ -247,13 +247,13 @@ export default function AcademiaContabilidadPage() {
         </section>
 
         <section className="relative z-30 border-t border-white/10 bg-black/20">
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+          <div className="mx-auto max-w-7xl px-4 py-12 min-[380px]:px-5 sm:px-8 sm:py-16 lg:px-10">
             <div className="grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <p className="text-sm font-black uppercase tracking-[0.25em] text-[#ff7fa2]">
                   Lo que vas a trabajar
                 </p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+                <h2 className="mt-3 text-[clamp(2rem,9vw,2.25rem)] font-black leading-[1.08] tracking-tight text-white sm:text-4xl">
                   Una clase clara para entender contabilidad sin sentir que todo
                   es demasiado técnico.
                 </h2>
@@ -275,21 +275,21 @@ export default function AcademiaContabilidadPage() {
         </section>
 
         {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-3 backdrop-blur-md sm:p-4">
-            <div className="relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+          <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/85 p-0 backdrop-blur-md sm:items-center sm:p-4">
+            <div className="relative flex max-h-[96dvh] w-full max-w-[520px] flex-col overflow-hidden rounded-t-[1.5rem] border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)] sm:max-h-[92dvh] sm:rounded-[2rem]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
+                className="absolute right-4 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-2xl font-bold text-slate-500 transition hover:text-slate-900 sm:right-5 sm:top-4"
                 aria-label="Cerrar modal"
               >
                 ×
               </button>
 
-              <div className="shrink-0 px-5 pb-4 pt-7 text-center sm:px-8 sm:pb-5 sm:pt-8">
+              <div className="shrink-0 px-5 pb-3 pt-6 text-center sm:px-8 sm:pb-5 sm:pt-8">
                 <p className="text-[11px] font-black uppercase tracking-[0.3em] text-fuchsia-600">
                   Registro gratuito
                 </p>
-                <h3 className="mt-2 text-3xl font-black uppercase tracking-tight text-slate-900">
+                <h3 className="mt-2 pr-8 text-2xl font-black uppercase tracking-tight text-slate-900 sm:pr-0 sm:text-3xl">
                   Academia Contabilidad
                 </h3>
                 <p className="mt-2 text-sm text-slate-500">
@@ -297,8 +297,8 @@ export default function AcademiaContabilidadPage() {
                 </p>
               </div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-5 sm:px-8 sm:pb-8">
-                <div className="min-h-[420px]">
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-8 sm:pb-8">
+                <div className="min-h-[360px] sm:min-h-[420px]">
                   <div className={FORM_CLASS}></div>
                 </div>
               </div>
@@ -326,6 +326,12 @@ export default function AcademiaContabilidadPage() {
           .${FORM_CLASS} ._field-wrapper,
           .${FORM_CLASS} ._button-wrapper {
             margin: 0 0 14px 0 !important;
+          }
+
+          .${FORM_CLASS} ._form-content,
+          .${FORM_CLASS} ._inline-style {
+            width: 100% !important;
+            max-width: 100% !important;
           }
 
           .${FORM_CLASS} p {
@@ -372,6 +378,29 @@ export default function AcademiaContabilidadPage() {
             font-weight: 900 !important;
             text-transform: uppercase !important;
             cursor: pointer !important;
+          }
+
+          @media (max-width: 639px) {
+            .${FORM_CLASS} ._form_element,
+            .${FORM_CLASS} ._field-wrapper,
+            .${FORM_CLASS} ._button-wrapper {
+              margin-bottom: 10px !important;
+            }
+
+            .${FORM_CLASS} input,
+            .${FORM_CLASS} select,
+            .${FORM_CLASS} textarea {
+              min-height: 48px !important;
+              padding: 12px 14px !important;
+              font-size: 16px !important;
+            }
+
+            .${FORM_CLASS} ._submit,
+            .${FORM_CLASS} button[type="submit"] {
+              min-height: 52px !important;
+              padding: 13px 16px !important;
+              font-size: 14px !important;
+            }
           }
         `}</style>
       </main>

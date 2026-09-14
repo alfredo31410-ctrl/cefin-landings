@@ -106,7 +106,7 @@ export default function GraciasAcademiaContabilidadPage() {
         />
       </noscript>
 
-      <main className="relative h-screen overflow-x-hidden overflow-y-auto bg-[#190320] text-white">
+      <main className="relative min-h-[100svh] overflow-x-hidden bg-[#190320] text-white">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(255,99,132,0.24),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(168,85,247,0.24),transparent_24%),linear-gradient(to_bottom,#2a0931,#22072e,#190320)]" />
           <div className="absolute inset-0 opacity-[0.15] [background-image:radial-gradient(rgba(255,255,255,0.65)_1.2px,transparent_1.2px)] [background-size:36px_36px]" />
@@ -132,19 +132,19 @@ export default function GraciasAcademiaContabilidadPage() {
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#190320] via-[#190320]/92 to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12 lg:px-10">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl items-start px-4 py-7 min-[380px]:px-5 sm:items-center sm:px-8 sm:py-10 lg:px-10 lg:py-12">
           <div className="ml-auto w-full max-w-3xl">
             <div className="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.26em] text-emerald-300">
               Registro 80% completado
             </div>
 
-            <h1 className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:text-6xl xl:text-[5.5rem]">
+            <h1 className="mt-4 text-[clamp(2.6rem,13vw,5.5rem)] font-black uppercase leading-[0.9] tracking-[-0.04em] text-white sm:mt-5">
               Falta entrar
               <br />
               al grupo
             </h1>
 
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 min-[380px]:text-lg sm:mt-5 sm:text-xl">
               Tu registro para{" "}
               <span className="font-black text-[#ff8cae]">
                 Academia de Contabilidad Básica
@@ -152,15 +152,15 @@ export default function GraciasAcademiaContabilidadPage() {
               ya quedó casi listo.
             </p>
 
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65 min-[380px]:text-base sm:text-lg">
               Para que tu registro quede totalmente completo, entra ahora al
               grupo de WhatsApp. Ahí recibirás acceso, recordatorios y avisos
               importantes de la clase.
             </p>
 
-            <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur sm:p-6">
+            <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4 backdrop-blur sm:mt-8 sm:rounded-[2rem] sm:p-6">
               <div className="mb-6 rounded-2xl border border-[#25D366]/25 bg-[#25D366]/10 p-4">
-                <div className="flex items-center justify-between gap-4 text-xs font-black uppercase tracking-[0.18em] text-[#6CFF9A]">
+                <div className="flex items-center justify-between gap-3 text-[11px] font-black uppercase tracking-[0.12em] text-[#6CFF9A] min-[380px]:text-xs min-[380px]:tracking-[0.18em]">
                   <span>Registro casi listo</span>
                   <span>80%</span>
                 </div>
@@ -177,7 +177,7 @@ export default function GraciasAcademiaContabilidadPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Fecha
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">
+                  <p className="mt-1 text-lg font-black text-white min-[380px]:text-xl">
                     Martes 22 de septiembre
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function GraciasAcademiaContabilidadPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
                     Hora
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">
+                  <p className="mt-1 text-lg font-black text-white min-[380px]:text-xl">
                     11:00 a. m. (CDMX)
                   </p>
                 </div>
@@ -197,7 +197,7 @@ export default function GraciasAcademiaContabilidadPage() {
                   <a
                     href={WHATSAPP_URL}
                     onClick={handleWhatsAppClick}
-                    className="inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
+                    className="inline-flex min-h-16 w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-4 py-4 text-center text-sm font-black uppercase leading-tight tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] min-[380px]:px-6 min-[380px]:text-base sm:w-auto sm:min-w-[360px] sm:py-5 sm:text-lg"
                   >
                     Entrar al grupo de WhatsApp
                   </a>
@@ -205,7 +205,7 @@ export default function GraciasAcademiaContabilidadPage() {
                   <button
                     type="button"
                     disabled
-                    className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-[1.2rem] bg-slate-500 px-6 py-5 text-center text-base font-black uppercase tracking-tight text-white/75 opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
+                    className="inline-flex min-h-16 w-full cursor-not-allowed items-center justify-center rounded-[1.2rem] bg-slate-500 px-4 py-4 text-center text-sm font-black uppercase leading-tight tracking-tight text-white/75 opacity-70 min-[380px]:px-6 min-[380px]:text-base sm:w-auto sm:min-w-[360px] sm:py-5 sm:text-lg"
                   >
                     {registrationStatus === "checking"
                       ? "Comprobando registro…"
