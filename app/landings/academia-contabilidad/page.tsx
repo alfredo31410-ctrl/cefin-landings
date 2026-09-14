@@ -220,18 +220,6 @@ export default function AcademiaContabilidadPage() {
               </div>
             </div>
 
-            <div className="mt-8 grid max-w-5xl gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4 lg:ml-auto">
-              {bullets.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-4 text-sm font-semibold leading-relaxed text-white/82 backdrop-blur sm:p-4"
-                >
-                  <span className="mr-2 text-[#ff6a57]">•</span>
-                  {item}
-                </div>
-              ))}
-            </div>
-
             <div className="mt-6 flex flex-col gap-3 rounded-[1.5rem] border border-fuchsia-300/25 bg-gradient-to-r from-[#ff5e7a]/12 via-fuchsia-500/12 to-violet-500/12 p-3 shadow-[0_18px_60px_rgba(216,92,255,0.16)] backdrop-blur sm:ml-auto sm:w-fit sm:flex-row sm:items-center sm:gap-4 sm:p-3 lg:justify-end">
               <button
                 onClick={() => setIsModalOpen(true)}
@@ -242,6 +230,18 @@ export default function AcademiaContabilidadPage() {
               <p className="px-2 text-center text-xs font-bold uppercase leading-relaxed tracking-[0.16em] text-white/80 sm:max-w-32 sm:px-0 sm:text-left sm:text-sm">
                 Formulario rápido · Cupo limitado
               </p>
+            </div>
+
+            <div className="mt-8 grid max-w-5xl gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4 lg:ml-auto">
+              {bullets.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-4 text-sm font-semibold leading-relaxed text-white/82 backdrop-blur sm:p-4"
+                >
+                  <span className="mr-2 text-[#ff6a57]">•</span>
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </section>
