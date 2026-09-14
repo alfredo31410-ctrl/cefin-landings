@@ -29,13 +29,15 @@ export default function GraciasAcademiaContabilidadPage() {
     document.title = "Registro completado | Academia Contabilidad | CEFIN";
     const session = getAcademiaRegistrationSession();
     sessionRef.current = session;
-    const statusTimeoutId = window.setTimeout(
-      () => setRegistrationStatus(session ? "valid" : "invalid"),
-      0,
-    );
+    let isActive = true;
+    queueMicrotask(() => {
+      if (isActive) setRegistrationStatus(session ? "valid" : "invalid");
+    });
 
     if (!session) {
-      return () => window.clearTimeout(statusTimeoutId);
+      return () => {
+        isActive = false;
+      };
     }
 
     if (!session.registrationTracked) {
@@ -61,7 +63,9 @@ export default function GraciasAcademiaContabilidadPage() {
       }
     }
 
-    return () => window.clearTimeout(statusTimeoutId);
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   const handleWhatsAppClick = () => {

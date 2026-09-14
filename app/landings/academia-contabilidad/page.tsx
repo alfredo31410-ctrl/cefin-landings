@@ -100,17 +100,17 @@ export default function AcademiaContabilidadPage() {
       syncAcademiaAttributionFields(boundForm);
       clearAcademiaRegistrationProof();
 
-      proofTimeoutId = window.setTimeout(() => {
-        if (
-          !boundForm ||
-          !boundForm.checkValidity() ||
-          boundForm.querySelector("._error, ._form_error")
-        ) {
-          clearAcademiaRegistrationProof();
-          return;
-        }
+      if (!boundForm.checkValidity()) return;
 
-        createAcademiaRegistrationProof();
+      createAcademiaRegistrationProof();
+
+      if (proofTimeoutId !== undefined) {
+        window.clearTimeout(proofTimeoutId);
+      }
+      proofTimeoutId = window.setTimeout(() => {
+        if (!boundForm || boundForm.querySelector("._error, ._form_error")) {
+          clearAcademiaRegistrationProof();
+        }
       }, 0);
     };
 
@@ -126,11 +126,11 @@ export default function AcademiaContabilidadPage() {
         return;
       }
 
-      boundForm?.removeEventListener("submit", handleSubmit);
+      boundForm?.removeEventListener("submit", handleSubmit, true);
       boundForm = form;
       syncAcademiaAttributionFields(form);
       schedulePhoneInputSpacing(form);
-      form.addEventListener("submit", handleSubmit);
+      form.addEventListener("submit", handleSubmit, true);
     };
 
     const observer = new MutationObserver(bindForm);
@@ -146,7 +146,7 @@ export default function AcademiaContabilidadPage() {
 
     return () => {
       observer.disconnect();
-      boundForm?.removeEventListener("submit", handleSubmit);
+      boundForm?.removeEventListener("submit", handleSubmit, true);
       if (proofTimeoutId !== undefined) window.clearTimeout(proofTimeoutId);
       phoneSpacingTimeoutIds.forEach((timeoutId) =>
         window.clearTimeout(timeoutId),
