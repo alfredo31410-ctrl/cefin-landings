@@ -34,7 +34,7 @@ declare global {
 const LIVE_PAGE_DATA = {
   title: "Academia de Contabilidad Basica",
   subtitle:
-    "Cada jueves tienes una clase guiada para recuperar seguridad, entender la contabilidad desde la base y volver a ejercer con claridad.",
+    "Este martes 22 de septiembre tienes una clase guiada para recuperar seguridad, entender la contabilidad desde la base y volver a ejercer con claridad.",
   pageBackgroundImage:
     "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/academia-live-bg.png",
   heroImage:
@@ -52,9 +52,10 @@ const LIVE_PAGE_DATA = {
   priceCurrency: "MXN",
   productValue: 3387,
   presenter: "Mtro. Alfredo Cobos",
-  broadcastDayLabel: "Jueves",
-  broadcastTimeLabel: "11:00 AM (CDMX)",
-  liveNoticeTitle: "Tu clase especial abre todos los jueves a las 11:00 AM",
+  broadcastDayLabel: "Martes 22 de septiembre",
+  broadcastTimeLabel: "11:00 a. m. (CDMX)",
+  liveNoticeTitle:
+    "Tu clase especial abre el martes 22 de septiembre a las 11:00 a. m.",
   liveNoticeBody:
     "En ese horario podras entrar, seguir la sesion completa y aprovechar la invitacion especial que aparece al final de la clase.",
   enrollmentTitle: "Entra hoy a la Academia de Contabilidad Basica",
@@ -104,14 +105,16 @@ const YOUTUBE_EMBED_URL =
   "https://www.youtube.com/embed/hQOJB0TQr-4?autoplay=1&rel=0";
 
 /**
- * REGLAS DEL EVENTO SEMANAL
- * - solo los jueves
- * - 11:00 AM
+ * REGLAS DEL EVENTO
+ * - martes 22 de septiembre de 2026
+ * - 11:00 a. m.
  * - hora CDMX
  * - con una ventana total configurable
  */
 const LIVE_TIMEZONE = "America/Mexico_City";
-const LIVE_WEEKDAY = "Thu";
+const LIVE_EVENT_YEAR = 2026;
+const LIVE_EVENT_MONTH = 9;
+const LIVE_EVENT_DAY = 22;
 const LIVE_START_HOUR = 11;
 const LIVE_START_MINUTE = 0;
 const LIVE_DURATION_MINUTES = 84;
@@ -330,6 +333,9 @@ function getLiveClockState(): LiveClockState {
   const formatter = new Intl.DateTimeFormat("en-US", {
     timeZone: LIVE_TIMEZONE,
     weekday: "short",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -339,6 +345,15 @@ function getLiveClockState(): LiveClockState {
   const parts = formatter.formatToParts(now);
   const currentDay =
     parts.find((part) => part.type === "weekday")?.value ?? "Mon";
+  const currentYear = Number(
+    parts.find((part) => part.type === "year")?.value ?? "0",
+  );
+  const currentMonth = Number(
+    parts.find((part) => part.type === "month")?.value ?? "0",
+  );
+  const currentDate = Number(
+    parts.find((part) => part.type === "day")?.value ?? "0",
+  );
   const currentHour = Number(
     parts.find((part) => part.type === "hour")?.value ?? "0",
   );
@@ -349,7 +364,10 @@ function getLiveClockState(): LiveClockState {
     parts.find((part) => part.type === "second")?.value ?? "0",
   );
 
-  const isLiveDay = currentDay === LIVE_WEEKDAY;
+  const isLiveDay =
+    currentYear === LIVE_EVENT_YEAR &&
+    currentMonth === LIVE_EVENT_MONTH &&
+    currentDate === LIVE_EVENT_DAY;
   const currentTotalMinutes = currentHour * 60 + currentMinute;
   const liveStartTotalMinutes = LIVE_START_HOUR * 60 + LIVE_START_MINUTE;
   const liveEndTotalMinutes = liveStartTotalMinutes + LIVE_DURATION_MINUTES;

@@ -1,33 +1,90 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
+  initializeMetaPixel,
   META_CURRENCY,
-  trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  getAcademiaEventId,
+  getAcademiaRegistrationSession,
+  persistAcademiaRegistrationSession,
+  type AcademiaRegistrationSession,
+} from "@/lib/academia-contabilidad-tracking-session";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/JeFF9VaNQoh1snLDN8ksx4";
-const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo-academia.png";
+const HERO_IMAGE_URL = "/academia-contabilidad/alfredo.png";
 
 export default function GraciasAcademiaContabilidadPage() {
+  const sessionRef = useRef<AcademiaRegistrationSession | null>(null);
+  const [registrationStatus, setRegistrationStatus] = useState<
+    "checking" | "valid" | "invalid"
+  >("checking");
+
   useEffect(() => {
     document.title = "Registro completado | Academia Contabilidad | CEFIN";
+    const session = getAcademiaRegistrationSession();
+    sessionRef.current = session;
+    const statusTimeoutId = window.setTimeout(
+      () => setRegistrationStatus(session ? "valid" : "invalid"),
+      0,
+    );
 
-    trackMetaEvent("CompleteRegistration", {
-      content_name: "Academia Contabilidad | Registro completado",
-      content_category: "Clase gratuita",
-      status: "completed",
-      value: 0,
-      currency: META_CURRENCY,
-    });
+    if (!session) {
+      return () => window.clearTimeout(statusTimeoutId);
+    }
+
+    if (!session.registrationTracked) {
+      initializeMetaPixel();
+      if (typeof window.fbq === "function") {
+        session.registrationTracked = true;
+        persistAcademiaRegistrationSession(session);
+        window.fbq(
+          "track",
+          "CompleteRegistration",
+          {
+            content_name: "Academia Contabilidad | Registro completado",
+            content_category: "Clase gratuita",
+            landing_slug: "academia-contabilidad",
+            event_date: "2026-09-22",
+            event_time: "11:00 a. m. CDMX",
+            status: "completed",
+            value: 0,
+            currency: META_CURRENCY,
+          },
+          { eventID: getAcademiaEventId("registration", session.id) },
+        );
+      }
+    }
+
+    return () => window.clearTimeout(statusTimeoutId);
   }, []);
 
   const handleWhatsAppClick = () => {
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+    const session = sessionRef.current;
+    if (!session || session.contactTracked) return;
+
+    initializeMetaPixel();
+    if (typeof window.fbq !== "function") return;
+
+    session.contactTracked = true;
+    persistAcademiaRegistrationSession(session);
+    window.fbq(
+      "track",
+      "Contact",
+      {
+        content_name: "Academia Contabilidad | Grupo de WhatsApp",
+        content_category: "Grupo de WhatsApp",
+        landing_slug: "academia-contabilidad",
+        source: "thank_you_page",
+        destination: "whatsapp_group",
+        status: "clicked",
+      },
+      { eventID: getAcademiaEventId("contact", session.id) },
+    );
   };
 
   return (
@@ -117,9 +174,11 @@ export default function GraciasAcademiaContabilidadPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/45">
-                    Día
+                    Fecha
                   </p>
-                  <p className="mt-1 text-xl font-black text-white">Jueves</p>
+                  <p className="mt-1 text-xl font-black text-white">
+                    Martes 22 de septiembre
+                  </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
@@ -127,21 +186,36 @@ export default function GraciasAcademiaContabilidadPage() {
                     Hora
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
-                    11:00 AM (CDMX)
+                    11:00 a. m. (CDMX)
                   </p>
                 </div>
               </div>
 
               <div className="mt-6">
-                <button
-                  onClick={handleWhatsAppClick}
-                  className="inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
-                >
-                  Entrar al grupo de WhatsApp
-                </button>
+                {registrationStatus === "valid" ? (
+                  <a
+                    href={WHATSAPP_URL}
+                    onClick={handleWhatsAppClick}
+                    className="inline-flex w-full items-center justify-center rounded-[1.2rem] bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
+                  >
+                    Entrar al grupo de WhatsApp
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-[1.2rem] bg-slate-500 px-6 py-5 text-center text-base font-black uppercase tracking-tight text-white/75 opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
+                  >
+                    {registrationStatus === "checking"
+                      ? "Comprobando registro…"
+                      : "Registro no comprobado"}
+                  </button>
+                )}
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
-                  Sin este paso podrías perder el acceso y los recordatorios.
+                  {registrationStatus === "invalid"
+                    ? "Vuelve a la landing y completa el formulario para acceder al grupo."
+                    : "Sin este paso podrías perder el acceso y los recordatorios."}
                 </p>
               </div>
             </div>

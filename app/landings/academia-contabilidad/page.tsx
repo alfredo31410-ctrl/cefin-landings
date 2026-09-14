@@ -7,11 +7,23 @@ import {
   getMetaPixelScript,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  captureAcademiaAttribution,
+  clearAcademiaRegistrationProof,
+  createAcademiaRegistrationProof,
+  syncAcademiaAttributionFields,
+} from "@/lib/academia-contabilidad-tracking-session";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 191;
+const ACTIVE_CAMPAIGN_FORM_ID = 347;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
-const HERO_IMAGE_URL =
-  "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo-academia.png";
+const HERO_IMAGE_URL = "/academia-contabilidad/alfredo.png";
+const WEBINAR_EVENT = {
+  content_name: "Academia de Contabilidad Básica",
+  content_category: "Clase gratuita",
+  landing_slug: "academia-contabilidad",
+  event_date: "2026-09-22",
+  event_time: "11:00 a. m. CDMX",
+} as const;
 
 const bullets = [
   "Aprende contabilidad desde cero con enfoque claro y práctico.",
@@ -31,17 +43,20 @@ export default function AcademiaContabilidadPage() {
 
   useEffect(() => {
     document.title = "Academia de Contabilidad Básica | CEFIN";
+    captureAcademiaAttribution();
 
     trackMetaEvent("ViewContent", {
-      content_name: "Academia de Contabilidad Básica",
-      content_category: "Clase gratuita",
+      ...WEBINAR_EVENT,
+      source: "landing_page",
     });
   }, []);
 
   useEffect(() => {
     if (!isModalOpen) return;
 
-    const oldScript = document.getElementById("ac-script-loader");
+    const oldScript = document.getElementById(
+      "activecampaign-academia-contabilidad-form-347",
+    );
     if (oldScript) oldScript.remove();
 
     const existingFormNode = document.querySelector(`.${FORM_CLASS}`);
@@ -49,13 +64,62 @@ export default function AcademiaContabilidadPage() {
       existingFormNode.innerHTML = "";
     }
 
+    let boundForm: HTMLFormElement | null = null;
+    let proofTimeoutId: number | undefined;
+
+    const handleSubmit = () => {
+      if (!boundForm) return;
+      syncAcademiaAttributionFields(boundForm);
+      clearAcademiaRegistrationProof();
+
+      proofTimeoutId = window.setTimeout(() => {
+        if (
+          !boundForm ||
+          !boundForm.checkValidity() ||
+          boundForm.querySelector("._error, ._form_error")
+        ) {
+          clearAcademiaRegistrationProof();
+          return;
+        }
+
+        createAcademiaRegistrationProof();
+      }, 0);
+    };
+
+    const bindForm = () => {
+      const form = document.querySelector<HTMLFormElement>(
+        `.${FORM_CLASS} form`,
+      );
+      if (!form || form === boundForm) {
+        if (boundForm?.querySelector("._error, ._form_error")) {
+          clearAcademiaRegistrationProof();
+        }
+        return;
+      }
+
+      boundForm?.removeEventListener("submit", handleSubmit);
+      boundForm = form;
+      syncAcademiaAttributionFields(form);
+      form.addEventListener("submit", handleSubmit);
+    };
+
+    const observer = new MutationObserver(bindForm);
+    observer.observe(document.body, { childList: true, subtree: true });
+
     const script = document.createElement("script");
-    script.id = "ac-script-loader";
+    script.id = "activecampaign-academia-contabilidad-form-347";
     script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
     script.type = "text/javascript";
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
+
+    return () => {
+      observer.disconnect();
+      boundForm?.removeEventListener("submit", handleSubmit);
+      if (proofTimeoutId !== undefined) window.clearTimeout(proofTimeoutId);
+      script.remove();
+    };
   }, [isModalOpen]);
 
   return (
@@ -125,7 +189,7 @@ export default function AcademiaContabilidadPage() {
                   entender los negocios.
                 </p>
                 <p className="mt-3 text-2xl font-black text-white sm:text-4xl">
-                  Jueves, 11:00 AM (CDMX)
+                  Martes 22 de septiembre, 11:00 a. m. (CDMX)
                 </p>
               </div>
 
