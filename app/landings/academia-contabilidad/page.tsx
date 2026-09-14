@@ -16,7 +16,8 @@ import {
 
 const ACTIVE_CAMPAIGN_FORM_ID = 347;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
-const HERO_IMAGE_URL = "/academia-contabilidad/alfredo.png";
+const HERO_IMAGE_URL =
+  "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo.png";
 const WEBINAR_EVENT = {
   content_name: "Academia de Contabilidad Básica",
   content_category: "Clase gratuita",
