@@ -68,6 +68,16 @@ export default function AcademiaContabilidadPage() {
     let boundForm: HTMLFormElement | null = null;
     let proofTimeoutId: number | undefined;
 
+    const fixPhoneInputSpacing = (form: HTMLFormElement) => {
+      const phoneInput = form.querySelector<HTMLInputElement>(
+        'input[name="phone"]',
+      );
+      if (!phoneInput) return;
+
+      phoneInput.style.setProperty("padding-left", "116px", "important");
+      phoneInput.style.setProperty("padding-right", "15px", "important");
+    };
+
     const handleSubmit = () => {
       if (!boundForm) return;
       syncAcademiaAttributionFields(boundForm);
@@ -92,6 +102,7 @@ export default function AcademiaContabilidadPage() {
         `.${FORM_CLASS} form`,
       );
       if (!form || form === boundForm) {
+        if (form) fixPhoneInputSpacing(form);
         if (boundForm?.querySelector("._error, ._form_error")) {
           clearAcademiaRegistrationProof();
         }
@@ -101,6 +112,7 @@ export default function AcademiaContabilidadPage() {
       boundForm?.removeEventListener("submit", handleSubmit);
       boundForm = form;
       syncAcademiaAttributionFields(form);
+      fixPhoneInputSpacing(form);
       form.addEventListener("submit", handleSubmit);
     };
 
@@ -538,7 +550,7 @@ export default function AcademiaContabilidadPage() {
             :is(#cefin-academia-form, form[id^="_form_"])
             .iti
             input {
-            padding-left: 92px !important;
+            padding-left: 116px !important;
           }
 
           .${FORM_CLASS}.${FORM_CLASS}
@@ -642,7 +654,7 @@ export default function AcademiaContabilidadPage() {
               :is(#cefin-academia-form, form[id^="_form_"])
               .iti
               input {
-              padding-left: 88px !important;
+              padding-left: 112px !important;
             }
 
             .${FORM_CLASS}.${FORM_CLASS}
