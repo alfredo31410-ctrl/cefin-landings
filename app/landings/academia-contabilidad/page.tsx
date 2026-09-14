@@ -67,6 +67,7 @@ export default function AcademiaContabilidadPage() {
 
     let boundForm: HTMLFormElement | null = null;
     let proofTimeoutId: number | undefined;
+    const phoneSpacingTimeoutIds: number[] = [];
 
     const fixPhoneInputSpacing = (form: HTMLFormElement) => {
       const phoneInput = form.querySelector<HTMLInputElement>(
@@ -74,8 +75,27 @@ export default function AcademiaContabilidadPage() {
       );
       if (!phoneInput) return;
 
-      phoneInput.style.setProperty("padding-left", "116px", "important");
+      const countrySelector = form.querySelector<HTMLElement>(
+        ".iti__selected-country",
+      );
+      const selectorWidth = countrySelector?.getBoundingClientRect().width ?? 64;
+      const leftPadding = Math.max(88, Math.ceil(selectorWidth) + 18);
+
+      phoneInput.style.setProperty(
+        "padding-left",
+        `${leftPadding}px`,
+        "important",
+      );
       phoneInput.style.setProperty("padding-right", "15px", "important");
+    };
+
+    const schedulePhoneInputSpacing = (form: HTMLFormElement) => {
+      fixPhoneInputSpacing(form);
+      [250, 1000].forEach((delay) => {
+        phoneSpacingTimeoutIds.push(
+          window.setTimeout(() => fixPhoneInputSpacing(form), delay),
+        );
+      });
     };
 
     const handleSubmit = () => {
@@ -112,7 +132,7 @@ export default function AcademiaContabilidadPage() {
       boundForm?.removeEventListener("submit", handleSubmit);
       boundForm = form;
       syncAcademiaAttributionFields(form);
-      fixPhoneInputSpacing(form);
+      schedulePhoneInputSpacing(form);
       form.addEventListener("submit", handleSubmit);
     };
 
@@ -131,6 +151,9 @@ export default function AcademiaContabilidadPage() {
       observer.disconnect();
       boundForm?.removeEventListener("submit", handleSubmit);
       if (proofTimeoutId !== undefined) window.clearTimeout(proofTimeoutId);
+      phoneSpacingTimeoutIds.forEach((timeoutId) =>
+        window.clearTimeout(timeoutId),
+      );
       script.remove();
     };
   }, [isModalOpen]);
@@ -550,7 +573,7 @@ export default function AcademiaContabilidadPage() {
             :is(#cefin-academia-form, form[id^="_form_"])
             .iti
             input {
-            padding-left: 116px !important;
+            padding-left: 88px !important;
           }
 
           .${FORM_CLASS}.${FORM_CLASS}
@@ -560,6 +583,27 @@ export default function AcademiaContabilidadPage() {
             border-right: 1px solid #e2e8f0 !important;
             border-radius: 14px 0 0 14px !important;
             background: #f8fafc !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__selected-country-primary
+            .iti__flag {
+            display: none !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__selected-country-primary {
+            padding: 0 6px !important;
+          }
+
+          .${FORM_CLASS}.${FORM_CLASS}
+            :is(#cefin-academia-form, form[id^="_form_"])
+            .iti__selected-dial-code {
+            margin-left: 0 !important;
+            color: #334155 !important;
+            font-weight: 700 !important;
           }
 
           .${FORM_CLASS}.${FORM_CLASS}
@@ -654,7 +698,7 @@ export default function AcademiaContabilidadPage() {
               :is(#cefin-academia-form, form[id^="_form_"])
               .iti
               input {
-              padding-left: 112px !important;
+              padding-left: 88px !important;
             }
 
             .${FORM_CLASS}.${FORM_CLASS}
