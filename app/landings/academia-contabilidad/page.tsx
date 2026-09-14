@@ -176,9 +176,9 @@ export default function AcademiaContabilidadPage() {
             <img
               src={HERO_IMAGE_URL}
               alt=""
-              className="absolute bottom-0 left-1/2 h-[52%] w-auto max-w-none -translate-x-1/2 object-contain opacity-55 sm:h-[60%]"
+              className="absolute bottom-[16%] left-1/2 h-[55%] w-auto max-w-none -translate-x-1/2 object-contain opacity-70 drop-shadow-[0_20px_45px_rgba(0,0,0,0.24)] min-[480px]:bottom-[14%] sm:bottom-[10%] sm:h-[62%] md:bottom-[8%] md:h-[66%]"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(28,4,36,0.12)_0%,rgba(28,4,36,0.48)_48%,rgba(25,3,32,0.94)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(28,4,36,0.08)_0%,rgba(28,4,36,0.3)_48%,rgba(25,3,32,0.86)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1a0321] via-[#1a0321]/92 to-transparent" />
           </div>
 
