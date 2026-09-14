@@ -232,15 +232,15 @@ export default function AcademiaContabilidadPage() {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 lg:justify-end">
+            <div className="mt-6 flex flex-col gap-3 rounded-[1.5rem] border border-fuchsia-300/25 bg-gradient-to-r from-[#ff5e7a]/12 via-fuchsia-500/12 to-violet-500/12 p-3 shadow-[0_18px_60px_rgba(216,92,255,0.16)] backdrop-blur sm:ml-auto sm:w-fit sm:flex-row sm:items-center sm:gap-4 sm:p-3 lg:justify-end">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex min-h-16 w-full items-center justify-center rounded-2xl bg-white px-4 py-4 text-center text-sm font-black uppercase leading-tight tracking-tight text-[#25072d] shadow-[0_18px_50px_rgba(255,255,255,0.18)] transition hover:scale-[1.01] active:scale-[0.98] min-[380px]:px-6 min-[380px]:text-base sm:w-auto sm:px-9 sm:py-5 sm:text-lg"
+                className="inline-flex min-h-16 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#ff5e7a] via-[#d85cff] to-[#8b5cf6] px-4 py-4 text-center text-sm font-black uppercase leading-tight tracking-tight text-white shadow-[0_18px_55px_rgba(216,92,255,0.38)] ring-2 ring-white/25 transition hover:scale-[1.01] hover:brightness-110 active:scale-[0.98] min-[380px]:px-6 min-[380px]:text-base sm:w-auto sm:px-9 sm:py-5 sm:text-lg"
               >
                 Quiero registrarme gratis
               </button>
-              <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-white/65 sm:text-left sm:text-sm">
-                Cupo limitado
+              <p className="px-2 text-center text-xs font-bold uppercase leading-relaxed tracking-[0.16em] text-white/80 sm:max-w-32 sm:px-0 sm:text-left sm:text-sm">
+                Formulario rápido · Cupo limitado
               </p>
             </div>
           </div>
@@ -276,7 +276,8 @@ export default function AcademiaContabilidadPage() {
 
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/85 p-0 backdrop-blur-md sm:items-center sm:p-4">
-            <div className="relative flex max-h-[96dvh] w-full max-w-[520px] flex-col overflow-hidden rounded-t-[1.5rem] border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)] sm:max-h-[92dvh] sm:rounded-[2rem]">
+            <div className="relative flex max-h-[96dvh] w-full max-w-[540px] flex-col overflow-hidden rounded-t-[1.5rem] border border-fuchsia-300/60 bg-white shadow-[0_30px_110px_rgba(216,92,255,0.38)] sm:max-h-[92dvh] sm:rounded-[2rem] sm:border-2">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#ff5e7a] via-[#d85cff] to-[#8b5cf6]" />
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="absolute right-4 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-2xl font-bold text-slate-500 transition hover:text-slate-900 sm:right-5 sm:top-4"
@@ -285,20 +286,20 @@ export default function AcademiaContabilidadPage() {
                 ×
               </button>
 
-              <div className="shrink-0 px-5 pb-3 pt-6 text-center sm:px-8 sm:pb-5 sm:pt-8">
-                <p className="text-[11px] font-black uppercase tracking-[0.3em] text-fuchsia-600">
-                  Registro gratuito
+              <div className="shrink-0 bg-gradient-to-b from-fuchsia-50 via-white to-white px-5 pb-4 pt-6 text-center sm:px-8 sm:pb-5 sm:pt-8">
+                <p className="inline-flex rounded-full border border-fuchsia-200 bg-fuchsia-100 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-fuchsia-700">
+                  Registro gratuito · 1 minuto
                 </p>
                 <h3 className="mt-2 pr-8 text-2xl font-black uppercase tracking-tight text-slate-900 sm:pr-0 sm:text-3xl">
                   Academia Contabilidad
                 </h3>
-                <p className="mt-2 text-sm text-slate-500">
-                  Completa tus datos para asegurar tu lugar.
+                <p className="mx-auto mt-2 max-w-sm text-sm font-medium text-slate-600">
+                  Completa tus datos y asegura tu acceso a la clase gratuita.
                 </p>
               </div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-8 sm:pb-8">
-                <div className="min-h-[360px] sm:min-h-[420px]">
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-slate-50 px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 sm:px-7 sm:pb-7 sm:pt-4">
+                <div className="min-h-[360px] rounded-[1.25rem] border border-fuchsia-100 bg-white p-3 shadow-[0_12px_40px_rgba(88,28,135,0.10)] sm:min-h-[420px] sm:p-5">
                   <div className={FORM_CLASS}></div>
                 </div>
               </div>
@@ -342,7 +343,7 @@ export default function AcademiaContabilidadPage() {
           }
 
           .${FORM_CLASS} ._form-label {
-            color: #334155 !important;
+            color: #1e293b !important;
             font-size: 13px !important;
             font-weight: 800 !important;
             margin-bottom: 6px !important;
@@ -353,12 +354,30 @@ export default function AcademiaContabilidadPage() {
           .${FORM_CLASS} textarea {
             width: 100% !important;
             border-radius: 15px !important;
-            border: 1px solid #e5e7eb !important;
-            background: #f8fafc !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: #ffffff !important;
             padding: 14px 16px !important;
             color: #0f172a !important;
             font-size: 15px !important;
             outline: none !important;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+            transition:
+              border-color 160ms ease,
+              box-shadow 160ms ease !important;
+          }
+
+          .${FORM_CLASS} input:focus,
+          .${FORM_CLASS} select:focus,
+          .${FORM_CLASS} textarea:focus {
+            border-color: #d85cff !important;
+            box-shadow:
+              0 0 0 4px rgba(216, 92, 255, 0.14),
+              0 4px 14px rgba(88, 28, 135, 0.09) !important;
+          }
+
+          .${FORM_CLASS} input::placeholder,
+          .${FORM_CLASS} textarea::placeholder {
+            color: #94a3b8 !important;
           }
 
           .${FORM_CLASS} ._submit,
@@ -378,6 +397,21 @@ export default function AcademiaContabilidadPage() {
             font-weight: 900 !important;
             text-transform: uppercase !important;
             cursor: pointer !important;
+            box-shadow: 0 14px 34px rgba(168, 85, 247, 0.34) !important;
+            transition:
+              transform 160ms ease,
+              filter 160ms ease !important;
+          }
+
+          .${FORM_CLASS} ._submit:hover,
+          .${FORM_CLASS} button[type="submit"]:hover {
+            filter: brightness(1.08) !important;
+            transform: translateY(-1px) !important;
+          }
+
+          .${FORM_CLASS} ._submit:active,
+          .${FORM_CLASS} button[type="submit"]:active {
+            transform: translateY(1px) !important;
           }
 
           @media (max-width: 639px) {
