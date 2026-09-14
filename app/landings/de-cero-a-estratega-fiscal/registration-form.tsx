@@ -9,8 +9,6 @@ const REGISTRATION_PENDING_KEY =
 
 export default function RegistrationForm() {
   useEffect(() => {
-    if (!config.activation.trackingEnabled) return;
-
     const root = document.getElementById("registro");
     if (!root) return;
 
@@ -33,7 +31,7 @@ export default function RegistrationForm() {
           JSON.stringify({ id, createdAt: Date.now() }),
         );
       } catch {
-        // El tracking nunca debe interferir con el formulario oficial.
+        // El comprobante local nunca debe interferir con el formulario oficial.
       }
     };
 

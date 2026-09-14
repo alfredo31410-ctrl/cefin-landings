@@ -2,7 +2,10 @@
 
 import Script from "next/script";
 import { useEffect, useRef } from "react";
-import { getMetaPixelScript } from "@/lib/meta-pixel";
+import {
+  getMetaPixelScript,
+  initializeMetaPixel,
+} from "@/lib/meta-pixel";
 import { landingConfig as config } from "../config";
 
 const REGISTRATION_PENDING_KEY =
@@ -11,9 +14,7 @@ const REGISTRATION_COMPLETED_KEY =
   "cefin_estratega_fiscal_registration_completed";
 const REGISTRATION_MARKER_TTL_MS = 5 * 60 * 1000;
 const REGISTRATION_SESSION_TTL_MS = 24 * 60 * 60 * 1000;
-const PIXEL_RETRY_INTERVAL_MS = 50;
-const PIXEL_MAX_ATTEMPTS = 6;
-const TRACKING_SEND_DELAY_MS = 100;
+const PIXEL_FLUSH_GRACE_MS = 50;
 
 type RegistrationMarker = {
   id: string;
@@ -24,6 +25,12 @@ type RegistrationSession = RegistrationMarker & {
   registrationTracked: boolean;
   contactTracked: boolean;
 };
+
+declare global {
+  interface Window {
+    __cefinEstrategaFiscalHandoffAttempted?: boolean;
+  }
+}
 
 function isValidRegistrationMarker(
   value: unknown,
@@ -115,128 +122,294 @@ function getValidWhatsAppGroupUrl(value: string | null) {
   }
 }
 
-export function ConversionClient({
+function enableWhatsAppLink(link: HTMLElement | null, groupUrl: string) {
+  if (!(link instanceof HTMLAnchorElement)) return;
+
+  link.href = groupUrl;
+  link.removeAttribute("aria-disabled");
+  link.removeAttribute("tabindex");
+}
+
+function showInvalidRegistration(status: HTMLElement | null) {
+  if (!status) return;
+  status.textContent =
+    "No pudimos comprobar un registro reciente. Vuelve al formulario para registrarte.";
+}
+
+function queueConversionEvents(session: RegistrationSession) {
+  if (!config.activation.trackingEnabled) return false;
+
+  initializeMetaPixel();
+  if (typeof window.fbq !== "function") return false;
+
+  let queuedEvent = false;
+
+  if (!session.registrationTracked) {
+    queuedEvent = true;
+    session.registrationTracked = true;
+    window.fbq(
+      "track",
+      "CompleteRegistration",
+      {},
+      { eventID: `registration-${session.id}` },
+    );
+  }
+
+  if (!session.contactTracked) {
+    queuedEvent = true;
+    session.contactTracked = true;
+    window.fbq(
+      "track",
+      "Contact",
+      {},
+      { eventID: `contact-${session.id}` },
+    );
+  }
+
+  persistRegistrationSession(session);
+  return queuedEvent;
+}
+
+function navigateToWhatsApp(groupUrl: string) {
+  if (window.__cefinEstrategaFiscalHandoffAttempted) return;
+  window.__cefinEstrategaFiscalHandoffAttempted = true;
+
+  try {
+    window.location.replace(groupUrl);
+  } catch {
+    window.location.href = groupUrl;
+  }
+}
+
+function serializeForInlineScript(value: unknown) {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
+function getImmediateHandoffScript({
   groupUrl,
   whatsappLinkId,
+  statusId,
 }: {
   groupUrl: string | null;
   whatsappLinkId: string;
+  statusId: string;
+}) {
+  const serializedConfig = serializeForInlineScript({
+    groupUrl,
+    whatsappLinkId,
+    statusId,
+    trackingEnabled: config.activation.trackingEnabled,
+    pendingKey: REGISTRATION_PENDING_KEY,
+    completedKey: REGISTRATION_COMPLETED_KEY,
+    markerTtlMs: REGISTRATION_MARKER_TTL_MS,
+    sessionTtlMs: REGISTRATION_SESSION_TTL_MS,
+    pixelFlushGraceMs: PIXEL_FLUSH_GRACE_MS,
+  });
+  const pixelBootstrap = config.activation.trackingEnabled
+    ? getMetaPixelScript()
+    : "";
+
+  return `
+    (() => {
+      const settings = ${serializedConfig};
+      const status = document.getElementById(settings.statusId);
+      const link = document.getElementById(settings.whatsappLinkId);
+
+      const validMarker = (value, ttlMs) => {
+        if (!value || typeof value !== "object") return false;
+        const createdAt = Number(value.createdAt);
+        const now = Date.now();
+        return typeof value.id === "string" && value.id.length > 0 &&
+          Number.isFinite(createdAt) && createdAt <= now &&
+          now - createdAt <= ttlMs;
+      };
+
+      const validGroupUrl = (() => {
+        try {
+          const url = new URL(settings.groupUrl);
+          return url.protocol === "https:" &&
+            url.hostname === "chat.whatsapp.com" && url.pathname !== "/"
+            ? url.toString()
+            : null;
+        } catch {
+          return null;
+        }
+      })();
+
+      let session = null;
+      try {
+        const pendingSerialized = sessionStorage.getItem(settings.pendingKey);
+        sessionStorage.removeItem(settings.pendingKey);
+
+        if (pendingSerialized) {
+          const pending = JSON.parse(pendingSerialized);
+          if (validMarker(pending, settings.markerTtlMs)) {
+            session = {
+              id: pending.id,
+              createdAt: pending.createdAt,
+              registrationTracked: false,
+              contactTracked: false,
+            };
+            sessionStorage.setItem(
+              settings.completedKey,
+              JSON.stringify(session),
+            );
+          }
+        }
+
+        if (!session) {
+          const completedSerialized = sessionStorage.getItem(
+            settings.completedKey,
+          );
+          if (completedSerialized) {
+            const completed = JSON.parse(completedSerialized);
+            if (validMarker(completed, settings.sessionTtlMs)) {
+              session = {
+                id: completed.id,
+                createdAt: completed.createdAt,
+                registrationTracked: completed.registrationTracked === true,
+                contactTracked: completed.contactTracked === true,
+              };
+            } else {
+              sessionStorage.removeItem(settings.completedKey);
+            }
+          }
+        }
+      } catch {
+        session = null;
+      }
+
+      if (!session || !validGroupUrl) {
+        if (status) {
+          status.textContent =
+            "No pudimos comprobar un registro reciente. Vuelve al formulario para registrarte.";
+        }
+        return;
+      }
+
+      if (link instanceof HTMLAnchorElement) {
+        link.href = validGroupUrl;
+        link.removeAttribute("aria-disabled");
+        link.removeAttribute("tabindex");
+      }
+
+      if (settings.trackingEnabled) {
+        ${pixelBootstrap}
+
+        let queuedConversionEvent = false;
+        if (typeof window.fbq === "function") {
+          if (!session.registrationTracked) {
+            queuedConversionEvent = true;
+            session.registrationTracked = true;
+            window.fbq(
+              "track",
+              "CompleteRegistration",
+              {},
+              { eventID: "registration-" + session.id },
+            );
+          }
+          if (!session.contactTracked) {
+            queuedConversionEvent = true;
+            session.contactTracked = true;
+            window.fbq(
+              "track",
+              "Contact",
+              {},
+              { eventID: "contact-" + session.id },
+            );
+          }
+          try {
+            sessionStorage.setItem(
+              settings.completedKey,
+              JSON.stringify(session),
+            );
+          } catch {}
+        }
+
+        settings.redirectDelayMs = queuedConversionEvent &&
+          (typeof window.fbq !== "function" ||
+            typeof window.fbq.callMethod !== "function")
+          ? settings.pixelFlushGraceMs
+          : 0;
+      }
+
+      if (!window.__cefinEstrategaFiscalHandoffAttempted) {
+        window.__cefinEstrategaFiscalHandoffAttempted = true;
+        window.setTimeout(() => {
+          try {
+            window.location.replace(validGroupUrl);
+          } catch {
+            window.location.href = validGroupUrl;
+          }
+        }, settings.redirectDelayMs || 0);
+      }
+    })();
+  `;
+}
+
+export function ConversionClient({
+  groupUrl,
+  whatsappLinkId,
+  statusId,
+}: {
+  groupUrl: string | null;
+  whatsappLinkId: string;
+  statusId: string;
 }) {
   const sessionRef = useRef<RegistrationSession | null | undefined>(undefined);
-  const redirectedRef = useRef(false);
 
   useEffect(() => {
     if (sessionRef.current === undefined) {
       sessionRef.current = getRegistrationSession();
     }
+
     const session = sessionRef.current;
     const safeGroupUrl = getValidWhatsAppGroupUrl(groupUrl);
-    if (!session || !safeGroupUrl) return;
-
-    const whatsappLink = document.getElementById(whatsappLinkId);
-    if (whatsappLink instanceof HTMLAnchorElement) {
-      whatsappLink.href = safeGroupUrl;
-      whatsappLink.hidden = false;
+    const status = document.getElementById(statusId);
+    if (!session || !safeGroupUrl) {
+      showInvalidRegistration(status);
+      return;
     }
 
-    let attempts = PIXEL_MAX_ATTEMPTS;
-    let retryTimeoutId: number | undefined;
-    let navigationTimeoutId: number | undefined;
+    const whatsappLink = document.getElementById(whatsappLinkId);
+    enableWhatsAppLink(whatsappLink, safeGroupUrl);
+    const queuedConversionEvent = queueConversionEvents(session);
+    const runtimeFbq = window.fbq as
+      | { callMethod?: (...args: unknown[]) => void }
+      | undefined;
+    const redirectDelayMs =
+      queuedConversionEvent && typeof runtimeFbq?.callMethod !== "function"
+        ? PIXEL_FLUSH_GRACE_MS
+        : 0;
 
-    const navigateToWhatsApp = () => {
-      if (redirectedRef.current) return;
-      redirectedRef.current = true;
-      window.location.assign(safeGroupUrl);
-    };
-
-    const trackRegistration = () => {
-      if (
-        config.activation.trackingEnabled &&
-        typeof window.fbq !== "function" &&
-        attempts > 0
-      ) {
-        attempts -= 1;
-        retryTimeoutId = window.setTimeout(
-          trackRegistration,
-          PIXEL_RETRY_INTERVAL_MS,
-        );
-        return;
-      }
-
-      if (
-        config.activation.trackingEnabled &&
-        typeof window.fbq === "function"
-      ) {
-        if (session.registrationTracked) return;
-
-        session.registrationTracked = true;
-        persistRegistrationSession(session);
-        window.fbq(
-          "track",
-          "CompleteRegistration",
-          {},
-          { eventID: `registration-${session.id}` },
-        );
-      }
-    };
-
-    const handleWhatsAppClick = (event: Event) => {
-      event.preventDefault();
-      if (
-        config.activation.trackingEnabled &&
-        typeof window.fbq === "function"
-      ) {
-        if (!session.registrationTracked) {
-          session.registrationTracked = true;
-          persistRegistrationSession(session);
-          window.fbq(
-            "track",
-            "CompleteRegistration",
-            {},
-            { eventID: `registration-${session.id}` },
-          );
-        }
-        if (!session.contactTracked) {
-          session.contactTracked = true;
-          persistRegistrationSession(session);
-          window.fbq(
-            "track",
-            "Contact",
-            {},
-            { eventID: `contact-${session.id}` },
-          );
-        }
-        navigationTimeoutId = window.setTimeout(
-          navigateToWhatsApp,
-          TRACKING_SEND_DELAY_MS,
-        );
-        return;
-      }
-
-      navigateToWhatsApp();
-    };
-
-    whatsappLink?.addEventListener("click", handleWhatsAppClick);
-    trackRegistration();
+    const redirectTimeoutId = window.setTimeout(
+      () => navigateToWhatsApp(safeGroupUrl),
+      redirectDelayMs,
+    );
 
     return () => {
-      whatsappLink?.removeEventListener("click", handleWhatsAppClick);
-      if (retryTimeoutId !== undefined) {
-        window.clearTimeout(retryTimeoutId);
-      }
-      if (navigationTimeoutId !== undefined) {
-        window.clearTimeout(navigationTimeoutId);
-      }
+      window.clearTimeout(redirectTimeoutId);
     };
-  }, [groupUrl, whatsappLinkId]);
-
-  if (!config.activation.trackingEnabled) return null;
+  }, [groupUrl, statusId, whatsappLinkId]);
 
   return (
-    <Script
-      id="meta-pixel-estratega-fiscal-gracias"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
-    />
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: getImmediateHandoffScript({
+            groupUrl,
+            whatsappLinkId,
+            statusId,
+          }),
+        }}
+      />
+      {config.activation.trackingEnabled && (
+        <Script
+          id="meta-pixel-estratega-fiscal-gracias"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
+        />
+      )}
+    </>
   );
 }

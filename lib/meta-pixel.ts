@@ -8,10 +8,69 @@ export type MetaEventPayload = Record<string, unknown>;
 type MetaEventCommand = "track" | "trackCustom";
 type MetaPixelScriptOptions = { trackPageView?: boolean };
 
+type MetaPixelRuntime = ((command: string, ...args: unknown[]) => void) & {
+  callMethod?: (command: string, ...args: unknown[]) => void;
+  queue: unknown[][];
+  push: (command: string, ...args: unknown[]) => void;
+  loaded: boolean;
+  version: string;
+};
+
 declare global {
   interface Window {
     fbq?: (command: string, ...args: unknown[]) => void;
+    _fbq?: (command: string, ...args: unknown[]) => void;
     __cefinMetaPixelInitialized?: boolean;
+  }
+}
+
+/**
+ * Installs Meta's queue synchronously and starts loading fbevents.js without
+ * waiting for the network. Calls to fbq can then be queued before navigation.
+ */
+export function initializeMetaPixel(
+  pixelId = META_PIXEL_ID,
+  { trackPageView = true }: MetaPixelScriptOptions = {},
+) {
+  if (typeof window === "undefined") return;
+
+  if (typeof window.fbq !== "function") {
+    const fbq = function metaPixelQueue(
+      command: string,
+      ...args: unknown[]
+    ) {
+      if (fbq.callMethod) {
+        fbq.callMethod(command, ...args);
+        return;
+      }
+
+      fbq.queue.push([command, ...args]);
+    } as MetaPixelRuntime;
+
+    fbq.queue = [];
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = "2.0";
+    window.fbq = fbq;
+    window._fbq = fbq;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://connect.facebook.net/en_US/fbevents.js";
+    script.dataset.cefinMetaPixel = "true";
+
+    const firstScript = document.getElementsByTagName("script")[0];
+    if (firstScript?.parentNode) {
+      firstScript.parentNode.insertBefore(script, firstScript);
+    } else {
+      document.head.appendChild(script);
+    }
+  }
+
+  if (!window.__cefinMetaPixelInitialized && window.fbq) {
+    window.fbq("init", pixelId);
+    if (trackPageView) window.fbq("track", "PageView");
+    window.__cefinMetaPixelInitialized = true;
   }
 }
 

@@ -36,6 +36,45 @@ function HighlightedTitle() {
   );
 }
 
+function EventDetails({ className = "" }: { className?: string }) {
+  return (
+    <div className={className}>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="rounded-2xl border border-white/15 bg-[var(--ef-dark-overlay)] p-4 backdrop-blur-sm">
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--ef-gold)]">
+            Fecha
+          </p>
+          <time
+            dateTime={config.date.startsAt}
+            className="mt-2 block text-base font-black"
+          >
+            {config.date.visible}
+            <span className="mt-1 block text-sm text-[var(--ef-muted-dark)]">
+              {config.date.time} · {config.date.timeZoneLabel}
+            </span>
+          </time>
+        </div>
+        <div className="rounded-2xl border border-white/15 bg-[var(--ef-dark-overlay)] p-4 backdrop-blur-sm">
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--ef-emerald)]">
+            Instructor
+          </p>
+          <p className="mt-2 text-base font-black">{config.instructor.name}</p>
+        </div>
+      </div>
+
+      <p className="mt-5 flex items-start gap-3 text-sm font-semibold leading-relaxed text-[var(--ef-muted-dark)]">
+        <span
+          className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--ef-emerald-soft)] text-[var(--ef-emerald)]"
+          aria-hidden="true"
+        >
+          ✓
+        </span>
+        {config.access.message}
+      </p>
+    </div>
+  );
+}
+
 export default function EstrategaFiscalLanding() {
   return (
     <>
@@ -56,7 +95,7 @@ export default function EstrategaFiscalLanding() {
             />
           </div>
 
-          <header className="relative z-30 mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
+          <header className="relative z-30 mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
             <span className="flex items-center gap-2.5 text-2xl font-black tracking-[-0.06em] sm:text-3xl">
               <span
                 className="h-8 w-1 rounded-full bg-[var(--ef-emerald)] sm:h-9"
@@ -69,7 +108,7 @@ export default function EstrategaFiscalLanding() {
             </span>
           </header>
 
-          <div className="relative mx-auto grid max-w-6xl gap-7 px-4 pb-14 pt-3 sm:gap-9 sm:px-6 sm:pb-18 lg:grid-cols-[minmax(0,1.22fr)_minmax(380px,.78fr)] lg:items-center lg:gap-7 lg:px-8 lg:pb-16 lg:pt-2">
+          <div className="relative mx-auto grid max-w-6xl gap-5 px-4 pb-9 pt-0 sm:gap-7 sm:px-6 sm:pb-14 lg:grid-cols-[minmax(0,1.22fr)_minmax(380px,.78fr)] lg:items-center lg:gap-7 lg:px-8 lg:pb-16 lg:pt-2">
             <div className="relative isolate min-w-0 overflow-hidden lg:min-h-[650px]">
               <Image
                 src={config.instructor.image}
@@ -79,7 +118,7 @@ export default function EstrategaFiscalLanding() {
                 sizes="(max-width: 639px) 82vw, (max-width: 1023px) 54vw, 510px"
                 unoptimized
                 preload
-                className={`${styles.heroPortrait} absolute right-[-1.25rem] top-2 z-0 h-[310px] w-auto max-w-none object-contain object-top opacity-85 sm:right-2 sm:h-[390px] md:right-8 md:h-[460px] lg:-right-16 lg:bottom-0 lg:top-auto lg:h-[570px] lg:opacity-100`}
+                className={`${styles.heroPortrait} absolute right-[-1.25rem] top-0 z-0 h-[270px] w-auto max-w-none object-contain object-top opacity-75 sm:right-2 sm:h-[390px] sm:opacity-85 md:right-8 md:h-[460px] lg:-right-16 lg:bottom-0 lg:top-auto lg:h-[570px] lg:opacity-100`}
               />
               <div
                 className={`${styles.heroImageGuard} pointer-events-none absolute inset-0 z-10`}
@@ -91,58 +130,36 @@ export default function EstrategaFiscalLanding() {
               />
 
               <div
-                className={`${styles.heroCopy} relative z-20 flex min-h-full flex-col justify-center py-6 lg:py-10`}
+                className={`${styles.heroCopy} relative z-20 flex min-h-full flex-col justify-center py-4 lg:py-10`}
               >
-                <p className="max-w-xl text-xs font-black uppercase tracking-[0.2em] text-[var(--ef-gold)] sm:text-sm">
+                <p className="max-w-xl text-[11px] font-black uppercase tracking-[0.18em] text-[var(--ef-gold)] sm:text-sm sm:tracking-[0.2em]">
                   Para contadores que quieren crecer profesionalmente
                 </p>
-                <h1 className="mt-5 max-w-[34rem] text-4xl font-black leading-[0.96] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+                <h1 className="mt-3 max-w-[34rem] text-[2.35rem] font-black leading-[0.94] tracking-[-0.045em] sm:mt-5 sm:text-5xl lg:text-6xl">
                   <HighlightedTitle />
                 </h1>
-                <p className="mt-6 max-w-[33rem] text-base leading-relaxed text-[var(--ef-warm-white)] sm:text-lg">
+                <p className="mt-4 max-w-[33rem] text-[15px] leading-6 text-[var(--ef-warm-white)] sm:mt-6 sm:text-lg sm:leading-relaxed">
                   {config.promise}
                 </p>
-
-                <div className="mt-7 grid max-w-[34rem] gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-white/15 bg-[var(--ef-dark-overlay)] p-4 backdrop-blur-sm">
-                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--ef-gold)]">
-                      Fecha
-                    </p>
-                    <time
-                      dateTime={config.date.startsAt}
-                      className="mt-2 block text-base font-black"
-                    >
-                      {config.date.visible}
-                      <span className="mt-1 block text-sm text-[var(--ef-muted-dark)]">
-                        {config.date.time} · {config.date.timeZoneLabel}
-                      </span>
-                    </time>
-                  </div>
-                  <div className="rounded-2xl border border-white/15 bg-[var(--ef-dark-overlay)] p-4 backdrop-blur-sm">
-                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--ef-emerald)]">
-                      Instructor
-                    </p>
-                    <p className="mt-2 text-base font-black">
-                      {config.instructor.name}
-                    </p>
-                  </div>
-                </div>
-
-                <p className="mt-5 flex max-w-[34rem] items-start gap-3 text-sm font-semibold leading-relaxed text-[var(--ef-muted-dark)]">
-                  <span
-                    className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--ef-emerald-soft)] text-[var(--ef-emerald)]"
-                    aria-hidden="true"
-                  >
-                    ✓
-                  </span>
-                  {config.access.message}
-                </p>
+                <EventDetails className="mt-7 hidden max-w-[34rem] lg:block" />
               </div>
             </div>
 
             <div className={`${styles.heroForm} relative z-30 self-center lg:py-8`}>
-              <RegistrationForm />
+              <div className={styles.heroFormCard}>
+                <div className="mb-3 rounded-2xl bg-[var(--ef-emerald-soft)] px-4 py-3 text-center sm:mb-4">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--ef-accessible-green)]">
+                    Reserva tu lugar gratis
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[var(--ef-charcoal)]">
+                    Completa tus datos y entra al grupo de WhatsApp.
+                  </p>
+                </div>
+                <RegistrationForm />
+              </div>
             </div>
+
+            <EventDetails className="relative z-20 lg:hidden" />
           </div>
         </section>
 
