@@ -19,7 +19,7 @@ export default function EstrategaFiscalThankYouPage() {
   return (
     <>
       <main
-        className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
+        className={`${styles.campaign} relative flex min-h-screen flex-col overflow-x-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
       >
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true">
           <div className={`${styles.heroGlowEmerald} absolute -right-24 -top-32 h-80 w-80 rounded-full blur-3xl`} />
