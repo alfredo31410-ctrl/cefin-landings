@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { landingConfig as config } from "../config";
 import styles from "../estratega-fiscal.module.css";
-import { WhatsAppRedirect } from "../gracias/whatsapp-redirect";
 
 export const metadata: Metadata = {
   title: `Último paso | ${config.campaignName} | CEFIN`,
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function EstrategaFiscalJoinWhatsAppPage() {
-  const whatsappLinkId = "estratega-fiscal-whatsapp-link";
   const whatsappGroupUrl = config.activation.registrationEnabled
     ? config.access.whatsappGroupUrl
     : null;
@@ -19,13 +17,6 @@ export default function EstrategaFiscalJoinWhatsAppPage() {
     <main
       className={`${styles.campaign} relative flex min-h-screen flex-col overflow-hidden bg-[var(--ef-petroleum)] text-[var(--ef-warm-white)]`}
     >
-      {whatsappGroupUrl && (
-        <WhatsAppRedirect
-          groupUrl={whatsappGroupUrl}
-          linkId={whatsappLinkId}
-        />
-      )}
-
       <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true">
         <div className={`${styles.heroGlowEmerald} absolute -right-24 -top-32 h-80 w-80 rounded-full blur-3xl`} />
         <div className={`${styles.heroGlowGold} absolute -bottom-32 left-[-5rem] h-80 w-80 rounded-full blur-3xl`} />
@@ -59,10 +50,9 @@ export default function EstrategaFiscalJoinWhatsAppPage() {
           {whatsappGroupUrl ? (
             <>
               <p className="mt-6 text-sm font-semibold text-[var(--ef-muted-dark)]" role="status">
-                Te estamos llevando al grupo oficial…
+                Toca el botón para abrir el grupo oficial.
               </p>
               <a
-                id={whatsappLinkId}
                 href={whatsappGroupUrl}
                 className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[var(--ef-emerald)] px-7 py-3 text-sm font-black uppercase tracking-[0.04em] text-[var(--ef-petroleum)] shadow-[0_16px_36px_var(--ef-cta-shadow)] transition hover:bg-[var(--ef-deep-green)] hover:text-[var(--ef-warm-white)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ef-gold)] sm:w-auto"
               >
