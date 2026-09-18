@@ -7,7 +7,7 @@ import {
   trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
-import { useEffect, type MouseEvent, useRef } from "react";
+import { useEffect } from "react";
 
 const CHECKOUT_URL = "https://pay.hotmart.com/R105211548E?off=2fonqwf3&checkoutMode=10&bid=1783529102396";
 const PRODUCT_PRICE = 4787;
@@ -64,7 +64,6 @@ const FAQS = [
 ];
 
 export default function AsesorFiscalPFInscripcionPage() {
-    const isRedirectingRef = useRef(false);
   useEffect(() => {
   document.title = "Asesor Fiscal PF | Inscripción";
 
@@ -77,12 +76,7 @@ export default function AsesorFiscalPFInscripcionPage() {
 }, []);
 
 const handleCheckoutClick =
-  (ctaLocation: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
-    if (isRedirectingRef.current) return;
-    isRedirectingRef.current = true;
-
+  (ctaLocation: string) => () => {
     trackMetaEvent("InitiateCheckout", {
       content_name: "Asesor Fiscal PF | Inscripción",
       content_category: "Curso de pago",
@@ -99,10 +93,6 @@ const handleCheckoutClick =
       source: ctaLocation,
       status: "checkout_opened",
     });
-
-    window.setTimeout(() => {
-      window.location.href = CHECKOUT_URL;
-    }, 700);
   };
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, type MouseEvent } from "react";
+import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -116,19 +116,13 @@ export default function CuentasContablesPage() {
     });
   }, []);
 
-  const handleCheckout = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
+  const handleCheckout = () => {
     trackMetaEvent("InitiateCheckout", {
       content_name: "Cuentas Contables desde Cero",
       content_category: "Guía práctica / Low ticket evergreen",
       value: PRICE,
       currency: META_CURRENCY,
     });
-
-    window.setTimeout(() => {
-      window.location.assign(CHECKOUT_URL);
-    }, 250);
   };
 
   return (

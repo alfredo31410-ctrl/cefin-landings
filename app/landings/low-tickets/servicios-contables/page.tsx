@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, type MouseEvent } from "react";
+import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -106,19 +106,13 @@ export default function ServiciosContablesPage() {
     });
   }, []);
 
-  const handleCheckout = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
+  const handleCheckout = () => {
     trackMetaEvent("InitiateCheckout", {
       content_name: "Crea tu Contrato de Servicios Contables",
       content_category: "Entrenamiento práctico / Low ticket evergreen",
       value: PRICE,
       currency: META_CURRENCY,
     });
-
-    window.setTimeout(() => {
-      window.location.assign(CHECKOUT_URL);
-    }, 250);
   };
 
   return (
