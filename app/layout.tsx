@@ -1,5 +1,17 @@
 import "./globals.css";
+import Script from "next/script";
 import { HotmartUtmTracking } from "@/components/hotmart-utm-tracking";
+
+const VK_DIGITAL_TRACKING_SCRIPT = `
+!function(w,d,c){
+  (w.VKMetrics=w.VKMetrics||{_q:[]})._q.push(['init',c,'page_view']);
+  var s=d.createElement('script');
+  s.src='https://cf.vkdigital.com.br/vk-metrics.js';
+  s.async=1;
+  s.setAttribute('data-no-xcod-url','');
+  d.head.appendChild(s);
+}(window,document,'ko22gCCWXDXzyXWlo4Zt');
+`;
 /*
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +32,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-full flex flex-col">
+        <Script
+          id="vk-digital-metrics"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: VK_DIGITAL_TRACKING_SCRIPT }}
+        />
         <HotmartUtmTracking />
         {children}
       </body>
