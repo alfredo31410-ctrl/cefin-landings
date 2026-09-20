@@ -15,7 +15,7 @@ import {
   type AcademiaRegistrationSession,
 } from "@/lib/academia-contabilidad-tracking-session";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/CMVRPAv0iXg1CowvtcGg9Z";
+const WHATSAPP_URL = "https://chat.whatsapp.com/DlJfD54MjZK4AliRDrcRb5";
 const HERO_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/alfredo.png";
 
