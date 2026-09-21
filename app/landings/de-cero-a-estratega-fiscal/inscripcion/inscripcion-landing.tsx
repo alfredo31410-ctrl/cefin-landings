@@ -3,15 +3,6 @@ import { directSaleConfig as config } from "./config";
 import styles from "./inscripcion.module.css";
 import { EstrategaFiscalTracking, TrackedCheckoutLink } from "./tracking";
 
-function formatMoney(value: number) {
-  return new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: config.pricing.currency,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
 function PurchaseCta({
   className = "",
   location,
@@ -109,9 +100,9 @@ export default function InscripcionLanding() {
         </div>
 
         <aside className={styles.priceCard}>
-          <p>Inversión</p>
-          <strong>{formatMoney(config.pricing.salePrice)} <small>MXN</small></strong>
-          <span>{config.pricing.taxNote}</span>
+          <p>Inscripción abierta</p>
+          <strong>Acceso completo</strong>
+          <span>Cinco sesiones en vivo, material de apoyo y grabaciones.</span>
           <PurchaseCta location="resumen-oferta" />
           <small>Serás dirigido al pago seguro de Hotmart.</small>
         </aside>
@@ -216,9 +207,9 @@ export default function InscripcionLanding() {
             ))}
           </div>
           <aside className={styles.finalPriceCard}>
-            <p>Inversión única</p>
-            <strong>{formatMoney(config.pricing.salePrice)}</strong>
-            <small>MXN</small>
+            <p>Inscripción abierta</p>
+            <strong>Acceso completo</strong>
+            <small>al programa intensivo de 5 días</small>
             <PurchaseCta location="oferta-final" />
             <ul>
               <li>Pago procesado de forma segura por Hotmart</li>
@@ -274,10 +265,12 @@ export default function InscripcionLanding() {
 
       <div className={styles.mobileCta}>
         <div>
-          <small>Inversión</small>
-          <strong>{formatMoney(config.pricing.salePrice)} MXN</strong>
+          <small>Programa intensivo</small>
+          <strong>5 días en vivo</strong>
         </div>
-        <TrackedCheckoutLink location="barra-movil">Inscribirme</TrackedCheckoutLink>
+        <TrackedCheckoutLink location="barra-movil">
+          {config.checkout.buttonLabel}
+        </TrackedCheckoutLink>
       </div>
     </main>
   );

@@ -10,11 +10,6 @@ export type DirectSaleConfig = {
     level: string;
     slogan: string;
   };
-  pricing: {
-    currency: "MXN";
-    salePrice: number;
-    taxNote: string;
-  };
   checkout: {
     enabled: boolean;
     url: string;
@@ -51,7 +46,7 @@ export type DirectSaleConfig = {
 /**
  * CONTENIDO COMERCIAL DE ESTRATEGIA FISCAL PASO A PASO
  *
- * Mantener aquí precio, checkout, temario y beneficios para que futuras
+ * Mantener aquí checkout, temario y beneficios para que futuras
  * actualizaciones no requieran modificar la estructura visual de la página.
  */
 export const directSaleConfig: DirectSaleConfig = {
@@ -67,15 +62,10 @@ export const directSaleConfig: DirectSaleConfig = {
     level: "1 hora diaria",
     slogan: "Estrategia hoy; mejores resultados mañana.",
   },
-  pricing: {
-    currency: "MXN",
-    salePrice: 987,
-    taxNote: "Inversión única de $987.00 MXN.",
-  },
   checkout: {
     enabled: true,
     url: "https://pay.hotmart.com/L107321129X?off=hs9wp3t0&checkoutMode=10&bid=1788550850213",
-    buttonLabel: "Inscribirme ahora por $987 MXN",
+    buttonLabel: "INSCRIBIRME YA",
   },
   highlights: [
     "Sesión en vivo · 1 hora diaria",
@@ -175,10 +165,6 @@ export const directSaleConfig: DirectSaleConfig = {
     {
       question: "¿Recibiré certificado?",
       answer: "Sí. El programa incluye certificado digital.",
-    },
-    {
-      question: "¿Cuál es la inversión?",
-      answer: "La inversión para acceder al programa completo es de $987.00 MXN.",
     },
   ],
   legal: {

@@ -6,7 +6,6 @@ import { useEffect, useRef, type ReactNode } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
-  META_CURRENCY,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 import { directSaleConfig as config } from "./config";
@@ -20,12 +19,9 @@ const PRODUCT_EVENT = {
     {
       id: PRODUCT_ID,
       quantity: 1,
-      item_price: config.pricing.salePrice,
     },
   ],
   content_type: "product",
-  value: config.pricing.salePrice,
-  currency: META_CURRENCY,
 };
 
 export function EstrategaFiscalTracking() {
