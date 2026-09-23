@@ -13,6 +13,12 @@ const CHECKOUT_URL =
   "https://pay.hotmart.com/J105150710D?off=ciu6d3oe&checkoutMode=10";
 const PRODUCT_PRICE = 1987;
 const PRODUCT_PRICE_LABEL = "$1,987 MXN";
+const ASSET_BASE =
+  process.env.NODE_ENV === "production"
+    ? "https://cefin-landings-z9uk.vercel.app"
+    : "";
+const ALFREDO_IMAGE_URL = `${ASSET_BASE}/academia-contabilidad/alfredo.png`;
+const HERO_BACKGROUND_URL = `${ASSET_BASE}/academia-contabilidad/academia-live-bg.png`;
 
 const COURSE_MODULES = [
   "Introducción y bienvenida al curso",
@@ -123,8 +129,7 @@ export default function AcademiaContabilidadInscripcionPage() {
           <div
             className="absolute inset-0 -z-30 bg-cover bg-[72%_center] lg:bg-center"
             style={{
-              backgroundImage:
-                'url("/academia-contabilidad/academia-live-bg.png")',
+              backgroundImage: `url("${HERO_BACKGROUND_URL}")`,
             }}
           />
           <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(17,3,31,.16)_0%,rgba(17,3,31,.28)_42%,#13051f_72%)] lg:bg-[linear-gradient(90deg,rgba(17,3,31,.05)_0%,rgba(17,3,31,.22)_42%,rgba(17,3,31,.92)_66%,#13051f_100%)]" />
@@ -132,7 +137,7 @@ export default function AcademiaContabilidadInscripcionPage() {
 
           <div className="academia-mobile-photo pointer-events-none absolute inset-x-0 top-[4.6rem] z-0 flex h-[40svh] min-h-[230px] max-h-[390px] items-end justify-center lg:hidden">
             <img
-              src="/academia-contabilidad/alfredo.png"
+              src={ALFREDO_IMAGE_URL}
               alt=""
               className="h-full w-auto max-w-[88vw] object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,.42)]"
               style={{
@@ -340,7 +345,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               <div className="absolute inset-16 rounded-full border border-[#a45cff]/30" />
               <div className="absolute bottom-3 left-1/2 h-16 w-[72%] -translate-x-1/2 rounded-full bg-black/45 blur-xl" />
               <img
-                src="/academia-contabilidad/alfredo.png"
+                src={ALFREDO_IMAGE_URL}
                 alt="Mtro. Alfredo Cobos, instructor de la Academia de Contabilidad Básica"
                 className="relative z-10 mx-auto h-[290px] w-auto max-w-full object-contain object-bottom drop-shadow-[0_30px_55px_rgba(0,0,0,.48)] min-[380px]:h-[330px] sm:h-[390px]"
                 style={{

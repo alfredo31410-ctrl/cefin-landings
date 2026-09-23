@@ -4,6 +4,15 @@ export const metadata: Metadata = {
   title: "Academia de Contabilidad Básica | CEFIN",
   description:
     "Aprende contabilidad desde cero, a tu ritmo y con un enfoque práctico. Conoce los 17 módulos de la Academia de Contabilidad Básica de CEFIN.",
+  icons: {
+    icon: [
+      {
+        url: "https://cefin-landings-z9uk.vercel.app/academia-contabilidad/favicon.png",
+        type: "image/png",
+        sizes: "64x64",
+      },
+    ],
+  },
   openGraph: {
     title: "Academia de Contabilidad Básica | CEFIN",
     description:
