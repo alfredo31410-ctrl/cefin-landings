@@ -118,20 +118,36 @@ export default function AcademiaContabilidadInscripcionPage() {
         />
       </noscript>
 
-      <main className="min-h-screen overflow-x-hidden bg-[#13051f] text-white">
+      <main className="min-h-screen overflow-x-hidden bg-[#13051f] pb-20 text-white md:pb-0">
         <section className="relative isolate min-h-[100svh] overflow-hidden">
           <div
-            className="absolute inset-0 -z-30 bg-cover bg-[36%_center] sm:bg-[30%_center] lg:bg-center"
+            className="absolute inset-0 -z-30 bg-cover bg-[72%_center] lg:bg-center"
             style={{
               backgroundImage:
                 'url("/academia-contabilidad/academia-live-bg.png")',
             }}
           />
-          <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(17,3,31,.10)_0%,rgba(17,3,31,.25)_55%,#13051f_100%)] lg:bg-[linear-gradient(90deg,rgba(17,3,31,.05)_0%,rgba(17,3,31,.22)_42%,rgba(17,3,31,.92)_66%,#13051f_100%)]" />
+          <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(17,3,31,.16)_0%,rgba(17,3,31,.28)_42%,#13051f_72%)] lg:bg-[linear-gradient(90deg,rgba(17,3,31,.05)_0%,rgba(17,3,31,.22)_42%,rgba(17,3,31,.92)_66%,#13051f_100%)]" />
           <div className="absolute inset-0 -z-10 opacity-20 [background-image:radial-gradient(rgba(255,255,255,.7)_1px,transparent_1px)] [background-size:42px_42px]" />
 
-          <header className="mx-auto flex w-full max-w-[1280px] items-center justify-between px-5 py-6 sm:px-8 lg:px-10">
-            <span className="text-2xl font-black tracking-[0.22em]">CEFIN</span>
+          <div className="academia-mobile-photo pointer-events-none absolute inset-x-0 top-[4.6rem] z-0 flex h-[40svh] min-h-[230px] max-h-[390px] items-end justify-center lg:hidden">
+            <img
+              src="/academia-contabilidad/alfredo.png"
+              alt=""
+              className="h-full w-auto max-w-[88vw] object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,.42)]"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 0%, black 72%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 0%, black 72%, transparent 100%)",
+              }}
+            />
+          </div>
+
+          <header className="relative z-30 mx-auto flex w-full max-w-[1280px] items-center justify-between px-4 py-5 min-[380px]:px-5 sm:px-8 sm:py-6 lg:px-10">
+            <span className="text-xl font-black tracking-[0.2em] min-[380px]:text-2xl min-[380px]:tracking-[0.22em]">
+              CEFIN
+            </span>
             <a
               href={CHECKOUT_URL}
               onClick={handleCheckoutClick("header")}
@@ -141,7 +157,7 @@ export default function AcademiaContabilidadInscripcionPage() {
             </a>
           </header>
 
-          <div className="mx-auto grid min-h-[calc(100svh-88px)] w-full max-w-[1280px] items-end px-5 pb-10 pt-[42vh] sm:px-8 sm:pt-[38vh] lg:grid-cols-2 lg:items-center lg:px-10 lg:pb-16 lg:pt-8">
+          <div className="academia-hero-content relative z-20 mx-auto grid min-h-[calc(100svh-76px)] w-full max-w-[1280px] items-end px-4 pb-10 pt-[46svh] min-[380px]:px-5 min-[380px]:pt-[48svh] sm:px-8 sm:pt-[50svh] md:pt-[48svh] lg:min-h-[calc(100svh-88px)] lg:grid-cols-2 lg:items-center lg:px-10 lg:pb-16 lg:pt-8">
             <div className="hidden lg:block" />
 
             <div className="relative z-10 text-center lg:text-left">
@@ -149,17 +165,17 @@ export default function AcademiaContabilidadInscripcionPage() {
                 Inscripciones abiertas · 100% en línea
               </p>
 
-              <p className="mt-5 text-[clamp(2.1rem,5.4vw,4.8rem)] font-black uppercase leading-[0.86] tracking-[-0.04em]">
+              <p className="mt-5 text-[clamp(1.8rem,8.5vw,4.8rem)] font-black uppercase leading-[0.9] tracking-[-0.04em]">
                 Academia
               </p>
-              <h1 className="mt-1 text-[clamp(3.1rem,7.2vw,6.6rem)] font-black uppercase leading-[0.78] tracking-[-0.06em]">
+              <h1 className="mt-1 text-[clamp(2.35rem,11.5vw,6.6rem)] font-black uppercase leading-[0.82] tracking-[-0.065em]">
                 <span className="bg-gradient-to-r from-[#ff6a57] via-[#ff4f7b] to-[#d65cff] bg-clip-text text-transparent">
                   Contabilidad
                 </span>
                 <span className="mt-2 block text-white">Básica</span>
               </h1>
 
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-white/82 sm:text-xl lg:mx-0">
+              <p className="mx-auto mt-5 max-w-2xl text-base font-semibold leading-relaxed text-white/82 min-[380px]:text-lg sm:mt-6 sm:text-xl lg:mx-0">
                 Aprende contabilidad desde cero y transforma tu forma de
                 entender los negocios con una ruta clara, práctica y a tu
                 ritmo.
@@ -169,7 +185,7 @@ export default function AcademiaContabilidadInscripcionPage() {
                 <a
                   href={CHECKOUT_URL}
                   onClick={handleCheckoutClick("hero")}
-                  className="inline-flex min-h-16 items-center justify-center rounded-2xl bg-gradient-to-r from-[#ff5f68] via-[#ff466f] to-[#c445f4] px-8 py-5 text-base font-black uppercase tracking-[0.08em] text-white shadow-[0_20px_65px_rgba(222,63,139,.42)] transition hover:-translate-y-1 hover:brightness-110"
+                  className="inline-flex min-h-14 items-center justify-center rounded-2xl bg-gradient-to-r from-[#ff5f68] via-[#ff466f] to-[#c445f4] px-5 py-4 text-sm font-black uppercase tracking-[0.06em] text-white shadow-[0_20px_65px_rgba(222,63,139,.42)] transition hover:-translate-y-1 hover:brightness-110 min-[380px]:min-h-16 min-[380px]:px-8 min-[380px]:py-5 min-[380px]:text-base min-[380px]:tracking-[0.08em]"
                 >
                   INSCRIBIRME AHORA
                 </a>
@@ -187,7 +203,7 @@ export default function AcademiaContabilidadInscripcionPage() {
             </div>
           </div>
 
-          <div className="relative mx-auto grid w-full max-w-[1120px] grid-cols-2 border-y border-white/10 bg-[#180625]/80 text-center backdrop-blur md:grid-cols-4">
+          <div className="relative z-20 mx-auto grid w-full max-w-[1120px] grid-cols-2 border-y border-white/10 bg-[#180625]/80 text-center backdrop-blur md:grid-cols-4">
             {[
               "Aprende a tu ritmo",
               "Conocimiento práctico",
@@ -204,14 +220,14 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="relative border-t border-white/10 bg-[#13051f] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <section className="relative border-t border-white/10 bg-[#13051f] px-4 py-16 min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_28%,rgba(255,75,117,.13),transparent_28%),radial-gradient(circle_at_88%_72%,rgba(153,61,235,.15),transparent_32%)]" />
           <div className="relative mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff8190]">
                 Tu éxito contable comienza aquí
               </p>
-              <h2 className="mt-4 max-w-2xl text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+              <h2 className="mt-4 max-w-2xl text-[clamp(2rem,9vw,3.75rem)] font-black uppercase leading-[0.95] tracking-[-0.04em]">
                 Deja de ver la contabilidad como un idioma imposible.
               </h2>
               <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-white/66">
@@ -221,7 +237,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
               {LEARNING_RESULTS.map((item) => (
                 <article
                   key={item.number}
@@ -244,7 +260,7 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#f7f1ff] px-5 py-20 text-[#241132] sm:px-8 lg:px-10 lg:py-28">
+        <section className="relative overflow-hidden bg-[#f7f1ff] px-4 py-16 text-[#241132] min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#ff5f68] via-[#d950ef] to-[#7548ff]" />
           <div className="mx-auto max-w-[1180px]">
             <div className="grid gap-8 lg:grid-cols-[1fr_.65fr] lg:items-end">
@@ -252,7 +268,7 @@ export default function AcademiaContabilidadInscripcionPage() {
                 <p className="text-xs font-black uppercase tracking-[0.28em] text-[#a632bf]">
                   Temario del curso
                 </p>
-                <h2 className="mt-4 text-4xl font-black uppercase leading-none tracking-[-0.04em] sm:text-6xl">
+                <h2 className="mt-4 text-[clamp(2rem,9vw,3.75rem)] font-black uppercase leading-none tracking-[-0.04em]">
                   17 módulos para construir bases contables de verdad.
                 </h2>
               </div>
@@ -270,12 +286,12 @@ export default function AcademiaContabilidadInscripcionPage() {
               ).map((module, index) => (
                 <article
                   key={module}
-                  className="group flex min-h-[92px] items-center gap-4 rounded-[1.25rem] border border-[#e3d4ed] bg-white p-4 shadow-[0_12px_35px_rgba(54,24,75,.07)] transition hover:-translate-y-1 hover:border-[#d556e9] hover:shadow-[0_18px_40px_rgba(138,48,162,.13)]"
+                  className="group flex min-h-[84px] items-center gap-3 rounded-[1.25rem] border border-[#e3d4ed] bg-white p-3 shadow-[0_12px_35px_rgba(54,24,75,.07)] transition hover:-translate-y-1 hover:border-[#d556e9] hover:shadow-[0_18px_40px_rgba(138,48,162,.13)] min-[380px]:min-h-[92px] min-[380px]:gap-4 min-[380px]:p-4"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff635f] to-[#d840db] text-lg font-black text-white shadow-[0_10px_25px_rgba(216,64,219,.25)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="font-extrabold leading-snug text-[#33203f]">
+                  <p className="break-words text-sm font-extrabold leading-snug text-[#33203f] min-[380px]:text-base">
                     {module}
                   </p>
                 </article>
@@ -287,7 +303,7 @@ export default function AcademiaContabilidadInscripcionPage() {
                 type="button"
                 onClick={() => setShowAllModules((current) => !current)}
                 aria-expanded={showAllModules}
-                className="inline-flex min-h-14 items-center justify-center rounded-full border-2 border-[#8f2aaa] bg-white px-7 py-4 text-sm font-black uppercase tracking-[0.1em] text-[#7d2094] transition hover:-translate-y-0.5 hover:bg-[#f6e9fb]"
+                className="inline-flex min-h-14 w-full max-w-[370px] items-center justify-center rounded-full border-2 border-[#8f2aaa] bg-white px-5 py-4 text-xs font-black uppercase tracking-[0.08em] text-[#7d2094] transition hover:-translate-y-0.5 hover:bg-[#f6e9fb] min-[380px]:px-7 min-[380px]:text-sm min-[380px]:tracking-[0.1em]"
               >
                 {showAllModules
                   ? "Ver menos módulos"
@@ -313,7 +329,7 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#1c082b] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <section className="relative overflow-hidden bg-[#1c082b] px-4 py-16 min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(rgba(255,255,255,.65)_1px,transparent_1px)] [background-size:38px_38px]" />
           <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-[#ff496d]/20 blur-3xl" />
           <div className="absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-[#9947ff]/25 blur-3xl" />
@@ -326,7 +342,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               <img
                 src="/academia-contabilidad/alfredo.png"
                 alt="Mtro. Alfredo Cobos, instructor de la Academia de Contabilidad Básica"
-                className="relative z-10 mx-auto h-[340px] w-auto max-w-full object-contain object-bottom drop-shadow-[0_30px_55px_rgba(0,0,0,.48)] sm:h-[390px]"
+                className="relative z-10 mx-auto h-[290px] w-auto max-w-full object-contain object-bottom drop-shadow-[0_30px_55px_rgba(0,0,0,.48)] min-[380px]:h-[330px] sm:h-[390px]"
                 style={{
                   WebkitMaskImage:
                     "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
@@ -341,7 +357,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff8d9a]">
                 Impartida por
               </p>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-none sm:text-6xl">
+              <h2 className="mt-4 text-[clamp(2rem,9vw,3.75rem)] font-black uppercase leading-none">
                 Mtro. Alfredo Cobos
               </h2>
               <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/70">
@@ -370,7 +386,7 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#2b0c3e] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <section className="bg-[#2b0c3e] px-4 py-16 min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="mx-auto grid max-w-[1120px] gap-7 lg:grid-cols-2">
             <article className="relative overflow-hidden rounded-[2rem] border border-[#ff7789]/25 bg-gradient-to-br from-[#4c174f] to-[#250934] p-7 shadow-[0_28px_80px_rgba(0,0,0,.25)] sm:p-9">
               <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[#ff526d]/25 blur-3xl" />
@@ -417,14 +433,14 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#11031b] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <section className="relative overflow-hidden bg-[#11031b] px-4 py-16 min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(200,62,240,.22),transparent_42%)]" />
           <div className="relative mx-auto grid max-w-[1080px] gap-10 lg:grid-cols-[1fr_.82fr] lg:items-center">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff8797]">
                 Tu formación, nuevas oportunidades
               </p>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl">
+              <h2 className="mt-4 text-[clamp(2rem,9vw,3.75rem)] font-black uppercase leading-[0.95] tracking-[-0.04em]">
                 Empieza hoy a construir una base contable más sólida.
               </h2>
               <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/66">
@@ -438,7 +454,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               <p className="text-xs font-black uppercase tracking-[0.24em] text-[#dda0ff]">
                 Inversión por participante
               </p>
-              <p className="mt-5 text-6xl font-black tracking-[-0.06em] text-white sm:text-7xl">
+              <p className="mt-5 text-[clamp(3.25rem,17vw,4.5rem)] font-black tracking-[-0.06em] text-white">
                 $1,987
               </p>
               <p className="mt-1 text-sm font-black uppercase tracking-[0.2em] text-white/55">
@@ -451,7 +467,7 @@ export default function AcademiaContabilidadInscripcionPage() {
               <a
                 href={CHECKOUT_URL}
                 onClick={handleCheckoutClick("price_card")}
-                className="mt-7 flex min-h-16 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#ff625f] via-[#ff4775] to-[#c342ef] px-6 py-5 text-base font-black uppercase tracking-[0.08em] text-white shadow-[0_20px_55px_rgba(223,65,162,.38)] transition hover:-translate-y-1 hover:brightness-110"
+                className="mt-7 flex min-h-14 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#ff625f] via-[#ff4775] to-[#c342ef] px-5 py-4 text-sm font-black uppercase tracking-[0.06em] text-white shadow-[0_20px_55px_rgba(223,65,162,.38)] transition hover:-translate-y-1 hover:brightness-110 min-[380px]:min-h-16 min-[380px]:px-6 min-[380px]:py-5 min-[380px]:text-base min-[380px]:tracking-[0.08em]"
               >
                 INSCRIBIRME AHORA
               </a>
@@ -462,13 +478,13 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="bg-[#f7f1ff] px-5 py-20 text-[#251332] sm:px-8 lg:px-10 lg:py-28">
+        <section className="bg-[#f7f1ff] px-4 py-16 text-[#251332] min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="mx-auto max-w-[920px]">
             <div className="text-center">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-[#a632bf]">
                 Preguntas frecuentes
               </p>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-none sm:text-5xl">
+              <h2 className="mt-4 text-[clamp(2rem,9vw,3rem)] font-black uppercase leading-none">
                 Antes de inscribirte
               </h2>
             </div>
@@ -494,13 +510,13 @@ export default function AcademiaContabilidadInscripcionPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#3e124d] via-[#270b3b] to-[#160522] px-5 py-20 text-center sm:px-8 lg:px-10 lg:py-28">
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#3e124d] via-[#270b3b] to-[#160522] px-4 py-16 text-center min-[380px]:px-5 sm:px-8 sm:py-20 lg:px-10 lg:py-28">
           <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:34px_34px]" />
           <div className="relative mx-auto max-w-[940px]">
             <p className="text-xs font-black uppercase tracking-[0.28em] text-[#ff91a0]">
               Inscripciones abiertas
             </p>
-            <h2 className="mt-4 text-4xl font-black uppercase leading-[0.92] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+            <h2 className="mt-4 text-[clamp(2.1rem,9.5vw,4.5rem)] font-black uppercase leading-[0.92] tracking-[-0.04em]">
               Tu éxito contable puede comenzar hoy.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/68">
@@ -510,7 +526,7 @@ export default function AcademiaContabilidadInscripcionPage() {
             <a
               href={CHECKOUT_URL}
               onClick={handleCheckoutClick("final_cta")}
-              className="mx-auto mt-8 flex min-h-16 w-full max-w-[520px] items-center justify-center rounded-2xl bg-white px-8 py-5 text-base font-black uppercase tracking-[0.08em] text-[#331143] shadow-[0_22px_70px_rgba(0,0,0,.28)] transition hover:-translate-y-1 hover:bg-[#fff4ff]"
+              className="mx-auto mt-8 flex min-h-14 w-full max-w-[520px] items-center justify-center rounded-2xl bg-white px-5 py-4 text-sm font-black uppercase tracking-[0.05em] text-[#331143] shadow-[0_22px_70px_rgba(0,0,0,.28)] transition hover:-translate-y-1 hover:bg-[#fff4ff] min-[380px]:min-h-16 min-[380px]:px-8 min-[380px]:py-5 min-[380px]:text-base min-[380px]:tracking-[0.08em]"
             >
               INSCRIBIRME YA POR {PRODUCT_PRICE_LABEL}
             </a>
@@ -524,7 +540,7 @@ export default function AcademiaContabilidadInscripcionPage() {
           </p>
         </footer>
 
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#14051e]/95 p-3 shadow-[0_-15px_45px_rgba(0,0,0,.35)] backdrop-blur md:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#14051e]/95 px-3 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-15px_45px_rgba(0,0,0,.35)] backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-lg items-center gap-3">
             <div className="shrink-0 pl-1">
               <p className="text-lg font-black leading-none">$1,987</p>
@@ -541,6 +557,27 @@ export default function AcademiaContabilidadInscripcionPage() {
             </a>
           </div>
         </div>
+
+        <style jsx global>{`
+          @media (max-width: 1023px) and (max-height: 700px) {
+            .academia-mobile-photo {
+              top: 3.8rem;
+              height: 42svh;
+              min-height: 170px;
+              max-height: 260px;
+            }
+
+            .academia-hero-content {
+              padding-top: 44svh;
+            }
+          }
+
+          @media (max-width: 340px) {
+            .academia-mobile-photo img {
+              max-width: 82vw;
+            }
+          }
+        `}</style>
       </main>
     </>
   );
