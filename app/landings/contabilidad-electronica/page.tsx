@@ -8,14 +8,39 @@ import {
   META_PIXEL_ID,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  captureContabilidadElectronicaAttribution,
+  createContabilidadElectronicaRegistrationProof,
+  getContabilidadElectronicaAttributionUrl,
+  syncContabilidadElectronicaAttributionFields,
+} from "@/lib/contabilidad-electronica-tracking";
+import { CONTABILIDAD_ELECTRONICA_CAMPAIGN } from "./campaign";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 189; // Reemplazar con el ID del formulario de ActiveCampaign.
+const ACTIVE_CAMPAIGN_FORM_ID =
+  CONTABILIDAD_ELECTRONICA_CAMPAIGN.activeCampaignFormId;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
+const ACTIVE_CAMPAIGN_SCRIPT_ID = `activecampaign-contabilidad-electronica-form-${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HAS_ACTIVE_CAMPAIGN_FORM = ACTIVE_CAMPAIGN_FORM_ID > 0;
+const THANK_YOU_PATH = "/landings/contabilidad-electronica/gracias";
 const HERO_BACKGROUND_URL =
   "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/background-banner.png";
 const MARISOL_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/marisol-contabilidad-electronica.png";
+const WEBINAR_EVENT = {
+  content_name: CONTABILIDAD_ELECTRONICA_CAMPAIGN.contentName,
+  content_category: "Clase gratuita",
+  landing_slug: "contabilidad-electronica",
+  event_date: CONTABILIDAD_ELECTRONICA_CAMPAIGN.eventDate,
+  event_time: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeLabel} CDMX`,
+} as const;
+
+type ActiveCampaignThankYou = (...args: unknown[]) => void;
+
+declare global {
+  interface Window {
+    _show_thank_you?: ActiveCampaignThankYou;
+  }
+}
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();
@@ -68,6 +93,7 @@ const buildAdvancedMatchData = (formRoot: ParentNode) => {
 export default function ContabilidadElectronicaPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const lastAdvancedMatchRef = useRef("");
+  const viewContentTrackedRef = useRef(false);
 
   const syncAdvancedMatching = useCallback((formRoot: ParentNode) => {
     if (typeof window === "undefined" || !window.fbq) return;
@@ -84,17 +110,20 @@ export default function ContabilidadElectronicaPage() {
 
   useEffect(() => {
     document.title = "Contabilidad Electrónica | Clase Gratuita | CEFIN";
+    captureContabilidadElectronicaAttribution();
+    if (viewContentTrackedRef.current) return;
+    viewContentTrackedRef.current = true;
 
     trackMetaEvent("ViewContent", {
-      content_name: "Contabilidad Electrónica | Landing",
-      content_category: "Clase gratuita",
+      ...WEBINAR_EVENT,
+      source: "landing_page",
     });
   }, []);
 
   useEffect(() => {
     if (!isModalOpen || !HAS_ACTIVE_CAMPAIGN_FORM) return;
 
-    const oldScript = document.getElementById("ac-script-loader");
+    const oldScript = document.getElementById(ACTIVE_CAMPAIGN_SCRIPT_ID);
     if (oldScript) oldScript.remove();
 
     const existingFormNode = document.querySelector(`.${FORM_CLASS}`);
@@ -102,54 +131,72 @@ export default function ContabilidadElectronicaPage() {
       existingFormNode.innerHTML = "";
     }
 
-    const script = document.createElement("script");
-    script.id = "ac-script-loader";
-    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
-    script.type = "text/javascript";
-    script.charset = "utf-8";
-    script.async = true;
-    document.body.appendChild(script);
-  }, [isModalOpen, syncAdvancedMatching]);
+    let boundForm: HTMLFormElement | null = null;
+    let originalShowThankYou: ActiveCampaignThankYou | undefined;
+    let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let redirectStarted = false;
 
-  useEffect(() => {
-    if (!isModalOpen || !HAS_ACTIVE_CAMPAIGN_FORM) return;
+    const bindForm = () => {
+      const form = document.querySelector<HTMLFormElement>(
+        `.${FORM_CLASS} form`,
+      );
+      if (!form || form === boundForm) return;
 
-    const formRoot = document.querySelector(`.${FORM_CLASS}`);
-    if (!formRoot) return;
-
-    const handleFieldInteraction = () => syncAdvancedMatching(formRoot);
-
-    const bindListeners = () => {
-      const formFields = formRoot.querySelectorAll("input, textarea, select");
-      formFields.forEach((field) => {
-        field.addEventListener("input", handleFieldInteraction);
-        field.addEventListener("change", handleFieldInteraction);
-        field.addEventListener("blur", handleFieldInteraction);
-      });
+      boundForm = form;
+      syncContabilidadElectronicaAttributionFields(form);
     };
 
-    const unbindListeners = () => {
-      const formFields = formRoot.querySelectorAll("input, textarea, select");
-      formFields.forEach((field) => {
-        field.removeEventListener("input", handleFieldInteraction);
-        field.removeEventListener("change", handleFieldInteraction);
-        field.removeEventListener("blur", handleFieldInteraction);
-      });
+    const installSuccessHandler = () => {
+      if (wrappedShowThankYou || typeof window._show_thank_you !== "function") {
+        return;
+      }
+
+      originalShowThankYou = window._show_thank_you;
+      wrappedShowThankYou = (...args: unknown[]) => {
+        if (redirectStarted) return;
+        redirectStarted = true;
+
+        if (boundForm) syncAdvancedMatching(boundForm);
+        originalShowThankYou?.(...args);
+        createContabilidadElectronicaRegistrationProof();
+        window.location.assign(
+          getContabilidadElectronicaAttributionUrl(THANK_YOU_PATH),
+        );
+      };
+      window._show_thank_you = wrappedShowThankYou;
     };
 
     const observer = new MutationObserver(() => {
-      unbindListeners();
-      bindListeners();
-      syncAdvancedMatching(formRoot);
+      bindForm();
+      installSuccessHandler();
     });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-    observer.observe(formRoot, { childList: true, subtree: true });
-    bindListeners();
-    syncAdvancedMatching(formRoot);
+    const script = document.createElement("script");
+    script.id = ACTIVE_CAMPAIGN_SCRIPT_ID;
+    const embedUrl = new URL(
+      `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`,
+    );
+    embedUrl.searchParams.set("cefin_v", Date.now().toString());
+    script.src = embedUrl.toString();
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.async = true;
+    script.addEventListener("load", () => {
+      bindForm();
+      installSuccessHandler();
+    });
+    document.body.appendChild(script);
 
     return () => {
       observer.disconnect();
-      unbindListeners();
+      if (
+        wrappedShowThankYou &&
+        window._show_thank_you === wrappedShowThankYou
+      ) {
+        window._show_thank_you = originalShowThankYou;
+      }
+      script.remove();
     };
   }, [isModalOpen, syncAdvancedMatching]);
 
@@ -251,7 +298,7 @@ export default function ContabilidadElectronicaPage() {
                     Próxima sesión
                   </p>
                   <p className="mt-2 text-2xl font-black italic text-white">
-                    26 de mayo
+                    {CONTABILIDAD_ELECTRONICA_CAMPAIGN.dateLabel}
                   </p>
                 </div>
 
@@ -260,7 +307,10 @@ export default function ContabilidadElectronicaPage() {
                     Horario online
                   </p>
                   <p className="mt-2 text-2xl font-black italic text-white">
-                    11:00 AM
+                    {CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeLabel}
+                    <span className="ml-2 text-base not-italic text-white/65">
+                      {CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeZoneLabel}
+                    </span>
                   </p>
                 </div>
               </div>

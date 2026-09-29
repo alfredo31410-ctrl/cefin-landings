@@ -1,43 +1,111 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
+  initializeMetaPixel,
   META_CURRENCY,
-  trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  captureContabilidadElectronicaAttribution,
+  getContabilidadElectronicaAttributionUrl,
+  getContabilidadElectronicaEventId,
+  getContabilidadElectronicaRegistrationSession,
+  persistContabilidadElectronicaRegistrationSession,
+  type ContabilidadElectronicaRegistrationSession,
+} from "@/lib/contabilidad-electronica-tracking";
+import { CONTABILIDAD_ELECTRONICA_CAMPAIGN } from "../campaign";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/L9kXQbshY6eAotS7H3zjQr"; // Reemplazar con el link del grupo de WhatsApp.
+const WHATSAPP_URL = CONTABILIDAD_ELECTRONICA_CAMPAIGN.whatsappUrl;
 const BANNER_IMAGE_URL =
   "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/banner.png";
 
 export default function GraciasContabilidadElectronicaPage() {
+  const sessionRef =
+    useRef<ContabilidadElectronicaRegistrationSession | null>(null);
+  const joinGroupSentRef = useRef(false);
+  const [whatsappUrl, setWhatsappUrl] = useState<string>(WHATSAPP_URL);
+
   useEffect(() => {
     document.title = "Registro completado | Contabilidad Electrónica | CEFIN";
+    captureContabilidadElectronicaAttribution();
+    const session = getContabilidadElectronicaRegistrationSession();
+    sessionRef.current = session;
 
-    trackMetaEvent("CompleteRegistration", {
-      content_name: "Contabilidad Electrónica | Registro completado",
-      content_category: "Clase gratuita",
-      status: "completed",
-      value: 0,
-      currency: META_CURRENCY,
+    queueMicrotask(() => {
+      setWhatsappUrl(getContabilidadElectronicaAttributionUrl(WHATSAPP_URL));
     });
+
+    if (!session || session.completeRegistrationSent) return;
+
+    initializeMetaPixel();
+    if (typeof window.fbq !== "function") return;
+
+    session.completeRegistrationSent = true;
+    persistContabilidadElectronicaRegistrationSession(session);
+    window.fbq(
+      "track",
+      "CompleteRegistration",
+      {
+        content_name: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.contentName} | Registro completado`,
+        content_category: "Clase gratuita",
+        landing_slug: "contabilidad-electronica",
+        event_date: CONTABILIDAD_ELECTRONICA_CAMPAIGN.eventDate,
+        event_time: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeLabel} CDMX`,
+        status: "completed",
+        value: 0,
+        currency: META_CURRENCY,
+      },
+      {
+        eventID: getContabilidadElectronicaEventId(
+          "complete-registration",
+          session.id,
+        ),
+      },
+    );
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Lead", {
-      content_name: "Contabilidad Electrónica | Click grupo WhatsApp",
-      content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
-      value: 0,
-      currency: META_CURRENCY,
-    });
+    if (joinGroupSentRef.current) return;
 
-    if (!WHATSAPP_URL) return;
+    initializeMetaPixel();
+    if (typeof window.fbq !== "function") return;
 
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+    const session = sessionRef.current;
+    if (session?.joinGroupSent) return;
+
+    joinGroupSentRef.current = true;
+    const eventSessionId =
+      session?.id ??
+      (typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
+    if (session) {
+      session.joinGroupSent = true;
+      persistContabilidadElectronicaRegistrationSession(session);
+    }
+
+    window.fbq(
+      "trackCustom",
+      "JoinGroup",
+      {
+        content_name: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.contentName} | Grupo de WhatsApp`,
+        content_category: "Grupo de WhatsApp",
+        landing_slug: "contabilidad-electronica",
+        source: "thank_you_page",
+        destination: "whatsapp_group",
+        status: "clicked",
+      },
+      {
+        eventID: getContabilidadElectronicaEventId(
+          "join-group",
+          eventSessionId,
+        ),
+      },
+    );
   };
 
   return (
@@ -120,7 +188,7 @@ export default function GraciasContabilidadElectronicaPage() {
                     Fecha
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
-                    26 de mayo
+                    {CONTABILIDAD_ELECTRONICA_CAMPAIGN.dateLabel}
                   </p>
                 </div>
 
@@ -129,19 +197,22 @@ export default function GraciasContabilidadElectronicaPage() {
                     Hora
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
-                    11:00 AM (CDMX)
+                    {CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeLabel} ·{" "}
+                    {CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeZoneLabel}
                   </p>
                 </div>
               </div>
 
               <div className="mt-6">
-                <button
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={handleWhatsAppClick}
-                  className="group inline-flex w-full items-center justify-center rounded-xl bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
-                  disabled={!WHATSAPP_URL}
+                  className="group inline-flex w-full items-center justify-center rounded-xl bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] sm:w-auto sm:min-w-[360px] sm:text-lg"
                 >
                   Entrar al grupo de WhatsApp
-                </button>
+                </a>
 
                 <p className="mt-3 text-sm font-semibold text-white/55">
                   Sin este paso podrías perder el acceso y los recordatorios.
