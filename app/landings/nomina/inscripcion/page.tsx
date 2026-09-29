@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HotmartPrice } from "@/components/HotmartPrice";
 import "../nomina.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,8 @@ export const metadata: Metadata = {
 const CHECKOUT_URL =
   "https://pay.hotmart.com/F107061566L?off=rk750909&checkoutMode=10";
 const PRODUCT_NAME = "Especialista en Nómina Estratégica CEFIN";
-const PRICE = "$5,987 MXN";
+
+export const revalidate = 300;
 
 const modules = [
   ["A", "Asesor fiscal de sueldos y salarios", "Revisa ISR, ingresos gravados y exentos, retenciones, subsidio y obligaciones fiscales."],
@@ -90,7 +92,7 @@ export default function NominaInscripcionPage() {
             <span>Material descargable</span>
           </div>
           <CheckoutButton />
-          <p className="nomina-sale-note">{PRICE} · IVA incluido · Pago seguro por Hotmart.</p>
+          <p className="nomina-sale-note"><HotmartPrice offer="nominaInscripcion" /> · IVA incluido · Pago seguro por Hotmart.</p>
         </div>
 
         <div className="nomina-sale-portrait">
@@ -211,7 +213,7 @@ export default function NominaInscripcionPage() {
             <div>
               <p className="section-kicker">{PRODUCT_NAME}</p>
               <h2>Entra a una ruta profesional completa.</h2>
-              <p className="nomina-sale-price">{PRICE} <small>IVA incluido</small></p>
+              <p className="nomina-sale-price"><HotmartPrice offer="nominaInscripcion" /> <small>IVA incluido</small></p>
             </div>
             <CheckoutButton />
           </div>
