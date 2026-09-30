@@ -55,6 +55,7 @@ test("uses the confirmed Meta Pixel without landing-specific secrets", async () 
       "../app/landings/contabilidad-electronica/page.tsx",
       "../app/landings/contabilidad-electronica/gracias/page.tsx",
       "../app/landings/contabilidad-electronica/campaign.ts",
+      "../lib/contabilidad-electronica-meta.ts",
       "../lib/contabilidad-electronica-tracking.ts",
     ].map((path) => readFile(new URL(path, import.meta.url), "utf8")),
   );
@@ -120,7 +121,7 @@ test("preserves attribution when building the thank-you and WhatsApp URLs", () =
   );
 });
 
-test("gates CompleteRegistration behind an ActiveCampaign success proof", async () => {
+test("tracks CompleteRegistration for both ActiveCampaign success paths", async () => {
   const landingSource = await readFile(
     new URL(
       "../app/landings/contabilidad-electronica/page.tsx",
@@ -135,17 +136,27 @@ test("gates CompleteRegistration behind an ActiveCampaign success proof", async 
     ),
     "utf8",
   );
+  const metaSource = await readFile(
+    new URL("../lib/contabilidad-electronica-meta.ts", import.meta.url),
+    "utf8",
+  );
 
   assert.match(landingSource, /wrappedShowThankYou/);
   assert.match(
     landingSource,
-    /createContabilidadElectronicaRegistrationProof\(\)/,
+    /addEventListener\("submit", handleFormSubmit, true\)/,
   );
   assert.match(
-    thankYouSource,
-    /if \(!session \|\| session\.completeRegistrationSent\) return;/,
+    landingSource,
+    /createContabilidadElectronicaRegistrationProof\(\)/,
   );
-  assert.match(thankYouSource, /"CompleteRegistration"/);
+  assert.match(landingSource, /"activecampaign_callback"/);
+  assert.match(thankYouSource, /"thank_you_redirect"/);
+  assert.match(
+    metaSource,
+    /if \(session\.completeRegistrationSent\) return false;/,
+  );
+  assert.match(metaSource, /"CompleteRegistration"/);
   assert.match(thankYouSource, /"JoinGroup"/);
   assert.doesNotMatch(thankYouSource, /trackMetaEvent\("Lead"/);
 });
@@ -166,6 +177,9 @@ test("does not create a registration session for a manual thank-you visit", () =
 
     const proof = createContabilidadElectronicaRegistrationProof();
     assert.ok(proof?.id);
+
+    const repeatedProof = createContabilidadElectronicaRegistrationProof();
+    assert.equal(repeatedProof?.id, proof.id);
 
     const session = getContabilidadElectronicaRegistrationSession();
     assert.equal(session?.id, proof.id);

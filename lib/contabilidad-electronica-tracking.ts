@@ -196,12 +196,22 @@ function isValidProof(value: unknown, ttlMs: number): value is RegistrationProof
 export function createContabilidadElectronicaRegistrationProof() {
   if (typeof window === "undefined") return null;
 
-  const proof = {
-    id: createId(),
-    createdAt: Date.now(),
-  } satisfies RegistrationProof;
-
   try {
+    const pendingSerialized = window.sessionStorage.getItem(
+      REGISTRATION_PENDING_KEY,
+    );
+    if (pendingSerialized) {
+      const pending = JSON.parse(pendingSerialized) as unknown;
+      if (isValidProof(pending, REGISTRATION_PENDING_TTL_MS)) {
+        return pending;
+      }
+    }
+
+    const proof = {
+      id: createId(),
+      createdAt: Date.now(),
+    } satisfies RegistrationProof;
+
     window.sessionStorage.setItem(
       REGISTRATION_PENDING_KEY,
       JSON.stringify(proof),

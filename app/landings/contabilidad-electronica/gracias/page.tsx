@@ -6,8 +6,8 @@ import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   initializeMetaPixel,
-  META_CURRENCY,
 } from "@/lib/meta-pixel";
+import { trackContabilidadElectronicaCompleteRegistration } from "@/lib/contabilidad-electronica-meta";
 import {
   captureContabilidadElectronicaAttribution,
   getContabilidadElectronicaAttributionUrl,
@@ -38,32 +38,11 @@ export default function GraciasContabilidadElectronicaPage() {
       setWhatsappUrl(getContabilidadElectronicaAttributionUrl(WHATSAPP_URL));
     });
 
-    if (!session || session.completeRegistrationSent) return;
+    if (!session) return;
 
-    initializeMetaPixel();
-    if (typeof window.fbq !== "function") return;
-
-    session.completeRegistrationSent = true;
-    persistContabilidadElectronicaRegistrationSession(session);
-    window.fbq(
-      "track",
-      "CompleteRegistration",
-      {
-        content_name: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.contentName} | Registro completado`,
-        content_category: "Clase gratuita",
-        landing_slug: "contabilidad-electronica",
-        event_date: CONTABILIDAD_ELECTRONICA_CAMPAIGN.eventDate,
-        event_time: `${CONTABILIDAD_ELECTRONICA_CAMPAIGN.timeLabel} CDMX`,
-        status: "completed",
-        value: 0,
-        currency: META_CURRENCY,
-      },
-      {
-        eventID: getContabilidadElectronicaEventId(
-          "complete-registration",
-          session.id,
-        ),
-      },
+    trackContabilidadElectronicaCompleteRegistration(
+      session,
+      "thank_you_redirect",
     );
   }, []);
 

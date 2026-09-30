@@ -12,8 +12,10 @@ import {
   captureContabilidadElectronicaAttribution,
   createContabilidadElectronicaRegistrationProof,
   getContabilidadElectronicaAttributionUrl,
+  getContabilidadElectronicaRegistrationSession,
   syncContabilidadElectronicaAttributionFields,
 } from "@/lib/contabilidad-electronica-tracking";
+import { trackContabilidadElectronicaCompleteRegistration } from "@/lib/contabilidad-electronica-meta";
 import { CONTABILIDAD_ELECTRONICA_CAMPAIGN } from "./campaign";
 
 const ACTIVE_CAMPAIGN_FORM_ID =
@@ -136,14 +138,24 @@ export default function ContabilidadElectronicaPage() {
     let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
     let redirectStarted = false;
 
+    const handleFormSubmit = () => {
+      if (!boundForm || !boundForm.checkValidity()) return;
+
+      syncContabilidadElectronicaAttributionFields(boundForm);
+      syncAdvancedMatching(boundForm);
+      createContabilidadElectronicaRegistrationProof();
+    };
+
     const bindForm = () => {
       const form = document.querySelector<HTMLFormElement>(
         `.${FORM_CLASS} form`,
       );
       if (!form || form === boundForm) return;
 
+      boundForm?.removeEventListener("submit", handleFormSubmit, true);
       boundForm = form;
       syncContabilidadElectronicaAttributionFields(form);
+      form.addEventListener("submit", handleFormSubmit, true);
     };
 
     const installSuccessHandler = () => {
@@ -156,9 +168,16 @@ export default function ContabilidadElectronicaPage() {
         if (redirectStarted) return;
         redirectStarted = true;
 
-        if (boundForm) syncAdvancedMatching(boundForm);
-        originalShowThankYou?.(...args);
         createContabilidadElectronicaRegistrationProof();
+        const session = getContabilidadElectronicaRegistrationSession();
+        if (session) {
+          trackContabilidadElectronicaCompleteRegistration(
+            session,
+            "activecampaign_callback",
+          );
+        }
+
+        originalShowThankYou?.(...args);
         window.location.assign(
           getContabilidadElectronicaAttributionUrl(THANK_YOU_PATH),
         );
@@ -190,6 +209,7 @@ export default function ContabilidadElectronicaPage() {
 
     return () => {
       observer.disconnect();
+      boundForm?.removeEventListener("submit", handleFormSubmit, true);
       if (
         wrappedShowThankYou &&
         window._show_thank_you === wrappedShowThankYou
