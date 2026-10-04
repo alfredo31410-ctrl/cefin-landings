@@ -5,5 +5,5 @@ export const CONTABILIDAD_ELECTRONICA_CAMPAIGN = {
   eventDate: "2026-10-06",
   timeLabel: "11:00 a. m.",
   timeZoneLabel: "Hora CDMX",
-  whatsappUrl: "https://chat.whatsapp.com/EBdVO3j1ot21ItKlDBqJni",
+  whatsappUrl: "https://chat.whatsapp.com/JWq81H9FDXjL8BaHt2bO0m",
 } as const;
