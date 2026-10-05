@@ -8,11 +8,21 @@ const routeDirectory = new URL(
   import.meta.url,
 );
 
-test("centralizes the confirmed commercial data without inventing checkout", () => {
+test("centralizes the confirmed commercial data and official checkout", () => {
+  const checkoutUrl = new URL(productConfig.checkoutUrl);
+
   assert.equal(productConfig.productName, "Reformas Fiscales 2027");
   assert.equal(productConfig.price, 297);
   assert.equal(productConfig.originalPrice, null);
-  assert.equal(productConfig.checkoutUrl, null);
+  assert.equal(
+    productConfig.checkoutUrl,
+    "https://pay.hotmart.com/C107834341X?off=ih360u7p&checkoutMode=10",
+  );
+  assert.equal(checkoutUrl.hostname, "pay.hotmart.com");
+  assert.equal(checkoutUrl.pathname, "/C107834341X");
+  assert.equal(checkoutUrl.searchParams.get("off"), "ih360u7p");
+  assert.equal(checkoutUrl.searchParams.get("checkoutMode"), "10");
+  assert.equal([...checkoutUrl.searchParams].length, 2);
   assert.equal(productConfig.trackingValue, 297);
   assert.equal(productConfig.cta, "INSCRIBIRME YA");
   assert.equal(productConfig.fallbackCta, "INSCRIBIRME YA");
@@ -40,6 +50,10 @@ test("tracks CTA clicks and only initiates checkout when a URL exists", async ()
   assert.match(ctaSource, /"InitiateCheckout"/);
   assert.match(ctaSource, /productConfig\.trackingValue !== null/);
   assert.match(ctaSource, /fallbackChildren/);
+  assert.equal((ctaSource.match(/"InitiateCheckout"/g) ?? []).length, 1);
+  assert.doesNotMatch(ctaSource, /event\.currentTarget\.href\s*=/);
+  assert.doesNotMatch(ctaSource, /data-no-xcod-url/);
+  assert.doesNotMatch(ctaSource, /data-vk-skip-decoration/);
   assert.ok(
     ctaSource.indexOf("if (!productConfig.checkoutUrl) return;") <
       ctaSource.indexOf('trackMetaEvent("InitiateCheckout"'),

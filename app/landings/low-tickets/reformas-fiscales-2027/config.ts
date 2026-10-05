@@ -22,7 +22,8 @@ export const productConfig: ProductConfig = {
   productName: "Reformas Fiscales 2027",
   price: 297,
   originalPrice: null,
-  checkoutUrl: null,
+  checkoutUrl:
+    "https://pay.hotmart.com/C107834341X?off=ih360u7p&checkoutMode=10",
   cta: "INSCRIBIRME YA",
   fallbackCta: "INSCRIBIRME YA",
   trackingValue: 297,
