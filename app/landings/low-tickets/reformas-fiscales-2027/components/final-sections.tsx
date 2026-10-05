@@ -101,29 +101,26 @@ export function FinalSections() {
                 {productConfig.price !== null ? (
                   <>
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
-                      Inversión
+                      Acceso al curso
                     </p>
                     <p className="mt-2 text-5xl font-black tracking-[-0.05em] text-[#e8bd45] sm:text-6xl">
                       {formatPrice(productConfig.price)}
+                      <span className="ml-2 text-xl tracking-normal text-[#f5f3ee] sm:text-2xl">
+                        MXN
+                      </span>
+                    </p>
+                    <p className="mt-3 text-base font-bold text-[#f5f3ee]">
+                      Pago único
                     </p>
                   </>
-                ) : (
-                  <>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
-                      Información comercial en preparación
-                    </p>
-                    <p className="mt-3 text-3xl font-black leading-tight">
-                      Conoce el contenido antes de que abramos inscripciones.
-                    </p>
-                  </>
-                )}
+                ) : null}
 
                 <CtaLink
                   placement="offer"
-                  fallbackHref="#preguntas"
+                  fallbackHref="#oferta"
                   fallbackChildren={
                     <>
-                      CONSULTAR PREGUNTAS FRECUENTES
+                      INSCRIBIRME YA
                       <span className="ml-3 text-xl">→</span>
                     </>
                   }
@@ -132,12 +129,9 @@ export function FinalSections() {
                   {productConfig.cta}<span className="ml-3 text-xl">→</span>
                 </CtaLink>
 
-                {!productConfig.checkoutUrl ? (
-                  <p className="mt-4 text-center text-xs leading-relaxed text-[#a8b2bc]">
-                    Fecha, modalidad, duración, acceso y precio se publicarán
-                    únicamente cuando estén confirmados.
-                  </p>
-                ) : null}
+                <p className="mt-4 text-center text-xs leading-relaxed text-[#a8b2bc]">
+                  Pago procesado de forma segura por Hotmart
+                </p>
               </aside>
             </div>
           </div>
@@ -186,7 +180,7 @@ export function FinalSections() {
               fallbackHref="#oferta"
               fallbackChildren={
                 <>
-                  QUIERO PREPARARME PARA 2027
+                  INSCRIBIRME YA
                   <span className="ml-3 text-xl">→</span>
                 </>
               }

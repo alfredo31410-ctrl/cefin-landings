@@ -86,23 +86,23 @@ export function HeroAndPain() {
               Una actualización práctica para identificar los movimientos que
               importan, comparar escenarios y saber qué revisar antes de enero.
             </p>
-            <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <div className="mt-7">
               <CtaLink
                 placement="hero"
                 fallbackHref="#oferta"
                 fallbackChildren={
                   <>
-                    QUIERO PREPARARME PARA 2027
+                    INSCRIBIRME YA
                     <span className="ml-3 text-xl">→</span>
                   </>
                 }
-                className="inline-flex min-h-16 w-full items-center justify-center bg-[#d7a928] px-6 text-center text-sm font-black text-[#0b1118] shadow-[0_18px_50px_rgba(0,0,0,.28)] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto sm:text-base"
+                className="inline-flex min-h-[68px] w-full items-center justify-center bg-[#d7a928] px-8 text-center text-base font-black text-[#0b1118] shadow-[0_18px_50px_rgba(0,0,0,.28)] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto"
               >
                 {productConfig.cta}<span className="ml-3 text-xl">→</span>
               </CtaLink>
-              <span className="max-w-[260px] text-xs font-bold uppercase leading-relaxed tracking-[0.12em] text-[#a8b2bc]">
+              <p className="mt-4 max-w-[430px] border-l border-white/15 pl-3 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] text-[#a8b2bc] sm:text-xs">
                 Iniciativa · corte 05 oct 2026 · sujeta a cambios
-              </span>
+              </p>
             </div>
           </div>
         </div>

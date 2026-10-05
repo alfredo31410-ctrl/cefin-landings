@@ -20,13 +20,13 @@ export type ProductConfig = {
  */
 export const productConfig: ProductConfig = {
   productName: "Reformas Fiscales 2027",
-  price: null,
+  price: 297,
   originalPrice: null,
   checkoutUrl: null,
-  cta: "QUIERO PREPARARME PARA 2027",
-  fallbackCta: "REVISAR EL CONTENIDO",
-  trackingValue: null,
-  modality: null,
+  cta: "INSCRIBIRME YA",
+  fallbackCta: "INSCRIBIRME YA",
+  trackingValue: 297,
+  modality: "Curso online",
   duration: null,
   access: null,
   materials: [],

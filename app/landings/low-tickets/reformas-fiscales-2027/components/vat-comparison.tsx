@@ -1,4 +1,6 @@
+import { productConfig } from "../config";
 import styles from "../reformas.module.css";
+import { CtaLink } from "./cta-link";
 
 const scenarios = [
   {
@@ -148,7 +150,7 @@ export function VatComparison() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-7 border-y border-white/10 py-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+        <div className="mt-12 grid gap-7 border-y border-white/10 py-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
             Información → criterio → recomendación
           </p>
@@ -162,6 +164,24 @@ export function VatComparison() {
               diferentes. El valor está en saber qué revisar antes de recomendar
               un esquema.
             </p>
+            <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-md font-black text-[#f5f3ee]">
+                Prepárate para responder con criterio en 2027.
+              </p>
+              <CtaLink
+                placement="vat_bridge"
+                fallbackHref="#oferta"
+                fallbackChildren={
+                  <>
+                    INSCRIBIRME YA
+                    <span className="ml-3 text-xl">→</span>
+                  </>
+                }
+                className="inline-flex min-h-14 w-full shrink-0 items-center justify-center bg-[#d7a928] px-7 text-center text-sm font-black text-[#0b1118] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto"
+              >
+                {productConfig.cta}<span className="ml-3 text-xl">→</span>
+              </CtaLink>
+            </div>
           </div>
         </div>
       </div>

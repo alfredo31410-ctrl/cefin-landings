@@ -8,13 +8,15 @@ const routeDirectory = new URL(
   import.meta.url,
 );
 
-test("keeps unconfirmed commercial data hidden in central config", () => {
+test("centralizes the confirmed commercial data without inventing checkout", () => {
   assert.equal(productConfig.productName, "Reformas Fiscales 2027");
-  assert.equal(productConfig.price, null);
+  assert.equal(productConfig.price, 297);
   assert.equal(productConfig.originalPrice, null);
   assert.equal(productConfig.checkoutUrl, null);
-  assert.equal(productConfig.trackingValue, null);
-  assert.equal(productConfig.fallbackCta, "REVISAR EL CONTENIDO");
+  assert.equal(productConfig.trackingValue, 297);
+  assert.equal(productConfig.cta, "INSCRIBIRME YA");
+  assert.equal(productConfig.fallbackCta, "INSCRIBIRME YA");
+  assert.equal(productConfig.modality, "Curso online");
 });
 
 test("implements one semantic H1 and the confirmed metadata", async () => {
@@ -38,6 +40,25 @@ test("tracks CTA clicks and only initiates checkout when a URL exists", async ()
   assert.match(ctaSource, /"InitiateCheckout"/);
   assert.match(ctaSource, /productConfig\.trackingValue !== null/);
   assert.match(ctaSource, /fallbackChildren/);
+  assert.ok(
+    ctaSource.indexOf("if (!productConfig.checkoutUrl) return;") <
+      ctaSource.indexOf('trackMetaEvent("InitiateCheckout"'),
+  );
+});
+
+test("presents four consistent sales CTAs and the confirmed price", async () => {
+  const [heroSource, vatSource, finalSource] = await Promise.all([
+    readFile(new URL("components/hero-and-pain.tsx", routeDirectory), "utf8"),
+    readFile(new URL("components/vat-comparison.tsx", routeDirectory), "utf8"),
+    readFile(new URL("components/final-sections.tsx", routeDirectory), "utf8"),
+  ]);
+  const salesSource = [heroSource, vatSource, finalSource].join("\n");
+
+  assert.equal((salesSource.match(/INSCRIBIRME YA/g) ?? []).length, 4);
+  assert.match(finalSource, /Pago único/);
+  assert.match(finalSource, /Pago procesado de forma segura por Hotmart/);
+  assert.doesNotMatch(salesSource, /Información comercial en preparación/);
+  assert.doesNotMatch(salesSource, /Conoce el contenido antes de que abramos inscripciones/);
 });
 
 test("keeps the IVA comparison responsive without a table", async () => {
