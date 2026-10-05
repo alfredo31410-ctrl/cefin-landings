@@ -1,0 +1,99 @@
+.landing {
+  --ink: #17141d;
+  --wine: #5a1832;
+  --wine-deep: #301024;
+  --paper: #fff4ea;
+  --paper-strong: #f1e3d5;
+  --periwinkle: #afcbff;
+  --cobalt: #4967d8;
+  --orange: #ff6b35;
+  scroll-behavior: smooth;
+}
+
+.grid {
+  background-image:
+    linear-gradient(rgba(90, 24, 50, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90, 24, 50, 0.07) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.noise {
+  background-image: radial-gradient(rgba(48, 16, 36, 0.16) 0.6px, transparent 0.6px);
+  background-size: 7px 7px;
+}
+
+.reveal {
+  animation: reveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delayOne {
+  animation-delay: 0.12s;
+}
+
+.delayTwo {
+  animation-delay: 0.22s;
+}
+
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.cta::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.5) 48%, transparent 74%);
+  transform: translateX(-145%);
+  animation: shine 4.8s ease-in-out infinite;
+}
+
+.ring {
+  box-shadow:
+    0 0 0 1px rgba(175, 203, 255, 0.38),
+    0 28px 80px rgba(48, 16, 36, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.landing :global(a:focus-visible),
+.landing :global(summary:focus-visible) {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0%,
+  68% {
+    transform: translateX(-145%);
+  }
+
+  92%,
+  100% {
+    transform: translateX(145%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .cta::after {
+    animation: none;
+  }
+}
