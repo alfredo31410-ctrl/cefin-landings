@@ -51,12 +51,13 @@ test("keeps the IVA comparison responsive without a table", async () => {
   assert.match(vatSource, /El 7% no es automáticamente mejor/);
 });
 
-test("keeps the low-ticket story to six sections", async () => {
+test("keeps the low-ticket story concise with a local instructor section", async () => {
   const componentFiles = [
     "components/hero-and-pain.tsx",
     "components/reform-sections.tsx",
     "components/vat-comparison.tsx",
     "components/audience-learning-transformation.tsx",
+    "components/instructor-section.tsx",
     "components/final-sections.tsx",
   ];
   const sources = await Promise.all(
@@ -67,6 +68,7 @@ test("keeps the low-ticket story to six sections", async () => {
     0,
   );
 
-  assert.equal(sectionCount, 6);
+  assert.equal(sectionCount, 7);
   assert.doesNotMatch(sources.join("\n"), /Contador reactivo/);
+  assert.match(sources.join("\n"), /instructorConfig\.image/);
 });

@@ -49,13 +49,13 @@ export function ReformSections() {
   return (
     <section
       id="cambios"
-      className="relative overflow-hidden bg-[#301024] text-white"
+      className="relative overflow-hidden bg-[#101c26] text-[#f5f3ee]"
     >
       <div className={`${styles.grid} absolute inset-0 opacity-15`} />
       <div className="relative mx-auto max-w-[1260px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#afcbff]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
               Radar fiscal 2027
             </p>
             <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
@@ -78,28 +78,31 @@ export function ReformSections() {
           {radarItems.map((item) => (
             <article
               key={item.number}
-              className="group flex min-h-[300px] flex-col border-b border-r border-white/15 bg-white/[0.035] p-7 transition duration-300 hover:bg-[#5a1832] sm:p-8"
+              className="group flex min-h-[300px] flex-col border-b border-r border-white/10 bg-[#16232e] p-7 transition duration-300 hover:bg-[#1b2b38] sm:p-8"
             >
               <div className="flex items-center justify-between gap-4">
-                <span className="text-xs font-black tracking-[0.18em] text-[#afcbff]">
+                <span className="text-xs font-black tracking-[0.18em] text-[#d7a928]">
                   {item.number}
                 </span>
-                <span className="text-right text-[10px] font-black uppercase tracking-[0.17em] text-white/55">
+                <span className="flex flex-wrap items-center justify-end gap-2 text-right text-[10px] font-black uppercase tracking-[0.15em] text-[#a8b2bc]">
                   {item.tag}
+                  <span className="border border-[#f59e0b]/35 bg-[#f59e0b]/10 px-2 py-1 text-[8px] text-[#fbbf24]">
+                    Propuesto
+                  </span>
                 </span>
               </div>
-              <p className="mt-8 text-[clamp(3.2rem,6vw,5rem)] font-black leading-none tracking-[-0.07em] text-[#afcbff]">
+              <p className="mt-8 text-[clamp(3.2rem,6vw,5rem)] font-black leading-none tracking-[-0.07em] text-[#d7a928]">
                 {item.value}
               </p>
               <h3 className="mt-4 text-xl font-black leading-tight text-white">
                 {item.title}
               </h3>
-              <p className="mt-4 leading-relaxed text-white/65">{item.body}</p>
+              <p className="mt-4 leading-relaxed text-[#a8b2bc]">{item.body}</p>
             </article>
           ))}
         </div>
 
-        <div className="mt-8 grid gap-4 border border-[#afcbff]/30 bg-[#afcbff]/10 p-5 text-sm leading-relaxed text-white/78 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="mt-8 grid gap-4 border border-[#d7a928]/25 bg-[#d7a928]/[0.06] p-5 text-sm leading-relaxed text-[#a8b2bc] lg:grid-cols-[1fr_auto] lg:items-center">
           <p>
             <strong className="text-white">Estatus y fecha de corte:</strong>{" "}
             iniciativa del Paquete Económico 2027, revisada al 5 de octubre de
@@ -112,7 +115,7 @@ export function ReformSections() {
             rel="noreferrer"
             data-no-xcod-url=""
             suppressHydrationWarning
-            className="font-black text-[#afcbff] underline decoration-[#ff6b35] decoration-2 underline-offset-4 transition hover:text-white"
+            className="font-black text-[#e8bd45] underline decoration-[#d7a928] decoration-2 underline-offset-4 transition hover:text-white"
           >
             Ver fuente oficial ↗
           </a>

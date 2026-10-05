@@ -3,52 +3,48 @@ import styles from "../reformas.module.css";
 const scenarios = [
   {
     id: "A",
-    accent: "mint",
-    rows: [
-      ["Ingresos", "$100,000"],
-      ["IVA trasladado", "$16,000"],
-      ["IVA acreditable", "$2,000"],
-      ["Esquema tradicional", "$14,000"],
-      ["Opción 7%", "$7,000"],
-    ],
+    income: "$100,000",
+    transferred: "$16,000",
+    creditable: "$2,000",
+    traditional: "$14,000",
+    proposed: "$7,000",
+    favorable: "proposed",
     result: "En este ejemplo, la opción del 7% sería más favorable.",
   },
   {
     id: "B",
-    accent: "orange",
-    rows: [
-      ["Ingresos", "$100,000"],
-      ["IVA trasladado", "$16,000"],
-      ["IVA acreditable", "$12,000"],
-      ["Esquema tradicional", "$4,000"],
-      ["Opción 7%", "$7,000"],
-    ],
+    income: "$100,000",
+    transferred: "$16,000",
+    creditable: "$12,000",
+    traditional: "$4,000",
+    proposed: "$7,000",
+    favorable: "traditional",
     result: "En este ejemplo, el esquema tradicional sería más favorable.",
   },
-];
+] as const;
 
 export function VatComparison() {
   return (
-    <section className="relative overflow-hidden bg-[#17141d] text-white">
-      <div className={`${styles.grid} absolute inset-0 opacity-15`} />
-      <div className="absolute right-[-15%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[#4967d8]/20 blur-3xl" />
+    <section className="relative overflow-hidden bg-[#0b1118] text-[#f5f3ee]">
+      <div className={`${styles.grid} absolute inset-0 opacity-20`} />
+      <div className="absolute right-[-15%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[#d7a928]/[0.06] blur-3xl" />
 
       <div className="relative mx-auto max-w-[1240px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[.65fr_1.35fr] lg:items-end">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#afcbff]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
               La comparación que importa
             </p>
             <h2 className="mt-4 text-5xl font-black leading-[.96] tracking-[-0.05em] sm:text-7xl">
-              ¿IVA tradicional o <span className="text-[#ff6b35]">7%?</span>
+              ¿IVA tradicional o <span className="text-[#d7a928]">7%?</span>
             </h2>
           </div>
-          <div className="border-l border-white/16 pl-6 sm:pl-8">
+          <div className="border-l border-white/12 pl-6 sm:pl-8">
             <p className="text-xl font-black leading-tight sm:text-2xl">
               Una de las propuestas más llamativas rumbo a 2027 no
               necesariamente le conviene a todos.
             </p>
-            <p className="mt-4 leading-relaxed text-white/58">
+            <p className="mt-4 leading-relaxed text-[#a8b2bc]">
               Se plantea una opción para determinados contribuyentes RESICO con
               actividades gravadas al 16%: calcular un pago definitivo mensual
               equivalente al 7% de las contraprestaciones efectivamente
@@ -58,77 +54,115 @@ export function VatComparison() {
         </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {scenarios.map((scenario) => {
-            const isMint = scenario.accent === "mint";
-
-            return (
-              <article
-                key={scenario.id}
-                className={`${styles.ring} overflow-hidden bg-[#251927]`}
-              >
-                <div
-                  className={`flex items-center justify-between px-6 py-5 sm:px-8 ${
-                    isMint
-                      ? "bg-[#afcbff] text-[#17141d]"
-                      : "bg-[#ff6b35] text-[#17141d]"
-                  }`}
-                >
-                  <p className="text-xs font-black uppercase tracking-[0.2em]">
-                    Escenario
+          {scenarios.map((scenario) => (
+            <article
+              key={scenario.id}
+              className={`${styles.ring} overflow-hidden bg-[#16232e]`}
+            >
+              <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-8">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#a8b2bc]">
+                    Comparativo simplificado
                   </p>
-                  <p className="text-4xl font-black">{scenario.id}</p>
+                  <p className="mt-1 text-lg font-black">Escenario {scenario.id}</p>
                 </div>
+                <span className="border border-[#f59e0b]/35 bg-[#f59e0b]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.16em] text-[#fbbf24]">
+                  Propuesto
+                </span>
+              </div>
 
-                <dl className="px-6 py-4 sm:px-8">
-                  {scenario.rows.map(([label, value], index) => (
-                    <div
-                      key={label}
-                      className={`flex items-center justify-between gap-5 border-b border-white/10 py-3 ${
-                        index >= 3 ? "font-black" : "text-white/65"
-                      }`}
-                    >
-                      <dt className="text-sm sm:text-base">{label}</dt>
-                      <dd
-                        className={`shrink-0 text-lg sm:text-xl ${
-                          index === 4
-                            ? isMint
-                              ? "text-[#afcbff]"
-                              : "text-[#ff9a73]"
-                            : ""
-                        }`}
-                      >
-                        {value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
+              <dl className="grid grid-cols-3 gap-px bg-white/10">
+                {[
+                  ["Ingresos", scenario.income],
+                  ["IVA trasladado", scenario.transferred],
+                  ["IVA acreditable", scenario.creditable],
+                ].map(([label, value]) => (
+                  <div key={label} className="bg-[#16232e] p-4 sm:p-5">
+                    <dt className="text-[10px] font-black uppercase leading-relaxed tracking-[0.1em] text-[#a8b2bc]">
+                      {label}
+                    </dt>
+                    <dd className="mt-2 text-base font-black sm:text-lg">{value}</dd>
+                  </div>
+                ))}
+              </dl>
 
-                <p
-                  className={`mx-6 mb-6 p-4 text-base font-black leading-snug sm:mx-8 ${
-                    isMint
-                      ? "bg-[#afcbff]/10 text-[#d5e2ff]"
-                      : "bg-[#ff6b35]/10 text-[#ffb89f]"
-                  }`}
-                >
-                  {scenario.result}
-                </p>
-              </article>
-            );
-          })}
+              <div className="grid gap-px bg-white/10 sm:grid-cols-2">
+                <div className="bg-[#101c26] p-6 sm:p-7">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#a8b2bc]">
+                    Tradicional
+                  </p>
+                  <p
+                    className={`mt-3 text-4xl font-black tracking-[-0.05em] sm:text-5xl ${
+                      scenario.favorable === "traditional"
+                        ? "text-[#22c55e]"
+                        : "text-[#f5f3ee]"
+                    }`}
+                  >
+                    {scenario.traditional}
+                  </p>
+                  {scenario.favorable === "traditional" ? (
+                    <p className="mt-3 text-xs font-black uppercase tracking-[0.12em] text-[#22c55e]">
+                      Menor en este ejemplo
+                    </p>
+                  ) : null}
+                </div>
+                <div className="bg-[#101c26] p-6 sm:p-7">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#fbbf24]">
+                    Opción propuesta · 7%
+                  </p>
+                  <p
+                    className={`mt-3 text-4xl font-black tracking-[-0.05em] sm:text-5xl ${
+                      scenario.favorable === "proposed"
+                        ? "text-[#22c55e]"
+                        : "text-[#f5f3ee]"
+                    }`}
+                  >
+                    {scenario.proposed}
+                  </p>
+                  {scenario.favorable === "proposed" ? (
+                    <p className="mt-3 text-xs font-black uppercase tracking-[0.12em] text-[#22c55e]">
+                      Menor en este ejemplo
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
+              <p className="border-t border-white/10 px-6 py-5 font-black leading-snug text-[#f5f3ee] sm:px-8">
+                {scenario.result}
+              </p>
+            </article>
+          ))}
         </div>
 
-        <div className="mt-7 grid gap-5 border border-[#afcbff]/30 bg-[#afcbff]/[0.08] p-6 sm:p-8 lg:grid-cols-[1fr_.8fr] lg:items-center">
+        <div className="mt-7 grid gap-5 border border-[#d7a928]/25 bg-[#d7a928]/[0.05] p-6 sm:p-8 lg:grid-cols-[1fr_.8fr] lg:items-center">
           <p className="text-2xl font-black leading-tight sm:text-3xl">
             El 7% no es automáticamente mejor.
-            <span className="mt-2 block text-[#afcbff]">
+            <span className="mt-2 block text-[#d7a928]">
               La clave está en saber hacer los números.
             </span>
           </p>
-          <p className="border-l border-white/16 pl-5 text-xs leading-relaxed text-white/72">
+          <p className="border-l border-white/12 pl-5 text-xs leading-relaxed text-[#a8b2bc]">
             Ejemplos simplificados para fines educativos. Suponen ingresos antes
             de IVA y no incorporan retenciones ni todos los requisitos que
             podrían resultar aplicables a un caso real.
           </p>
+        </div>
+
+        <div className="mt-12 grid gap-7 border-y border-white/10 py-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
+            Información → criterio → recomendación
+          </p>
+          <div>
+            <h3 className="text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
+              El problema no será conocer el nuevo porcentaje. Será saber cuándo
+              aplicarlo.
+            </h3>
+            <p className="mt-4 max-w-3xl leading-relaxed text-[#a8b2bc]">
+              Dos clientes pueden tener ingresos similares y requerir análisis
+              diferentes. El valor está en saber qué revisar antes de recomendar
+              un esquema.
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -38,3 +38,18 @@ export const productTracking = {
   contentName: productConfig.productName,
   contentCategory: "Actualización fiscal / Low ticket",
 };
+
+/**
+ * Información reutilizada de perfiles institucionales ya publicados en el
+ * proyecto. Mantener aquí únicamente datos verificables.
+ */
+export const instructorConfig = {
+  name: "Mtro. Alfredo Cobos",
+  role: "Contador público y maestro en impuestos",
+  organization: "Fundador de CEFIN · Director de la Red CEFIN",
+  bio: "Cuenta con más de 15 años de experiencia en asesoría fiscal, consultoría empresarial y capacitación profesional.",
+  image: "/alfredo.png",
+  imageAlt: "Mtro. Alfredo Cobos, instructor de CEFIN",
+  imageWidth: 639,
+  imageHeight: 628,
+};

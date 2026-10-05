@@ -15,10 +15,10 @@ const outcomes = [
 
 export function AudienceLearningTransformation() {
   return (
-    <section className="bg-[#f1e3d5] text-[#17141d]">
+    <section className="bg-[#101c26] text-[#f5f3ee]">
       <div className="mx-auto max-w-[1220px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="max-w-[820px]">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#4967d8]">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
             Del dato al criterio
           </p>
           <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
@@ -26,21 +26,21 @@ export function AudienceLearningTransformation() {
           </h2>
         </div>
 
-        <div className="mt-12 grid overflow-hidden border border-[#5a1832]/15 lg:grid-cols-[.85fr_1.15fr]">
-          <div className="bg-[#fffaf5]/80 p-7 sm:p-10">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#5a1832]">
+        <div className="mt-12 grid overflow-hidden border border-white/10 lg:grid-cols-[.85fr_1.15fr]">
+          <div className="bg-[#0b1118] p-7 sm:p-10">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
               Especialmente útil para
             </p>
-            <ul className="mt-7 border-t border-[#5a1832]/12">
+            <ul className="mt-7 border-t border-white/10">
               {audience.map((item, index) => (
                 <li
                   key={item}
-                  className="grid grid-cols-[34px_1fr] gap-3 border-b border-[#5a1832]/12 py-4"
+                  className="grid grid-cols-[34px_1fr] gap-3 border-b border-white/10 py-4"
                 >
-                  <span className="text-xs font-black text-[#4967d8]">
+                  <span className="text-xs font-black text-[#d7a928]">
                     0{index + 1}
                   </span>
-                  <span className="font-bold leading-relaxed text-black/72">
+                  <span className="font-bold leading-relaxed text-[#c4ccd3]">
                     {item}
                   </span>
                 </li>
@@ -48,22 +48,22 @@ export function AudienceLearningTransformation() {
             </ul>
           </div>
 
-          <div className="bg-[#5a1832] p-7 text-white sm:p-10">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#afcbff]">
+          <div className="bg-[#16232e] p-7 text-[#f5f3ee] sm:p-10">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
               Al terminar podrás
             </p>
             <ol className="mt-7 grid gap-px bg-white/12 sm:grid-cols-2">
               {outcomes.map((item, index) => (
                 <li
                   key={item}
-                  className={`bg-[#5a1832] p-5 ${
+                  className={`bg-[#101c26] p-5 ${
                     index === outcomes.length - 1 ? "sm:col-span-2" : ""
                   }`}
                 >
-                  <span className="text-xs font-black tracking-[0.16em] text-[#afcbff]">
+                  <span className="text-xs font-black tracking-[0.16em] text-[#d7a928]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="mt-3 font-bold leading-relaxed text-white/82">
+                  <p className="mt-3 font-bold leading-relaxed text-[#f5f3ee]">
                     {item}
                   </p>
                 </li>
