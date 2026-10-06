@@ -69,7 +69,7 @@ export const hotmartOffers = {
     enabled: false,
   },
   iaContadoresEcosistema: {
-    route: "/landings/ia-contadores/ecosistema",
+    route: "/landings/master-ia/ecosistema",
     productUcode: pendingProductUcode,
     offerCode: "mxynkrmw",
     fallbackPrice: 12387,
@@ -78,7 +78,7 @@ export const hotmartOffers = {
     enabled: false,
   },
   iaContadoresInscripcion: {
-    route: "/landings/ia-contadores/inscripcion",
+    route: "/landings/master-ia/inscripcion",
     productUcode: "f0d5a6ed-2de1-4f2b-91a2-b00b444c7e28",
     offerCode: "row94rfv",
     fallbackPrice: 587,
@@ -87,7 +87,7 @@ export const hotmartOffers = {
     enabled: false,
   },
   iaContadoresRetargeting: {
-    route: "/landings/ia-contadores/retargeting",
+    route: "/landings/master-ia/retargeting",
     productUcode: pendingProductUcode,
     offerCode: "7l62yrr2",
     fallbackPrice: 3387,

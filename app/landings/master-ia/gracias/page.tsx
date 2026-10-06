@@ -9,19 +9,20 @@ import {
   trackMetaEvent,
   trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
+import { MASTER_IA_CAPTURE_CAMPAIGN } from "../campaign";
 
 type WindowWithMetaPixel = Window & {
   fbq?: (...args: unknown[]) => void;
 };
 
 export default function GraciasIA() {
-  const whatsappUrl = "https://chat.whatsapp.com/H7ujhBBf7SvAG6awJhJGTk";
+  const whatsappUrl = MASTER_IA_CAPTURE_CAMPAIGN.whatsappUrl;
 
 useEffect(() => {
   document.title =
     "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
-  const registrationKey = "ia_contadores_16_julio_registered";
+  const registrationKey = MASTER_IA_CAPTURE_CAMPAIGN.registrationKey;
   const maxAttempts = 20;
   let attempts = 0;
   let timeoutId: number | undefined;
@@ -47,10 +48,10 @@ useEffect(() => {
     }
 
     trackMetaEvent("CompleteRegistration", {
-      content_name: "ABC de Inteligencia Artificial para Contadores",
-      content_category: "Webinar",
-      event_date: "2026-07-16",
-      event_time: "11:00 AM CDMX",
+      content_name: MASTER_IA_CAPTURE_CAMPAIGN.contentName,
+      content_category: MASTER_IA_CAPTURE_CAMPAIGN.contentCategory,
+      event_date: MASTER_IA_CAPTURE_CAMPAIGN.eventDate,
+      event_time: MASTER_IA_CAPTURE_CAMPAIGN.eventTime,
       status: "registered",
       value: 0,
       currency: META_CURRENCY,
@@ -71,10 +72,10 @@ useEffect(() => {
 
   const handleWhatsAppClick = () => {
   trackMetaCustomEvent("WhatsAppGroupClick", {
-    content_name: "ABC de Inteligencia Artificial para Contadores",
+    content_name: MASTER_IA_CAPTURE_CAMPAIGN.contentName,
     content_category: "Grupo de WhatsApp",
-    event_date: "2026-07-16",
-    event_time: "11:00 AM CDMX",
+    event_date: MASTER_IA_CAPTURE_CAMPAIGN.eventDate,
+    event_time: MASTER_IA_CAPTURE_CAMPAIGN.eventTime,
     value: 0,
     currency: META_CURRENCY,
   });
@@ -165,12 +166,12 @@ useEffect(() => {
                 <span className="font-bold text-white">
                   Ya completaste el 80% de tu registro.
                 </span>{" "}
-                Para que quede totalmente completo, el paso más importante para
-                asegurar tu lugar en{" "}
+                Para completarlo, entra ahora al grupo privado de WhatsApp de{" "}
                 <span className="font-bold text-cyan-300">
                   ABC de Inteligencia Artificial para Contadores
-                </span>{" "}
-                es entrar ahora al grupo privado de WhatsApp.
+                </span>
+                , que se realizará el {MASTER_IA_CAPTURE_CAMPAIGN.eventDateLong}{" "}
+                a las {MASTER_IA_CAPTURE_CAMPAIGN.eventTimeDisplay} (hora CDMX).
               </p>
 
               <div className="mt-8 sm:mt-10">
@@ -203,8 +204,9 @@ useEffect(() => {
                   WhatsApp.
                   <br />
                   Ahí te vamos a compartir el acceso a la clase, recordatorios,
-                  avisos importantes y todo lo que necesitas para no perderte
-                  nada.
+                  avisos importantes y todo lo que necesitas para la sesión del{" "}
+                  {MASTER_IA_CAPTURE_CAMPAIGN.eventDateLong} a las{" "}
+                  {MASTER_IA_CAPTURE_CAMPAIGN.eventTimeDisplay} (hora CDMX).
                 </p>
               </div>
 

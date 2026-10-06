@@ -1,4 +1,4 @@
-export default function IAContadoresLayout({
+export default function MasterIALayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

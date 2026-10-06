@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
         destination: "/landings/despierta-tu-potencial-contable/gracias",
         permanent: true,
       },
+      {
+        source: "/landings/ia-contadores",
+        destination: "/landings/master-ia",
+        permanent: true,
+      },
+      {
+        source: "/landings/ia-contadores/:path*",
+        destination: "/landings/master-ia/:path*",
+        permanent: true,
+      },
     ];
   },
   images: {

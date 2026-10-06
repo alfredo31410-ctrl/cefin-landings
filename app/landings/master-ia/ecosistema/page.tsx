@@ -602,7 +602,7 @@ export default function EcosistemaPage() {
           }
           .hero-grid {
             background-image:
-              url("/ia-contadores/ecosistema-hero.png"),
+              url("/master-ia/ecosistema-hero.png"),
               linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px),
               linear-gradient(
                 90deg,

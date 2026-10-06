@@ -8,15 +8,17 @@ import {
   trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import { MASTER_IA_CAPTURE_CAMPAIGN } from "./campaign";
 
 const WEBINAR_EVENT = {
-  content_name: "ABC de Inteligencia Artificial para Contadores",
-  content_category: "Webinar",
-  event_date: "2026-07-16",
-  event_time: "11:00 AM CDMX",
+  content_name: MASTER_IA_CAPTURE_CAMPAIGN.contentName,
+  content_category: MASTER_IA_CAPTURE_CAMPAIGN.contentCategory,
+  event_date: MASTER_IA_CAPTURE_CAMPAIGN.eventDate,
+  event_time: MASTER_IA_CAPTURE_CAMPAIGN.eventTime,
 };
 
-const ACTIVE_CAMPAIGN_FORM_ID = 263;
+const ACTIVE_CAMPAIGN_FORM_ID =
+  MASTER_IA_CAPTURE_CAMPAIGN.activeCampaignFormId;
 const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function LandingIA() {
@@ -50,6 +52,7 @@ export default function LandingIA() {
     const script = document.createElement("script");
     script.id = "ac-script-loader";
     script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
+    script.charset = "utf-8";
     script.async = true;
 
     document.body.appendChild(script);
@@ -188,8 +191,14 @@ export default function LandingIA() {
               </p>
 
               <div className="mt-5 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
-                <InfoCard label="Próxima sesión" value="16 DE JULIO" />
-                <InfoCard label="Horario online" value="11:00 AM" />
+                <InfoCard
+                  label="Próxima sesión"
+                  value={MASTER_IA_CAPTURE_CAMPAIGN.eventDateCard}
+                />
+                <InfoCard
+                  label="Horario online"
+                  value={MASTER_IA_CAPTURE_CAMPAIGN.eventTimeDisplay}
+                />
                 <InfoCard label="Hora local" value="CDMX" />
               </div>
 
@@ -301,7 +310,8 @@ export default function LandingIA() {
                   Aparta tu lugar gratis
                 </h3>
                 <p className="mt-2 text-slate-300">
-                  18 de junio de 2026 · 11:00 AM hora CDMX
+                  {MASTER_IA_CAPTURE_CAMPAIGN.eventDateLong} ·{" "}
+                  {MASTER_IA_CAPTURE_CAMPAIGN.eventTimeDisplay} (hora CDMX)
                 </p>
               </div>
 
@@ -347,7 +357,8 @@ export default function LandingIA() {
                 <p className="text-sm font-semibold text-slate-700">
                   Completa tus datos para recibir el acceso a la clase del{" "}
                   <span className="font-black text-slate-950">
-                    16 de julio a las 11:00 AM CDMX.
+                    {MASTER_IA_CAPTURE_CAMPAIGN.eventDateLong} a las{" "}
+                    {MASTER_IA_CAPTURE_CAMPAIGN.eventTimeDisplay} (hora CDMX).
                   </span>
                 </p>
               </div>
