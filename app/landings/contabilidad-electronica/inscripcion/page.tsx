@@ -275,9 +275,23 @@ export default function ContabilidadElectronicaInscripcionPage() {
               </div>
             </div>
           </div>
+
+          <a
+            href="#el-problema"
+            aria-label="Ver más contenido"
+            className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/35 transition-colors hover:text-cyan-200/70 focus-visible:text-cyan-200 focus-visible:outline-none md:flex"
+          >
+            <span>Ver más</span>
+            <span aria-hidden="true" className="text-lg font-normal leading-none">
+              ↓
+            </span>
+          </a>
         </section>
 
-        <section className="border-y border-cyan-200/10 bg-[#051015] px-5 py-20 sm:px-8 lg:px-10">
+        <section
+          id="el-problema"
+          className="scroll-mt-6 border-y border-cyan-200/10 bg-[#051015] px-5 py-20 sm:px-8 lg:px-10"
+        >
           <div className="mx-auto max-w-[1160px]">
             <div className="max-w-3xl">
               <p className="text-xs font-black uppercase tracking-[0.25em] text-cyan-300">

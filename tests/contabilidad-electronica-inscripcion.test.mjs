@@ -60,6 +60,9 @@ test("keeps the inscription skeleton and Hotmart-backed price", async () => {
   assert.match(pageSource, /Preguntas frecuentes/);
   assert.match(pageSource, /offer="contabilidadElectronicaInscripcion"/);
   assert.match(pageSource, /location="mobile_sticky"/);
+  assert.match(pageSource, /href="#el-problema"/);
+  assert.match(pageSource, /id="el-problema"/);
+  assert.match(pageSource, />Ver más</);
 });
 
 test("loads the instructor and background from the public asset host", async () => {
