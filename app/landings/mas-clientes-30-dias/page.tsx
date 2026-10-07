@@ -39,10 +39,19 @@ const WEBINAR_EVENT = {
 } as const;
 
 type ActiveCampaignThankYou = (...args: unknown[]) => void;
+type InternationalPhoneInputInstance = {
+  setCountry: (countryCode: string) => void;
+};
+type InternationalPhoneInputFactory = {
+  getInstance?: (
+    input: HTMLInputElement,
+  ) => InternationalPhoneInputInstance | undefined;
+};
 
 declare global {
   interface Window {
     _show_thank_you?: ActiveCampaignThankYou;
+    intlTelInput?: InternationalPhoneInputFactory;
   }
 }
 
@@ -138,6 +147,42 @@ export default function MasClientesTreintaDiasPage() {
     let originalShowThankYou: ActiveCampaignThankYou | undefined;
     let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
     let redirectStarted = false;
+    let mexicoCountryApplied = false;
+    const phoneSetupTimeoutIds: number[] = [];
+
+    const configurePhoneInput = (form: HTMLFormElement) => {
+      const phoneInput =
+        form.querySelector<HTMLInputElement>(".iti input.iti__tel-input") ??
+        form.querySelector<HTMLInputElement>(
+          '.iti input[name="phone-iti"]:not([type="hidden"])',
+        ) ??
+        form.querySelector<HTMLInputElement>(
+          'input[name="phone"]:not([type="hidden"])',
+        );
+      if (!phoneInput) return;
+
+      phoneInput.placeholder = "Número a 10 dígitos";
+      phoneInput.inputMode = "tel";
+      phoneInput.style.setProperty("padding-left", "104px", "important");
+      phoneInput.style.setProperty("padding-right", "16px", "important");
+
+      if (mexicoCountryApplied) return;
+
+      const phoneInstance = window.intlTelInput?.getInstance?.(phoneInput);
+      if (!phoneInstance) return;
+
+      phoneInstance.setCountry("mx");
+      mexicoCountryApplied = true;
+    };
+
+    const schedulePhoneInputSetup = (form: HTMLFormElement) => {
+      configurePhoneInput(form);
+      [250, 750, 1500].forEach((delay) => {
+        phoneSetupTimeoutIds.push(
+          window.setTimeout(() => configurePhoneInput(form), delay),
+        );
+      });
+    };
 
     const handleFieldInteraction = () => {
       if (boundForm) syncAdvancedMatching(boundForm);
@@ -163,11 +208,16 @@ export default function MasClientesTreintaDiasPage() {
       const form = document.querySelector<HTMLFormElement>(
         `.${FORM_CLASS} form`,
       );
-      if (!form || form === boundForm) return;
+      if (!form) return;
+      if (form === boundForm) {
+        configurePhoneInput(form);
+        return;
+      }
 
       unbindForm();
       boundForm = form;
       syncMasClientes30DiasAttributionFields(form);
+      schedulePhoneInputSetup(form);
       form.addEventListener("submit", handleFormSubmit, true);
       form.addEventListener("input", handleFieldInteraction);
       form.addEventListener("change", handleFieldInteraction);
@@ -231,6 +281,9 @@ export default function MasClientesTreintaDiasPage() {
       ) {
         window._show_thank_you = originalShowThankYou;
       }
+      phoneSetupTimeoutIds.forEach((timeoutId) =>
+        window.clearTimeout(timeoutId),
+      );
       script.remove();
     };
   }, [syncAdvancedMatching]);
@@ -456,6 +509,16 @@ export default function MasClientesTreintaDiasPage() {
             font-size: 15px !important;
             outline: none !important;
             box-shadow: none !important;
+          }
+
+          .${FORM_CLASS} .iti {
+            width: 100% !important;
+          }
+
+          .${FORM_CLASS} .iti input.iti__tel-input,
+          .${FORM_CLASS} .iti input[type="tel"] {
+            padding-left: 104px !important;
+            padding-right: 16px !important;
           }
 
           .${FORM_CLASS} input:focus,

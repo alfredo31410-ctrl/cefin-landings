@@ -89,6 +89,8 @@ test("keeps the form inline and deduplicates conversion events", async () => {
   assert.doesNotMatch(landingSource, /isModalOpen/);
   assert.match(landingSource, /wrappedShowThankYou/);
   assert.match(landingSource, /"activecampaign_callback"/);
+  assert.match(landingSource, /phoneInstance\.setCountry\("mx"\)/);
+  assert.match(landingSource, /padding-left:\s*104px !important/);
   assert.match(thankYouSource, /"thank_you_redirect"/);
   assert.match(thankYouSource, /"JoinGroup"/);
   assert.doesNotMatch(thankYouSource, /trackMetaEvent\("Lead"/);
