@@ -1,23 +1,50 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   META_PIXEL_ID,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  captureMasClientes30DiasAttribution,
+  createMasClientes30DiasRegistrationProof,
+  getMasClientes30DiasAttributionUrl,
+  getMasClientes30DiasRegistrationSession,
+  syncMasClientes30DiasAttributionFields,
+} from "@/lib/mas-clientes-30-dias-tracking";
+import { trackMasClientes30DiasCompleteRegistration } from "@/lib/mas-clientes-30-dias-meta";
+import { MAS_CLIENTES_30_DIAS_CAMPAIGN } from "./campaign";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 213; // Reemplazar con el ID del formulario de ActiveCampaign.
+const ACTIVE_CAMPAIGN_FORM_ID =
+  MAS_CLIENTES_30_DIAS_CAMPAIGN.activeCampaignFormId;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
+const ACTIVE_CAMPAIGN_SCRIPT_ID = `activecampaign-mas-clientes-30-dias-form-${ACTIVE_CAMPAIGN_FORM_ID}`;
 const HAS_ACTIVE_CAMPAIGN_FORM = ACTIVE_CAMPAIGN_FORM_ID > 0;
+const THANK_YOU_PATH = "/landings/mas-clientes-30-dias/gracias";
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
     : "";
 const HERO_BG_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg.png`;
 const MOBILE_HERO_BG_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg-movil.png`;
+const WEBINAR_EVENT = {
+  content_name: MAS_CLIENTES_30_DIAS_CAMPAIGN.contentName,
+  content_category: "Clase gratuita",
+  landing_slug: "mas-clientes-30-dias",
+  event_date: MAS_CLIENTES_30_DIAS_CAMPAIGN.eventDate,
+  event_time: `${MAS_CLIENTES_30_DIAS_CAMPAIGN.timeLabel} CDMX`,
+} as const;
+
+type ActiveCampaignThankYou = (...args: unknown[]) => void;
+
+declare global {
+  interface Window {
+    _show_thank_you?: ActiveCampaignThankYou;
+  }
+}
 
 const getNormalizedText = (value: string | null | undefined) =>
   (value ?? "").trim();
@@ -68,8 +95,8 @@ const buildAdvancedMatchData = (formRoot: ParentNode) => {
 };
 
 export default function MasClientesTreintaDiasPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const lastAdvancedMatchRef = useRef("");
+  const viewContentTrackedRef = useRef(false);
 
   const syncAdvancedMatching = useCallback((formRoot: ParentNode) => {
     if (typeof window === "undefined" || !window.fbq) return;
@@ -86,72 +113,127 @@ export default function MasClientesTreintaDiasPage() {
 
   useEffect(() => {
     document.title = "Más Clientes en 30 Días | Clase Gratuita | CEFIN";
+    captureMasClientes30DiasAttribution();
+    if (viewContentTrackedRef.current) return;
+    viewContentTrackedRef.current = true;
 
     trackMetaEvent("ViewContent", {
-      content_name: "Más Clientes en 30 Días | Landing",
-      content_category: "Clase gratuita",
+      ...WEBINAR_EVENT,
+      source: "landing_page",
     });
   }, []);
 
   useEffect(() => {
-    if (!isModalOpen || !HAS_ACTIVE_CAMPAIGN_FORM) return;
+    if (!HAS_ACTIVE_CAMPAIGN_FORM) return;
 
-    const oldScript = document.getElementById("ac-script-loader");
+    const oldScript = document.getElementById(ACTIVE_CAMPAIGN_SCRIPT_ID);
     if (oldScript) oldScript.remove();
 
     const existingFormNode = document.querySelector(`.${FORM_CLASS}`);
-    if (existingFormNode) existingFormNode.innerHTML = "";
+    if (existingFormNode) {
+      existingFormNode.innerHTML = "";
+    }
 
-    const script = document.createElement("script");
-    script.id = "ac-script-loader";
-    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
-    script.type = "text/javascript";
-    script.charset = "utf-8";
-    script.async = true;
-    document.body.appendChild(script);
-  }, [isModalOpen, syncAdvancedMatching]);
+    let boundForm: HTMLFormElement | null = null;
+    let originalShowThankYou: ActiveCampaignThankYou | undefined;
+    let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let redirectStarted = false;
 
-  useEffect(() => {
-    if (!isModalOpen || !HAS_ACTIVE_CAMPAIGN_FORM) return;
-
-    const formRoot = document.querySelector(`.${FORM_CLASS}`);
-    if (!formRoot) return;
-
-    const handleFieldInteraction = () => syncAdvancedMatching(formRoot);
-
-    const bindListeners = () => {
-      const formFields = formRoot.querySelectorAll("input, textarea, select");
-      formFields.forEach((field) => {
-        field.addEventListener("input", handleFieldInteraction);
-        field.addEventListener("change", handleFieldInteraction);
-        field.addEventListener("blur", handleFieldInteraction);
-      });
+    const handleFieldInteraction = () => {
+      if (boundForm) syncAdvancedMatching(boundForm);
     };
 
-    const unbindListeners = () => {
-      const formFields = formRoot.querySelectorAll("input, textarea, select");
-      formFields.forEach((field) => {
-        field.removeEventListener("input", handleFieldInteraction);
-        field.removeEventListener("change", handleFieldInteraction);
-        field.removeEventListener("blur", handleFieldInteraction);
-      });
+    const handleFormSubmit = () => {
+      if (!boundForm || !boundForm.checkValidity()) return;
+
+      syncMasClientes30DiasAttributionFields(boundForm);
+      syncAdvancedMatching(boundForm);
+      createMasClientes30DiasRegistrationProof();
+    };
+
+    const unbindForm = () => {
+      if (!boundForm) return;
+
+      boundForm.removeEventListener("submit", handleFormSubmit, true);
+      boundForm.removeEventListener("input", handleFieldInteraction);
+      boundForm.removeEventListener("change", handleFieldInteraction);
+    };
+
+    const bindForm = () => {
+      const form = document.querySelector<HTMLFormElement>(
+        `.${FORM_CLASS} form`,
+      );
+      if (!form || form === boundForm) return;
+
+      unbindForm();
+      boundForm = form;
+      syncMasClientes30DiasAttributionFields(form);
+      form.addEventListener("submit", handleFormSubmit, true);
+      form.addEventListener("input", handleFieldInteraction);
+      form.addEventListener("change", handleFieldInteraction);
+    };
+
+    const installSuccessHandler = () => {
+      if (wrappedShowThankYou || typeof window._show_thank_you !== "function") {
+        return;
+      }
+
+      originalShowThankYou = window._show_thank_you;
+      wrappedShowThankYou = (...args: unknown[]) => {
+        if (redirectStarted) return;
+        redirectStarted = true;
+
+        createMasClientes30DiasRegistrationProof();
+        const session = getMasClientes30DiasRegistrationSession();
+        if (session) {
+          trackMasClientes30DiasCompleteRegistration(
+            session,
+            "activecampaign_callback",
+          );
+        }
+
+        originalShowThankYou?.(...args);
+        window.location.assign(
+          getMasClientes30DiasAttributionUrl(THANK_YOU_PATH),
+        );
+      };
+      window._show_thank_you = wrappedShowThankYou;
     };
 
     const observer = new MutationObserver(() => {
-      unbindListeners();
-      bindListeners();
-      syncAdvancedMatching(formRoot);
+      bindForm();
+      installSuccessHandler();
     });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-    observer.observe(formRoot, { childList: true, subtree: true });
-    bindListeners();
-    syncAdvancedMatching(formRoot);
+    const script = document.createElement("script");
+    script.id = ACTIVE_CAMPAIGN_SCRIPT_ID;
+    const embedUrl = new URL(
+      `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`,
+    );
+    embedUrl.searchParams.set("cefin_v", Date.now().toString());
+    script.src = embedUrl.toString();
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.async = true;
+    script.addEventListener("load", () => {
+      bindForm();
+      installSuccessHandler();
+    });
+    document.body.appendChild(script);
 
     return () => {
       observer.disconnect();
-      unbindListeners();
+      unbindForm();
+      if (
+        wrappedShowThankYou &&
+        window._show_thank_you === wrappedShowThankYou
+      ) {
+        window._show_thank_you = originalShowThankYou;
+      }
+      script.remove();
     };
-  }, [isModalOpen, syncAdvancedMatching]);
+  }, [syncAdvancedMatching]);
 
   return (
     <>
@@ -200,17 +282,17 @@ export default function MasClientesTreintaDiasPage() {
             <p className="text-3xl font-black tracking-tight drop-shadow-[0_4px_14px_rgba(0,0,0,0.7)]">
               CEFIN
             </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
+            <a
+              href="#registro"
               className="hidden rounded-full border border-orange-500/40 bg-orange-500/16 px-5 py-2 text-sm font-black uppercase text-white backdrop-blur transition hover:bg-orange-500/26 md:inline-flex"
             >
               Registrarme
-            </button>
+            </a>
           </div>
         </header>
 
         <section className="relative z-30">
-          <div className="mx-auto flex min-h-[calc(100vh-88px)] max-w-7xl items-center px-6 pb-16 pt-8 lg:px-10">
+          <div className="mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl items-center gap-10 px-6 pb-16 pt-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,460px)] lg:px-10">
             <div className="w-full max-w-3xl text-center lg:text-left">
               <p className="inline-flex rounded-full border border-orange-500/35 bg-orange-500/14 px-5 py-2 text-xs font-black uppercase tracking-[0.28em] text-orange-200 backdrop-blur-md sm:text-sm">
                 Clase estratégica para contadores
@@ -226,7 +308,8 @@ export default function MasClientesTreintaDiasPage() {
               </div>
 
               <p className="mt-6 max-w-2xl text-xl font-black uppercase leading-tight text-white">
-                10 de junio · 11:00 AM (hora CDMX)
+                {MAS_CLIENTES_30_DIAS_CAMPAIGN.dateLabel} ·{" "}
+                {MAS_CLIENTES_30_DIAS_CAMPAIGN.timeLabel} ({MAS_CLIENTES_30_DIAS_CAMPAIGN.timeZoneLabel})
               </p>
 
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/78 sm:text-xl">
@@ -234,20 +317,18 @@ export default function MasClientesTreintaDiasPage() {
                 comunicar tu valor y dejar de depender solo de recomendaciones.
               </p>
 
-             
-
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-                <button
-                  onClick={() => setIsModalOpen(true)}
+                <a
+                  href="#registro"
                   className="inline-flex w-full items-center justify-center rounded-2xl bg-orange-600 px-8 py-5 text-center text-xl font-black uppercase tracking-tight text-white shadow-[0_20px_60px_rgba(234,88,12,0.34)] transition hover:scale-[1.01] hover:bg-orange-500 active:scale-[0.98] sm:w-auto"
                 >
                   Reservar mi lugar gratis
-                </button>
+                </a>
                 <p className="text-sm font-semibold text-white/62">
                   Acceso sin costo para la clase en vivo.
                 </p>
               </div>
-               <div className="mt-7 grid max-w-3xl gap-4 sm:grid-cols-3">
+              <div className="mt-7 grid max-w-3xl gap-4 sm:grid-cols-3">
                 {[
                   "Oferta más clara",
                   "Prospección con enfoque",
@@ -262,6 +343,37 @@ export default function MasClientesTreintaDiasPage() {
                 ))}
               </div>
             </div>
+
+            <aside
+              id="registro"
+              className="scroll-mt-6 rounded-3xl border border-white/15 bg-white p-5 text-slate-900 shadow-[0_30px_100px_rgba(0,0,0,0.55)] sm:p-8"
+              aria-labelledby="registro-title"
+            >
+              <div className="mb-5 text-center">
+                <p className="text-[11px] font-black uppercase tracking-[0.3em] text-orange-600">
+                  Clase gratuita
+                </p>
+                <h2
+                  id="registro-title"
+                  className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900"
+                >
+                  Reserva tu lugar
+                </h2>
+                <p className="mt-2 text-sm text-slate-500">
+                  Completa tus datos para asegurar tu acceso.
+                </p>
+              </div>
+
+              {HAS_ACTIVE_CAMPAIGN_FORM ? (
+                <div className="min-h-[420px]" aria-live="polite">
+                  <div className={FORM_CLASS}></div>
+                </div>
+              ) : (
+                <div className="rounded-xl border border-orange-200 bg-orange-50 p-5 text-center text-sm font-semibold text-slate-700">
+                  Falta conectar el formulario de ActiveCampaign.
+                </div>
+              )}
+            </aside>
           </div>
         </section>
 
@@ -289,45 +401,6 @@ export default function MasClientesTreintaDiasPage() {
             </div>
           </div>
         </section>
-
-        {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505]/88 p-3 backdrop-blur-md sm:p-4">
-            <div className="relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute right-5 top-4 text-2xl font-bold text-slate-400 transition hover:text-slate-900"
-                aria-label="Cerrar modal"
-              >
-                x
-              </button>
-
-              <div className="shrink-0 px-5 pb-4 pt-7 text-center sm:px-8 sm:pb-5 sm:pt-8">
-                <p className="text-[11px] font-black uppercase tracking-[0.3em] text-orange-600">
-                  Clase gratuita
-                </p>
-                <h4 className="mt-2 text-2xl font-black uppercase tracking-tight text-slate-900">
-                  Más clientes en 30 días
-                </h4>
-                <p className="mt-2 text-sm text-slate-500">
-                  Completa tus datos para asegurar tu lugar.
-                </p>
-              </div>
-
-              <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-5 sm:px-8 sm:pb-8">
-                {HAS_ACTIVE_CAMPAIGN_FORM ? (
-                  <div className="min-h-[420px]">
-                    <div className={FORM_CLASS}></div>
-                  </div>
-                ) : (
-                  <div className="rounded-xl border border-orange-200 bg-orange-50 p-5 text-center text-sm font-semibold text-slate-700">
-                    Falta conectar el ID del formulario de ActiveCampaign para
-                    mostrar el registro aquí.
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
 
         <style jsx global>{`
           .${FORM_CLASS} {
