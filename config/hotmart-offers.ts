@@ -50,6 +50,15 @@ export const hotmartOffers = {
     locale: "es-MX",
     enabled: false,
   },
+  contabilidadElectronicaInscripcion: {
+    route: "/landings/contabilidad-electronica/inscripcion",
+    productUcode: "a2a5c8a5-329f-42f8-8928-9c60a862d877",
+    offerCode: "bg8976r5",
+    fallbackPrice: 1287,
+    currency: "MXN",
+    locale: "es-MX",
+    enabled: true,
+  },
   estrategaFiscalInscripcion: {
     route: "/landings/de-cero-a-estratega-fiscal/inscripcion",
     productUcode: pendingProductUcode,
