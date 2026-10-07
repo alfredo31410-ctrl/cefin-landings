@@ -1,15 +1,24 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
-  META_CURRENCY,
-  trackMetaEvent,
+  initializeMetaPixel,
 } from "@/lib/meta-pixel";
+import { trackMasClientes30DiasCompleteRegistration } from "@/lib/mas-clientes-30-dias-meta";
+import {
+  captureMasClientes30DiasAttribution,
+  getMasClientes30DiasAttributionUrl,
+  getMasClientes30DiasEventId,
+  getMasClientes30DiasRegistrationSession,
+  persistMasClientes30DiasRegistrationSession,
+  type MasClientes30DiasRegistrationSession,
+} from "@/lib/mas-clientes-30-dias-tracking";
+import { MAS_CLIENTES_30_DIAS_CAMPAIGN } from "../campaign";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/C8bml6truxhL1uxL05Wskb"; // Reemplazar con el link del grupo de WhatsApp.
+const WHATSAPP_URL = MAS_CLIENTES_30_DIAS_CAMPAIGN.whatsappUrl;
 const ASSET_BASE =
   process.env.NODE_ENV === "production"
     ? "https://cefin-landings-z9uk.vercel.app"
@@ -18,30 +27,65 @@ const BANNER_IMAGE_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg.png`;
 const MOBILE_BANNER_IMAGE_URL = `${ASSET_BASE}/mas-clientes-30-dias/hero-bg-movil.png`;
 
 export default function GraciasMasClientesTreintaDiasPage() {
+  const sessionRef =
+    useRef<MasClientes30DiasRegistrationSession | null>(null);
+  const joinGroupSentRef = useRef(false);
+  const [whatsappUrl, setWhatsappUrl] = useState<string>(WHATSAPP_URL);
+
   useEffect(() => {
     document.title = "Registro completado | Más Clientes en 30 Días | CEFIN";
+    captureMasClientes30DiasAttribution();
+    const session = getMasClientes30DiasRegistrationSession();
+    sessionRef.current = session;
 
-    trackMetaEvent("CompleteRegistration", {
-      content_name: "Más Clientes en 30 Días | Registro completado",
-      content_category: "Clase gratuita",
-      status: "completed",
-      value: 0,
-      currency: META_CURRENCY,
+    queueMicrotask(() => {
+      setWhatsappUrl(getMasClientes30DiasAttributionUrl(WHATSAPP_URL));
     });
+
+    if (!session) return;
+
+    trackMasClientes30DiasCompleteRegistration(
+      session,
+      "thank_you_redirect",
+    );
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackMetaEvent("Lead", {
-      content_name: "Más Clientes en 30 Días | Click grupo WhatsApp",
-      content_category: "Grupo de WhatsApp",
-      status: "whatsapp_group_click",
-      value: 0,
-      currency: META_CURRENCY,
-    });
+    if (joinGroupSentRef.current) return;
 
-    if (!WHATSAPP_URL) return;
+    initializeMetaPixel();
+    if (typeof window.fbq !== "function") return;
 
-    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+    const session = sessionRef.current;
+    if (session?.joinGroupSent) return;
+
+    joinGroupSentRef.current = true;
+    const eventSessionId =
+      session?.id ??
+      (typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
+    if (session) {
+      session.joinGroupSent = true;
+      persistMasClientes30DiasRegistrationSession(session);
+    }
+
+    window.fbq(
+      "trackCustom",
+      "JoinGroup",
+      {
+        content_name: `${MAS_CLIENTES_30_DIAS_CAMPAIGN.contentName} | Grupo de WhatsApp`,
+        content_category: "Grupo de WhatsApp",
+        landing_slug: "mas-clientes-30-dias",
+        source: "thank_you_page",
+        destination: "whatsapp_group",
+        status: "clicked",
+      },
+      {
+        eventID: getMasClientes30DiasEventId("join-group", eventSessionId),
+      },
+    );
   };
 
   return (
@@ -131,13 +175,15 @@ export default function GraciasMasClientesTreintaDiasPage() {
                 </p>
               </div>
 
-              <button
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}
                 className="group inline-flex w-full items-center justify-center rounded-xl bg-[#25D366] px-6 py-5 text-center text-base font-black uppercase tracking-tight text-[#062c15] shadow-[0_22px_60px_rgba(37,211,102,0.35)] transition hover:scale-[1.01] hover:shadow-[0_28px_70px_rgba(37,211,102,0.45)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:min-w-[360px] sm:text-lg"
-                disabled={!WHATSAPP_URL}
               >
                 Entrar al grupo de WhatsApp
-              </button>
+              </a>
 
               <p className="mt-3 text-sm font-semibold text-white/55">
                 Sin este paso podrías perder el acceso y los recordatorios.
