@@ -7,6 +7,8 @@ export const CONTABILIDAD_ELECTRONICA_PRODUCT = {
     "https://pay.hotmart.com/A105920735V?off=bg8976r5&checkoutMode=10",
   fallbackPrice: 1287,
   priceLabel: "$1,287 MXN",
-  image: "/contabilidad-electronica/marisol-contabilidad-electronica.png",
-  backgroundImage: "/contabilidad-electronica/background-banner.png",
+  image:
+    "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/marisol-contabilidad-electronica.png",
+  backgroundImage:
+    "https://cefin-landings-z9uk.vercel.app/contabilidad-electronica/background-banner.png",
 } as const;

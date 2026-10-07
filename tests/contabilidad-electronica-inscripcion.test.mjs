@@ -61,3 +61,16 @@ test("keeps the inscription skeleton and Hotmart-backed price", async () => {
   assert.match(pageSource, /offer="contabilidadElectronicaInscripcion"/);
   assert.match(pageSource, /location="mobile_sticky"/);
 });
+
+test("loads the instructor and background from the public asset host", async () => {
+  const configSource = await readFile(configUrl, "utf8");
+
+  assert.match(
+    configSource,
+    /https:\/\/cefin-landings-z9uk\.vercel\.app\/contabilidad-electronica\/marisol-contabilidad-electronica\.png/,
+  );
+  assert.match(
+    configSource,
+    /https:\/\/cefin-landings-z9uk\.vercel\.app\/contabilidad-electronica\/background-banner\.png/,
+  );
+});
