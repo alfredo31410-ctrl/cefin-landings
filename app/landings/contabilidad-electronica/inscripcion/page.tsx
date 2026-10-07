@@ -163,12 +163,7 @@ export default function ContabilidadElectronicaInscripcionPage() {
 
       <main className="overflow-x-hidden bg-[#02070a] pb-20 text-white md:pb-0">
         <section className="relative isolate min-h-svh overflow-hidden">
-          <div
-            className="absolute inset-0 -z-30 hidden bg-cover bg-left lg:block"
-            style={{
-              backgroundImage: `url(${CONTABILIDAD_ELECTRONICA_PRODUCT.backgroundImage})`,
-            }}
-          />
+          <div className="absolute inset-0 -z-30 bg-[#02070a]" />
           <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_78%_18%,rgba(34,211,238,.17),transparent_28%),linear-gradient(105deg,#02070a_0%,rgba(2,7,10,.64)_42%,rgba(2,7,10,.94)_68%,#02070a_100%)]" />
           <div className="absolute inset-0 -z-10 opacity-20 [background-image:linear-gradient(rgba(103,232,249,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,.16)_1px,transparent_1px)] [background-size:42px_42px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
 
@@ -204,13 +199,27 @@ export default function ContabilidadElectronicaInscripcionPage() {
                   alt="Marisol Galván, instructora de CEFIN"
                   fill
                   priority
+                  unoptimized
                   sizes="(max-width: 1024px) 90vw, 0px"
                   className="object-contain object-bottom drop-shadow-[0_25px_55px_rgba(0,0,0,.55)]"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#02070a] to-transparent" />
               </div>
 
-              <div className="hidden lg:block" aria-hidden="true" />
+              <div className="relative hidden min-h-[660px] lg:block">
+                <div className="absolute inset-x-10 bottom-10 h-72 rounded-full bg-cyan-300/15 blur-[95px]" />
+                <div className="absolute inset-8 rounded-full border border-cyan-300/10" />
+                <Image
+                  src={CONTABILIDAD_ELECTRONICA_PRODUCT.image}
+                  alt="Marisol Galván, instructora de Contabilidad Electrónica"
+                  fill
+                  priority
+                  unoptimized
+                  sizes="(min-width: 1024px) 50vw, 0px"
+                  className="object-contain object-bottom drop-shadow-[0_32px_65px_rgba(0,0,0,.6)]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#02070a] to-transparent" />
+              </div>
 
               <div className="min-w-0 text-center lg:text-left">
                 <p className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-cyan-200 backdrop-blur sm:text-xs sm:tracking-[0.24em]">
@@ -475,6 +484,7 @@ export default function ContabilidadElectronicaInscripcionPage() {
                 src={CONTABILIDAD_ELECTRONICA_PRODUCT.image}
                 alt="Marisol Galván, instructora del programa Contabilidad Electrónica"
                 fill
+                unoptimized
                 sizes="(max-width: 1024px) 90vw, 430px"
                 className="object-contain object-bottom drop-shadow-[0_25px_50px_rgba(0,0,0,.55)]"
               />
