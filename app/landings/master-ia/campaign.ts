@@ -8,5 +8,5 @@ export const MASTER_IA_CAPTURE_CAMPAIGN = {
   eventTime: "11:00 AM CDMX",
   eventTimeDisplay: "11:00 a. m.",
   registrationKey: "master_ia_16_octubre_2026_registered",
-  whatsappUrl: "https://chat.whatsapp.com/Dp3E6SrSuPgFKylLif4mZL",
+  whatsappUrl: "https://chat.whatsapp.com/FcfazjZrXIsLt4Y2gkIxeZ?s=cl&p=a&mlu=4&ilr=4",
 } as const;
