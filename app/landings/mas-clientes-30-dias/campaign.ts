@@ -5,5 +5,5 @@ export const MAS_CLIENTES_30_DIAS_CAMPAIGN = {
   eventDate: "2026-10-13",
   timeLabel: "11:00 AM",
   timeZoneLabel: "hora CDMX",
-  whatsappUrl: "https://chat.whatsapp.com/H5DkkqR9pAx9rXp5p0kFGX",
+  whatsappUrl: "https://chat.whatsapp.com/HODWMUkXsoNAFBe1diBcvg",
 } as const;
