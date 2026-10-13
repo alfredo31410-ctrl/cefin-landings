@@ -15,7 +15,7 @@ test("uses the confirmed ActiveCampaign form and WhatsApp group", async () => {
   assert.equal(CONTABILIDAD_ELECTRONICA_CAMPAIGN.activeCampaignFormId, 351);
   assert.equal(
     CONTABILIDAD_ELECTRONICA_CAMPAIGN.whatsappUrl,
-    "https://chat.whatsapp.com/EBdVO3j1ot21ItKlDBqJni",
+    "https://chat.whatsapp.com/JWq81H9FDXjL8BaHt2bO0m",
   );
 
   const landingSource = await readFile(
