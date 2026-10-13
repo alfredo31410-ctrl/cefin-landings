@@ -1,0 +1,294 @@
+.page {
+  --petroleum: #102c3a;
+  --petroleum-light: #17495a;
+  --turquoise: #13b8a6;
+  --mist: #eff8f7;
+  --white: #ffffff;
+  scroll-behavior: smooth;
+}
+
+.heroBackdrop {
+  background:
+    radial-gradient(circle at 84% 16%, rgba(19, 184, 166, 0.22), transparent 27%),
+    radial-gradient(circle at 8% 88%, rgba(23, 73, 90, 0.72), transparent 30%),
+    linear-gradient(135deg, #0b2430 0%, #102c3a 52%, #17495a 100%);
+}
+
+.gridOverlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, black, transparent 96%);
+}
+
+.glassPanel {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.045));
+  box-shadow: 0 16px 45px rgba(4, 21, 29, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.titleAccent {
+  background: linear-gradient(90deg, #ffffff 0%, #b8fff7 55%, #13b8a6 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+.photoFrame {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(19, 184, 166, 0.28), transparent 55%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(19, 184, 166, 0.08));
+  box-shadow: 0 16px 40px rgba(3, 19, 26, 0.38);
+}
+
+.instructorFeature {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(19, 184, 166, 0.07)),
+    rgba(6, 30, 40, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 48px rgba(3, 19, 26, 0.34);
+}
+
+.instructorPortrait {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(86, 234, 217, 0.34), transparent 46%),
+    linear-gradient(145deg, rgba(19, 184, 166, 0.13), rgba(5, 28, 38, 0.52));
+}
+
+.registrationCard {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(19, 184, 166, 0.11), transparent 32%),
+    #ffffff;
+}
+
+.activeCampaignShell {
+  min-height: 14rem;
+}
+
+.formLoading,
+.formError {
+  display: flex;
+  min-height: 14rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(23, 73, 90, 0.1);
+  border-radius: 1rem;
+  background: #eff8f7;
+  color: rgba(23, 73, 90, 0.72);
+  text-align: center;
+}
+
+.formLoading {
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.loadingDot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: #13b8a6;
+  box-shadow: 0 0 0 0.35rem rgba(19, 184, 166, 0.14);
+  animation: loadingPulse 1.2s ease-in-out infinite;
+}
+
+.formError {
+  flex-direction: column;
+  padding: 1.5rem;
+  color: #102c3a;
+}
+
+.retryButton {
+  margin-top: 1rem;
+  min-height: 2.75rem;
+  border-radius: 0.75rem;
+  background: #13b8a6;
+  padding: 0.65rem 1.25rem;
+  color: #082f32;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.retryButton:focus-visible {
+  outline: 3px solid #102c3a;
+  outline-offset: 3px;
+}
+
+.formHidden {
+  display: none;
+}
+
+.formReady {
+  display: block;
+}
+
+.activeCampaignForm :global(._form_361),
+.activeCampaignForm :global(._form-content) {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.activeCampaignForm :global(._form_361) {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #102c3a !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+}
+
+.activeCampaignForm :global(._form-content) {
+  padding: 0 !important;
+}
+
+.activeCampaignForm :global(._form-title),
+.activeCampaignForm :global(._form-branding) {
+  display: none !important;
+}
+
+.activeCampaignForm :global(._form_element) {
+  margin: 0 0 0.85rem !important;
+}
+
+.activeCampaignForm :global(._form-label) {
+  display: block !important;
+  margin: 0 0 0.4rem !important;
+  color: #102c3a !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  line-height: 1.35 !important;
+}
+
+.activeCampaignForm :global(input[type="text"]),
+.activeCampaignForm :global(input[type="email"]),
+.activeCampaignForm :global(input[type="tel"]),
+.activeCampaignForm :global(input[type="number"]),
+.activeCampaignForm :global(select),
+.activeCampaignForm :global(textarea) {
+  width: 100% !important;
+  min-height: 3rem !important;
+  border: 1px solid rgba(23, 73, 90, 0.22) !important;
+  border-radius: 0.75rem !important;
+  background: #ffffff !important;
+  padding: 0.75rem 0.9rem !important;
+  color: #102c3a !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  line-height: 1.3 !important;
+  box-shadow: 0 1px 0 rgba(16, 44, 58, 0.03) !important;
+}
+
+.activeCampaignForm :global(input:focus),
+.activeCampaignForm :global(select:focus),
+.activeCampaignForm :global(textarea:focus) {
+  border-color: #13b8a6 !important;
+  outline: 3px solid rgba(19, 184, 166, 0.2) !important;
+  outline-offset: 1px !important;
+}
+
+.activeCampaignForm :global(._button-wrapper) {
+  margin-top: 0.35rem !important;
+}
+
+.activeCampaignForm :global(.sms_consent_checkbox) {
+  display: grid !important;
+  grid-template-columns: 1rem minmax(0, 1fr) !important;
+  gap: 0.55rem !important;
+  align-items: start !important;
+  margin: 0.15rem 0 0.75rem !important;
+}
+
+.activeCampaignForm :global(.sms_consent_checkbox input) {
+  width: 1rem !important;
+  height: 1rem !important;
+  margin: 0.1rem 0 0 !important;
+  accent-color: #13b8a6;
+}
+
+.activeCampaignForm :global(.sms_consent_message) {
+  color: rgba(23, 73, 90, 0.72) !important;
+  font-size: 0.67rem !important;
+  line-height: 1.4 !important;
+}
+
+.activeCampaignForm :global(._submit),
+.activeCampaignForm :global(._form_submit) {
+  width: 100% !important;
+  min-height: 3.5rem !important;
+  border: 0 !important;
+  border-radius: 0.85rem !important;
+  background: #13b8a6 !important;
+  padding: 0.9rem 1.25rem !important;
+  color: #082f32 !important;
+  font-family: inherit !important;
+  font-size: 0.92rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.035em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  box-shadow: 0 14px 34px rgba(19, 184, 166, 0.24) !important;
+}
+
+:global(#registro) .activeCampaignForm :global(#_form_361_submit) {
+  background: #13b8a6 !important;
+  color: #082f32 !important;
+}
+
+.activeCampaignForm :global(._submit:hover),
+.activeCampaignForm :global(._form_submit:hover) {
+  background: #42d2c2 !important;
+}
+
+.activeCampaignForm :global(._submit:focus-visible),
+.activeCampaignForm :global(._form_submit:focus-visible) {
+  outline: 3px solid #102c3a !important;
+  outline-offset: 3px !important;
+}
+
+.activeCampaignForm :global(._error-inner),
+.activeCampaignForm :global(._form-thank-you) {
+  color: #102c3a !important;
+  font-family: inherit !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadingDot {
+    animation: none;
+  }
+}
+
+@keyframes loadingPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.darkSection {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(19, 184, 166, 0.17), transparent 24%),
+    linear-gradient(145deg, #102c3a 0%, #0b222d 100%);
+}
+
+.focusRing:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(19, 184, 166, 0.72);
+}
+
+.lightFocusRing:focus-visible {
+  outline: 3px solid #102c3a;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(19, 184, 166, 0.34);
+}
