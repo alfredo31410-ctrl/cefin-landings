@@ -8,7 +8,7 @@
     "hotmart:discover": "node --env-file-if-exists=.env.local scripts/hotmart-discover.mjs",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
