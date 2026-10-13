@@ -14,7 +14,7 @@ test("uses the confirmed campaign details", () => {
   assert.equal(MAS_CLIENTES_30_DIAS_CAMPAIGN.eventDate, "2026-10-13");
   assert.equal(
     MAS_CLIENTES_30_DIAS_CAMPAIGN.whatsappUrl,
-    "https://chat.whatsapp.com/H5DkkqR9pAx9rXp5p0kFGX",
+    "https://chat.whatsapp.com/HODWMUkXsoNAFBe1diBcvg",
   );
 });
 
