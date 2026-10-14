@@ -20,10 +20,12 @@ const UTM_FIELD_IDS = {
 declare global {
   interface Window {
     _form_callback?: (id: string) => void;
+    _show_thank_you?: ActiveCampaignThankYou;
   }
 }
 
 type FormStatus = "loading" | "ready" | "error";
+type ActiveCampaignThankYou = (...args: unknown[]) => void;
 
 function fillOfficialUtmFields(form: HTMLFormElement) {
   const attribution = getPreservedAttribution();
@@ -79,31 +81,12 @@ export function ActiveCampaignForm() {
     let loadTimeout = 0;
     let injectionTimer = 0;
     const previousCallback = window._form_callback;
+    let originalShowThankYou: ActiveCampaignThankYou | undefined;
+    let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
 
     const findInjectedForm = () => host.querySelector<HTMLFormElement>(`form._form_${FORM_ID}`);
 
-    const markReady = () => {
-      const form = findInjectedForm();
-      if (!form || !isActive) return false;
-
-      fillOfficialUtmFields(form);
-      setStatus("ready");
-      window.clearTimeout(loadTimeout);
-      return true;
-    };
-
-    const observer = new MutationObserver(() => {
-      if (markReady()) observer.disconnect();
-    });
-    observer.observe(host, { childList: true, subtree: true });
-
-    const verifiedSuccessCallback = (id: string) => {
-      try {
-        previousCallback?.(id);
-      } catch {
-        // Un callback previo no debe impedir la confirmación oficial de este formulario.
-      }
-
+    const confirmOfficialSuccess = (id: string) => {
       const form = document.getElementById(`_form_${id}_`);
       const thankYou = form?.querySelector<HTMLElement>("._form-thank-you");
       const content = form?.querySelector<HTMLElement>("._form-content");
@@ -120,6 +103,43 @@ export function ActiveCampaignForm() {
       confirmedRef.current = true;
       trackConfirmedRegistration({ registrationId: createConfirmationId() });
       router.replace(THANKS_PATH);
+    };
+
+    const installSuccessBridge = () => {
+      if (typeof window._show_thank_you !== "function") return;
+      if (wrappedShowThankYou && window._show_thank_you === wrappedShowThankYou) return;
+
+      originalShowThankYou = window._show_thank_you;
+      wrappedShowThankYou = (...args) => {
+        originalShowThankYou?.(...args);
+        if (typeof args[0] === "string") confirmOfficialSuccess(args[0]);
+      };
+      window._show_thank_you = wrappedShowThankYou;
+    };
+
+    const markReady = () => {
+      const form = findInjectedForm();
+      if (!form || !isActive) return false;
+
+      fillOfficialUtmFields(form);
+      installSuccessBridge();
+      setStatus("ready");
+      window.clearTimeout(loadTimeout);
+      return true;
+    };
+
+    const observer = new MutationObserver(() => {
+      if (markReady()) observer.disconnect();
+    });
+    observer.observe(host, { childList: true, subtree: true });
+
+    const verifiedSuccessCallback = (id: string) => {
+      try {
+        previousCallback?.(id);
+      } catch {
+        // Un callback previo no debe impedir la confirmación oficial de este formulario.
+      }
+      confirmOfficialSuccess(id);
     };
 
     window._form_callback = verifiedSuccessCallback;
@@ -158,6 +178,9 @@ export function ActiveCampaignForm() {
 
       if (window._form_callback === verifiedSuccessCallback) {
         window._form_callback = previousCallback;
+      }
+      if (wrappedShowThankYou && window._show_thank_you === wrappedShowThankYou) {
+        window._show_thank_you = originalShowThankYou;
       }
     };
   }, [attempt, router]);
