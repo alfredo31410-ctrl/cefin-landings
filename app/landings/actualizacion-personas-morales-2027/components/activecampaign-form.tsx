@@ -4,7 +4,12 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { campaign } from "../config";
 import styles from "../landing.module.css";
-import { getPreservedAttribution, trackConfirmedRegistration } from "./tracking";
+import {
+  consumeRegistrationAttempt,
+  getPreservedAttribution,
+  preserveRegistrationAttempt,
+  trackConfirmedRegistration,
+} from "./tracking";
 
 const FORM_ID = campaign.activeCampaign.formId;
 const SCRIPT_SELECTOR = `script[data-cefin-activecampaign-form="${FORM_ID}"]`;
@@ -48,14 +53,6 @@ function fillOfficialUtmFields(form: HTMLFormElement) {
   }
 }
 
-function createConfirmationId() {
-  if (typeof crypto.randomUUID === "function") {
-    return `ac-${FORM_ID}-${crypto.randomUUID()}`;
-  }
-
-  return `ac-${FORM_ID}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-}
-
 export function ActiveCampaignForm() {
   const router = useRouter();
   const hostRef = useRef<HTMLDivElement>(null);
@@ -91,6 +88,7 @@ export function ActiveCampaignForm() {
     const previousCallback = window._form_callback;
     let originalShowThankYou: ActiveCampaignThankYou | undefined;
     let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let boundForm: HTMLFormElement | null = null;
     let mexicoCountryApplied = false;
     const phoneSetupTimeoutIds: number[] = [];
 
@@ -137,8 +135,21 @@ export function ActiveCampaignForm() {
       if (!isVerifiedSuccess || confirmedRef.current) return;
 
       confirmedRef.current = true;
-      trackConfirmedRegistration({ registrationId: createConfirmationId() });
+      const registrationAttempt = consumeRegistrationAttempt() ?? preserveRegistrationAttempt();
+      trackConfirmedRegistration(registrationAttempt);
       router.replace(THANKS_PATH);
+    };
+
+    const handleFormSubmit = () => {
+      if (!boundForm?.checkValidity()) return;
+      preserveRegistrationAttempt();
+    };
+
+    const bindFormSubmit = (form: HTMLFormElement) => {
+      if (boundForm === form) return;
+      boundForm?.removeEventListener("submit", handleFormSubmit, true);
+      boundForm = form;
+      boundForm.addEventListener("submit", handleFormSubmit, true);
     };
 
     const installSuccessBridge = () => {
@@ -158,6 +169,7 @@ export function ActiveCampaignForm() {
       if (!form || !isActive) return false;
 
       fillOfficialUtmFields(form);
+      bindFormSubmit(form);
       scheduleMexicoCountrySetup(form);
       installSuccessBridge();
       setStatus("ready");
@@ -208,6 +220,7 @@ export function ActiveCampaignForm() {
       window.clearTimeout(loadTimeout);
       window.clearTimeout(injectionTimer);
       phoneSetupTimeoutIds.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      boundForm?.removeEventListener("submit", handleFormSubmit, true);
       script.remove();
       host.replaceChildren();
       document.querySelectorAll<HTMLElement>(`._form_${FORM_ID}`).forEach((element) => {

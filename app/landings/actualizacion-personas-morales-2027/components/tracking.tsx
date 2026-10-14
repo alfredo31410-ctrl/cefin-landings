@@ -12,7 +12,9 @@ import { campaign } from "../config";
 
 const ATTRIBUTION_STORAGE_KEY = "actualizacionPersonasMorales2027Attribution";
 const REGISTRATION_STORAGE_KEY = "actualizacionPersonasMorales2027Registration";
+const REGISTRATION_ATTEMPT_STORAGE_KEY = "actualizacionPersonasMorales2027RegistrationAttempt";
 const JOIN_GROUP_STORAGE_KEY = "actualizacionPersonasMorales2027JoinGroup";
+const REGISTRATION_ATTEMPT_TTL_MS = 10 * 60 * 1000;
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 const trackedPageLoads = new Set<string>();
 let joinGroupTracked = false;
@@ -24,6 +26,10 @@ type CampaignPageTrackingProps = {
 
 type ConfirmedRegistration = {
   registrationId: string;
+};
+
+type RegistrationAttempt = ConfirmedRegistration & {
+  createdAt: number;
 };
 
 function preserveAttribution() {
@@ -50,6 +56,49 @@ export function getPreservedAttribution(): Record<string, string> {
     return stored ? (JSON.parse(stored) as Record<string, string>) : {};
   } catch {
     return {};
+  }
+}
+
+function createRegistrationId() {
+  if (typeof crypto.randomUUID === "function") {
+    return `ac-${campaign.activeCampaign.formId}-${crypto.randomUUID()}`;
+  }
+
+  return `ac-${campaign.activeCampaign.formId}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+export function preserveRegistrationAttempt() {
+  const attempt: RegistrationAttempt = {
+    registrationId: createRegistrationId(),
+    createdAt: Date.now(),
+  };
+
+  try {
+    window.sessionStorage.setItem(REGISTRATION_ATTEMPT_STORAGE_KEY, JSON.stringify(attempt));
+  } catch {
+    // ActiveCampaign puede continuar aunque el almacenamiento no esté disponible.
+  }
+
+  return attempt;
+}
+
+export function consumeRegistrationAttempt(): RegistrationAttempt | null {
+  try {
+    const stored = window.sessionStorage.getItem(REGISTRATION_ATTEMPT_STORAGE_KEY);
+    window.sessionStorage.removeItem(REGISTRATION_ATTEMPT_STORAGE_KEY);
+    if (!stored) return null;
+
+    const attempt = JSON.parse(stored) as Partial<RegistrationAttempt>;
+    const isValid =
+      typeof attempt.registrationId === "string" &&
+      attempt.registrationId.length > 0 &&
+      typeof attempt.createdAt === "number" &&
+      Date.now() - attempt.createdAt >= 0 &&
+      Date.now() - attempt.createdAt <= REGISTRATION_ATTEMPT_TTL_MS;
+
+    return isValid ? (attempt as RegistrationAttempt) : null;
+  } catch {
+    return null;
   }
 }
 
@@ -120,6 +169,11 @@ export function CampaignPageTracking({ page, trackViewContent = false }: Campaig
         content_category: campaign.tracking.contentCategory,
         ...getPreservedAttribution(),
       });
+    }
+
+    if (page === "thanks") {
+      const registrationAttempt = consumeRegistrationAttempt();
+      if (registrationAttempt) trackConfirmedRegistration(registrationAttempt);
     }
   }, [page, trackViewContent]);
 
