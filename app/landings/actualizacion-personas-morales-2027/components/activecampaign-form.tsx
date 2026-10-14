@@ -26,6 +26,14 @@ declare global {
 
 type FormStatus = "loading" | "ready" | "error";
 type ActiveCampaignThankYou = (...args: unknown[]) => void;
+type InternationalPhoneInputInstance = {
+  setCountry: (countryCode: string) => void;
+};
+type WindowWithInternationalPhoneInput = Window & {
+  intlTelInput?: {
+    getInstance?: (input: HTMLInputElement) => InternationalPhoneInputInstance | undefined;
+  };
+};
 
 function fillOfficialUtmFields(form: HTMLFormElement) {
   const attribution = getPreservedAttribution();
@@ -83,8 +91,36 @@ export function ActiveCampaignForm() {
     const previousCallback = window._form_callback;
     let originalShowThankYou: ActiveCampaignThankYou | undefined;
     let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let mexicoCountryApplied = false;
+    const phoneSetupTimeoutIds: number[] = [];
 
     const findInjectedForm = () => host.querySelector<HTMLFormElement>(`form._form_${FORM_ID}`);
+
+    const configureMexicoAsDefaultCountry = (form: HTMLFormElement) => {
+      if (mexicoCountryApplied) return;
+
+      const phoneInput =
+        form.querySelector<HTMLInputElement>(".iti input.iti__tel-input") ??
+        form.querySelector<HTMLInputElement>('input[name="phone"]:not([type="hidden"])');
+      if (!phoneInput) return;
+
+      const phoneInstance = (window as WindowWithInternationalPhoneInput).intlTelInput?.getInstance?.(
+        phoneInput,
+      );
+      if (!phoneInstance) return;
+
+      phoneInstance.setCountry("mx");
+      mexicoCountryApplied = true;
+    };
+
+    const scheduleMexicoCountrySetup = (form: HTMLFormElement) => {
+      configureMexicoAsDefaultCountry(form);
+      [250, 750, 1500].forEach((delay) => {
+        phoneSetupTimeoutIds.push(
+          window.setTimeout(() => configureMexicoAsDefaultCountry(form), delay),
+        );
+      });
+    };
 
     const confirmOfficialSuccess = (id: string) => {
       const form = document.getElementById(`_form_${id}_`);
@@ -122,6 +158,7 @@ export function ActiveCampaignForm() {
       if (!form || !isActive) return false;
 
       fillOfficialUtmFields(form);
+      scheduleMexicoCountrySetup(form);
       installSuccessBridge();
       setStatus("ready");
       window.clearTimeout(loadTimeout);
@@ -170,6 +207,7 @@ export function ActiveCampaignForm() {
       observer.disconnect();
       window.clearTimeout(loadTimeout);
       window.clearTimeout(injectionTimer);
+      phoneSetupTimeoutIds.forEach((timeoutId) => window.clearTimeout(timeoutId));
       script.remove();
       host.replaceChildren();
       document.querySelectorAll<HTMLElement>(`._form_${FORM_ID}`).forEach((element) => {
