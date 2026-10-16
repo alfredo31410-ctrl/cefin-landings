@@ -1,5 +1,5 @@
 export const MASTER_IA_CAPTURE_CAMPAIGN = {
-  activeCampaignFormId: 357,
+  activeCampaignFormId: 363,
   contentName: "ABC de Inteligencia Artificial para Contadores",
   contentCategory: "Webinar",
   eventDate: "2026-10-23",
