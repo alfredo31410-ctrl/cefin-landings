@@ -33,7 +33,7 @@ export function WhatsappGroupLink() {
       onClick={() => trackConfirmedJoinGroup()}
       className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-[#25D366] px-6 py-4 text-center text-sm font-black uppercase tracking-[0.04em] text-[#063B1B] shadow-[0_18px_45px_rgba(37,211,102,0.22)] transition hover:bg-[#2BE074] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base"
     >
-      UNIRME AL GRUPO DE WHATSAPP
+      COMPLETAR MI REGISTRO EN WHATSAPP
     </a>
   );
 }
