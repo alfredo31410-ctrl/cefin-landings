@@ -20,7 +20,7 @@ export const campaign = {
     embedUrl: "https://cefincapacitacion.activehosted.com/f/embed.php?id=361",
   },
   whatsapp: {
-    groupUrl: "https://chat.whatsapp.com/EyISfvgwCxsBF2PicAboKL",
+    groupUrl: "https://chat.whatsapp.com/DG2UrPrUPnLBXfbRg5p8Uo",
   },
   privacyUrl: "https://cefin.mx/privacidad",
   tracking: {
