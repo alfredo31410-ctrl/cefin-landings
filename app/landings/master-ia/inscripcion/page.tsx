@@ -5,11 +5,9 @@ import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
-  META_CURRENCY,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const PRICE = 987;
 const CHECKOUT_URL = "https://pay.hotmart.com/S107816962P?off=row94rfv&checkoutMode=10";
 const ASSET_BASE = "https://cefin-landings-z9uk.vercel.app";
 const ALFREDO_IMAGE_URL = `${ASSET_BASE}/alfredo.png`;
@@ -18,8 +16,6 @@ const EVENT_DATE_TEXT = "Del 26 al 30 de octubre del 2026 | 11:00 AM (hora CDMX)
 const PRODUCT_EVENT = {
   content_name: "Master-IA CEFIN",
   content_category: "Taller práctico en vivo / IA para contadores",
-  value: PRICE,
-  currency: META_CURRENCY,
 };
 
 const pains = [
@@ -243,10 +239,6 @@ export default function MasterIAInscripcionPage() {
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <p className="border border-lime-300/35 bg-lime-300/10 px-6 py-4 text-3xl font-black text-lime-300">
-                    ${PRICE} MXN
-                  </p>
-
                   <a
                     href={CHECKOUT_URL}
                     onClick={handleCheckout}
@@ -410,9 +402,6 @@ export default function MasterIAInscripcionPage() {
                 INSCRIBIRME AHORA
                 <span className="ml-3 text-2xl leading-none">→</span>
               </a>
-              <p className="mt-3 text-center text-sm font-black uppercase text-lime-200">
-                ${PRICE} MXN · Acceso al taller de 5 días
-              </p>
             </div>
           </div>
         </section>
@@ -566,7 +555,6 @@ export default function MasterIAInscripcionPage() {
               <p className="text-sm font-black uppercase tracking-[0.22em] text-cyan-300">
                 Master-IA CEFIN
               </p>
-              <p className="mt-3 text-5xl font-black text-lime-300">${PRICE} MXN</p>
               <p className="mt-3 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                 {EVENT_DATE_TEXT}
               </p>
