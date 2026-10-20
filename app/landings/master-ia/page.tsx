@@ -13,10 +13,22 @@ import { MASTER_IA_CAPTURE_CAMPAIGN } from "./campaign";
 import { OpenAIAdsPixel } from "./openai-ads-pixel";
 
 type ActiveCampaignThankYou = (...args: unknown[]) => void;
+type ActiveCampaignShowError = (
+  id: string,
+  message: string,
+  html?: string,
+) => void;
+type ActiveCampaignScriptLoader = (
+  url: string,
+  callback?: (() => void) | null,
+  isSubmit?: boolean,
+) => void;
 
 declare global {
   interface Window {
     _show_thank_you?: ActiveCampaignThankYou;
+    _show_error?: ActiveCampaignShowError;
+    _load_script?: ActiveCampaignScriptLoader;
   }
 }
 
@@ -30,6 +42,7 @@ const WEBINAR_EVENT = {
 const ACTIVE_CAMPAIGN_FORM_ID =
   MASTER_IA_CAPTURE_CAMPAIGN.activeCampaignFormId;
 const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
+const ACTIVE_CAMPAIGN_ORIGIN = "https://cefincapacitacion.activehosted.com";
 const OPENAI_ADS_PENDING_REGISTRATION_KEY =
   "cefin_master_ia_openai_registration_pending";
 const OPENAI_ADS_DEBUG_TRACE_KEY = "cefin_master_ia_openai_debug_trace";
@@ -131,6 +144,17 @@ export default function LandingIA() {
 
     let originalShowThankYou: ActiveCampaignThankYou | undefined;
     let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let originalShowError: ActiveCampaignShowError | undefined;
+    let wrappedShowError: ActiveCampaignShowError | undefined;
+    let originalLoadScript: ActiveCampaignScriptLoader | undefined;
+    let wrappedLoadScript: ActiveCampaignScriptLoader | undefined;
+    let activeSubmission:
+      | {
+          formInstanceId: string;
+          rejected: boolean;
+          responseAccepted: boolean;
+        }
+      | undefined;
     let registrationConfirmed = false;
     let hookReplacementRecorded = false;
     const isOpenAIAdsLocalTest = isOpenAIAdsDebugEnabled();
@@ -178,7 +202,25 @@ export default function LandingIA() {
       });
     };
 
-    const confirmVerifiedSuccess = (receivedId: unknown) => {
+    const storeVerifiedConfirmation = (source: "inline" | "redirect") => {
+      if (registrationConfirmed) return;
+
+      registrationConfirmed = true;
+      const confirmationReturned = confirmMasterIARegistrationForOpenAIAds();
+      const pendingStorageState = getPendingStorageState();
+      recordOpenAIAdsDebug(
+        pendingStorageState.pendingStored
+          ? "confirmation_stored"
+          : "confirmation_storage_failed",
+        {
+          source,
+          confirmationReturned,
+          ...pendingStorageState,
+        },
+      );
+    };
+
+    const confirmVerifiedInlineSuccess = (receivedId: unknown) => {
       const id =
         typeof receivedId === "string" || typeof receivedId === "number"
           ? String(receivedId)
@@ -220,36 +262,79 @@ export default function LandingIA() {
       }
 
       if (isVerifiedSuccess && !registrationConfirmed) {
-        registrationConfirmed = true;
-        const confirmationReturned =
-          confirmMasterIARegistrationForOpenAIAds();
-        const pendingStorageState = getPendingStorageState();
-        recordOpenAIAdsDebug(
-          pendingStorageState.pendingStored
-            ? "confirmation_stored"
-            : "confirmation_storage_failed",
-          {
-            confirmationReturned,
-            ...pendingStorageState,
-          },
-        );
-        pauseNextNavigationForLocalTest();
+        storeVerifiedConfirmation("inline");
       }
     };
 
-    const installSuccessHandler = () => {
+    const getVerifiedSubmission = (url: string, isSubmit?: boolean) => {
+      if (!isSubmit) return null;
+
+      try {
+        const requestUrl = new URL(url, window.location.href);
+        if (
+          requestUrl.origin !== ACTIVE_CAMPAIGN_ORIGIN ||
+          requestUrl.pathname !== "/proc.php" ||
+          requestUrl.searchParams.get("f") !==
+            String(ACTIVE_CAMPAIGN_FORM_ID) ||
+          requestUrl.searchParams.get("jsonp") !== "true"
+        ) {
+          return null;
+        }
+
+        const formInstanceId = requestUrl.searchParams.get("u") || "";
+        const form = document.getElementById(`_form_${formInstanceId}_`);
+        const hiddenFormId = form?.querySelector<HTMLInputElement>(
+          'input[name="f"]',
+        );
+        const hiddenInstanceId = form?.querySelector<HTMLInputElement>(
+          'input[name="u"]',
+        );
+
+        if (
+          !formInstanceId ||
+          !(form instanceof HTMLFormElement) ||
+          !form.classList.contains(ACTIVE_CAMPAIGN_FORM_CLASS) ||
+          hiddenFormId?.value !== String(ACTIVE_CAMPAIGN_FORM_ID) ||
+          hiddenInstanceId?.value !== formInstanceId
+        ) {
+          return null;
+        }
+
+        return { form, formInstanceId };
+      } catch {
+        return null;
+      }
+    };
+
+    const installActiveCampaignHooks = () => {
       if (
         wrappedShowThankYou ||
-        typeof window._show_thank_you !== "function"
+        wrappedShowError ||
+        wrappedLoadScript
       ) {
         recordOpenAIAdsDebug("hook_install_skipped", {
-          alreadyWrapped: Boolean(wrappedShowThankYou),
-          currentHookType: typeof window._show_thank_you,
+          alreadyWrapped: true,
+        });
+        return;
+      }
+
+      if (
+        typeof window._show_thank_you !== "function" ||
+        typeof window._show_error !== "function" ||
+        typeof window._load_script !== "function"
+      ) {
+        recordOpenAIAdsDebug("hook_install_skipped", {
+          alreadyWrapped: false,
+          thankYouType: typeof window._show_thank_you,
+          errorType: typeof window._show_error,
+          loaderType: typeof window._load_script,
         });
         return;
       }
 
       originalShowThankYou = window._show_thank_you;
+      originalShowError = window._show_error;
+      originalLoadScript = window._load_script;
       wrappedShowThankYou = (...args: unknown[]) => {
         recordOpenAIAdsDebug("hook_invoked", {
           argumentCount: args.length,
@@ -274,12 +359,91 @@ export default function LandingIA() {
           throw error;
         }
 
-        confirmVerifiedSuccess(args[0]);
+        confirmVerifiedInlineSuccess(args[0]);
+      };
+      wrappedShowError = (id, message, html) => {
+        if (activeSubmission && id === activeSubmission.formInstanceId) {
+          activeSubmission.rejected = true;
+          recordOpenAIAdsDebug("submission_response_rejected", {
+            matchingFormInstance: true,
+          });
+        }
+
+        originalShowError?.(id, message, html);
+      };
+      wrappedLoadScript = (url, callback, isSubmit) => {
+        const verifiedSubmission = getVerifiedSubmission(url, isSubmit);
+        if (!verifiedSubmission) {
+          originalLoadScript?.call(window, url, callback, isSubmit);
+          return;
+        }
+
+        const submission = {
+          formInstanceId: verifiedSubmission.formInstanceId,
+          rejected: false,
+          responseAccepted: false,
+        };
+        activeSubmission = submission;
+        recordOpenAIAdsDebug("submission_request_verified", {
+          formId: ACTIVE_CAMPAIGN_FORM_ID,
+          classMatched: true,
+          instanceMatched: true,
+        });
+
+        const handleResponseLoaded = () => {
+          callback?.();
+
+          const form = document.getElementById(
+            `_form_${submission.formInstanceId}_`,
+          );
+          const submitButton = form?.querySelector<HTMLButtonElement>(
+            `#_form_${ACTIVE_CAMPAIGN_FORM_ID}_submit`,
+          );
+          const validation = {
+            isCurrentSubmission: activeSubmission === submission,
+            rejected: submission.rejected,
+            formFound: form instanceof HTMLFormElement,
+            hasExpectedFormClass:
+              form?.classList.contains(ACTIVE_CAMPAIGN_FORM_CLASS) ?? false,
+            submitStillProcessing:
+              submitButton?.disabled === true &&
+              submitButton.classList.contains("processing"),
+          };
+          const accepted =
+            validation.isCurrentSubmission &&
+            !validation.rejected &&
+            validation.formFound &&
+            validation.hasExpectedFormClass &&
+            validation.submitStillProcessing;
+
+          recordOpenAIAdsDebug(
+            accepted
+              ? "submission_redirect_response_accepted"
+              : "submission_redirect_response_rejected",
+            validation,
+          );
+
+          if (accepted) {
+            submission.responseAccepted = true;
+            pauseNextNavigationForLocalTest();
+          }
+        };
+
+        originalLoadScript?.call(
+          window,
+          url,
+          handleResponseLoaded,
+          isSubmit,
+        );
       };
       window._show_thank_you = wrappedShowThankYou;
+      window._show_error = wrappedShowError;
+      window._load_script = wrappedLoadScript;
 
       recordOpenAIAdsDebug("hook_installed", {
-        installed: window._show_thank_you === wrappedShowThankYou,
+        thankYouInstalled: window._show_thank_you === wrappedShowThankYou,
+        errorInstalled: window._show_error === wrappedShowError,
+        loaderInstalled: window._load_script === wrappedLoadScript,
         originalHookName: originalShowThankYou.name || "anonymous",
       });
 
@@ -290,6 +454,24 @@ export default function LandingIA() {
       }
     };
 
+    const confirmVerifiedRedirectNavigation = () => {
+      if (
+        !activeSubmission ||
+        activeSubmission.rejected ||
+        !activeSubmission.responseAccepted
+      ) {
+        return;
+      }
+
+      recordOpenAIAdsDebug("submission_redirect_observed", {
+        responseAccepted: true,
+      });
+      storeVerifiedConfirmation("redirect");
+    };
+
+    window.addEventListener("beforeunload", confirmVerifiedRedirectNavigation);
+    window.addEventListener("pagehide", confirmVerifiedRedirectNavigation);
+
     const script = document.createElement("script");
     script.id = "ac-script-loader";
     script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
@@ -297,9 +479,11 @@ export default function LandingIA() {
     script.async = true;
     const handleScriptLoad = () => {
       recordOpenAIAdsDebug("activecampaign_script_loaded", {
-        currentHookType: typeof window._show_thank_you,
+        thankYouType: typeof window._show_thank_you,
+        errorType: typeof window._show_error,
+        loaderType: typeof window._load_script,
       });
-      installSuccessHandler();
+      installActiveCampaignHooks();
     };
     const handleScriptError = () => {
       recordOpenAIAdsDebug("activecampaign_script_failed");
@@ -314,7 +498,11 @@ export default function LandingIA() {
       ? window.setInterval(() => {
           if (
             wrappedShowThankYou &&
-            window._show_thank_you !== wrappedShowThankYou &&
+            wrappedShowError &&
+            wrappedLoadScript &&
+            (window._show_thank_you !== wrappedShowThankYou ||
+              window._show_error !== wrappedShowError ||
+              window._load_script !== wrappedLoadScript) &&
             !hookReplacementRecorded
           ) {
             hookReplacementRecorded = true;
@@ -322,6 +510,9 @@ export default function LandingIA() {
               replacementType: typeof window._show_thank_you,
               replacementName:
                 window._show_thank_you?.name || "anonymous_or_missing",
+              errorHookStillInstalled: window._show_error === wrappedShowError,
+              loaderHookStillInstalled:
+                window._load_script === wrappedLoadScript,
             });
           }
         }, 100)
@@ -332,7 +523,11 @@ export default function LandingIA() {
         hookInstalled: Boolean(wrappedShowThankYou),
         hookStillInstalled:
           Boolean(wrappedShowThankYou) &&
-          window._show_thank_you === wrappedShowThankYou,
+          Boolean(wrappedShowError) &&
+          Boolean(wrappedLoadScript) &&
+          window._show_thank_you === wrappedShowThankYou &&
+          window._show_error === wrappedShowError &&
+          window._load_script === wrappedLoadScript,
         ...getPendingStorageState(),
       });
     };
@@ -345,11 +540,20 @@ export default function LandingIA() {
         hookInstalled: Boolean(wrappedShowThankYou),
         hookStillInstalled:
           Boolean(wrappedShowThankYou) &&
-          window._show_thank_you === wrappedShowThankYou,
+          Boolean(wrappedShowError) &&
+          Boolean(wrappedLoadScript) &&
+          window._show_thank_you === wrappedShowThankYou &&
+          window._show_error === wrappedShowError &&
+          window._load_script === wrappedLoadScript,
         ...getPendingStorageState(),
       });
       script.removeEventListener("load", handleScriptLoad);
       script.removeEventListener("error", handleScriptError);
+      window.removeEventListener(
+        "beforeunload",
+        confirmVerifiedRedirectNavigation,
+      );
+      window.removeEventListener("pagehide", confirmVerifiedRedirectNavigation);
       window.removeEventListener("beforeunload", recordBeforeUnload);
       if (hookMonitorId !== undefined) {
         window.clearInterval(hookMonitorId);
@@ -359,6 +563,12 @@ export default function LandingIA() {
         window._show_thank_you === wrappedShowThankYou
       ) {
         window._show_thank_you = originalShowThankYou;
+      }
+      if (wrappedShowError && window._show_error === wrappedShowError) {
+        window._show_error = originalShowError;
+      }
+      if (wrappedLoadScript && window._load_script === wrappedLoadScript) {
+        window._load_script = originalLoadScript;
       }
       script.remove();
     };

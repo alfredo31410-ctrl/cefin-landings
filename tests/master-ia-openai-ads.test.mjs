@@ -185,6 +185,16 @@ test("limits the integration to verified Master IA success", async () => {
 
   assert.match(landingSource, /MASTER_IA_CAPTURE_CAMPAIGN\.activeCampaignFormId/);
   assert.match(landingSource, /window\._show_thank_you = wrappedShowThankYou/);
+  assert.match(landingSource, /window\._load_script = wrappedLoadScript/);
+  assert.match(landingSource, /window\._show_error = wrappedShowError/);
+  assert.match(landingSource, /requestUrl\.pathname !== "\/proc\.php"/);
+  assert.match(
+    landingSource,
+    /requestUrl\.searchParams\.get\("f"\)[\s\S]*String\(ACTIVE_CAMPAIGN_FORM_ID\)/,
+  );
+  assert.match(landingSource, /hiddenInstanceId\?\.value !== formInstanceId/);
+  assert.match(landingSource, /activeSubmission\.responseAccepted/);
+  assert.match(landingSource, /storeVerifiedConfirmation\("redirect"\)/);
   assert.match(landingSource, /originalShowThankYou\?\.\(\.\.\.args\)/);
   assert.doesNotMatch(landingSource, /window\._form_callback\s*=/);
   assert.match(landingSource, /thankYou\?\.style\.display === "block"/);
@@ -201,6 +211,11 @@ test("limits the integration to verified Master IA success", async () => {
   assert.match(landingSource, /"confirmation_stored"/);
   assert.match(landingSource, /"confirmation_storage_failed"/);
   assert.match(landingSource, /"hook_replaced_after_install"/);
+  assert.match(landingSource, /"submission_request_verified"/);
+  assert.match(landingSource, /"submission_response_rejected"/);
+  assert.match(landingSource, /"submission_redirect_response_accepted"/);
+  assert.match(landingSource, /"submission_redirect_observed"/);
+  assert.doesNotMatch(landingSource, /_form_263/);
 
   assert.match(landingSource, /trackMetaEvent\("ViewContent"/);
   assert.match(thankYouSource, /trackMetaEvent\("CompleteRegistration"/);
