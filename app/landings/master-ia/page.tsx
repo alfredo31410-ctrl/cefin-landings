@@ -8,7 +8,17 @@ import {
   trackMetaCustomEvent,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import { confirmMasterIARegistrationForOpenAIAds } from "@/lib/master-ia-openai-ads";
 import { MASTER_IA_CAPTURE_CAMPAIGN } from "./campaign";
+import { OpenAIAdsPixel } from "./openai-ads-pixel";
+
+type ActiveCampaignThankYou = (...args: unknown[]) => void;
+
+declare global {
+  interface Window {
+    _show_thank_you?: ActiveCampaignThankYou;
+  }
+}
 
 const WEBINAR_EVENT = {
   content_name: MASTER_IA_CAPTURE_CAMPAIGN.contentName,
@@ -20,6 +30,69 @@ const WEBINAR_EVENT = {
 const ACTIVE_CAMPAIGN_FORM_ID =
   MASTER_IA_CAPTURE_CAMPAIGN.activeCampaignFormId;
 const ACTIVE_CAMPAIGN_FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
+const OPENAI_ADS_PENDING_REGISTRATION_KEY =
+  "cefin_master_ia_openai_registration_pending";
+const OPENAI_ADS_DEBUG_TRACE_KEY = "cefin_master_ia_openai_debug_trace";
+const OPENAI_ADS_DEBUG_TRACE_LIMIT = 50;
+
+type OpenAIAdsDebugEntry = {
+  sequence: number;
+  stage: string;
+  details: Record<string, unknown>;
+};
+
+const isOpenAIAdsDebugEnabled = () =>
+  process.env.NODE_ENV !== "production" &&
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("openai_ads_debug") === "1";
+
+const recordOpenAIAdsDebug = (
+  stage: string,
+  details: Record<string, unknown> = {},
+) => {
+  if (!isOpenAIAdsDebugEnabled()) return;
+
+  try {
+    const serialized = window.sessionStorage.getItem(
+      OPENAI_ADS_DEBUG_TRACE_KEY,
+    );
+    const parsed: unknown = serialized ? JSON.parse(serialized) : [];
+    const trace = Array.isArray(parsed)
+      ? (parsed as OpenAIAdsDebugEntry[]).slice(
+          -(OPENAI_ADS_DEBUG_TRACE_LIMIT - 1),
+        )
+      : [];
+    const entry: OpenAIAdsDebugEntry = {
+      sequence: (trace.at(-1)?.sequence ?? 0) + 1,
+      stage,
+      details,
+    };
+
+    trace.push(entry);
+    window.sessionStorage.setItem(
+      OPENAI_ADS_DEBUG_TRACE_KEY,
+      JSON.stringify(trace),
+    );
+    console.debug(`[OpenAI Ads][Master IA][trace] ${stage}`, details);
+  } catch (error) {
+    console.debug("[OpenAI Ads][Master IA][trace] storage_write_failed", {
+      attemptedStage: stage,
+      errorType: error instanceof Error ? error.name : typeof error,
+    });
+  }
+};
+
+const resetOpenAIAdsDebug = () => {
+  if (!isOpenAIAdsDebugEnabled()) return;
+
+  try {
+    window.sessionStorage.removeItem(OPENAI_ADS_DEBUG_TRACE_KEY);
+  } catch (error) {
+    console.debug("[OpenAI Ads][Master IA][trace] storage_reset_failed", {
+      errorType: error instanceof Error ? error.name : typeof error,
+    });
+  }
+};
 
 export default function LandingIA() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +107,8 @@ export default function LandingIA() {
   }, []);
 
   const openRegistrationModal = () => {
+    resetOpenAIAdsDebug();
+    recordOpenAIAdsDebug("modal_open_requested");
     setIsModalOpen(true);
 
     trackMetaCustomEvent("OpenRegistrationModal", {
@@ -46,20 +121,253 @@ export default function LandingIA() {
   useEffect(() => {
     if (!isModalOpen) return;
 
+    recordOpenAIAdsDebug("effect_started");
+
     const oldScript = document.getElementById("ac-script-loader");
+    recordOpenAIAdsDebug("previous_script_checked", {
+      existed: Boolean(oldScript),
+    });
     if (oldScript) oldScript.remove();
+
+    let originalShowThankYou: ActiveCampaignThankYou | undefined;
+    let wrappedShowThankYou: ActiveCampaignThankYou | undefined;
+    let registrationConfirmed = false;
+    let hookReplacementRecorded = false;
+    const isOpenAIAdsLocalTest = isOpenAIAdsDebugEnabled();
+
+    const getPendingStorageState = () => {
+      try {
+        return {
+          storageReadable: true,
+          pendingStored:
+            window.sessionStorage.getItem(
+              OPENAI_ADS_PENDING_REGISTRATION_KEY,
+            ) !== null,
+        };
+      } catch (error) {
+        return {
+          storageReadable: false,
+          pendingStored: false,
+          storageErrorType:
+            error instanceof Error ? error.name : typeof error,
+        };
+      }
+    };
+
+    const pauseNextNavigationForLocalTest = () => {
+      if (!isOpenAIAdsLocalTest) return;
+
+      const pauseNavigation = (event: BeforeUnloadEvent) => {
+        window.removeEventListener("beforeunload", pauseNavigation);
+        recordOpenAIAdsDebug("local_navigation_pause_invoked", {
+          hookStillInstalled:
+            Boolean(wrappedShowThankYou) &&
+            window._show_thank_you === wrappedShowThankYou,
+          ...getPendingStorageState(),
+        });
+        event.preventDefault();
+        event.returnValue = "";
+      };
+
+      window.addEventListener("beforeunload", pauseNavigation);
+      console.debug(
+        "[OpenAI Ads][Master IA] local_navigation_pause_armed",
+      );
+      recordOpenAIAdsDebug("local_navigation_pause_armed", {
+        ...getPendingStorageState(),
+      });
+    };
+
+    const confirmVerifiedSuccess = (receivedId: unknown) => {
+      const id =
+        typeof receivedId === "string" || typeof receivedId === "number"
+          ? String(receivedId)
+          : "";
+      const form = document.getElementById(`_form_${id}_`);
+      const thankYou = form?.querySelector<HTMLElement>("._form-thank-you");
+      const content = form?.querySelector<HTMLElement>("._form-content");
+      const validation = {
+        receivedIdType: typeof receivedId,
+        hasUsableId: Boolean(id),
+        formFound: Boolean(form),
+        isHtmlForm: form instanceof HTMLFormElement,
+        hasExpectedFormClass:
+          form?.classList.contains(ACTIVE_CAMPAIGN_FORM_CLASS) ?? false,
+        hasThankYouContent: Boolean(thankYou?.textContent?.trim()),
+        thankYouVisible: thankYou?.style.display === "block",
+        formContentHidden: content?.style.display === "none",
+      };
+      const rejectionReasons = Object.entries(validation)
+        .filter(([key, value]) => key !== "receivedIdType" && value === false)
+        .map(([key]) => key);
+      const isVerifiedSuccess = rejectionReasons.length === 0;
+
+      recordOpenAIAdsDebug(
+        isVerifiedSuccess ? "validation_accepted" : "validation_rejected",
+        {
+          ...validation,
+          rejectionReasons,
+          duplicate: registrationConfirmed,
+        },
+      );
+
+      if (process.env.NODE_ENV !== "production") {
+        console.debug("[OpenAI Ads][Master IA] activecampaign_callback", {
+          receivedIdType: typeof receivedId,
+          isVerifiedSuccess,
+          duplicate: registrationConfirmed,
+        });
+      }
+
+      if (isVerifiedSuccess && !registrationConfirmed) {
+        registrationConfirmed = true;
+        const confirmationReturned =
+          confirmMasterIARegistrationForOpenAIAds();
+        const pendingStorageState = getPendingStorageState();
+        recordOpenAIAdsDebug(
+          pendingStorageState.pendingStored
+            ? "confirmation_stored"
+            : "confirmation_storage_failed",
+          {
+            confirmationReturned,
+            ...pendingStorageState,
+          },
+        );
+        pauseNextNavigationForLocalTest();
+      }
+    };
+
+    const installSuccessHandler = () => {
+      if (
+        wrappedShowThankYou ||
+        typeof window._show_thank_you !== "function"
+      ) {
+        recordOpenAIAdsDebug("hook_install_skipped", {
+          alreadyWrapped: Boolean(wrappedShowThankYou),
+          currentHookType: typeof window._show_thank_you,
+        });
+        return;
+      }
+
+      originalShowThankYou = window._show_thank_you;
+      wrappedShowThankYou = (...args: unknown[]) => {
+        recordOpenAIAdsDebug("hook_invoked", {
+          argumentCount: args.length,
+          firstArgumentType: typeof args[0],
+          hookStillInstalled:
+            window._show_thank_you === wrappedShowThankYou,
+          ...getPendingStorageState(),
+        });
+
+        try {
+          originalShowThankYou?.(...args);
+          recordOpenAIAdsDebug("original_hook_returned", {
+            hookStillInstalled:
+              window._show_thank_you === wrappedShowThankYou,
+            ...getPendingStorageState(),
+          });
+        } catch (error) {
+          recordOpenAIAdsDebug("original_hook_threw", {
+            errorType: error instanceof Error ? error.name : typeof error,
+            ...getPendingStorageState(),
+          });
+          throw error;
+        }
+
+        confirmVerifiedSuccess(args[0]);
+      };
+      window._show_thank_you = wrappedShowThankYou;
+
+      recordOpenAIAdsDebug("hook_installed", {
+        installed: window._show_thank_you === wrappedShowThankYou,
+        originalHookName: originalShowThankYou.name || "anonymous",
+      });
+
+      if (process.env.NODE_ENV !== "production") {
+        console.debug(
+          "[OpenAI Ads][Master IA] activecampaign_success_handler_installed",
+        );
+      }
+    };
 
     const script = document.createElement("script");
     script.id = "ac-script-loader";
     script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${ACTIVE_CAMPAIGN_FORM_ID}`;
     script.charset = "utf-8";
     script.async = true;
+    const handleScriptLoad = () => {
+      recordOpenAIAdsDebug("activecampaign_script_loaded", {
+        currentHookType: typeof window._show_thank_you,
+      });
+      installSuccessHandler();
+    };
+    const handleScriptError = () => {
+      recordOpenAIAdsDebug("activecampaign_script_failed");
+    };
+    script.addEventListener("load", handleScriptLoad, { once: true });
+    script.addEventListener("error", handleScriptError, { once: true });
 
     document.body.appendChild(script);
+    recordOpenAIAdsDebug("activecampaign_script_appended");
+
+    const hookMonitorId = isOpenAIAdsLocalTest
+      ? window.setInterval(() => {
+          if (
+            wrappedShowThankYou &&
+            window._show_thank_you !== wrappedShowThankYou &&
+            !hookReplacementRecorded
+          ) {
+            hookReplacementRecorded = true;
+            recordOpenAIAdsDebug("hook_replaced_after_install", {
+              replacementType: typeof window._show_thank_you,
+              replacementName:
+                window._show_thank_you?.name || "anonymous_or_missing",
+            });
+          }
+        }, 100)
+      : undefined;
+
+    const recordBeforeUnload = () => {
+      recordOpenAIAdsDebug("beforeunload_observed", {
+        hookInstalled: Boolean(wrappedShowThankYou),
+        hookStillInstalled:
+          Boolean(wrappedShowThankYou) &&
+          window._show_thank_you === wrappedShowThankYou,
+        ...getPendingStorageState(),
+      });
+    };
+    if (isOpenAIAdsLocalTest) {
+      window.addEventListener("beforeunload", recordBeforeUnload);
+    }
+
+    return () => {
+      recordOpenAIAdsDebug("effect_cleanup", {
+        hookInstalled: Boolean(wrappedShowThankYou),
+        hookStillInstalled:
+          Boolean(wrappedShowThankYou) &&
+          window._show_thank_you === wrappedShowThankYou,
+        ...getPendingStorageState(),
+      });
+      script.removeEventListener("load", handleScriptLoad);
+      script.removeEventListener("error", handleScriptError);
+      window.removeEventListener("beforeunload", recordBeforeUnload);
+      if (hookMonitorId !== undefined) {
+        window.clearInterval(hookMonitorId);
+      }
+      if (
+        wrappedShowThankYou &&
+        window._show_thank_you === wrappedShowThankYou
+      ) {
+        window._show_thank_you = originalShowThankYou;
+      }
+      script.remove();
+    };
   }, [isModalOpen]);
 
   return (
     <>
+      <OpenAIAdsPixel />
+
       <Script
         id="meta-pixel-ia"
         strategy="afterInteractive"

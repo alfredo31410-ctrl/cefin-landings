@@ -9,7 +9,9 @@ import {
   trackMetaEvent,
   trackMetaCustomEvent,
 } from "@/lib/meta-pixel";
+import { sendPendingMasterIARegistrationToOpenAIAds } from "@/lib/master-ia-openai-ads";
 import { MASTER_IA_CAPTURE_CAMPAIGN } from "../campaign";
+import { OpenAIAdsPixel } from "../openai-ads-pixel";
 
 type WindowWithMetaPixel = Window & {
   fbq?: (...args: unknown[]) => void;
@@ -19,6 +21,8 @@ export default function GraciasIA() {
   const whatsappUrl = MASTER_IA_CAPTURE_CAMPAIGN.whatsappUrl;
 
 useEffect(() => {
+  void sendPendingMasterIARegistrationToOpenAIAds();
+
   document.title =
     "Último paso | ABC de Inteligencia Artificial para Contadores | CEFIN";
 
@@ -83,6 +87,8 @@ useEffect(() => {
 
   return (
     <>
+      <OpenAIAdsPixel />
+
       <Script
         id="meta-pixel-ia-thank-you"
         strategy="afterInteractive"
