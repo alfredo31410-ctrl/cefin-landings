@@ -47,12 +47,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Script
           id="vk-digital-leads-pixel"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: VK_DIGITAL_LEADS_PIXEL_SCRIPT }}
         />
         <Script
           id="vk-digital-metrics"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: VK_DIGITAL_TRACKING_SCRIPT }}
         />
         <HotmartUtmTracking />
