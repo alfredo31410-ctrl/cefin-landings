@@ -13,7 +13,8 @@ export const salesPage = {
   instructor: {
     name: "Mtro. Alfredo Cobos",
     role: "Fundador y director de CEFIN",
-    image: "/asesor-fiscal/alfredo-academia.png",
+    image:
+      "https://cefin-landings-z9uk.vercel.app/asesor-fiscal/alfredo-academia.png",
     imageAlt: "Mtro. Alfredo Cobos, instructor de CEFIN",
   },
   coreOffer: [
