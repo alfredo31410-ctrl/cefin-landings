@@ -24,7 +24,7 @@ function InvalidRegistration() {
           registro.
         </p>
         <a
-          href="/landings/nif/registro"
+          href="/landings/nif"
           className="mt-7 inline-flex rounded-2xl bg-white px-6 py-4 text-sm font-black uppercase text-[#111]"
         >
           Volver al registro
@@ -59,7 +59,7 @@ export default function GraciasNifClient() {
         trackMetaEvent(
           "CompleteRegistration",
           {
-            content_name: "ABC PRÁCTICO DE NIF",
+            content_name: "ABC de NIF",
             content_category: "Clase gratuita en vivo",
             status: "completed",
             value: 0,
@@ -81,6 +81,7 @@ export default function GraciasNifClient() {
         dangerouslySetInnerHTML={{ __html: getMetaPixelScript() }}
       />
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"

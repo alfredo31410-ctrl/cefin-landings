@@ -7,7 +7,7 @@ import {
   verifyRegistrationToken,
 } from "@/lib/nif-registration";
 
-const registerPath = "/landings/nif/registro";
+const registerPath = "/landings/nif";
 const thanksPath = "/landings/nif/registro/gracias";
 const canonicalOrigin = "https://cefin.mx";
 
