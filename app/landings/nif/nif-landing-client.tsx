@@ -18,7 +18,7 @@ import {
 } from "@/lib/meta-pixel";
 import styles from "./nif-landing.module.css";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 307;
+const ACTIVE_CAMPAIGN_FORM_ID = 369;
 const FORM_CLASS = "_form_" + ACTIVE_CAMPAIGN_FORM_ID;
 const EVENT_DATE = "6 de noviembre";
 const EVENT_TIME = "11:00 a. m.";
