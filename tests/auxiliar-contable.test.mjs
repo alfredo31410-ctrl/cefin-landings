@@ -68,3 +68,23 @@ test("tracks the form funnel without overriding ActiveCampaign fields", async ()
   assert.doesNotMatch(landingSource, /\.ac-modal-wrapper input\s*\{/);
   assert.doesNotMatch(landingSource, /\.ac-modal-wrapper \._submit\s*\{/);
 });
+
+test("keeps the mobile landing and registration modal vertically scrollable", async () => {
+  const styles = await readFile(
+    new URL(
+      "../app/landings/auxiliar-contable/auxiliar-contable.module.css",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(styles, /\.page\s*\{[\s\S]*?overflow-y:\s*visible;/);
+  assert.match(
+    styles,
+    /\.modalBackdrop\s*\{[\s\S]*?overflow-y:\s*auto;[\s\S]*?touch-action:\s*pan-y;/,
+  );
+  assert.match(
+    styles,
+    /\.modal\s*\{[\s\S]*?max-height:[^;]+;[\s\S]*?overflow-y:\s*auto;[\s\S]*?touch-action:\s*pan-y;/,
+  );
+});
