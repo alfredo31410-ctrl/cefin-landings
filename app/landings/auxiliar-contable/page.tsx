@@ -1,36 +1,71 @@
 "use client";
 
+import Image from "next/image";
 import Script from "next/script";
-import { useState, useEffect } from "react";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
+import { useEffect, useState } from "react";
+import {
+  META_PIXEL_ID,
+  trackMetaCustomEvent,
+} from "@/lib/meta-pixel";
+import { createAuxiliarContableRegistrationProof } from "@/lib/auxiliar-contable-tracking";
+import { AUXILIAR_EVENT } from "./config";
+import styles from "./auxiliar-contable.module.css";
 
-declare global {
-  interface Window {
-    fbq?: (command: string, ...args: unknown[]) => void;
-  }
+const topics = [
+  "Bases contables",
+  "Control de facturas",
+  "Reportería esencial",
+];
+
+function ArrowIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
 }
 
 export default function LandingCEFIN() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Auxiliar Contable - Entrenamiento En Vivo | CEFIN";
+    document.title = `${AUXILIAR_EVENT.name} | CEFIN`;
   }, []);
 
   useEffect(() => {
-    if (isModalOpen) {
-      const oldScript = document.getElementById("ac-script-loader");
-      if (oldScript) oldScript.remove();
+    if (!isModalOpen) return;
 
-      const script = document.createElement("script");
-      script.id = "ac-script-loader";
-      script.src =
-        "https://cefincapacitacion.activehosted.com/f/embed.php?id=283";
-      script.type = "text/javascript";
-      script.charset = "utf-8";
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    const oldScript = document.getElementById("ac-script-loader");
+    oldScript?.remove();
+
+    const script = document.createElement("script");
+    script.id = "ac-script-loader";
+    script.src = `https://cefincapacitacion.activehosted.com/f/embed.php?id=${AUXILIAR_EVENT.activeCampaignFormId}`;
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsModalOpen(false);
+    };
+    const captureRegistrationAttempt = (event: SubmitEvent) => {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      if (!form.closest(`._form_${AUXILIAR_EVENT.activeCampaignFormId}`)) return;
+      createAuxiliarContableRegistrationProof();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("submit", captureRegistrationAttempt, true);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("submit", captureRegistrationAttempt, true);
+    };
   }, [isModalOpen]);
 
   return (
@@ -59,6 +94,7 @@ export default function LandingCEFIN() {
       />
 
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element -- Meta Pixel requires its tracking image inside noscript. */}
         <img
           height="1"
           width="1"
@@ -68,183 +104,189 @@ export default function LandingCEFIN() {
         />
       </noscript>
 
-      <main className="min-h-screen w-full bg-[#0f172a] text-white relative font-sans overflow-x-hidden flex flex-col">
-        {/* FONDO Y RESPLANDOR */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div
-            className="absolute top-[5%] left-[-10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full blur-[100px] opacity-40"
-            style={{
-              background:
-                "radial-gradient(circle, #e6007e 0%, transparent 70%)",
-            }}
-          />
-          <div className="absolute inset-0 z-10 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
-            <img
-              src="https://cefin-landings-z9uk.vercel.app/alfredo.png"
-              alt="Mtro. Alfredo Cobos"
-              className="absolute inset-0 h-full w-full object-contain object-left-bottom scale-110 -translate-x-[15%] sm:-translate-x-[5%] opacity-90"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f172a]/10 to-[#0f172a] z-0" />
+      <main className={styles.page}>
+        <div className={styles.ambient} aria-hidden="true">
+          <span className={styles.auroraOne} />
+          <span className={styles.auroraTwo} />
+          <span className={styles.grid} />
+          <span className={styles.noise} />
         </div>
 
-        {/* HEADER */}
-        <header className="relative z-30 flex justify-end px-6 py-6 lg:px-12">
-          <div className="text-right border-r-4 border-fuchsia-600 pr-4">
-            <p className="font-black text-2xl tracking-tighter leading-none">
-              CEFIN
-            </p>
-            <p className="text-[10px] uppercase font-bold text-slate-400">
-              Mtro. Alfredo Cobos
-            </p>
+        <header className={styles.header}>
+          <div className={styles.livePill}>
+            <span /> Clase gratuita en vivo
           </div>
+
+          <a
+            className={styles.brand}
+            href="https://cefin.mx"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visitar el sitio de CEFIN"
+          >
+            <span>CEFIN</span>
+            <small>Mtro. Alfredo Cobos</small>
+          </a>
         </header>
 
-        {/* CONTENIDO PRINCIPAL */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6 flex-grow flex flex-col justify-center py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-start-4 lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-block bg-fuchsia-600 text-white px-4 py-1 text-[11px] font-black uppercase italic tracking-widest rounded-sm">
-                ¡Entrenamiento desde cero!
-              </div>
-
-              <h1 className="text-6xl sm:text-7xl xl:text-[95px] font-black leading-[0.8] uppercase italic tracking-tighter">
-                Auxiliar <br />
-                <span className="text-yellow-400">Contable</span>
-              </h1>
-
-              <div className="bg-blue-600 inline-block px-5 py-2 text-sm font-bold uppercase italic shadow-lg">
-                Sesión 100% en vivo // Cupo Limitado
-              </div>
-
-              <div className="pt-4">
-                <p className="text-4xl sm:text-6xl font-black text-fuchsia-500 leading-none uppercase italic drop-shadow-md">
-                  MARTES 28 DE JULIO
-                </p>
-                <div className="text-xl font-bold mt-2 flex items-center justify-center lg:justify-start gap-3">
-                  11:00 AM - (CDMX)
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-500 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-fuchsia-500"></span>
-                  </span>
-                </div>
-              </div>
-
-              <div className="pt-24 lg:pt-8 flex justify-center lg:justify-start">
-                <button
-                  onClick={() => {
-                    setIsModalOpen(true);
-                  }}
-                  className="group relative inline-flex items-center justify-center px-10 py-5 font-black text-white bg-fuchsia-600 rounded-xl overflow-hidden transition-all hover:bg-fuchsia-700 active:scale-95 shadow-[0_15px_40px_rgba(230,0,126,0.4)] text-xl uppercase italic tracking-tighter"
-                >
-                  <span className="relative z-10">
-                    ¡Registrarme Gratis Ahora!
-                  </span>
-                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
-                </button>
-              </div>
+        <section className={styles.hero}>
+          <div className={styles.portraitWrap} aria-hidden="true">
+            <span className={styles.portraitHalo} />
+            <span className={styles.portraitRing} />
+            <Image
+              className={styles.portrait}
+              src="/alfredo.png"
+              alt=""
+              width={628}
+              height={628}
+              priority
+              sizes="(max-width: 900px) 100vw, 52vw"
+            />
+            <div className={styles.expertBadge}>
+              <span className={styles.expertNumber}>01</span>
+              <span>Nivel inicial<br />desde cero</span>
             </div>
           </div>
-        </div>
 
-        {/* FOOTER CON BOTÓN "CONOCER MÁS" INCORPORADO */}
-        <footer className="relative z-20 w-full pt-10 pb-12 bg-gradient-to-t from-fuchsia-900/10 to-transparent flex flex-col items-center">
-          <div className="mb-10">
-            <a
-              href="https://cefin.mx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 transition-all duration-300"
-            >
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-fuchsia-400 transition-colors">
-                ¿Quieres saber más de nosotros?
+          <div className={styles.content}>
+            <div className={`${styles.eyebrow} ${styles.revealOne}`}>
+              <span>01</span>
+              <p>Entrenamiento desde cero</p>
+              <i />
+            </div>
+
+            <h1 className={`${styles.title} ${styles.revealTwo}`}>
+              <span>Auxiliares</span>
+              <strong>Contables</strong>
+              <em>con Inteligencia Artificial</em>
+            </h1>
+
+            <p className={`${styles.subtitle} ${styles.revealThree}`}>
+              Aprende las bases que necesitas para comenzar con seguridad y
+              apóyate en la inteligencia artificial para trabajar mejor.
+            </p>
+
+            <div className={`${styles.sessionTag} ${styles.revealThree}`}>
+              <span className={styles.sessionDot} />
+              Sesión 100% en vivo
+              <i />
+              Cupo limitado
+            </div>
+
+            <div className={`${styles.eventCard} ${styles.revealFour}`}>
+              <div className={styles.calendarIcon} aria-hidden="true">
+                <span />
+                <span />
+                <b>{AUXILIAR_EVENT.day}</b>
+              </div>
+              <div className={styles.eventCopy}>
+                <small>Reserva la fecha</small>
+                <p>{AUXILIAR_EVENT.date}</p>
+              </div>
+              <div className={styles.eventTime}>
+                <small>Hora</small>
+                <p>{AUXILIAR_EVENT.time}</p>
+                <span>{AUXILIAR_EVENT.timezone}</span>
+              </div>
+            </div>
+
+            <div className={`${styles.actions} ${styles.revealFive}`}>
+              <button
+                type="button"
+                className={styles.primaryCta}
+                onClick={() => {
+                  trackMetaCustomEvent("OpenRegistrationForm", {
+                    content_name: AUXILIAR_EVENT.name,
+                    form_id: AUXILIAR_EVENT.activeCampaignFormId,
+                  });
+                  setIsModalOpen(true);
+                }}
+              >
+                <span>¡Registrarme gratis!</span>
+                <i><ArrowIcon /></i>
+              </button>
+              <p><span>✓</span> Sin costo · Acceso inmediato</p>
+            </div>
+          </div>
+        </section>
+
+        <footer className={styles.footer}>
+          <div className={styles.topics}>
+            {topics.map((topic, index) => (
+              <span key={topic}>
+                <i>0{index + 1}</i> {topic}
               </span>
-              <div className="px-6 py-3 border-2 border-fuchsia-600/30 group-hover:border-fuchsia-600 rounded-full text-sm font-black uppercase italic tracking-tighter transition-all group-hover:bg-fuchsia-600/10 flex items-center gap-3">
-                Conoce más de lo que hacemos en CEFIN
-                <svg
-                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
-            </a>
+            ))}
           </div>
 
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="flex flex-wrap justify-center gap-8 opacity-50">
-              {[
-                "BASES CONTABLES",
-                "CONTROL DE FACTURAS",
-                "REPORTERÍA ESENCIAL",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="text-[10px] sm:text-xs font-black tracking-[0.3em] italic text-fuchsia-200"
-                >
-                  {"// "} {item}
-                </span>
-              ))}
-            </div>
-          </div>
+          <a
+            className={styles.secondaryCta}
+            href="https://cefin.mx"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              <small>¿Quieres saber más de nosotros?</small>
+              Conoce lo que hacemos en CEFIN
+            </span>
+            <i><ArrowIcon /></i>
+          </a>
         </footer>
 
-        {/* MODAL */}
         {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f172a]/95 backdrop-blur-md">
-            <div className="relative bg-white w-full max-w-[480px] rounded-[2.5rem] p-8 shadow-[0_0_60px_rgba(230,0,126,0.4)] border-t-[10px] border-fuchsia-600 max-h-[90vh] overflow-y-auto">
+          <div
+            className={styles.modalBackdrop}
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setIsModalOpen(false);
+            }}
+          >
+            <div
+              className={styles.modal}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="registration-title"
+            >
               <button
+                type="button"
+                className={styles.closeButton}
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-5 right-6 text-slate-400 hover:text-slate-900 font-bold text-2xl"
+                aria-label="Cerrar formulario"
+                autoFocus
               >
-                ✕
+                <span />
+                <span />
               </button>
 
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-black text-[#0f172a] italic uppercase leading-none">
-                  Asegura tu <span className="text-fuchsia-600">Lugar</span>
+              <div className={styles.modalHeading}>
+                <span>Registro gratuito</span>
+                <h2 id="registration-title">
+                  Asegura tu <strong>lugar</strong>
                 </h2>
-                <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest">
-                  Entrenamiento 28 de Julio
-                </p>
+                <p>{AUXILIAR_EVENT.name} · {AUXILIAR_EVENT.shortDate}</p>
               </div>
 
-              <div className="ac-modal-wrapper min-h-[400px]">
-                <div className="_form_283"></div>
+              <div className={`${styles.formWrapper} ac-modal-wrapper`}>
+                <div className={`_form_${AUXILIAR_EVENT.activeCampaignFormId}`} />
               </div>
+
+              <p className={styles.privacyNote}>
+                Tus datos están seguros. No compartimos tu información.
+              </p>
             </div>
           </div>
         )}
 
         <style jsx global>{`
-          .ac-modal-wrapper ._form_283 {
+          .ac-modal-wrapper ._form_${AUXILIAR_EVENT.activeCampaignFormId},
+          .ac-modal-wrapper form,
+          .ac-modal-wrapper ._form-content {
             background: transparent !important;
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
           }
-          .ac-modal-wrapper ._form-title {
-            display: none !important;
-          }
-          .ac-modal-wrapper ._submit {
-            background: #e6007e !important;
-            color: white !important;
-            font-weight: 900 !important;
-            text-transform: uppercase !important;
-            border-radius: 14px !important;
-            padding: 1.2rem !important;
-            width: 100% !important;
-            font-size: 1.1rem !important;
-          }
-          .ac-modal-wrapper input {
-            background: #f1f5f9 !important;
-            border: 1px solid #e2e8f0 !important;
-            border-radius: 12px !important;
-            padding: 1rem !important;
-          }
+          .ac-modal-wrapper ._form-title,
           .ac-modal-wrapper ._form-branding {
             display: none !important;
           }
