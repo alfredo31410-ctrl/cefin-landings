@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
-  nifRegistrationCookieOptions,
   NIF_REGISTRATION_CONFIRMATION_COOKIE,
   verifyRegistrationToken,
 } from "@/lib/nif-registration";
@@ -15,13 +14,8 @@ export async function POST() {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  const response = NextResponse.json(
+  return NextResponse.json(
     { ok: true, registrationId: confirmation.registrationId },
     { headers: { "cache-control": "no-store" } },
   );
-  response.cookies.set(NIF_REGISTRATION_CONFIRMATION_COOKIE, "", {
-    ...nifRegistrationCookieOptions,
-    maxAge: 0,
-  });
-  return response;
 }

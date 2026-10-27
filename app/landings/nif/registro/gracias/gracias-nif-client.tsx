@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -12,31 +12,30 @@ import {
 
 const JOIN_ROUTE = "/landings/nif/unirse-whatsapp";
 
-function InvalidRegistration() {
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-[#08080b] px-5 py-12 text-white">
-      <div className="max-w-xl rounded-3xl border border-white/10 bg-white/[0.05] p-8 text-center">
-        <h1 className="text-3xl font-black">
-          No pudimos validar este registro
-        </h1>
-        <p className="mt-4 leading-relaxed text-white/70">
-          El enlace expiró, ya fue utilizado o no proviene del proceso de
-          registro.
-        </p>
-        <a
-          href="/landings/nif"
-          className="mt-7 inline-flex rounded-2xl bg-white px-6 py-4 text-sm font-black uppercase text-[#111]"
-        >
-          Volver al registro
-        </a>
-      </div>
-    </main>
-  );
+function claimRegistrationConversion(registrationId: string) {
+  const conversionKey = `${NIF_REGISTRATION_COMPLETION_STORAGE_KEY}:${registrationId}`;
+
+  try {
+    if (window.localStorage.getItem(conversionKey)) return false;
+    window.localStorage.setItem(conversionKey, "true");
+    return true;
+  } catch {
+    if (
+      window.sessionStorage.getItem(
+        NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
+      ) === registrationId
+    ) {
+      return false;
+    }
+    window.sessionStorage.setItem(
+      NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
+      registrationId,
+    );
+    return true;
+  }
 }
 
 export default function GraciasNifClient() {
-  const [invalid, setInvalid] = useState(false);
-
   useEffect(() => {
     fetch("/api/nif/registro/consumir", {
       method: "POST",
@@ -47,15 +46,7 @@ export default function GraciasNifClient() {
         return (await response.json()) as { registrationId: string };
       })
       .then(({ registrationId }) => {
-        const alreadyTracked = window.sessionStorage.getItem(
-          NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
-        );
-        if (alreadyTracked) return;
-
-        window.sessionStorage.setItem(
-          NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
-          registrationId,
-        );
+        if (!claimRegistrationConversion(registrationId)) return;
         trackMetaEvent(
           "CompleteRegistration",
           {
@@ -68,10 +59,8 @@ export default function GraciasNifClient() {
           { eventID: registrationId },
         );
       })
-      .catch(() => setInvalid(true));
+      .catch(() => undefined);
   }, []);
-
-  if (invalid) return <InvalidRegistration />;
 
   return (
     <>
