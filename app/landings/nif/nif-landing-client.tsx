@@ -20,7 +20,8 @@ import styles from "./nif-landing.module.css";
 
 const ACTIVE_CAMPAIGN_FORM_ID = 369;
 const FORM_CLASS = "_form_" + ACTIVE_CAMPAIGN_FORM_ID;
-const EVENT_DATE = "6 de noviembre";
+const EVENT_DATE = "jueves 5 de noviembre";
+const EVENT_DATE_LABEL = "Jueves 5 de noviembre";
 const EVENT_TIME = "11:00 a. m.";
 
 const learningPoints = [
@@ -115,9 +116,11 @@ function RegistrationButton({
 
 export function NifLandingClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showMobileSticky, setShowMobileSticky] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const heroCtaRef = useRef<HTMLDivElement>(null);
 
   const openRegistration = (location: string, trigger: HTMLButtonElement) => {
     lastTriggerRef.current = trigger;
@@ -168,6 +171,18 @@ export function NifLandingClient() {
       { threshold: 0.14, rootMargin: "0px 0px -6% 0px" },
     );
     revealElements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const heroCta = heroCtaRef.current;
+    if (!heroCta) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowMobileSticky(!entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+    observer.observe(heroCta);
     return () => observer.disconnect();
   }, []);
 
@@ -283,9 +298,10 @@ export function NifLandingClient() {
         <div className="relative z-50 border-b border-white/10 bg-[#101117]/95 px-4 py-2.5 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
             <p className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-white/78 sm:text-xs">
-              Clase gratuita en vivo
-              <span className="mx-2 text-[#a78bfa]">·</span>
-              {EVENT_DATE}
+              <span className="hidden md:inline">Clase gratuita en vivo</span>
+              <span className="mx-2 hidden text-[#a78bfa] md:inline">·</span>
+              <span className="sm:hidden">Jueves 5 nov</span>
+              <span className="hidden sm:inline">{EVENT_DATE_LABEL}</span>
               <span className="hidden sm:inline">
                 <span className="mx-2 text-[#a78bfa]">·</span>
                 {EVENT_TIME} CDMX
@@ -344,7 +360,11 @@ export function NifLandingClient() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-2.5">
-                {[EVENT_DATE, EVENT_TIME + " · CDMX", "100% gratuita"].map(
+                {[
+                  EVENT_DATE_LABEL,
+                  EVENT_TIME + " · CDMX",
+                  "100% gratuita",
+                ].map(
                   (item) => (
                     <span
                       key={item}
@@ -356,7 +376,10 @@ export function NifLandingClient() {
                 )}
               </div>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div
+                ref={heroCtaRef}
+                className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
+              >
                 <RegistrationButton
                   location="hero"
                   onOpen={openRegistration}
@@ -374,7 +397,7 @@ export function NifLandingClient() {
 
             <div
               className={
-                "relative z-10 min-h-[25rem] self-end sm:min-h-[35rem] lg:min-h-[43rem] " +
+                "relative z-10 self-end " +
                 styles.alfredoStage
               }
             >
@@ -386,19 +409,16 @@ export function NifLandingClient() {
                 height={800}
                 priority
                 sizes="(min-width: 1024px) 46vw, 92vw"
-                className={
-                  "absolute bottom-0 left-1/2 z-10 h-auto w-[31rem] max-w-none -translate-x-1/2 object-contain sm:w-[42rem] lg:left-[86%] lg:w-[38rem] xl:left-[88%] xl:w-[41rem] " +
-                  styles.alfredoImage
-                }
+                className={styles.alfredoImage}
               />
               <div
                 className={
-                  "absolute bottom-6 left-1/2 z-20 w-[90%] max-w-sm -translate-x-1/2 rounded-2xl border border-white/15 bg-[#0c0d12]/75 p-4 shadow-2xl backdrop-blur-xl lg:bottom-12 lg:left-0 lg:translate-x-0 " +
+                  "rounded-2xl border border-white/15 bg-[#0c0d12]/82 p-4 shadow-2xl backdrop-blur-xl " +
                   styles.instructorCard
                 }
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#a78bfa]">
-                  Tu instructor
+                  Instructor de ABC de NIF
                 </p>
                 <p className="mt-1 text-lg font-black">Mtro. Alfredo Cobos</p>
                 <p className="mt-1 text-xs text-white/55">Instructor de CEFIN</p>
@@ -556,7 +576,14 @@ export function NifLandingClient() {
           </div>
         </footer>
 
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#090a0e]/92 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden">
+        <div
+          className={
+            "fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#090a0e]/92 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-xl transition duration-300 sm:hidden " +
+            (showMobileSticky
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-full opacity-0")
+          }
+        >
           <RegistrationButton
             location="mobile_sticky"
             onOpen={openRegistration}

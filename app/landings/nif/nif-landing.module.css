@@ -122,27 +122,50 @@
 }
 
 .alfredoStage {
+  position: relative;
+  isolation: isolate;
+  width: calc(100% + 2.5rem);
+  min-height: clamp(34rem, 145vw, 42rem);
+  margin-inline: -1.25rem;
+  overflow: hidden;
   animation: portrait-enter 900ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .portraitHalo {
   z-index: 0;
-  right: 6%;
-  bottom: 13%;
-  width: 78%;
-  height: 64%;
+  right: 5%;
+  bottom: 8%;
+  width: 90%;
+  height: 72%;
   background: rgba(124, 58, 237, 0.32);
   filter: blur(68px);
   animation: halo-breathe 5.5s ease-in-out infinite alternate;
 }
 
 .alfredoImage {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 10;
+  width: clamp(29rem, 126vw, 35rem);
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
+  object-fit: contain;
+  object-position: center bottom;
   filter: saturate(0.88) contrast(1.04) drop-shadow(0 28px 65px rgba(0, 0, 0, 0.35));
   animation: portrait-float 7s ease-in-out 1s infinite;
 }
 
 .instructorCard {
-  animation: card-float 6s ease-in-out 700ms infinite;
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  z-index: 20;
+  width: calc(100% - 2rem);
+  max-width: 24rem;
+  transform: translateX(-50%);
+  animation: card-float-mobile 6s ease-in-out 700ms infinite;
 }
 
 .eyebrow {
@@ -359,13 +382,23 @@
   }
 }
 
-@keyframes card-float {
+@keyframes card-float-mobile {
   0%,
   100% {
     transform: translateX(-50%) translateY(0);
   }
   50% {
     transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes card-float-desktop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
   }
 }
 
@@ -426,20 +459,60 @@
     padding: 2rem;
   }
 
-  @keyframes card-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
+  .alfredoStage {
+    width: 100%;
+    min-height: 43rem;
+    margin-inline: 0;
+    overflow: visible;
+  }
+
+  .portraitHalo {
+    right: 6%;
+    bottom: 13%;
+    width: 78%;
+    height: 64%;
+  }
+
+  .alfredoImage {
+    left: 86%;
+    width: 38rem;
+  }
+
+  .instructorCard {
+    bottom: 3rem;
+    left: 0;
+    width: 90%;
+    transform: none;
+    animation-name: card-float-desktop;
+  }
+}
+
+@media (min-width: 1280px) {
+  .alfredoImage {
+    left: 88%;
+    width: 41rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .alfredoStage {
+    width: 100%;
+    min-height: 39rem;
+    margin-inline: 0;
+  }
+
+  .alfredoImage {
+    width: 40rem;
   }
 }
 
 @media (max-width: 639px) {
   .primaryButton {
     width: 100%;
+  }
+
+  .instructorCard {
+    bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .heroGrid {
