@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TallerTrackingClient, trackTallerCheckoutClick } from "./taller-tracking-client";
+import { TallerTrackingClient, trackTallerOfferClick } from "./taller-tracking-client";
 import "./taller.css";
-
-const CHECKOUT_URL =
-  "https://pay.hotmart.com/G106884758Y?off=anbe55e7&checkoutMode=10";
 
 const eventDetails = [
   { icon: "▣", label: "Fecha", value: "24 al 28 de agosto de 2026" },
@@ -45,7 +42,7 @@ const faqs = [
   ["¿Cuál es el precio?", "El precio es de $587 MXN."],
 ] as const;
 
-function CheckoutLink({
+function OfferLink({
   children,
   className = "",
 }: {
@@ -53,17 +50,25 @@ function CheckoutLink({
   className?: string;
 }) {
   return (
-    <Link
-      href={CHECKOUT_URL}
+    <a
+      href="#oferta"
       className={`taller-cta ${className}`}
-      onClick={trackTallerCheckoutClick}
+      onClick={trackTallerOfferClick}
     >
       {children}
-    </Link>
+    </a>
   );
 }
 
-export default function TallerNifPage() {
+function CheckoutPlaceholder() {
+  return (
+    <span className="taller-cta taller-cta-disabled" aria-disabled="true">
+      Checkout disponible próximamente
+    </span>
+  );
+}
+
+export default function InscripcionNifPage() {
   return (
     <div className="nif-taller">
       <TallerTrackingClient />
@@ -93,9 +98,9 @@ export default function TallerNifPage() {
                 estructura tratamientos contables con un método práctico potenciado
                 con inteligencia artificial.
               </p>
-              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <OfferLink>VER PROGRAMA E INVERSIÓN</OfferLink>
               <p className="taller-microcopy">
-                Serás dirigido a Hotmart para completar tu inscripción de forma segura.
+                Conoce el método, los beneficios y todo lo que incluye tu inscripción.
               </p>
             </div>
 
@@ -193,7 +198,7 @@ export default function TallerNifPage() {
               <h2>Aprende a sustentar cada decisión contable.</h2>
               <p>Reserva tu lugar por $587 MXN.</p>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <OfferLink>VER DETALLES DE INSCRIPCIÓN</OfferLink>
           </div>
         </section>
 
@@ -253,7 +258,7 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Método práctico con IA</p>
               <h2>Inscríbete y lleva el análisis a casos reales.</h2>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <OfferLink>VER INVERSIÓN</OfferLink>
           </div>
         </section>
 
@@ -286,9 +291,9 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Taller Práctico de NIF</p>
               <p className="taller-price">$587<span>MXN</span></p>
               <p>24 al 28 de agosto de 2026 · 11:00 a. m. · Hora CDMX</p>
-              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <CheckoutPlaceholder />
               <p className="taller-microcopy">
-                Serás dirigido a Hotmart para completar tu inscripción de forma segura.
+                La conexión con el checkout se habilitará cuando la oferta esté lista.
               </p>
             </div>
           </div>
@@ -300,7 +305,7 @@ export default function TallerNifPage() {
               <p className="taller-kicker">Reserva tu lugar</p>
               <h2>Da el siguiente paso para sustentar tus decisiones contables.</h2>
             </div>
-            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <CheckoutPlaceholder />
           </div>
         </section>
       </main>

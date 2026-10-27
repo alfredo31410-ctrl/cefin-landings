@@ -48,8 +48,8 @@ export function TallerTrackingClient() {
   );
 }
 
-export function trackTallerCheckoutClick() {
-  trackMetaCustomEvent("CheckoutButtonClick", {
+export function trackTallerOfferClick() {
+  trackMetaCustomEvent("OfferSectionClick", {
     content_name: "Taller Práctico de NIF",
     value: 587,
     currency: "MXN",
