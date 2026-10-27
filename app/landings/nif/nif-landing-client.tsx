@@ -710,8 +710,6 @@ export function NifLandingClient() {
 
                 <div
                   className={
-                    styles.formShell +
-                    " " +
                     FORM_CLASS +
                     " min-h-[420px] transition-opacity duration-200 " +
                     (formStatus === "ready" ? "opacity-100" : "opacity-0")
