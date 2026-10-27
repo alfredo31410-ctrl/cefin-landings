@@ -4,7 +4,6 @@ export type ProductConfig = {
   originalPrice: number | null;
   checkoutUrl: string | null;
   cta: string;
-  fallbackCta: string;
   trackingValue: number | null;
   modality: string | null;
   duration: string | null;
@@ -20,14 +19,12 @@ export type ProductConfig = {
  */
 export const productConfig: ProductConfig = {
   productName: "Reformas Fiscales 2027",
-  price: 297,
+  price: null,
   originalPrice: null,
-  checkoutUrl:
-    "https://pay.hotmart.com/C107834341X?off=ih360u7p&checkoutMode=10",
-  cta: "INSCRIBIRME YA",
-  fallbackCta: "INSCRIBIRME YA",
-  trackingValue: 297,
-  modality: "Curso online",
+  checkoutUrl: null,
+  cta: "QUIERO PREPARARME PARA 2027",
+  trackingValue: null,
+  modality: null,
   duration: null,
   access: null,
   materials: [],

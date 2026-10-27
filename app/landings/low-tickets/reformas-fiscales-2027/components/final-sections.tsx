@@ -1,11 +1,22 @@
 import { productConfig } from "../config";
+import styles from "../reformas.module.css";
 import { CtaLink } from "./cta-link";
 
 const faqs = [
   {
-    question: "¿Incluye cambios para personas físicas y morales?",
+    question: "¿Esta capacitación es para contadores?",
     answer:
-      "Sí. Incluye los cambios propuestos de RESICO, IVA, deducción de inversiones, control de deducciones, pérdidas fiscales, intereses y otros ajustes relevantes para ambos perfiles.",
+      "Sí. Está planteada para contadores, asesores fiscales, despachos y profesionales que necesitan entender los cambios rumbo a 2027 y revisar su posible impacto en cada cliente.",
+  },
+  {
+    question: "¿Sirve si trabajo con personas físicas?",
+    answer:
+      "Sí. Se analizan temas propuestos que pueden ser relevantes para personas físicas, entre ellos los cambios de RESICO y el escenario planteado para IVA.",
+  },
+  {
+    question: "¿También se analizan cambios para personas morales?",
+    answer:
+      "Sí. El contenido contempla cambios propuestos de RESICO Persona Moral, deducción de inversiones, control de deducciones, pérdidas fiscales, intereses y otros ajustes relacionados.",
   },
   {
     question: "¿Se explica la opción propuesta del 7% de IVA?",
@@ -46,18 +57,18 @@ export function FinalSections() {
 
   return (
     <>
-      <section id="oferta" className="bg-[#101c26] text-[#f5f3ee]">
-        <div className="mx-auto max-w-[1120px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
-          <div className="overflow-hidden border border-white/10 bg-[#0b1118] shadow-[0_28px_80px_rgba(0,0,0,.22)]">
+      <section id="oferta" className="bg-[#f4f0e7] text-[#07141e]">
+        <div className="mx-auto max-w-[1120px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+          <div className="overflow-hidden border border-black/12 bg-white shadow-[0_28px_80px_rgba(8,25,36,.12)]">
             <div className="grid lg:grid-cols-[1.15fr_.85fr]">
               <div className="p-7 sm:p-10 lg:p-14">
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#087c68]">
                   La capacitación
                 </p>
                 <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
                   {productConfig.productName}
                 </h2>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#a8b2bc]">
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-black/60">
                   Una actualización profesional para entender los principales
                   cambios propuestos, identificar a quién podrían afectar y
                   llegar a 2027 con mejores preguntas y un mapa más claro.
@@ -66,25 +77,25 @@ export function FinalSections() {
                 {hasExtraOfferContent ? (
                   <div className="mt-9 grid gap-3 sm:grid-cols-2">
                     {commercialDetails.map(([label, value]) => (
-                      <div key={label} className="border border-white/10 p-4">
-                        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8b2bc]">
+                      <div key={label} className="border border-black/10 p-4">
+                        <p className="text-xs font-black uppercase tracking-[0.16em] text-black/40">
                           {label}
                         </p>
                         <p className="mt-2 font-black">{value}</p>
                       </div>
                     ))}
                     {productConfig.materials.map((material) => (
-                      <div key={material} className="border border-white/10 p-4 font-bold">
+                      <div key={material} className="border border-black/10 p-4 font-bold">
                         {material}
                       </div>
                     ))}
                     {productConfig.bonuses.map((bonus) => (
-                      <div key={bonus} className="border border-white/10 p-4 font-bold">
+                      <div key={bonus} className="border border-black/10 p-4 font-bold">
                         {bonus}
                       </div>
                     ))}
                     {productConfig.guarantee ? (
-                      <div className="border border-white/10 p-4 font-bold">
+                      <div className="border border-black/10 p-4 font-bold">
                         {productConfig.guarantee}
                       </div>
                     ) : null}
@@ -92,122 +103,126 @@ export function FinalSections() {
                 ) : null}
               </div>
 
-              <aside className="flex flex-col justify-center border-t border-[#d7a928]/20 bg-[#16232e] p-7 text-[#f5f3ee] sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
+              <aside className="flex flex-col justify-center bg-[#0a1c2b] p-7 text-white sm:p-10 lg:p-12">
                 {productConfig.originalPrice !== null ? (
-                  <p className="text-lg font-bold text-[#a8b2bc] line-through">
+                  <p className="text-lg font-bold text-white/38 line-through">
                     {formatPrice(productConfig.originalPrice)}
                   </p>
                 ) : null}
                 {productConfig.price !== null ? (
                   <>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
-                      Acceso al curso
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#75e4c3]">
+                      Inversión
                     </p>
-                    <p className="mt-2 text-5xl font-black tracking-[-0.05em] text-[#e8bd45] sm:text-6xl">
+                    <p className="mt-2 text-5xl font-black tracking-[-0.05em] text-[#c8f55c] sm:text-6xl">
                       {formatPrice(productConfig.price)}
-                      <span className="ml-2 text-xl tracking-normal text-[#f5f3ee] sm:text-2xl">
-                        MXN
-                      </span>
-                    </p>
-                    <p className="mt-3 text-base font-bold text-[#f5f3ee]">
-                      Pago único
                     </p>
                   </>
-                ) : null}
+                ) : (
+                  <>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#75e4c3]">
+                      Acceso a la capacitación
+                    </p>
+                    <p className="mt-3 text-3xl font-black leading-tight">
+                      Prepárate para analizar antes de decidir.
+                    </p>
+                  </>
+                )}
 
                 <CtaLink
                   placement="offer"
-                  fallbackHref="#oferta"
-                  fallbackChildren={
-                    <>
-                      INSCRIBIRME YA
-                      <span className="ml-3 text-xl">→</span>
-                    </>
-                  }
-                  className="mt-8 inline-flex min-h-16 w-full items-center justify-center bg-[#d7a928] px-6 text-center text-sm font-black text-[#0b1118] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:text-base"
+                  fallbackHref="#preguntas"
+                  className="mt-8 inline-flex min-h-16 w-full items-center justify-center bg-[#c8f55c] px-6 text-center text-sm font-black text-[#061019] transition hover:-translate-y-1 hover:bg-[#dcff8c] sm:text-base"
                 >
                   {productConfig.cta}<span className="ml-3 text-xl">→</span>
                 </CtaLink>
 
-                <p className="mt-4 text-center text-xs leading-relaxed text-[#a8b2bc]">
-                  Pago procesado de forma segura por Hotmart
-                </p>
+                {!productConfig.checkoutUrl ? (
+                  <p className="mt-4 text-center text-xs leading-relaxed text-white/45">
+                    Los datos comerciales y de acceso se integrarán cuando
+                    sean confirmados.
+                  </p>
+                ) : null}
               </aside>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="preguntas" className="bg-[#0b1118] text-[#f5f3ee]">
-        <div className="mx-auto max-w-[1040px] px-5 py-16 sm:px-8 lg:py-20">
-          <p className="text-center text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
+      <section id="preguntas" className="bg-white text-[#07141e]">
+        <div className="mx-auto max-w-[900px] px-5 py-20 sm:px-8 lg:py-24">
+          <p className="text-center text-xs font-black uppercase tracking-[0.22em] text-[#087c68]">
             Preguntas frecuentes
           </p>
           <h2 className="mt-4 text-center text-4xl font-black tracking-[-0.04em] sm:text-5xl">
             Antes de prepararte
           </h2>
 
-          <div className="mx-auto mt-9 max-w-[900px] border-t border-white/10">
+          <div className="mt-10 border-t border-black/12">
             {faqs.map((faq) => (
               <details
                 key={faq.question}
-                className="group border-b border-white/10 transition-colors hover:bg-white/[0.025]"
+                className="group border-b border-black/12 py-6"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-3 py-5 text-lg font-black sm:px-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black">
                   {faq.question}
-                  <span className="text-2xl text-[#d7a928] transition group-open:rotate-45">
+                  <span className="text-2xl text-[#087c68] transition group-open:rotate-45">
                     +
                   </span>
                 </summary>
-                <p className="max-w-3xl px-3 pb-6 leading-relaxed text-[#a8b2bc] sm:px-5">
+                <p className="max-w-3xl pt-4 leading-relaxed text-black/58">
                   {faq.answer}
                 </p>
               </details>
             ))}
           </div>
-
-          <div className="mt-12 grid gap-6 border border-[#d7a928]/20 bg-[#101c26] p-7 text-[#f5f3ee] sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center lg:text-left">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d7a928]">
-                El momento de anticiparte es ahora
-              </p>
-              <p className="mt-3 text-2xl font-black leading-tight sm:text-3xl">
-                Llega a 2027 con mejores preguntas y un mapa más claro.
-              </p>
-            </div>
-            <CtaLink
-              placement="final"
-              fallbackHref="#oferta"
-              fallbackChildren={
-                <>
-                  INSCRIBIRME YA
-                  <span className="ml-3 text-xl">→</span>
-                </>
-              }
-              className="inline-flex min-h-14 w-full items-center justify-center bg-[#d7a928] px-7 text-center text-sm font-black text-[#0b1118] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto"
-            >
-              {productConfig.cta}<span className="ml-3 text-xl">→</span>
-            </CtaLink>
-          </div>
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-[#080d12] text-[#f5f3ee]">
+      <section className="relative overflow-hidden bg-[#0a1c2b]">
+        <div className={`${styles.grid} absolute inset-0 opacity-30`} />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(200,245,92,.12),transparent_28%)]" />
+        <div className="relative mx-auto max-w-[1020px] px-5 py-20 text-center sm:px-8 lg:py-28">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#75e4c3]">
+            El momento de anticiparte es ahora
+          </p>
+          <h2 className="mt-5 text-4xl font-black leading-[1.02] tracking-[-0.045em] sm:text-6xl">
+            Los cambios fiscales van a llegar.
+            <span className="block text-[#c8f55c]">
+              La diferencia está en cómo llegas tú.
+            </span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/62">
+            Prepárate para entender los principales cambios rumbo a 2027,
+            detectar cómo pueden impactar a tus clientes y tomar decisiones con
+            mayor claridad antes de que llegue enero.
+          </p>
+          <CtaLink
+            placement="final"
+            className="mt-9 inline-flex min-h-16 w-full items-center justify-center bg-[#c8f55c] px-8 text-center text-sm font-black text-[#061019] transition hover:-translate-y-1 hover:bg-[#dcff8c] sm:w-auto sm:text-base"
+          >
+            {productConfig.cta}<span className="ml-3 text-xl">→</span>
+          </CtaLink>
+          <p className="mt-5 text-xs font-bold uppercase tracking-[0.12em] text-white/42">
+            Actualización práctica para contadores y profesionales fiscales.
+          </p>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/10 bg-[#041019]">
         <div className="mx-auto max-w-[1160px] px-5 py-9 sm:px-8">
           <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-            <span className="text-2xl font-black tracking-[-0.04em]">
-              CEFIN<span className="text-[#d7a928]">.</span>
+            <span className="text-2xl font-black tracking-[-0.04em] text-white">
+              CEFIN<span className="text-[#75e4c3]">.</span>
             </span>
             <a
               href="https://cefin.mx"
-              data-no-xcod-url=""
-              suppressHydrationWarning
-              className="text-sm font-bold text-[#a8b2bc] transition hover:text-white"
+              className="text-sm font-bold text-white/45 transition hover:text-white"
             >
               cefin.mx
             </a>
           </div>
-          <p className="mt-7 border-t border-white/10 pt-6 text-center text-xs leading-relaxed text-[#a8b2bc] sm:text-left">
+          <p className="mt-7 border-t border-white/10 pt-6 text-center text-xs leading-relaxed text-white/38 sm:text-left">
             El contenido de esta capacitación tiene fines educativos y de
             actualización profesional. Las disposiciones analizadas pueden estar
             sujetas a modificaciones durante el proceso legislativo y a reglas

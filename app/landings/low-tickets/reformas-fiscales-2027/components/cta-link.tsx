@@ -11,7 +11,6 @@ import styles from "../reformas.module.css";
 type CtaLinkProps = {
   children?: ReactNode;
   className?: string;
-  fallbackChildren?: ReactNode;
   fallbackHref?: string;
   placement: string;
 };
@@ -19,22 +18,16 @@ type CtaLinkProps = {
 export function CtaLink({
   children,
   className = "",
-  fallbackChildren,
   fallbackHref = "#oferta",
   placement,
 }: CtaLinkProps) {
   const href = productConfig.checkoutUrl ?? fallbackHref;
-  const label = productConfig.checkoutUrl
-    ? (children ?? productConfig.cta)
-    : (fallbackChildren ?? productConfig.fallbackCta);
 
   const handleClick = () => {
     trackMetaCustomEventImmediate("CTAButtonClick", {
       content_name: productTracking.contentName,
       content_category: productTracking.contentCategory,
-      button_name: productConfig.checkoutUrl
-        ? productConfig.cta
-        : productConfig.fallbackCta,
+      button_name: productConfig.cta,
       placement,
       checkout_ready: Boolean(productConfig.checkoutUrl),
     });
@@ -61,7 +54,7 @@ export function CtaLink({
       onClick={handleClick}
       className={`${styles.cta} ${className}`}
     >
-      {label}
+      {children ?? productConfig.cta}
     </a>
   );
 }

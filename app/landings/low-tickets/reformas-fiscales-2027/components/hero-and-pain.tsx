@@ -1,126 +1,168 @@
-import Image from "next/image";
-import { instructorConfig, productConfig } from "../config";
+import { productConfig } from "../config";
 import styles from "../reformas.module.css";
 import { CtaLink } from "./cta-link";
 
-const briefingQuestions = [
-  "Qué cambia",
-  "A quién puede afectar",
-  "Qué conviene comparar",
+const clientQuestions = [
+  "Contador, ¿esto me va a afectar?",
+  "¿Qué tenemos que hacer?",
+  "¿Me conviene seguir en este régimen?",
+  "¿Qué cambia para mi empresa?",
+  "¿Debemos hacer algo antes de enero?",
+];
+
+const frictionPoints = [
+  "Exceso de información",
+  "Publicaciones contradictorias",
+  "Miedo a interpretar incorrectamente",
+  "Presión por actualizarse",
+  "Dificultad para identificar a quién afecta",
+  "Riesgo de llegar a enero reaccionando",
 ];
 
 export function HeroAndPain() {
   return (
-    <section className="relative isolate min-h-svh overflow-hidden bg-[#0b1118] text-[#f5f3ee]">
-      <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_30%,rgba(215,169,40,.12),transparent_24%),radial-gradient(circle_at_12%_84%,rgba(31,61,80,.5),transparent_31%),linear-gradient(125deg,#0b1118_0%,#101c26_62%,#0b1118_100%)]" />
-      <div className={`${styles.grid} absolute inset-0 -z-20 opacity-45`} />
-      <div className={`${styles.noise} absolute inset-0 -z-10 opacity-10`} />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-[linear-gradient(to_bottom,transparent,#0b1118)]" />
+    <>
+      <section className="relative isolate min-h-svh overflow-hidden">
+        <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_78%_22%,rgba(117,228,195,.22),transparent_26%),radial-gradient(circle_at_16%_80%,rgba(255,155,98,.13),transparent_30%),linear-gradient(125deg,#061019_0%,#0b2231_58%,#07141e_100%)]" />
+        <div className={`${styles.grid} absolute inset-0 -z-20 opacity-50`} />
+        <div className={`${styles.noise} absolute inset-0 -z-10 opacity-20`} />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-[linear-gradient(to_bottom,transparent,#061019)]" />
 
-      <div className="mx-auto flex min-h-svh max-w-[1280px] flex-col px-5 pb-8 pt-6 sm:px-8 lg:px-10">
-        <header className={`${styles.reveal} flex items-center justify-between gap-4`}>
-          <span className="text-2xl font-black tracking-[-0.04em] sm:text-3xl">
-            CEFIN<span className="text-[#d7a928]">.</span>
-          </span>
-          <a
-            href="#cambios"
-            className="border border-[#d7a928]/35 bg-[#d7a928]/[0.06] px-3 py-2 text-[9px] font-black uppercase tracking-[0.16em] text-[#e8bd45] transition hover:border-[#e8bd45] hover:bg-[#d7a928]/12 sm:px-4 sm:text-xs"
-          >
-            Abrir briefing
-          </a>
-        </header>
-
-        <div className="grid flex-1 gap-8 pb-8 pt-11 lg:grid-cols-[.56fr_.44fr] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-10 lg:gap-y-5 lg:py-10">
-          <div className={`${styles.reveal} ${styles.delayOne} lg:col-start-1 lg:row-start-1`}>
-            <p className="inline-flex border-l-2 border-[#d7a928] bg-[#d7a928]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#e8bd45] sm:text-sm">
-              Brief fiscal · 2027
-            </p>
-            <h1 className="mt-6 max-w-[760px] text-[clamp(3.25rem,7.1vw,6.8rem)] font-black uppercase leading-[0.82] tracking-[-0.065em]">
-              Reformas
-              <span className="block text-[#f5f3ee]">Fiscales</span>
-              <span className="block text-[.78em] text-[#d7a928]">2027</span>
-            </h1>
-          </div>
-
-          <div
-            className={`${styles.reveal} ${styles.delayTwo} relative min-h-[370px] overflow-hidden sm:min-h-[470px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-[700px] lg:self-stretch`}
-          >
-            <p
-              aria-hidden="true"
-              className="pointer-events-none absolute right-[-3%] top-[2%] select-none text-[clamp(8rem,19vw,17rem)] font-black leading-none tracking-[-0.09em] text-white/[0.025] lg:right-[-8%] lg:top-[8%]"
+        <div className="mx-auto flex min-h-svh max-w-[1280px] flex-col px-5 pb-10 pt-6 sm:px-8 lg:px-10">
+          <header className={`${styles.reveal} flex items-center justify-between gap-4`}>
+            <span className="text-2xl font-black tracking-[-0.04em] sm:text-3xl">
+              CEFIN<span className="text-[#75e4c3]">.</span>
+            </span>
+            <a
+              href="#cambios"
+              className="border border-white/15 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white/70 transition hover:border-[#75e4c3]/60 hover:text-white sm:text-xs"
             >
-              2027
-            </p>
-            <div className="absolute bottom-[10%] left-[2%] right-[2%] top-[12%] border-y border-[#d7a928]/20" />
-            <div className="absolute bottom-[8%] right-[3%] h-[70%] w-[72%] bg-[radial-gradient(circle_at_50%_55%,rgba(215,169,40,.12),transparent_55%)]" />
-            <div className="absolute bottom-[12%] right-[8%] h-[58%] w-[58%] rounded-full border border-[#d7a928]/15" />
-            <div className="absolute bottom-[12%] right-[16%] h-[42%] w-[42%] rounded-full border border-white/[0.06]" />
+              Ver cambios clave
+            </a>
+          </header>
 
-            <Image
-              src={instructorConfig.image}
-              alt={instructorConfig.imageAlt}
-              width={instructorConfig.imageWidth}
-              height={instructorConfig.imageHeight}
-              sizes="(max-width: 639px) 94vw, (max-width: 1023px) 76vw, 560px"
-              preload
-              className="absolute bottom-[2%] left-1/2 z-10 h-[92%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_34px_70px_rgba(0,0,0,.6)] sm:h-[96%] lg:bottom-0 lg:h-[91%]"
-            />
-            <div className="absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-[#0b1118] via-[#0b1118]/70 to-transparent" />
-
-            <div className="absolute bottom-5 left-0 z-20 border-l-2 border-[#d7a928] pl-4 sm:bottom-8 lg:left-2">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-[#f5f3ee] sm:text-base">
-                {instructorConfig.name}
+          <div className="grid flex-1 items-center gap-10 py-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16 lg:py-12">
+            <div className={`${styles.reveal} ${styles.delayOne}`}>
+              <p className="inline-flex border-l-2 border-[#c8f55c] bg-[#c8f55c]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#d8ff7a] sm:text-sm">
+                Actualización fiscal 2027
               </p>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#d7a928] sm:text-xs">
-                Contador público · Maestro en impuestos
+              <h1 className="mt-6 max-w-[860px] text-[clamp(3.4rem,8vw,7.6rem)] font-black uppercase leading-[0.82] tracking-[-0.065em]">
+                Reformas
+                <span className="block text-[#75e4c3]">Fiscales</span>
+                <span className="block text-[.76em] text-white">2027</span>
+              </h1>
+              <p className="mt-7 max-w-[720px] text-xl font-black leading-tight text-white sm:text-2xl lg:text-3xl">
+                Lo que cambia, a quién afecta y qué debes preparar antes de
+                enero.
               </p>
+              <p className="mt-5 max-w-[690px] text-base leading-relaxed text-white/68 sm:text-lg">
+                Conoce los puntos clave, identifica oportunidades y riesgos y
+                entiende qué debes comenzar a analizar con tus clientes antes
+                de que los cambios entren en vigor.
+              </p>
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <CtaLink
+                  placement="hero"
+                  className="inline-flex min-h-16 w-full items-center justify-center bg-[#c8f55c] px-7 text-center text-sm font-black text-[#07121a] shadow-[0_18px_50px_rgba(200,245,92,.18)] transition hover:-translate-y-1 hover:bg-[#dcff8c] sm:w-auto sm:text-base"
+                >
+                  {productConfig.cta}<span className="ml-3 text-xl">→</span>
+                </CtaLink>
+                <span className="max-w-[250px] text-xs font-bold uppercase leading-relaxed tracking-[0.12em] text-white/45">
+                  Claridad · Interpretación · Anticipación
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className={`${styles.reveal} ${styles.delayOne} lg:col-start-1 lg:row-start-2`}>
-            <p className="max-w-[660px] text-xl font-black leading-tight text-[#f5f3ee] sm:text-2xl lg:text-3xl">
-              Ubica el cambio. Lee el impacto. Llega antes que la pregunta del
-              cliente.
-            </p>
-            <p className="mt-5 max-w-[640px] text-base leading-relaxed text-[#a8b2bc] sm:text-lg">
-              Una actualización práctica para identificar los movimientos que
-              importan, comparar escenarios y saber qué revisar antes de enero.
-            </p>
-            <div className="mt-7">
-              <CtaLink
-                placement="hero"
-                fallbackHref="#oferta"
-                fallbackChildren={
-                  <>
-                    INSCRIBIRME YA
-                    <span className="ml-3 text-xl">→</span>
-                  </>
-                }
-                className="inline-flex min-h-[68px] w-full items-center justify-center bg-[#d7a928] px-8 text-center text-base font-black text-[#0b1118] shadow-[0_18px_50px_rgba(0,0,0,.28)] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto"
-              >
-                {productConfig.cta}<span className="ml-3 text-xl">→</span>
-              </CtaLink>
-              <p className="mt-4 max-w-[430px] border-l border-white/15 pl-3 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] text-[#a8b2bc] sm:text-xs">
-                Iniciativa · corte 05 oct 2026 · sujeta a cambios
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid border-y border-white/10 sm:grid-cols-3">
-          {briefingQuestions.map((item, index) => (
             <div
-              key={item}
-              className="grid grid-cols-[42px_1fr] items-center gap-3 border-b border-white/10 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:px-5 sm:last:border-r-0"
+              className={`${styles.reveal} ${styles.delayTwo} ${styles.ring} relative mx-auto w-full max-w-[520px] overflow-hidden bg-[#0a1c2b]/88 p-6 backdrop-blur sm:p-9`}
             >
-              <span className="text-xs font-black tracking-[0.18em] text-[#d7a928]">
-                0{index + 1}
-              </span>
-              <span className="text-sm font-bold text-[#c4ccd3]">{item}</span>
+              <div className="absolute right-[-65px] top-[-65px] h-48 w-48 rounded-full border-[36px] border-[#75e4c3]/10" />
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#75e4c3]">
+                Información ≠ estrategia
+              </p>
+              <p className="mt-5 text-3xl font-black leading-tight sm:text-4xl">
+                Conocer la reforma es sólo el inicio.
+              </p>
+              <div className="mt-8 space-y-3">
+                {[
+                  "Entender el impacto",
+                  "Comparar escenarios",
+                  "Saber qué revisar",
+                ].map((item, index) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-4 border border-white/10 bg-white/[0.035] p-4"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-[#75e4c3] text-sm font-black text-[#061019]">
+                      0{index + 1}
+                    </span>
+                    <span className="font-bold text-white/82">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-7 border-t border-white/12 pt-6 text-sm leading-relaxed text-white/55">
+                La diferencia está en convertir los cambios en preguntas y
+                decisiones concretas para cada cliente.
+              </p>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="bg-[#f4f0e7] text-[#07141e]">
+        <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-[.88fr_1.12fr] lg:gap-20">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#087c68]">
+                La presión empieza antes de enero
+              </p>
+              <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
+                Tus clientes no van a esperar a que termines de entender la
+                reforma.
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-black/60">
+                Cada cambio abre dudas, interpretaciones y decisiones que no se
+                resuelven con una publicación aislada.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {clientQuestions.map((question, index) => (
+                <blockquote
+                  key={question}
+                  className={`border border-black/10 p-6 text-lg font-black leading-snug ${
+                    index === clientQuestions.length - 1
+                      ? "bg-[#0a1c2b] text-white sm:col-span-2"
+                      : "bg-white"
+                  }`}
+                >
+                  <span className="mb-6 block text-xs tracking-[0.18em] text-[#087c68]">
+                    0{index + 1}
+                  </span>
+                  “{question}”
+                </blockquote>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-14 grid border-l border-t border-black/10 sm:grid-cols-2 lg:grid-cols-3">
+            {frictionPoints.map((point) => (
+              <div
+                key={point}
+                className="flex min-h-24 items-center gap-3 border-b border-r border-black/10 bg-white/45 p-5"
+              >
+                <span className="h-2.5 w-2.5 shrink-0 bg-[#ff7a45]" />
+                <p className="font-bold text-black/72">{point}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-12 border-l-4 border-[#ff7a45] pl-6 text-2xl font-black leading-tight sm:text-3xl">
+            El problema no es que existan cambios. El problema es llegar a
+            ellos sin haber analizado cómo pueden afectar a tus clientes.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

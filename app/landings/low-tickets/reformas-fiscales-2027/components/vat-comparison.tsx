@@ -5,48 +5,52 @@ import { CtaLink } from "./cta-link";
 const scenarios = [
   {
     id: "A",
-    income: "$100,000",
-    transferred: "$16,000",
-    creditable: "$2,000",
-    traditional: "$14,000",
-    proposed: "$7,000",
-    favorable: "proposed",
+    accent: "mint",
+    rows: [
+      ["Ingresos", "$100,000"],
+      ["IVA trasladado", "$16,000"],
+      ["IVA acreditable", "$2,000"],
+      ["Esquema tradicional", "$14,000"],
+      ["Opción 7%", "$7,000"],
+    ],
     result: "En este ejemplo, la opción del 7% sería más favorable.",
   },
   {
     id: "B",
-    income: "$100,000",
-    transferred: "$16,000",
-    creditable: "$12,000",
-    traditional: "$4,000",
-    proposed: "$7,000",
-    favorable: "traditional",
+    accent: "orange",
+    rows: [
+      ["Ingresos", "$100,000"],
+      ["IVA trasladado", "$16,000"],
+      ["IVA acreditable", "$12,000"],
+      ["Esquema tradicional", "$4,000"],
+      ["Opción 7%", "$7,000"],
+    ],
     result: "En este ejemplo, el esquema tradicional sería más favorable.",
   },
-] as const;
+];
 
 export function VatComparison() {
   return (
-    <section className="relative overflow-hidden bg-[#0b1118] text-[#f5f3ee]">
-      <div className={`${styles.grid} absolute inset-0 opacity-20`} />
-      <div className="absolute right-[-15%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[#d7a928]/[0.06] blur-3xl" />
+    <section className="relative overflow-hidden bg-[#0a1c2b]">
+      <div className={`${styles.grid} absolute inset-0 opacity-25`} />
+      <div className="absolute right-[-15%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[#75e4c3]/10 blur-3xl" />
 
-      <div className="relative mx-auto max-w-[1240px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <div className="relative mx-auto max-w-[1240px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
         <div className="grid gap-8 lg:grid-cols-[.65fr_1.35fr] lg:items-end">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#75e4c3]">
               La comparación que importa
             </p>
             <h2 className="mt-4 text-5xl font-black leading-[.96] tracking-[-0.05em] sm:text-7xl">
-              ¿IVA tradicional o <span className="text-[#d7a928]">7%?</span>
+              ¿IVA tradicional o <span className="text-[#c8f55c]">7%?</span>
             </h2>
           </div>
-          <div className="border-l border-white/12 pl-6 sm:pl-8">
+          <div className="border-l border-white/16 pl-6 sm:pl-8">
             <p className="text-xl font-black leading-tight sm:text-2xl">
               Una de las propuestas más llamativas rumbo a 2027 no
               necesariamente le conviene a todos.
             </p>
-            <p className="mt-4 leading-relaxed text-[#a8b2bc]">
+            <p className="mt-4 leading-relaxed text-white/58">
               Se plantea una opción para determinados contribuyentes RESICO con
               actividades gravadas al 16%: calcular un pago definitivo mensual
               equivalente al 7% de las contraprestaciones efectivamente
@@ -55,134 +59,108 @@ export function VatComparison() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {scenarios.map((scenario) => (
-            <article
-              key={scenario.id}
-              className={`${styles.ring} overflow-hidden bg-[#16232e]`}
-            >
-              <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-8">
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#a8b2bc]">
-                    Comparativo simplificado
-                  </p>
-                  <p className="mt-1 text-lg font-black">Escenario {scenario.id}</p>
-                </div>
-                <span className="border border-[#f59e0b]/35 bg-[#f59e0b]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.16em] text-[#fbbf24]">
-                  Propuesto
-                </span>
-              </div>
+        <div className="mt-14 grid gap-5 lg:grid-cols-2">
+          {scenarios.map((scenario) => {
+            const isMint = scenario.accent === "mint";
 
-              <dl className="grid grid-cols-3 gap-px bg-white/10">
-                {[
-                  ["Ingresos", scenario.income],
-                  ["IVA trasladado", scenario.transferred],
-                  ["IVA acreditable", scenario.creditable],
-                ].map(([label, value]) => (
-                  <div key={label} className="bg-[#16232e] p-4 sm:p-5">
-                    <dt className="text-[10px] font-black uppercase leading-relaxed tracking-[0.1em] text-[#a8b2bc]">
-                      {label}
-                    </dt>
-                    <dd className="mt-2 text-base font-black sm:text-lg">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className="grid gap-px bg-white/10 sm:grid-cols-2">
-                <div className="bg-[#101c26] p-6 sm:p-7">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#a8b2bc]">
-                    Tradicional
+            return (
+              <article
+                key={scenario.id}
+                className={`${styles.ring} overflow-hidden bg-[#07141e]`}
+              >
+                <div
+                  className={`flex items-center justify-between px-6 py-5 sm:px-8 ${
+                    isMint
+                      ? "bg-[#75e4c3] text-[#061019]"
+                      : "bg-[#ff9b62] text-[#1c0e08]"
+                  }`}
+                >
+                  <p className="text-xs font-black uppercase tracking-[0.2em]">
+                    Escenario
                   </p>
-                  <p
-                    className={`mt-3 text-4xl font-black tracking-[-0.05em] sm:text-5xl ${
-                      scenario.favorable === "traditional"
-                        ? "text-[#22c55e]"
-                        : "text-[#f5f3ee]"
-                    }`}
-                  >
-                    {scenario.traditional}
-                  </p>
-                  {scenario.favorable === "traditional" ? (
-                    <p className="mt-3 text-xs font-black uppercase tracking-[0.12em] text-[#22c55e]">
-                      Menor en este ejemplo
-                    </p>
-                  ) : null}
+                  <p className="text-4xl font-black">{scenario.id}</p>
                 </div>
-                <div className="bg-[#101c26] p-6 sm:p-7">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#fbbf24]">
-                    Opción propuesta · 7%
-                  </p>
-                  <p
-                    className={`mt-3 text-4xl font-black tracking-[-0.05em] sm:text-5xl ${
-                      scenario.favorable === "proposed"
-                        ? "text-[#22c55e]"
-                        : "text-[#f5f3ee]"
-                    }`}
-                  >
-                    {scenario.proposed}
-                  </p>
-                  {scenario.favorable === "proposed" ? (
-                    <p className="mt-3 text-xs font-black uppercase tracking-[0.12em] text-[#22c55e]">
-                      Menor en este ejemplo
-                    </p>
-                  ) : null}
-                </div>
-              </div>
 
-              <p className="border-t border-white/10 px-6 py-5 font-black leading-snug text-[#f5f3ee] sm:px-8">
-                {scenario.result}
-              </p>
-            </article>
-          ))}
+                <dl className="p-6 sm:p-8">
+                  {scenario.rows.map(([label, value], index) => (
+                    <div
+                      key={label}
+                      className={`flex items-center justify-between gap-5 border-b border-white/10 py-4 ${
+                        index >= 3 ? "font-black" : "text-white/65"
+                      }`}
+                    >
+                      <dt className="text-sm sm:text-base">{label}</dt>
+                      <dd
+                        className={`shrink-0 text-lg sm:text-xl ${
+                          index === 4
+                            ? isMint
+                              ? "text-[#c8f55c]"
+                              : "text-[#ffb58c]"
+                            : ""
+                        }`}
+                      >
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <p
+                  className={`mx-6 mb-6 p-5 text-lg font-black leading-snug sm:mx-8 sm:mb-8 ${
+                    isMint
+                      ? "bg-[#75e4c3]/10 text-[#9cf0d8]"
+                      : "bg-[#ff9b62]/10 text-[#ffb58c]"
+                  }`}
+                >
+                  {scenario.result}
+                </p>
+              </article>
+            );
+          })}
         </div>
 
-        <div className="mt-7 grid gap-5 border border-[#d7a928]/25 bg-[#d7a928]/[0.05] p-6 sm:p-8 lg:grid-cols-[1fr_.8fr] lg:items-center">
-          <p className="text-2xl font-black leading-tight sm:text-3xl">
+        <div className="mt-8 border border-[#c8f55c]/30 bg-[#c8f55c]/[0.07] p-6 text-center sm:p-9">
+          <p className="text-2xl font-black leading-tight sm:text-4xl">
             El 7% no es automáticamente mejor.
-            <span className="mt-2 block text-[#d7a928]">
+            <span className="mt-2 block text-[#c8f55c]">
               La clave está en saber hacer los números.
             </span>
           </p>
-          <p className="border-l border-white/12 pl-5 text-xs leading-relaxed text-[#a8b2bc]">
-            Ejemplos simplificados para fines educativos. Suponen ingresos antes
-            de IVA y no incorporan retenciones ni todos los requisitos que
-            podrían resultar aplicables a un caso real.
-          </p>
+          <div className="mx-auto mt-7 flex max-w-[980px] flex-col items-stretch justify-center gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+            {["Ingresos", "IVA acreditable", "Retenciones", "Características"].map(
+              (item, index) => (
+                <div key={item} className="contents">
+                  <span className="border border-white/15 bg-white/[0.04] px-4 py-3 text-xs font-black uppercase tracking-[0.1em] text-white/72">
+                    {item}
+                  </span>
+                  {index < 3 ? (
+                    <span className="hidden text-[#75e4c3] sm:inline">+</span>
+                  ) : null}
+                </div>
+              ),
+            )}
+            <span className="hidden text-[#75e4c3] sm:inline">=</span>
+            <span className="bg-[#c8f55c] px-5 py-3 text-xs font-black uppercase tracking-[0.14em] text-[#061019]">
+              Decisión
+            </span>
+          </div>
         </div>
 
-        <div className="mt-12 grid gap-7 border-y border-white/10 py-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
-            Información → criterio → recomendación
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-y border-white/12 py-8 text-center lg:flex-row lg:text-left">
           <div>
-            <h3 className="text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-              El problema no será conocer el nuevo porcentaje. Será saber cuándo
-              aplicarlo.
-            </h3>
-            <p className="mt-4 max-w-3xl leading-relaxed text-[#a8b2bc]">
-              Dos clientes pueden tener ingresos similares y requerir análisis
-              diferentes. El valor está en saber qué revisar antes de recomendar
-              un esquema.
+            <p className="text-2xl font-black">
+              No te quedes con el porcentaje. Aprende a comparar el escenario.
             </p>
-            <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-md font-black text-[#f5f3ee]">
-                Prepárate para responder con criterio en 2027.
-              </p>
-              <CtaLink
-                placement="vat_bridge"
-                fallbackHref="#oferta"
-                fallbackChildren={
-                  <>
-                    INSCRIBIRME YA
-                    <span className="ml-3 text-xl">→</span>
-                  </>
-                }
-                className="inline-flex min-h-14 w-full shrink-0 items-center justify-center bg-[#d7a928] px-7 text-center text-sm font-black text-[#0b1118] transition hover:-translate-y-1 hover:bg-[#e8bd45] sm:w-auto"
-              >
-                {productConfig.cta}<span className="ml-3 text-xl">→</span>
-              </CtaLink>
-            </div>
+            <p className="mt-2 text-sm text-white/50">
+              Actualización práctica para contadores y profesionales fiscales.
+            </p>
           </div>
+          <CtaLink
+            placement="iva-comparison"
+            className="inline-flex min-h-14 w-full shrink-0 items-center justify-center bg-[#c8f55c] px-7 text-sm font-black text-[#061019] transition hover:-translate-y-1 hover:bg-[#dcff8c] sm:w-auto"
+          >
+            {productConfig.cta}<span className="ml-3 text-xl">→</span>
+          </CtaLink>
         </div>
       </div>
     </section>

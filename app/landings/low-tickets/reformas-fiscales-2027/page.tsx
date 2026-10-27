@@ -12,12 +12,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
   },
-  twitter: {
-    card: "summary",
-    title: "Reformas Fiscales 2027 | CEFIN",
-    description:
-      "Cambios propuestos, escenarios y preguntas clave para prepararte antes de enero.",
-  },
 };
 
 export default function ReformasFiscales2027Page() {

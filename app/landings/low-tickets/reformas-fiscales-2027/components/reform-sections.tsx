@@ -1,126 +1,175 @@
 import styles from "../reformas.module.css";
 
-const radarItems = [
+const highlights = [
+  {
+    label: "RESICO Persona Física",
+    value: "$5",
+    suffix: "MILLONES",
+    text: "Nuevo límite de ingresos propuesto rumbo a 2027.",
+  },
+  {
+    label: "RESICO Persona Moral",
+    value: "$50",
+    suffix: "MILLONES",
+    text: "Nuevo límite de ingresos propuesto.",
+  },
+  {
+    label: "Computadoras y equipo relacionado",
+    value: "100%",
+    suffix: "HASTA",
+    text: "Incremento máximo propuesto para determinadas inversiones.",
+  },
+  {
+    label: "Pérdidas fiscales",
+    value: "50%",
+    suffix: "LÍMITE",
+    text: "Para determinados contribuyentes sujetos al mecanismo propuesto.",
+  },
+  {
+    label: "Intereses",
+    value: "20%",
+    suffix: "PROPUESTO",
+    text: "Cambio planteado en el límite mencionado para su deducción.",
+  },
+  {
+    label: "IVA",
+    value: "7%",
+    suffix: "OPCIÓN",
+    text: "Para determinados contribuyentes RESICO con actividades al 16%.",
+  },
+];
+
+const topics = [
   {
     number: "01",
-    tag: "RESICO · PF",
-    value: "$5M",
-    title: "Nuevo límite propuesto",
-    body: "El límite de ingresos pasaría de $3.5 a $5 millones. La oportunidad depende de requisitos y situación real.",
+    title: "RESICO Persona Física",
+    body: "Analiza el incremento propuesto del límite de $3.5 a $5 millones, qué contribuyentes podrían entrar o volver a evaluar este régimen y qué requisitos deben revisarse antes de recomendar un cambio.",
   },
   {
     number: "02",
-    tag: "RESICO · PM",
-    value: "$50M",
-    title: "Más empresas por revisar",
-    body: "El límite propuesto subiría de $35 a $50 millones. Entrar al régimen exige comparar, no asumir.",
+    title: "RESICO Persona Moral",
+    body: "Comprende el aumento propuesto de $35 a $50 millones, las oportunidades potenciales para determinadas empresas y por qué debe compararse el régimen con la situación real del contribuyente.",
   },
   {
     number: "03",
-    tag: "Inversiones",
-    value: "100%",
-    title: "Deducción máxima",
-    body: "Computadoras y determinados activos podrían cambiar el momento fiscalmente conveniente para invertir.",
+    title: "Deducción de inversiones",
+    body: "Revisa los cambios propuestos para computadoras, equipo tecnológico, mobiliario, automóviles, camiones, montacargas, maquinaria y determinados activos sectoriales.",
+    callout:
+      "2027 podría modificar cuándo conviene realizar determinadas inversiones y cómo se aprovechan fiscalmente.",
   },
   {
     number: "04",
-    tag: "Deducciones",
-    value: ">$50M",
-    title: "Nuevo mecanismo de control",
-    body: "Determinadas personas morales con ingresos superiores a este umbral requerirían una revisión especial.",
+    title: "Control de deducciones",
+    body: "La propuesta contempla un nuevo mecanismo para determinadas personas morales con ingresos acumulables superiores a $50 millones.",
+    callout: "¿Tienes clientes que superan los $50 millones de ingresos?",
   },
   {
     number: "05",
-    tag: "Pérdidas fiscales",
-    value: "50%",
-    title: "Límite de disminución",
-    body: "Algunas empresas podrían tener pérdidas pendientes y aun así terminar pagando ISR.",
+    title: "Pérdidas fiscales",
+    body: "Para determinadas empresas afectadas por el nuevo mecanismo, se plantea limitar la disminución de pérdidas fiscales al 50% de la utilidad fiscal correspondiente.",
+    callout:
+      "¿Una empresa podría tener pérdidas fiscales pendientes y aun así terminar pagando ISR?",
   },
   {
     number: "06",
-    tag: "Intereses",
-    value: "20%",
-    title: "Límite propuesto",
-    body: "Intereses netos, anticipos y pagos al extranjero demandan revisar los supuestos aplicables.",
+    title: "Intereses, anticipos y pagos al extranjero",
+    body: "Conoce los cambios propuestos relacionados con el límite de intereses, pagos al extranjero, anticipos por servicios, anticipos de arrendamiento y otros ajustes relevantes para la planeación fiscal.",
   },
 ];
 
 export function ReformSections() {
   return (
-    <section
-      id="cambios"
-      className="relative overflow-hidden bg-[#101c26] text-[#f5f3ee]"
-    >
-      <div className={`${styles.grid} absolute inset-0 opacity-15`} />
-      <div className="relative mx-auto max-w-[1260px] px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d7a928]">
-              Radar fiscal 2027
+    <>
+      <section id="cambios" className="relative overflow-hidden bg-[#07141e]">
+        <div className={`${styles.grid} absolute inset-0 opacity-30`} />
+        <div className="relative mx-auto max-w-[1260px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+          <div className="max-w-[880px]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#75e4c3]">
+              Los números que pueden cambiar el escenario
             </p>
             <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
-              Seis movimientos que merecen contexto.
+              Una cifra aislada informa. Su impacto exige contexto.
             </h2>
-          </div>
-          <div className="border-l border-white/16 pl-6 sm:pl-8">
-            <p className="text-xl font-black leading-tight sm:text-2xl">
-              La cifra abre la conversación. El caso del contribuyente decide
-              qué hacer con ella.
-            </p>
-            <p className="mt-4 leading-relaxed text-white/58">
-              Este mapa reúne el dato, el tema y la pregunta práctica en un solo
-              lugar para evitar explicaciones repetidas.
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/58">
+              Estos son algunos de los cambios propuestos que se analizan rumbo
+              a 2027. Cada cifra debe leerse junto con sus requisitos y el caso
+              real del contribuyente.
             </p>
           </div>
-        </div>
 
-        <div className="mt-12 grid border-l border-t border-white/12 sm:grid-cols-2 lg:grid-cols-3">
-          {radarItems.map((item) => (
-            <article
-              key={item.number}
-              className="group flex min-h-[300px] flex-col border-b border-r border-white/10 bg-[#16232e] p-7 transition duration-300 hover:bg-[#1b2b38] sm:p-8"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-xs font-black tracking-[0.18em] text-[#d7a928]">
-                  {item.number}
-                </span>
-                <span className="flex flex-wrap items-center justify-end gap-2 text-right text-[10px] font-black uppercase tracking-[0.15em] text-[#a8b2bc]">
-                  {item.tag}
-                  <span className="border border-[#f59e0b]/35 bg-[#f59e0b]/10 px-2 py-1 text-[8px] text-[#fbbf24]">
-                    Propuesto
-                  </span>
-                </span>
-              </div>
-              <p className="mt-8 text-[clamp(3.2rem,6vw,5rem)] font-black leading-none tracking-[-0.07em] text-[#d7a928]">
-                {item.value}
-              </p>
-              <h3 className="mt-4 text-xl font-black leading-tight text-white">
-                {item.title}
-              </h3>
-              <p className="mt-4 leading-relaxed text-[#a8b2bc]">{item.body}</p>
-            </article>
-          ))}
-        </div>
+          <div className="mt-14 grid border-l border-t border-white/12 sm:grid-cols-2 lg:grid-cols-3">
+            {highlights.map((item) => (
+              <article
+                key={item.label}
+                className="group min-h-[310px] border-b border-r border-white/12 bg-white/[0.025] p-7 transition duration-300 hover:bg-[#102b3a] sm:p-9"
+              >
+                <p className="min-h-11 text-xs font-black uppercase leading-relaxed tracking-[0.16em] text-white/50">
+                  {item.label}
+                </p>
+                <p className="mt-8 text-[clamp(3.4rem,7vw,5.8rem)] font-black leading-none tracking-[-0.07em] text-[#c8f55c]">
+                  {item.value}
+                </p>
+                <p className="mt-2 text-xs font-black uppercase tracking-[0.2em] text-[#75e4c3]">
+                  {item.suffix}
+                </p>
+                <p className="mt-7 leading-relaxed text-white/58">{item.text}</p>
+              </article>
+            ))}
+          </div>
 
-        <div className="mt-8 grid gap-4 border border-[#d7a928]/25 bg-[#d7a928]/[0.06] p-5 text-sm leading-relaxed text-[#a8b2bc] lg:grid-cols-[1fr_auto] lg:items-center">
-          <p>
-            <strong className="text-white">Estatus y fecha de corte:</strong>{" "}
-            iniciativa del Paquete Económico 2027, revisada al 5 de octubre de
-            2026. Las cifras pueden cambiar durante el proceso legislativo o
-            mediante reglas posteriores.
+          <p className="mt-8 max-w-5xl border border-[#75e4c3]/20 bg-[#75e4c3]/[0.06] p-5 text-xs leading-relaxed text-white/52">
+            <strong className="text-white/78">Nota aclaratoria:</strong> las
+            cifras se presentan como propuestas, iniciativas y escenarios rumbo
+            a 2027. Pueden modificarse durante el proceso legislativo o mediante
+            reglas posteriores.
           </p>
-          <a
-            href="https://www.finanzaspublicas.hacienda.gob.mx/es/Finanzas_Publicas/Paquete_Economico_y_Presupuesto"
-            target="_blank"
-            rel="noreferrer"
-            data-no-xcod-url=""
-            suppressHydrationWarning
-            className="font-black text-[#e8bd45] underline decoration-[#d7a928] decoration-2 underline-offset-4 transition hover:text-white"
-          >
-            Ver fuente oficial ↗
-          </a>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="bg-[#f4f0e7] text-[#07141e]">
+        <div className="mx-auto max-w-[1220px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+          <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
+            <div className="lg:sticky lg:top-8 lg:self-start">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#087c68]">
+                Qué cambios se analizan
+              </p>
+              <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-6xl">
+                Del cambio general al caso concreto.
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-black/58">
+                Un recorrido práctico para ubicar qué revisar, qué comparar y
+                qué preguntas hacer antes de decidir.
+              </p>
+            </div>
+
+            <div className="border-t border-black/12">
+              {topics.map((topic) => (
+                <article
+                  key={topic.number}
+                  className="grid gap-5 border-b border-black/12 py-8 sm:grid-cols-[70px_1fr] sm:py-10"
+                >
+                  <span className="text-sm font-black tracking-[0.18em] text-[#087c68]">
+                    {topic.number}
+                  </span>
+                  <div>
+                    <h3 className="text-2xl font-black sm:text-3xl">
+                      {topic.title}
+                    </h3>
+                    <p className="mt-4 leading-relaxed text-black/60">
+                      {topic.body}
+                    </p>
+                    {topic.callout ? (
+                      <p className="mt-5 border-l-3 border-[#ff7a45] bg-white/65 px-5 py-4 font-black leading-relaxed">
+                        {topic.callout}
+                      </p>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
