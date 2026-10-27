@@ -229,7 +229,13 @@ export function NifLandingClient() {
       const submit = formRoot.querySelector<HTMLButtonElement>(
         "button[type='submit'], ._submit",
       );
-      if (submit) submit.textContent = "¡Quiero mi lugar gratis!";
+      if (submit) {
+        const submitLabel = "¡Quiero mi lugar gratis!";
+        if (submit.textContent !== submitLabel) {
+          submit.textContent = submitLabel;
+        }
+        observer.disconnect();
+      }
     };
 
     const observer = new MutationObserver(bindForm);
