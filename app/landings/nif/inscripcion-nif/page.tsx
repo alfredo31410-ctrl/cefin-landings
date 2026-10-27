@@ -1,48 +1,42 @@
 import Image from "next/image";
-import Link from "next/link";
-import { TallerTrackingClient, trackTallerOfferClick } from "./taller-tracking-client";
+import {
+  TallerTrackingClient,
+  trackTallerCheckoutClick,
+} from "./taller-tracking-client";
+import { ScrollRevealClient } from "./scroll-reveal-client";
 import "./taller.css";
 
-const eventDetails = [
-  { icon: "▣", label: "Fecha", value: "24 al 28 de agosto de 2026" },
-  { icon: "◷", label: "Horario", value: "11:00 a. m. · Hora CDMX" },
-  { icon: "◉", label: "Modalidad", value: "En vivo · 100 % en línea" },
-  { icon: "5", label: "Duración", value: "5 días" },
-] as const;
+const CHECKOUT_URL =
+  "https://pay.hotmart.com/H108211101R?off=9c34jhld&checkoutMode=10";
 
-const pains = [
-  "La operación parece sencilla, pero no sabes qué NIF sustenta el tratamiento.",
-  "El asiento cuadra, aunque todavía faltan datos para explicar la decisión.",
-  "La información del caso está dispersa y cuesta ordenar el análisis.",
-  "Conoces la teoría, pero necesitas llevarla a situaciones reales.",
-];
+const eventDetails = [
+  ["Fecha", "23—27 NOV 2026"],
+  ["Horario", "11:00 A. M. CDMX"],
+  ["Formato", "EN VIVO · ONLINE"],
+  ["Duración", "5 DÍAS"],
+] as const;
 
 const outcomes = [
-  ["01", "Explicar el tratamiento", "Explicarás por qué elegiste un tratamiento contable."],
-  ["02", "Detectar información", "Detectarás cuándo falta información relevante."],
-  ["03", "Analizar antes de registrar", "Evitarás registrar automáticamente sin analizar."],
-  ["04", "Comunicar conclusiones", "Comunicarás una conclusión con mayor claridad."],
-  ["05", "Sustentar decisiones", "Sustentarás una decisión con mayor criterio profesional."],
+  ["01", "Analiza antes de registrar", "Ordena los hechos y detecta la información que todavía falta."],
+  ["02", "Identifica la NIF aplicable", "Ubica la norma que necesitas revisar para cada operación."],
+  ["03", "Sustenta tu decisión", "Explica el tratamiento contable con mayor claridad y criterio."],
 ] as const;
 
-const practicalFocus = [
-  ["Analiza", "Analiza la operación antes de pensar en el registro."],
-  ["Ordena", "Ordena la información disponible del caso."],
-  ["Detecta", "Detecta los datos faltantes para continuar."],
-  ["Identifica", "Identifica qué NIF necesitas revisar."],
-  ["Estructura", "Estructura el análisis contable."],
-  ["Sustenta", "Sustenta la decisión contable."],
+const workshopRoute = [
+  ["Día 01", "Analiza", "Lee la operación antes de pensar en el asiento."],
+  ["Día 02", "Ordena", "Separa los datos relevantes y detecta vacíos de información."],
+  ["Día 03", "Identifica", "Define qué NIF necesitas consultar para resolver el caso."],
+  ["Día 04", "Estructura", "Apóyate en IA para organizar preguntas y alternativas."],
+  ["Día 05", "Sustenta", "Construye una conclusión contable que puedas explicar."],
 ] as const;
 
 const faqs = [
-  ["¿Cuándo se realizará el taller?", "Del 24 al 28 de agosto de 2026."],
-  ["¿A qué hora será?", "A las 11:00 a. m., hora de CDMX."],
-  ["¿Cómo se impartirá?", "Será en vivo y 100 % en línea."],
-  ["¿Cuánto dura?", "Son 5 días."],
-  ["¿Cuál es el precio?", "El precio es de $587 MXN."],
+  ["¿Para quién es?", "Para contadores y profesionales del área contable que quieren aplicar las NIF a operaciones reales."],
+  ["¿Cómo se imparte?", "Son cinco sesiones en vivo y 100 % en línea, del 23 al 27 de noviembre de 2026."],
+  ["¿La IA sustituye mi criterio?", "No. La IA ayuda a ordenar información; tú validas los datos y sustentas la decisión contable."],
 ] as const;
 
-function OfferLink({
+function CheckoutLink({
   children,
   className = "",
 }: {
@@ -51,268 +45,188 @@ function OfferLink({
 }) {
   return (
     <a
-      href="#oferta"
-      className={`taller-cta ${className}`}
-      onClick={trackTallerOfferClick}
+      className={`nif-cta ${className}`}
+      href={CHECKOUT_URL}
+      onClick={trackTallerCheckoutClick}
+      rel="noopener noreferrer"
     >
-      {children}
+      <span>{children}</span>
+      <span aria-hidden="true">↗</span>
     </a>
-  );
-}
-
-function CheckoutPlaceholder() {
-  return (
-    <span className="taller-cta taller-cta-disabled" aria-disabled="true">
-      Checkout disponible próximamente
-    </span>
   );
 }
 
 export default function InscripcionNifPage() {
   return (
-    <div className="nif-taller">
+    <div className="nif-sale">
       <TallerTrackingClient />
+      <ScrollRevealClient />
 
-      <section className="taller-hero" id="inicio">
-        <div className="taller-shell taller-hero-inner">
-          <header className="taller-header-inner">
-            <Link href="#inicio" className="taller-brand">
-              CEFIN
-            </Link>
-            <a className="taller-header-link" href="#metodo">
-              Ver el programa
-            </a>
-          </header>
-
-          <div className="taller-hero-grid">
-            <div className="taller-hero-copy">
-              <p className="taller-kicker">
-                Taller en vivo para contadores y profesionales del área contable
-              </p>
-              <h1>
-                Taller Práctico de NIF: deja de registrar por inercia y aprende a
-                sustentar cada decisión contable.
-              </h1>
-              <p className="taller-copy">
-                Analiza operaciones reales, identifica qué NIF necesitas revisar y
-                estructura tratamientos contables con un método práctico potenciado
-                con inteligencia artificial.
-              </p>
-              <OfferLink>VER PROGRAMA E INVERSIÓN</OfferLink>
-              <p className="taller-microcopy">
-                Conoce el método, los beneficios y todo lo que incluye tu inscripción.
-              </p>
-            </div>
-
-            <div className="taller-hero-visual">
-              <div className="taller-hero-badge">
-                <span>Taller Práctico de NIF</span>
-                <strong>Potenciado con Inteligencia Artificial</strong>
-              </div>
-              <Image
-                src="/alfredo.png"
-                alt="Mtro. Alfredo Cobos, instructor del Taller Práctico de NIF"
-                width={800}
-                height={800}
-                priority
-                sizes="(max-width: 699px) 82vw, (max-width: 959px) 70vw, 35vw"
-              />
-              <span className="taller-instructor-label">Mtro. Alfredo Cobos</span>
-            </div>
-
-            <div className="taller-event-strip" aria-label="Datos del taller">
-              {eventDetails.map((detail) => (
-                <div className="taller-event-item" key={detail.label}>
-                  <span className="taller-event-icon" aria-hidden="true">{detail.icon}</span>
-                  <span className="taller-event-label">{detail.label}</span>
-                  <strong>{detail.value}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <header className="nif-header">
+        <a className="nif-brand" href="#inicio" aria-label="CEFIN, ir al inicio">
+          CEFIN<span>.</span>
+        </a>
+        <nav aria-label="Navegación de la landing">
+          <a className="nif-nav-link" href="#programa">Programa</a>
+          <CheckoutLink className="nif-cta-header">INSCRIBIRME AHORA</CheckoutLink>
+        </nav>
+      </header>
 
       <main>
-        <section className="taller-section taller-dark-section">
-          <div className="taller-shell">
-            <p className="taller-kicker">El problema</p>
-            <h2 className="taller-heading">
-              Conocer las NIF no basta si no sabes aplicarlas.
-            </h2>
-            <p className="taller-copy">
-              En la práctica, muchas operaciones no llegan con la respuesta escrita.
-              Primero necesitas analizar el caso, identificar qué información falta y
-              entender qué norma aplica antes de registrar.
+        <section className="nif-hero" id="inicio">
+          <div className="nif-hero-grid" aria-hidden="true" />
+          <div className="nif-hero-copy">
+            <p className="nif-eyebrow">Formación en vivo · CEFIN</p>
+            <h1>
+              Taller <span>Práctico</span> de NIF
+            </h1>
+            <p className="nif-hero-intro">
+              Lleva las NIF de la teoría a casos reales y aprende a explicar el
+              criterio detrás de cada decisión contable.
             </p>
-            <div className="taller-pain-grid">
-              {pains.map((pain) => (
-                <div className="taller-pain" key={pain}>{pain}</div>
-              ))}
+            <div className="nif-hero-actions">
+              <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+              <a className="nif-secondary-link" href="#programa">Ver la ruta de 5 días</a>
             </div>
+            <p className="nif-presale-note">
+              <strong>Precio de preventa: $587 MXN.</strong> El precio subirá al terminar esta etapa.
+            </p>
+          </div>
+
+          <div className="nif-hero-visual">
+            <span className="nif-visual-word" aria-hidden="true">NIF</span>
+            <Image
+              src="/academia-contabilidad/alfredo.png"
+              alt="Mtro. Alfredo Cobos, instructor del Taller Práctico de NIF"
+              width={518}
+              height={590}
+              priority
+              sizes="(max-width: 760px) 88vw, 46vw"
+            />
+            <div className="nif-instructor-tag">
+              <span>Instructor</span>
+              <strong>Mtro. Alfredo Cobos</strong>
+            </div>
+          </div>
+
+          <div className="nif-event-bar" aria-label="Información del taller">
+            {eventDetails.map(([label, value]) => (
+              <div key={label}>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="taller-section taller-light-section">
-          <div className="taller-shell taller-reframe">
+        <section className="nif-manifesto">
+          <p className="nif-vertical-copy" aria-hidden="true">ANÁLISIS · CRITERIO · NIF</p>
+          <div className="nif-section-copy" data-reveal>
+            <p className="nif-eyebrow nif-eyebrow-dark">El cambio de enfoque</p>
+            <h2>El asiento puede cuadrar. Tu decisión también debe sostenerse.</h2>
+            <p className="nif-body-copy">
+              Una operación real no llega con la respuesta escrita. Primero debes
+              entender el caso, detectar qué información falta y encontrar la norma
+              que sustenta el tratamiento.
+            </p>
+          </div>
+
+          <div className="nif-outcomes">
+            {outcomes.map(([number, title, text]) => (
+              <article key={number} data-reveal>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="nif-inline-cta" data-reveal>
             <div>
-              <p className="taller-kicker">El reencuadre</p>
-              <h2 className="taller-heading">Primero analiza. Después registra.</h2>
-              <p className="taller-copy">
-                El criterio contable aparece cuando el caso no viene resuelto. El
-                objetivo no es memorizar más, sino aprender a justificar mejor.
-              </p>
+              <span>PREVENTA · $587 MXN · PRECIO PRÓXIMO A SUBIR</span>
+              <strong>Aprende a sustentar cada decisión contable.</strong>
             </div>
-            <div className="taller-reframe-list">
-              <div>La IA puede ayudarte a ordenar. Pero tú validas la información.</div>
-              <div>La IA puede estructurar preguntas. Pero tú identificas qué NIF necesitas revisar.</div>
-              <div>La IA puede apoyar el análisis. Pero tú sustentas la decisión contable.</div>
-            </div>
+            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
           </div>
         </section>
 
-        <section className="taller-section taller-dark-section">
-          <div className="taller-shell">
-            <div className="taller-centered-heading">
-              <p className="taller-kicker">Lo que lograrás</p>
-              <h2 className="taller-heading">
-                Llevarás las NIF de la teoría a la aplicación práctica.
-              </h2>
+        <section className="nif-program" id="programa">
+          <div className="nif-program-heading" data-reveal>
+            <div>
+              <p className="nif-eyebrow">Ruta práctica</p>
+              <h2>Cinco días.<br />Un método claro.</h2>
             </div>
-            <div className="taller-outcome-grid">
-              {outcomes.map(([number, title, text]) => (
-                <article className="taller-outcome" key={number}>
-                  <span>{number}</span>
+            <p>
+              No se trata de memorizar más. Se trata de aprender a hacer mejores
+              preguntas antes de registrar.
+            </p>
+          </div>
+
+          <div className="nif-program-layout">
+            <div className="nif-days">
+              {workshopRoute.map(([day, title, text]) => (
+                <article key={day} data-reveal>
+                  <span>{day}</span>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </article>
               ))}
             </div>
+
+            <aside className="nif-program-card" data-reveal>
+              <span className="nif-program-card-number">05</span>
+              <p className="nif-eyebrow">Taller en vivo</p>
+              <h3>De la operación a una decisión sustentada.</h3>
+              <ul>
+                <li>Casos y análisis práctico</li>
+                <li>NIF aplicada con criterio</li>
+                <li>IA como apoyo, no como sustituto</li>
+              </ul>
+              <CheckoutLink className="nif-cta-program">INSCRIBIRME AHORA</CheckoutLink>
+            </aside>
           </div>
         </section>
 
-        <section className="taller-cta-band">
-          <div className="taller-shell">
-            <div>
-              <p className="taller-kicker">Taller en vivo · 5 días</p>
-              <h2>Aprende a sustentar cada decisión contable.</h2>
-              <p>Reserva tu lugar por $587 MXN.</p>
-            </div>
-            <OfferLink>VER DETALLES DE INSCRIPCIÓN</OfferLink>
+        <section className="nif-offer" id="inscripcion">
+          <div className="nif-offer-copy" data-reveal>
+            <p className="nif-eyebrow nif-eyebrow-dark">Inscripción abierta</p>
+            <h2>Construye criterio. No solo registros.</h2>
+            <p>
+              Del lunes 23 al viernes 27 de noviembre de 2026, a las 11:00 a. m.,
+              hora de CDMX.
+            </p>
           </div>
-        </section>
 
-        <section className="taller-section taller-light-section" id="metodo">
-          <div className="taller-shell">
-            <p className="taller-kicker">Ejes prácticos del taller</p>
-            <h2 className="taller-heading">Esto es lo que trabajarás durante el taller.</h2>
-            <div className="taller-focus-grid">
-              {practicalFocus.map(([title, text], index) => (
-                <article className="taller-focus" key={title}>
+          <div className="nif-price-card" data-reveal>
+            <span className="nif-presale-badge">Precio de preventa</span>
+            <p>Taller Práctico de NIF</p>
+            <div className="nif-price"><span>$</span>587<small>MXN</small></div>
+            <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
+            <small>El precio subirá al terminar la preventa · Pago seguro por Hotmart.</small>
+          </div>
+
+          <div className="nif-faq" data-reveal>
+            {faqs.map(([question, answer], index) => (
+              <details key={question}>
+                <summary>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="taller-section taller-dark-section">
-          <div className="taller-shell taller-audience-grid">
-            <div>
-              <p className="taller-kicker">Para quién es</p>
-              <h2 className="taller-heading">Para contadores y profesionales del área contable.</h2>
-              <p className="taller-copy">
-                Para quienes quieren analizar operaciones reales, identificar la NIF
-                aplicable y explicar sus decisiones con mayor criterio profesional.
-              </p>
-            </div>
-            <div className="taller-audience-card">
-              <strong>No es solo teoría.</strong>
-              <p>Es un enfoque práctico para trabajar con casos y estructurar mejor el análisis.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="taller-section taller-light-section">
-          <div className="taller-shell">
-            <p className="taller-kicker">Uso de inteligencia artificial</p>
-            <h2 className="taller-heading">La IA no sustituye tu criterio profesional.</h2>
-            <p className="taller-copy">
-              Puede ayudarte a ordenar la información, clasificar elementos, detectar
-              datos faltantes y estructurar el análisis.
-            </p>
-            <div className="taller-ai-grid">
-              <div>Ordenar información de una operación.</div>
-              <div>Clasificar datos relevantes.</div>
-              <div>Detectar información faltante.</div>
-              <div>Apoyar la revisión de alternativas.</div>
-            </div>
-          </div>
-        </section>
-
-        <section className="taller-cta-band">
-          <div className="taller-shell">
-            <div>
-              <p className="taller-kicker">Método práctico con IA</p>
-              <h2>Inscríbete y lleva el análisis a casos reales.</h2>
-            </div>
-            <OfferLink>VER INVERSIÓN</OfferLink>
-          </div>
-        </section>
-
-        <section className="taller-section taller-dark-section">
-          <div className="taller-shell">
-            <p className="taller-kicker">Preguntas frecuentes</p>
-            <h2 className="taller-heading">Lo esencial antes de reservar</h2>
-            <div className="taller-faq">
-              {faqs.map(([question, answer]) => (
-                <details key={question}>
-                  <summary>{question}</summary>
-                  <p>{answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="taller-section taller-final" id="oferta">
-          <div className="taller-shell taller-final-grid">
-            <div>
-              <p className="taller-kicker">Reserva tu lugar</p>
-              <h2 className="taller-heading">No basta con que el asiento cuadre.</h2>
-              <p className="taller-copy">
-                Aprende a explicar qué NIF sustenta tu decisión y lleva tu análisis
-                contable de la teoría a la práctica.
-              </p>
-            </div>
-            <div className="taller-offer-card">
-              <p className="taller-kicker">Taller Práctico de NIF</p>
-              <p className="taller-price">$587<span>MXN</span></p>
-              <p>24 al 28 de agosto de 2026 · 11:00 a. m. · Hora CDMX</p>
-              <CheckoutPlaceholder />
-              <p className="taller-microcopy">
-                La conexión con el checkout se habilitará cuando la oferta esté lista.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="taller-cta-band taller-final-cta">
-          <div className="taller-shell">
-            <div>
-              <p className="taller-kicker">Reserva tu lugar</p>
-              <h2>Da el siguiente paso para sustentar tus decisiones contables.</h2>
-            </div>
-            <CheckoutPlaceholder />
+                  {question}
+                  <b aria-hidden="true">+</b>
+                </summary>
+                <p>{answer}</p>
+              </details>
+            ))}
           </div>
         </section>
       </main>
 
-      <footer className="taller-footer">
-        <div className="taller-shell">CEFIN · Taller Práctico de NIF</div>
+      <footer className="nif-footer">
+        <strong>CEFIN<span>.</span></strong>
+        <p>Taller Práctico de NIF · Noviembre 2026</p>
+        <a href="#inicio">Volver arriba ↑</a>
       </footer>
+
+      <CheckoutLink className="nif-mobile-cta">INSCRIBIRME AHORA</CheckoutLink>
     </div>
   );
 }

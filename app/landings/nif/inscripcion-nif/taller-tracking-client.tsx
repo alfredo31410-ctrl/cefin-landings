@@ -55,3 +55,12 @@ export function trackTallerOfferClick() {
     currency: "MXN",
   });
 }
+
+export function trackTallerCheckoutClick() {
+  trackMetaEvent("InitiateCheckout", {
+    content_name: "Taller Práctico de NIF",
+    content_category: "Taller en vivo",
+    value: 587,
+    currency: "MXN",
+  });
+}
