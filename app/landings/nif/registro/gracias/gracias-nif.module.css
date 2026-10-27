@@ -204,6 +204,44 @@
   white-space: nowrap;
 }
 
+.accessNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 191, 105, 0.28);
+  border-radius: 1.1rem;
+  background: rgba(255, 191, 105, 0.08);
+  padding: 0.95rem 1rem;
+}
+
+.accessNotice > span {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.6rem;
+  background: #ffbf69;
+  color: #281500;
+  font-size: 0.8rem;
+  font-weight: 950;
+}
+
+.accessNotice p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.accessNotice strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #ffd59e;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
 .actionCard {
   margin-top: 1.15rem;
   border: 1px solid rgba(167, 139, 250, 0.18);

@@ -113,16 +113,17 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
             <div className={styles.copy}>
               <div className={styles.kicker}>
                 <span className={styles.liveDot} aria-hidden="true" />
-                Registro completado · Último paso
+                Datos recibidos · Falta un último paso
               </div>
 
               <h1 className={styles.title}>
-                Tu lugar en <span>ABC de NIF</span> ya está apartado.
+                Tu acceso a <span>ABC de NIF</span> aún no está completo.
               </h1>
 
               <p className={styles.lead}>
-                Tus datos quedaron guardados. Ahora entra al grupo oficial para
-                recibir el enlace de acceso, recordatorios y avisos de la clase.
+                Ya recibimos tus datos, pero todavía no estás dentro de la
+                clase. Para confirmar tu acceso, entra ahora al grupo oficial de
+                WhatsApp.
               </p>
 
               <div className={styles.eventCard}>
@@ -140,9 +141,18 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
                 </div>
               </div>
 
+              <div className={styles.accessNotice} role="note">
+                <span aria-hidden="true">!</span>
+                <p>
+                  <strong>Aún no estás dentro de la clase.</strong>
+                  Tu acceso queda completo cuando entras al grupo oficial, donde
+                  recibirás el enlace y los avisos del evento.
+                </p>
+              </div>
+
               <div className={styles.actionCard}>
                 <div className={styles.progressHeader}>
-                  <p>Completa tu acceso</p>
+                  <p>Finaliza tu registro</p>
                   <span>1 de 2 listo</span>
                 </div>
                 <div className={styles.progressTrack} aria-hidden="true">
@@ -154,14 +164,14 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
                     <span>✓</span>
                     <div>
                       <small>Paso 1</small>
-                      <strong>Datos guardados</strong>
+                      <strong>Formulario enviado</strong>
                     </div>
                   </div>
                   <div className={styles.stepPending}>
                     <span>2</span>
                     <div>
                       <small>Paso final</small>
-                      <strong>Entrar a WhatsApp</strong>
+                      <strong>Confirmar en WhatsApp</strong>
                     </div>
                   </div>
                 </div>
@@ -174,11 +184,12 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.5 0 .16 5.34.16 11.92c0 2.1.55 4.16 1.59 5.97L.06 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01c6.58 0 11.92-5.34 11.92-11.92 0-3.19-1.24-6.18-3.48-8.43ZM12.08 21.82h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.71.97.99-3.62-.24-.37a9.84 9.84 0 0 1-1.52-5.29c0-5.46 4.44-9.9 9.91-9.9a9.83 9.83 0 0 1 7 2.9 9.84 9.84 0 0 1 2.9 7c-.01 5.46-4.45 9.9-9.91 9.9Zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47a8.9 8.9 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z" />
                   </svg>
-                  Entrar al grupo oficial
+                  Confirmar mi acceso en WhatsApp
                   <span aria-hidden="true">→</span>
                 </a>
                 <p className={styles.microcopy}>
-                  WhatsApp se abrirá directamente. Toca “Unirme al grupo”.
+                  WhatsApp se abrirá directamente. Toca “Unirme al grupo” para
+                  quedar dentro de la clase.
                 </p>
               </div>
             </div>
@@ -210,7 +221,7 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
           onClick={trackJoinGroup}
           className={styles.mobileStickyButton}
         >
-          Entrar al grupo oficial <span aria-hidden="true">→</span>
+          Confirmar mi acceso <span aria-hidden="true">→</span>
         </a>
       </div>
     </>
