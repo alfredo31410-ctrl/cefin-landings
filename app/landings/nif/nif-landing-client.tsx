@@ -117,6 +117,10 @@ function RegistrationButton({
 export function NifLandingClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMobileSticky, setShowMobileSticky] = useState(false);
+  const [formLoadAttempt, setFormLoadAttempt] = useState(0);
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >("idle");
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -124,6 +128,7 @@ export function NifLandingClient() {
 
   const openRegistration = (location: string, trigger: HTMLButtonElement) => {
     lastTriggerRef.current = trigger;
+    setFormStatus("loading");
     trackMetaCustomEvent("NifRegistrationOpen", {
       content_name: "ABC de NIF",
       button_location: location,
@@ -197,7 +202,9 @@ export function NifLandingClient() {
       credentials: "same-origin",
     }).catch(() => undefined);
 
-    const formRoot = document.querySelector<HTMLElement>("." + FORM_CLASS);
+    const formRoot = modalRef.current?.querySelector<HTMLElement>(
+      "." + FORM_CLASS,
+    );
     document.getElementById("activecampaign-nif-form")?.remove();
     if (formRoot) formRoot.innerHTML = "";
 
@@ -206,6 +213,7 @@ export function NifLandingClient() {
 
       const form = formRoot.querySelector<HTMLFormElement>("form");
       if (form && !form.dataset.nifBound) {
+        setFormStatus("ready");
         form.dataset.nifBound = "true";
         form.addEventListener("submit", () => {
           window.sessionStorage.setItem(
@@ -231,13 +239,22 @@ export function NifLandingClient() {
 
     const script = document.createElement("script");
     script.id = "activecampaign-nif-form";
-    script.src =
+    const embedUrl = new URL(
       "https://cefincapacitacion.activehosted.com/f/embed.php?id=" +
-      ACTIVE_CAMPAIGN_FORM_ID;
+        ACTIVE_CAMPAIGN_FORM_ID,
+    );
+    embedUrl.searchParams.set("cefin_v", Date.now().toString());
+    script.src = embedUrl.toString();
     script.type = "text/javascript";
     script.charset = "utf-8";
     script.async = true;
+    script.addEventListener("load", bindForm);
+    script.addEventListener("error", () => setFormStatus("error"));
     document.body.appendChild(script);
+
+    const loadTimeout = window.setTimeout(() => {
+      if (!formRoot?.querySelector("form")) setFormStatus("error");
+    }, 10000);
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -270,11 +287,12 @@ export function NifLandingClient() {
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(loadTimeout);
       observer.disconnect();
       script.remove();
       window.requestAnimationFrame(() => lastTriggerRef.current?.focus());
     };
-  }, [isModalOpen]);
+  }, [formLoadAttempt, isModalOpen]);
 
   return (
     <>
@@ -646,11 +664,54 @@ export function NifLandingClient() {
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-9 sm:py-7">
-              <div
-                className={
-                  styles.formShell + " " + FORM_CLASS + " min-h-[420px]"
-                }
-              />
+              <div className="relative min-h-[420px]">
+                {formStatus === "loading" && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 text-center">
+                    <span
+                      className={styles.formLoader}
+                      aria-hidden="true"
+                    />
+                    <p className="text-sm font-bold text-black/55">
+                      Preparando tu formulario…
+                    </p>
+                  </div>
+                )}
+
+                {formStatus === "error" && (
+                  <div
+                    className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl border border-[#7c3aed]/15 bg-[#7c3aed]/[0.04] px-6 text-center"
+                    role="alert"
+                  >
+                    <p className="text-lg font-black text-[#202126]">
+                      No pudimos cargar el formulario
+                    </p>
+                    <p className="mt-2 max-w-sm text-sm leading-relaxed text-black/55">
+                      Revisa tu conexión y vuelve a intentarlo. No perderás tu
+                      lugar por recargarlo.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormStatus("loading");
+                        setFormLoadAttempt((attempt) => attempt + 1);
+                      }}
+                      className="mt-5 rounded-xl bg-[#7c3aed] px-5 py-3 text-xs font-black uppercase tracking-[0.06em] text-white transition hover:bg-[#6d28d9] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7c3aed]"
+                    >
+                      Reintentar formulario
+                    </button>
+                  </div>
+                )}
+
+                <div
+                  className={
+                    styles.formShell +
+                    " " +
+                    FORM_CLASS +
+                    " min-h-[420px] transition-opacity duration-200 " +
+                    (formStatus === "ready" ? "opacity-100" : "opacity-0")
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>

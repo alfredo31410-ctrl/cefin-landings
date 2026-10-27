@@ -263,6 +263,15 @@
   animation: modal-panel-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.formLoader {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 3px solid rgba(124, 58, 237, 0.15);
+  border-top-color: #7c3aed;
+  border-radius: 999px;
+  animation: form-loader-spin 700ms linear infinite;
+}
+
 .formShell:global(._form_369),
 .formShell:global(._form_369) form {
   width: 100% !important;
@@ -454,6 +463,12 @@
   }
 }
 
+@keyframes form-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (min-width: 1024px) {
   .learningCard {
     padding: 2rem;
@@ -534,7 +549,8 @@
   .portraitHalo,
   .liveDot,
   .modalBackdrop,
-  .modalPanel {
+  .modalPanel,
+  .formLoader {
     animation: none !important;
   }
 
