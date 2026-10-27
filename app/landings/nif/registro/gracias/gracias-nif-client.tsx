@@ -7,10 +7,11 @@ import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
   NIF_REGISTRATION_COMPLETION_STORAGE_KEY,
+  trackMetaCustomEventImmediate,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const JOIN_ROUTE = "/landings/nif/unirse-whatsapp";
+const JOIN_GROUP_EVENT_KEY = "nifJoinGroupEventSent";
 
 function claimRegistrationConversion(registrationId: string) {
   const conversionKey = `${NIF_REGISTRATION_COMPLETION_STORAGE_KEY}:${registrationId}`;
@@ -35,7 +36,7 @@ function claimRegistrationConversion(registrationId: string) {
   }
 }
 
-export default function GraciasNifClient() {
+export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
   useEffect(() => {
     fetch("/api/nif/registro/consumir", {
       method: "POST",
@@ -61,6 +62,20 @@ export default function GraciasNifClient() {
       })
       .catch(() => undefined);
   }, []);
+
+  const trackJoinGroup = () => {
+    try {
+      if (window.sessionStorage.getItem(JOIN_GROUP_EVENT_KEY)) return;
+      window.sessionStorage.setItem(JOIN_GROUP_EVENT_KEY, "true");
+    } catch {
+      // El tracking nunca debe bloquear la salida directa hacia WhatsApp.
+    }
+
+    trackMetaCustomEventImmediate("JoinGroup", {
+      landing_slug: "nif-registro",
+      funnel_step: "whatsapp_direct",
+    });
+  };
 
   return (
     <>
@@ -117,7 +132,8 @@ export default function GraciasNifClient() {
                 Acceso pendiente de completar
               </p>
               <a
-                href={JOIN_ROUTE}
+                href={groupUrl}
+                onClick={trackJoinGroup}
                 className="mt-6 inline-flex min-h-[56px] w-full items-center justify-center rounded-2xl bg-[#25d366] px-6 py-4 text-center text-sm font-black uppercase text-[#062c15] shadow-[0_18px_45px_rgba(37,211,102,0.2)] transition hover:bg-[#6dff9d]"
               >
                 ¡Entrar al grupo y completar mi acceso!
@@ -141,7 +157,8 @@ export default function GraciasNifClient() {
       </main>
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-[#090b0d]/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur sm:hidden">
         <a
-          href={JOIN_ROUTE}
+          href={groupUrl}
+          onClick={trackJoinGroup}
           className="flex min-h-[52px] items-center justify-center rounded-xl bg-[#25d366] px-4 text-center text-xs font-black uppercase text-[#062c15]"
         >
           ¡Completar mi acceso ahora!
