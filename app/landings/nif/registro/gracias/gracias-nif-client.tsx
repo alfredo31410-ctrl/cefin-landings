@@ -10,6 +10,7 @@ import {
   trackMetaCustomEventImmediate,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import styles from "./gracias-nif.module.css";
 
 const JOIN_GROUP_EVENT_KEY = "nifJoinGroupEventSent";
 
@@ -94,74 +95,122 @@ export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
           alt=""
         />
       </noscript>
-      <main className="min-h-screen overflow-x-hidden bg-[#08080b] px-5 py-8 pb-28 text-white sm:px-8 lg:pb-12">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
-          <div>
-            <p className="inline-flex rounded-full border border-[#a79bff]/30 bg-[#7c42ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-[#c9c2ff]">
-              Paso 2 de 2 · Acción obligatoria
-            </p>
-            <h1 className="mt-6 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl">
-              ¡Todavía no has completado tu acceso!
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
-              Tus datos ya fueron guardados correctamente, pero todavía falta el
-              último paso:
-            </p>
-            <p className="mt-4 max-w-2xl text-xl font-black uppercase leading-tight text-[#c9c2ff]">
-              Entra ahora al grupo oficial de WhatsApp
-            </p>
-            <p className="mt-4 max-w-2xl leading-relaxed text-white/70">
-              Dentro del grupo recibirás el enlace para entrar a la clase, los
-              recordatorios, los avisos importantes y cualquier actualización
-              relacionada con el evento.
-            </p>
-            <p className="mt-4 max-w-2xl rounded-2xl border border-[#ffbf69]/30 bg-[#ffbf69]/10 p-4 text-sm font-bold leading-relaxed text-[#ffd59e]">
-              Si no entras al grupo, no tendrás completo el canal por el que
-              enviaremos el acceso y los avisos de la clase.
-            </p>
-            <div className="mt-7 rounded-3xl border border-white/10 bg-white/[0.05] p-5 sm:p-7">
-              <div className="grid gap-3 text-sm font-bold sm:grid-cols-2">
-                <p className="rounded-xl bg-[#7c42ff]/10 p-4 text-[#c9c2ff]">
-                  ✓ Paso 1: Tus datos fueron guardados.
-                </p>
-                <p className="rounded-xl bg-white/[0.06] p-4 text-white/80">
-                  → Paso 2: Entra al grupo oficial de WhatsApp.
+      <main className={styles.page}>
+        <div className={styles.grid} aria-hidden="true" />
+        <div className={styles.glowOne} aria-hidden="true" />
+        <div className={styles.glowTwo} aria-hidden="true" />
+
+        <section className={styles.shell}>
+          <header className={styles.topbar}>
+            <a href="/landings/nif" className={styles.brand}>
+              <span className={styles.brandMark}>C</span>
+              <span>CEFIN</span>
+            </a>
+            <span className={styles.freeBadge}>Clase 100% gratuita</span>
+          </header>
+
+          <div className={styles.heroLayout}>
+            <div className={styles.copy}>
+              <div className={styles.kicker}>
+                <span className={styles.liveDot} aria-hidden="true" />
+                Registro completado · Último paso
+              </div>
+
+              <h1 className={styles.title}>
+                Tu lugar en <span>ABC de NIF</span> ya está apartado.
+              </h1>
+
+              <p className={styles.lead}>
+                Tus datos quedaron guardados. Ahora entra al grupo oficial para
+                recibir el enlace de acceso, recordatorios y avisos de la clase.
+              </p>
+
+              <div className={styles.eventCard}>
+                <div>
+                  <span>Fecha</span>
+                  <strong>Jueves 5 de noviembre</strong>
+                </div>
+                <div>
+                  <span>Hora</span>
+                  <strong>11:00 a. m. · CDMX</strong>
+                </div>
+                <div>
+                  <span>Modalidad</span>
+                  <strong>En vivo y online</strong>
+                </div>
+              </div>
+
+              <div className={styles.actionCard}>
+                <div className={styles.progressHeader}>
+                  <p>Completa tu acceso</p>
+                  <span>1 de 2 listo</span>
+                </div>
+                <div className={styles.progressTrack} aria-hidden="true">
+                  <span />
+                </div>
+
+                <div className={styles.steps}>
+                  <div className={styles.stepDone}>
+                    <span>✓</span>
+                    <div>
+                      <small>Paso 1</small>
+                      <strong>Datos guardados</strong>
+                    </div>
+                  </div>
+                  <div className={styles.stepPending}>
+                    <span>2</span>
+                    <div>
+                      <small>Paso final</small>
+                      <strong>Entrar a WhatsApp</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={groupUrl}
+                  onClick={trackJoinGroup}
+                  className={styles.whatsappButton}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.5 0 .16 5.34.16 11.92c0 2.1.55 4.16 1.59 5.97L.06 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01c6.58 0 11.92-5.34 11.92-11.92 0-3.19-1.24-6.18-3.48-8.43ZM12.08 21.82h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.71.97.99-3.62-.24-.37a9.84 9.84 0 0 1-1.52-5.29c0-5.46 4.44-9.9 9.91-9.9a9.83 9.83 0 0 1 7 2.9 9.84 9.84 0 0 1 2.9 7c-.01 5.46-4.45 9.9-9.91 9.9Zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47a8.9 8.9 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z" />
+                  </svg>
+                  Entrar al grupo oficial
+                  <span aria-hidden="true">→</span>
+                </a>
+                <p className={styles.microcopy}>
+                  WhatsApp se abrirá directamente. Toca “Unirme al grupo”.
                 </p>
               </div>
-              <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#ffcf83]">
-                Acceso pendiente de completar
-              </p>
-              <a
-                href={groupUrl}
-                onClick={trackJoinGroup}
-                className="mt-6 inline-flex min-h-[56px] w-full items-center justify-center rounded-2xl bg-[#25d366] px-6 py-4 text-center text-sm font-black uppercase text-[#062c15] shadow-[0_18px_45px_rgba(37,211,102,0.2)] transition hover:bg-[#6dff9d]"
-              >
-                ¡Entrar al grupo y completar mi acceso!
-              </a>
-              <p className="mt-4 text-center text-sm font-bold text-white/75">
-                Cuando se abra WhatsApp, toca “Unirme al grupo”.
-              </p>
+            </div>
+
+            <div className={styles.instructorStage}>
+              <div className={styles.portraitHalo} aria-hidden="true" />
+              <Image
+                src="/alfredo.png"
+                alt="Mtro. Alfredo Cobos, instructor de ABC de NIF"
+                width={800}
+                height={900}
+                priority
+                sizes="(max-width: 900px) 100vw, 42vw"
+                className={styles.instructorImage}
+              />
+              <div className={styles.instructorCard}>
+                <span>Tu instructor</span>
+                <strong>Mtro. Alfredo Cobos</strong>
+                <p>Especialista en Normas de Información Financiera</p>
+              </div>
             </div>
           </div>
-          <div className="hidden lg:block">
-            <Image
-              src="/alfredo.png"
-              alt="Mtro. Alfredo Cobos"
-              width={800}
-              height={800}
-              sizes="35vw"
-              className="h-auto w-full object-contain opacity-90"
-            />
-          </div>
-        </div>
+        </section>
       </main>
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-[#090b0d]/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur sm:hidden">
+
+      <div className={styles.mobileSticky}>
         <a
           href={groupUrl}
           onClick={trackJoinGroup}
-          className="flex min-h-[52px] items-center justify-center rounded-xl bg-[#25d366] px-4 text-center text-xs font-black uppercase text-[#062c15]"
+          className={styles.mobileStickyButton}
         >
-          ¡Completar mi acceso ahora!
+          Entrar al grupo oficial <span aria-hidden="true">→</span>
         </a>
       </div>
     </>
