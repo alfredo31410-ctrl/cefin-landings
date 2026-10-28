@@ -96,7 +96,7 @@ export default function InscripcionNifPage() {
           <div className="nif-hero-visual">
             <span className="nif-visual-word" aria-hidden="true">NIF</span>
             <Image
-              src="/academia-contabilidad/alfredo.png"
+              src="/alfredo-nif.png"
               alt="Mtro. Alfredo Cobos, instructor del Taller Práctico de NIF"
               width={518}
               height={590}
