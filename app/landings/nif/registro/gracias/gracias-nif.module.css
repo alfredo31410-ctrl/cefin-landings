@@ -1,7 +1,7 @@
 .page {
   position: relative;
   min-height: 100svh;
-  overflow: hidden;
+  overflow: clip;
   background:
     radial-gradient(circle at 76% 18%, rgba(124, 58, 237, 0.22), transparent 30%),
     radial-gradient(circle at 10% 88%, rgba(37, 99, 235, 0.12), transparent 28%),
