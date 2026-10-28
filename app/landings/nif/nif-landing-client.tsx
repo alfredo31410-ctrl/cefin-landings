@@ -17,6 +17,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 import styles from "./nif-landing.module.css";
+import { captureNifWhatsappSelection } from "./nif-whatsapp-routing";
 
 const ACTIVE_CAMPAIGN_FORM_ID = 369;
 const FORM_CLASS = "_form_" + ACTIVE_CAMPAIGN_FORM_ID;
@@ -144,6 +145,8 @@ export function NifLandingClient() {
       content_category: "Clase gratuita en vivo",
       landing_slug: "nif",
     });
+
+    captureNifWhatsappSelection(window.location.search);
 
     const params = new URLSearchParams(window.location.search);
     const source =

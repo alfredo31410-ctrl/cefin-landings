@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import GraciasNifClient from "./gracias-nif-client";
 
-const groupUrl = "https://chat.whatsapp.com/IuzCjOKeFDo0mwJ9SjDhaJ";
-
 export const metadata: Metadata = {
   title: "Completa tu acceso | ABC de NIF | CEFIN",
   description:
@@ -11,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function NifGraciasPage() {
-  return <GraciasNifClient groupUrl={groupUrl} />;
+  return <GraciasNifClient />;
 }

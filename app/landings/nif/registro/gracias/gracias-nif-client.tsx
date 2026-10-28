@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import {
   getMetaPixelNoscriptUrl,
   getMetaPixelScript,
@@ -10,9 +10,15 @@ import {
   trackMetaCustomEventImmediate,
   trackMetaEvent,
 } from "@/lib/meta-pixel";
+import {
+  NIF_WHATSAPP_GROUP_URLS,
+  resolveNifWhatsappGroupUrl,
+} from "../../nif-whatsapp-routing";
 import styles from "./gracias-nif.module.css";
 
 const JOIN_GROUP_EVENT_KEY = "nifJoinGroupEventSent";
+const subscribeToNifWhatsappSelection = () => () => undefined;
+const getPrincipalNifWhatsappGroup = () => NIF_WHATSAPP_GROUP_URLS.principal;
 
 function claimRegistrationConversion(registrationId: string) {
   const conversionKey = `${NIF_REGISTRATION_COMPLETION_STORAGE_KEY}:${registrationId}`;
@@ -37,7 +43,13 @@ function claimRegistrationConversion(registrationId: string) {
   }
 }
 
-export default function GraciasNifClient({ groupUrl }: { groupUrl: string }) {
+export default function GraciasNifClient() {
+  const groupUrl = useSyncExternalStore(
+    subscribeToNifWhatsappSelection,
+    resolveNifWhatsappGroupUrl,
+    getPrincipalNifWhatsappGroup,
+  );
+
   useEffect(() => {
     fetch("/api/nif/registro/consumir", {
       method: "POST",
