@@ -7,6 +7,7 @@ import {
   NIF_WHATSAPP_SELECTION_STORAGE_KEY,
   NIF_WHATSAPP_SELECTION_TTL_MS,
   resolveNifWhatsappGroupUrl,
+  selectNifWhatsappGroup,
 } from "../app/landings/nif/nif-whatsapp-routing.ts";
 
 function createStorage() {
@@ -19,17 +20,27 @@ function createStorage() {
   };
 }
 
-test("routes utm_source=openai to the exclusive group and preserves it", () => {
+test("routes utm_source=chatgpt_ads to the exclusive group and preserves it", () => {
   const storage = createStorage();
   const now = 1_000;
 
   assert.equal(
-    captureNifWhatsappSelection("?utm_source=OpenAI", { storage, now }),
+    captureNifWhatsappSelection(
+      "?utm_source=chatgpt_ads&utm_campaign=campaign-123",
+      { storage, now },
+    ),
     NIF_WHATSAPP_GROUP_URLS.openai,
   );
   assert.equal(
     resolveNifWhatsappGroupUrl({ storage, now: now + 60_000 }),
     NIF_WHATSAPP_GROUP_URLS.openai,
+  );
+});
+
+test("keeps utm_source=openai as a compatible OpenAI source", () => {
+  assert.equal(
+    selectNifWhatsappGroup("?utm_source=OpenAI"),
+    "openai",
   );
 });
 
@@ -43,6 +54,29 @@ test("routes every other explicit source to the principal group", () => {
   assert.equal(
     resolveNifWhatsappGroupUrl({ storage, now: 2 }),
     NIF_WHATSAPP_GROUP_URLS.principal,
+  );
+});
+
+test("utm_campaign never changes the selected group", () => {
+  assert.equal(
+    selectNifWhatsappGroup(
+      "?utm_source=chatgpt_ads&utm_campaign=first-campaign",
+    ),
+    "openai",
+  );
+  assert.equal(
+    selectNifWhatsappGroup(
+      "?utm_source=chatgpt_ads&utm_campaign=another-campaign",
+    ),
+    "openai",
+  );
+  assert.equal(
+    selectNifWhatsappGroup("?utm_source=facebook&utm_campaign=openai"),
+    "principal",
+  );
+  assert.equal(
+    selectNifWhatsappGroup("?utm_campaign=campaign-without-source"),
+    "principal",
   );
 });
 

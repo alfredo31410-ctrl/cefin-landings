@@ -35,7 +35,10 @@ function isNifWhatsappGroup(value: unknown): value is NifWhatsappGroup {
 
 export function selectNifWhatsappGroup(search: string): NifWhatsappGroup {
   const source = new URLSearchParams(search).get("utm_source");
-  return source?.trim().toLowerCase() === "openai" ? "openai" : "principal";
+  const normalizedSource = source?.trim().toLowerCase();
+  return normalizedSource === "openai" || normalizedSource === "chatgpt_ads"
+    ? "openai"
+    : "principal";
 }
 
 export function captureNifWhatsappSelection(
