@@ -20,6 +20,17 @@ const JOIN_GROUP_EVENT_KEY = "nifJoinGroupEventSent";
 const subscribeToNifWhatsappSelection = () => () => undefined;
 const getPrincipalNifWhatsappGroup = () => NIF_WHATSAPP_GROUP_URLS.principal;
 
+function unlockDocumentScroll() {
+  [document.documentElement, document.body].forEach((element) => {
+    if (element.style.overflow === "hidden") {
+      element.style.removeProperty("overflow");
+    }
+    if (element.style.overflowY === "hidden") {
+      element.style.removeProperty("overflow-y");
+    }
+  });
+}
+
 function claimRegistrationConversion(registrationId: string) {
   const conversionKey = `${NIF_REGISTRATION_COMPLETION_STORAGE_KEY}:${registrationId}`;
 
@@ -49,6 +60,10 @@ export default function GraciasNifClient() {
     resolveNifWhatsappGroupUrl,
     getPrincipalNifWhatsappGroup,
   );
+
+  useEffect(() => {
+    unlockDocumentScroll();
+  }, []);
 
   useEffect(() => {
     fetch("/api/nif/registro/consumir", {
