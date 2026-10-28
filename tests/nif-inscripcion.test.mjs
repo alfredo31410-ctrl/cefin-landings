@@ -20,7 +20,11 @@ test("keeps the confirmed NIF workshop offer and Hotmart checkout", async () => 
   assert.match(source, /\$587|>587</);
   assert.match(source, /Precio de preventa/);
   assert.match(source, /precio subirá/i);
-  assert.match(source, /src="\/alfredo-nif\.png"/);
+  assert.match(
+    source,
+    /src="https:\/\/cefin-landings-z9uk\.vercel\.app\/alfredo-nif\.png"/,
+  );
+  assert.match(source, /unoptimized/);
   assert.match(
     source,
     /https:\/\/pay\.hotmart\.com\/H108211101R\?off=9c34jhld&checkoutMode=10/,

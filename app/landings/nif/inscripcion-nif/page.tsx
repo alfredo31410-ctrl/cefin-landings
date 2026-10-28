@@ -96,11 +96,12 @@ export default function InscripcionNifPage() {
           <div className="nif-hero-visual">
             <span className="nif-visual-word" aria-hidden="true">NIF</span>
             <Image
-              src="/alfredo-nif.png"
+              src="https://cefin-landings-z9uk.vercel.app/alfredo-nif.png"
               alt="Mtro. Alfredo Cobos, instructor del Taller Práctico de NIF"
               width={518}
               height={590}
               priority
+              unoptimized
               sizes="(max-width: 760px) 88vw, 46vw"
             />
             <div className="nif-instructor-tag">
