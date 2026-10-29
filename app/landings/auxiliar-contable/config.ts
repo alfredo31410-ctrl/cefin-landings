@@ -10,4 +10,4 @@ export const AUXILIAR_EVENT = {
 } as const;
 
 export const AUXILIAR_WHATSAPP_URL =
-  "https://chat.whatsapp.com/KtgBe3y5EK2GHsTXKV1tZx";
+  "https://chat.whatsapp.com/CVJ6sU37SSS5IgkrgxFHb1";
