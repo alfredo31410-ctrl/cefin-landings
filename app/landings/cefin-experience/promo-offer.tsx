@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { REGISTRATION_URL } from "./constants";
 import styles from "./cefin-experience.module.css";
 
@@ -73,12 +76,29 @@ export function OfferSection() {
 }
 
 export function StickyPromoCta() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("inicio");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0.08 },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <a
-      className={styles.stickyMobileCta}
+      className={`${styles.stickyMobileCta} ${visible ? styles.stickyMobileCtaVisible : ""}`}
       href={REGISTRATION_URL}
       target="_blank"
       rel="noopener noreferrer"
+      aria-hidden={!visible}
+      tabIndex={visible ? undefined : -1}
     >
       <span>
         <small>Precio de preventa</small>
