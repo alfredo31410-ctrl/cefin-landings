@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const experiences = [
   {
     number: "01",
-    title: "Rompe tus techos",
+    title: "Rompe tus techos mentales",
     description:
       "Una experiencia de transformación para desafiar límites y abrir nuevas posibilidades.",
   },
@@ -190,7 +190,7 @@ export default function CefinExperiencePage() {
             <div className={styles.dayNumber}>17</div>
             <div className={styles.dayContent}>
               <p>Transformación + estrategia</p>
-              <h3>Rompe tus techos. Prepárate para 2027.</h3>
+              <h3>Rompe tus techos mentales. Prepárate para 2027.</h3>
               <ul>
                 <li>Experiencia para romper techos mentales</li>
                 <li>Reforma Fiscal 2027</li>
