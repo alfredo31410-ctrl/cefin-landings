@@ -4,6 +4,7 @@ import Image from "next/image";
 import { assetUrl, REGISTRATION_URL } from "./constants";
 import { HeroVideo } from "./hero-video";
 import { OfferSection, ProgramPromoCta, StickyPromoCta } from "./promo-offer";
+import { CefinExperienceTracking } from "./tracking";
 import styles from "./cefin-experience.module.css";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ function SparkIcon() {
 export default function CefinExperiencePage() {
   return (
     <main className={styles.page}>
+      <CefinExperienceTracking />
       <header className={styles.header}>
         <a className={styles.brand} href="#inicio" aria-label="CEFIN Experience, inicio">
           <span className={styles.brandMark}>C</span>
