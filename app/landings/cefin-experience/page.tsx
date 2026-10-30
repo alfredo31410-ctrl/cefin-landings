@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
-import { REGISTRATION_URL } from "./constants";
+import { assetUrl, REGISTRATION_URL } from "./constants";
+import { HeroVideo } from "./hero-video";
 import { OfferSection, ProgramPromoCta, StickyPromoCta } from "./promo-offer";
 import styles from "./cefin-experience.module.css";
 
@@ -76,31 +78,15 @@ export default function CefinExperiencePage() {
         </a>
       </header>
 
-      <section className={styles.hero} id="inicio">
-        <video
-          className={styles.heroVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-        >
-          <source
-            src="/cefin-experience/cefin-hero-9x16.mp4"
-            type="video/mp4"
-            media="(max-width: 767px) and (orientation: portrait)"
-          />
-          <source
-            src="/cefin-experience/cefin-hero-16x9.webm"
-            type="video/webm"
-          />
-          <source
-            src="/cefin-experience/cefin-hero-16x9.mp4"
-            type="video/mp4"
-          />
-        </video>
+      <section
+        className={styles.hero}
+        id="inicio"
+        style={{
+          "--hero-poster-desktop": `url("${assetUrl("/cefin-experience/cefin-hero-poster.jpg")}")`,
+          "--hero-poster-mobile": `url("${assetUrl("/cefin-experience/cefin-hero-poster-9x16.jpg")}")`,
+        } as CSSProperties}
+      >
+        <HeroVideo />
         <div className={styles.heroVideoShade} aria-hidden="true" />
         <div className={styles.heroGrid} aria-hidden="true" />
         <div className={styles.heroOrb} aria-hidden="true">
@@ -250,11 +236,12 @@ export default function CefinExperiencePage() {
               <span className={styles.speakerShape} aria-hidden="true" />
               <Image
                 className={styles.speakerImage}
-                src="/alfredo.png"
+                src={assetUrl("/alfredo.png")}
                 alt="Alfredo Cobos"
                 width={628}
                 height={628}
                 sizes="(max-width: 760px) 88vw, 38vw"
+                unoptimized
               />
             </div>
             <div className={styles.speakerInfo}>
@@ -268,11 +255,12 @@ export default function CefinExperiencePage() {
               <span className={styles.speakerShape} aria-hidden="true" />
               <Image
                 className={styles.speakerImage}
-                src="/contabilidad-electronica/marisol-contabilidad-electronica.png"
+                src={assetUrl("/contabilidad-electronica/marisol-contabilidad-electronica.png")}
                 alt="Marisol Galván"
                 width={567}
                 height={551}
                 sizes="(max-width: 760px) 88vw, 38vw"
+                unoptimized
               />
             </div>
             <div className={styles.speakerInfo}>
@@ -298,11 +286,12 @@ export default function CefinExperiencePage() {
         <div className={styles.communityVisual}>
           <Image
             className={styles.communityImage}
-            src="/cefin-experience/comunidad-cefin-experience.jpg"
+            src={assetUrl("/cefin-experience/comunidad-cefin-experience.jpg")}
             alt="Comunidad CEFIN reunida en diferentes encuentros presenciales"
             width={1672}
             height={941}
             sizes="(max-width: 760px) 100vw, 94vw"
+            unoptimized
           />
 
           <div className={styles.communityBadge}>

@@ -80,7 +80,7 @@
   padding: clamp(130px, 18vh, 190px) 3vw 38px;
   overflow: hidden;
   background-color: #030510;
-  background-image: url("/cefin-experience/cefin-hero-poster.jpg");
+  background-image: var(--hero-poster-desktop);
   background-position: 60% center;
   background-size: cover;
   color: white;
@@ -431,7 +431,7 @@
     min-height: 900px;
     padding-top: 125px;
     padding-bottom: 28px;
-    background-image: url("/cefin-experience/cefin-hero-poster-9x16.jpg");
+    background-image: var(--hero-poster-mobile);
     background-position: center;
   }
   .heroVideo { object-position: center; }
