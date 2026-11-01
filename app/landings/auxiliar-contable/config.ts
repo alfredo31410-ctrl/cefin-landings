@@ -1,4 +1,4 @@
-9export const AUXILIAR_EVENT = {
+export const AUXILIAR_EVENT = {
   name: "Auxiliares Contables con Inteligencia Artificial",
   activeCampaignFormId: 367,
   dateIso: "2026-11-03",
