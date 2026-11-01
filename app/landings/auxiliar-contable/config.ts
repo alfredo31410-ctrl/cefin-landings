@@ -1,4 +1,4 @@
-export const AUXILIAR_EVENT = {
+9export const AUXILIAR_EVENT = {
   name: "Auxiliares Contables con Inteligencia Artificial",
   activeCampaignFormId: 367,
   dateIso: "2026-11-03",
@@ -10,4 +10,4 @@ export const AUXILIAR_EVENT = {
 } as const;
 
 export const AUXILIAR_WHATSAPP_URL =
-  "https://chat.whatsapp.com/CVJ6sU37SSS5IgkrgxFHb1";
+  "https://chat.whatsapp.com/CJMQyH0buNW5nyuBpHF8K7?s=cl&p=a&iam=2";
