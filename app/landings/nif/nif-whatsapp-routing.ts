@@ -1,6 +1,6 @@
 export const NIF_WHATSAPP_GROUP_URLS = {
   openai: "https://chat.whatsapp.com/CFQawlPYLCN7Y9pCXUDFRD",
-  principal: "https://chat.whatsapp.com/KYLKlCuRnElC4dX1psZZM5",
+  principal: "https://chat.whatsapp.com/KiqN6Lan6MkKo1kdYi1vRz",
 } as const;
 
 export const NIF_WHATSAPP_SELECTION_STORAGE_KEY =
