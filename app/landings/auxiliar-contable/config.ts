@@ -9,4 +9,4 @@ export const AUXILIAR_EVENT = {
   timezone: "CDMX",
 } as const;
 
-export const AUXILIAR_WHATSAPP_URL = "https://chat.whatsapp.com/CJMQyH0buNW5nyuBpHF8K7?s=cl&p=a&iam=2";
+export const AUXILIAR_WHATSAPP_URL = "https://chat.whatsapp.com/CKinkhKpjGN4wXRWEL25eH";
