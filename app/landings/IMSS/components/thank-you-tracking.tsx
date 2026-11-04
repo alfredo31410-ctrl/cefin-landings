@@ -5,6 +5,7 @@ import { initializeMetaPixel, trackMetaEvent } from "@/lib/meta-pixel";
 import {
   consumeImssRegistrationConfirmation,
   trackConfirmedImssLead,
+  trackImssCompleteRegistration,
 } from "../registration-adapter";
 
 export function ThankYouTracking() {
@@ -18,9 +19,9 @@ export function ThankYouTracking() {
     trackMetaEvent("PageView");
 
     const confirmationId = consumeImssRegistrationConfirmation();
-    if (!confirmationId) return;
+    if (confirmationId) trackConfirmedImssLead(confirmationId);
 
-    trackConfirmedImssLead(confirmationId);
+    trackImssCompleteRegistration(confirmationId);
   }, []);
 
   return null;

@@ -29,7 +29,10 @@ test("exposes the requested public route from the IMSS source folder", async () 
   assert.equal(imssCampaign.publicPath, "/landings/imss-actualizacion-total");
 });
 test("centralizes the approved context and renders one semantic heading", async () => {
-  const landingSource = await readFile(new URL("landing.tsx", sourceDirectory), "utf8");
+  const [landingSource, thanksSource] = await Promise.all([
+    readFile(new URL("landing.tsx", sourceDirectory), "utf8"),
+    readFile(new URL("thanks.tsx", sourceDirectory), "utf8"),
+  ]);
 
   assert.equal(imssTopics.length, 4);
   assert.equal(imssCampaign.statement, "Contador: el IMSS cambió. ¿Ya estás al día?");
@@ -42,6 +45,9 @@ test("centralizes the approved context and renders one semantic heading", async 
   assert.match(landingSource, /src=\{alfredoPortrait\}/);
   assert.match(landingSource, /<Image/);
   assert.match(landingSource, /\bpriority\s+unoptimized\b/);
+  assert.match(thanksSource, /import alfredoPortrait from "\.\.\/\.\.\/\.\.\/public\/alfredo\/DSC_5172-sin-fondo\.webp"/);
+  assert.match(thanksSource, /src=\{alfredoPortrait\}/);
+  assert.match(thanksSource, /\bpriority\s+unoptimized\b/);
   assert.equal((landingSource.match(/<h1\b/g) ?? []).length, 1);
   assert.match(landingSource, /imssTopics\.map/);
   assert.equal(imssCampaign.schedule.dateLabel, "Martes 10 de noviembre");
@@ -62,7 +68,7 @@ test("initializes Meta and tracks the landing view before confirmed registration
   assert.equal(imssCampaign.tracking.joinIntentEvent, "JoinGroupIntent");
   assert.equal(imssCampaign.tracking.conversionEvent, "CompleteRegistration");
 });
-test("defaults WhatsApp to Mexico and only tracks a verified confirmation", async () => {
+test("tracks the verified lead and the thank-you conversion separately", async () => {
   const [adapterSource, formSource, thankYouTrackingSource] = await Promise.all([
     readFile(new URL("registration-adapter.ts", sourceDirectory), "utf8"),
     readFile(new URL("components/registration-form.tsx", sourceDirectory), "utf8"),
@@ -82,8 +88,13 @@ test("defaults WhatsApp to Mexico and only tracks a verified confirmation", asyn
   assert.match(formSource, /persistImssRegistrationConfirmation/);
   assert.match(formSource, /window\.location\.assign\(getImssThankYouUrl\(\)\)/);
   assert.match(thankYouTrackingSource, /consumeImssRegistrationConfirmation/);
-  assert.match(thankYouTrackingSource, /if \(!confirmationId\) return/);
+  assert.match(thankYouTrackingSource, /if \(confirmationId\) trackConfirmedImssLead/);
   assert.match(thankYouTrackingSource, /trackConfirmedImssLead/);
+  assert.match(thankYouTrackingSource, /trackImssCompleteRegistration\(confirmationId\)/);
+  assert.match(adapterSource, /imssCampaign\.tracking\.conversionEvent/);
+  assert.match(adapterSource, /status: "thank_you_page_viewed"/);
+  assert.match(adapterSource, /COMPLETE_REGISTRATION_KEY/);
+  assert.doesNotMatch(adapterSource, /if \(storedEventId\) return/);
   assert.doesNotMatch(adapterSource, /localStorage/);
   assert.doesNotMatch(adapterSource, /fetch\(/);
 });

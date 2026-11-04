@@ -1,4 +1,5 @@
 import Image from "next/image";
+import alfredoPortrait from "../../../public/alfredo/DSC_5172-sin-fondo.webp";
 import { imssCampaign } from "./config";
 import { ThankYouTracking } from "./components/thank-you-tracking";
 import { WhatsAppReservationCta } from "./components/whatsapp-reservation-cta";
@@ -105,11 +106,12 @@ export default function ImssThankYouPage() {
 
           <figure className={styles.portrait}>
             <Image
-              src={imssCampaign.portrait.src}
+              src={alfredoPortrait}
               alt={imssCampaign.portrait.alt}
               width={1024}
               height={1536}
               priority
+              unoptimized
               sizes="(max-width: 768px) 88vw, 31rem"
             />
           </figure>

@@ -10,6 +10,8 @@ type ImssAttribution = Partial<
 const PENDING_CONFIRMATION_KEY =
   "cefin:imss-actualizacion-total:pending-confirmation";
 const PENDING_CONFIRMATION_TTL_MS = 30 * 60 * 1000;
+const COMPLETE_REGISTRATION_KEY =
+  "cefin:imss-actualizacion-total:complete-registration";
 
 export function readImssAttribution(): ImssAttribution {
   const params = new URLSearchParams(window.location.search);
@@ -180,6 +182,43 @@ export function trackConfirmedImssLead(confirmationId: string) {
       ...readImssAttribution(),
     },
     { eventID: confirmationId },
+  );
+
+  return true;
+}
+
+export function trackImssCompleteRegistration(
+  confirmationId: string | null,
+) {
+  let eventId = confirmationId
+    ? `${confirmationId}-complete-registration`
+    : `imss-complete-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+  try {
+    const storedEventId = window.sessionStorage.getItem(
+      COMPLETE_REGISTRATION_KEY,
+    );
+    if (storedEventId) {
+      eventId = storedEventId;
+    } else {
+      window.sessionStorage.setItem(COMPLETE_REGISTRATION_KEY, eventId);
+    }
+  } catch {
+    // El evento de conversión no depende del almacenamiento del navegador.
+  }
+
+  trackMetaEvent(
+    imssCampaign.tracking.conversionEvent,
+    {
+      content_name: imssCampaign.tracking.contentName,
+      content_category: imssCampaign.tracking.contentCategory,
+      status: "thank_you_page_viewed",
+      registration_step: "form_completed",
+      value: 0,
+      currency: "MXN",
+      ...readImssAttribution(),
+    },
+    { eventID: eventId },
   );
 
   return true;
