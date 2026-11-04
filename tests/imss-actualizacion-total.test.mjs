@@ -9,14 +9,17 @@ const routeDirectory = new URL(
   import.meta.url,
 );
 
-test("uses the confirmed ActiveCampaign form while downstream steps remain pending", () => {
+test("uses the confirmed ActiveCampaign form and WhatsApp group", () => {
   assert.equal(imssCampaign.registration.enabled, true);
   assert.equal(imssCampaign.registration.activeCampaignFormId, 375);
   assert.equal(
     imssCampaign.registration.activeCampaignEmbedUrl,
     "https://cefincapacitacion.activehosted.com/f/embed.php?id=375",
   );
-  assert.equal(imssCampaign.registration.whatsappGroupUrl, null);
+  assert.equal(
+    imssCampaign.registration.whatsappGroupUrl,
+    "https://chat.whatsapp.com/BXhtpGGRt69EvABLjaUFqG",
+  );
   assert.equal(
     imssCampaign.registration.thankYouPath,
     "/landings/imss-actualizacion-total/gracias",
