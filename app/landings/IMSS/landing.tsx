@@ -67,6 +67,7 @@ export default function ImssActualizacionTotalLanding() {
               width={1024}
               height={1536}
               priority
+              unoptimized
               sizes="(max-width: 768px) 92vw, (max-width: 1360px) 26rem, 29rem"
             />
           </figure>

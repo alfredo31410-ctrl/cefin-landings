@@ -39,6 +39,7 @@ test("centralizes the approved context and renders one semantic heading", async 
   assert.equal(imssTopics[3].title, "Cambios que impactan el cálculo de cuotas");
   assert.equal(imssCampaign.portrait.src, "/alfredo/DSC_5172-sin-fondo.webp");
   assert.match(landingSource, /<Image/);
+  assert.match(landingSource, /\bpriority\s+unoptimized\b/);
   assert.equal((landingSource.match(/<h1\b/g) ?? []).length, 1);
   assert.match(landingSource, /imssTopics\.map/);
   assert.equal(imssCampaign.schedule.dateLabel, "Martes 10 de noviembre");
