@@ -89,6 +89,9 @@ test("tracks the verified lead and the thank-you conversion separately", async (
   assert.match(formSource, /const form = findInjectedForm\(\)/);
   assert.match(formSource, /trackConfirmedImssLead/);
   assert.match(formSource, /persistImssRegistrationConfirmation/);
+  assert.match(formSource, /host\.addEventListener\("submit", rememberValidSubmission, true\)/);
+  assert.match(formSource, /form\.checkValidity\(\)/);
+  assert.match(formSource, /pendingConfirmationRef\.current = confirmationId/);
   assert.match(formSource, /window\.location\.assign\(getImssThankYouUrl\(\)\)/);
   assert.match(thankYouTrackingSource, /consumeImssRegistrationConfirmation/);
   assert.match(thankYouTrackingSource, /if \(!confirmationId\) return/);

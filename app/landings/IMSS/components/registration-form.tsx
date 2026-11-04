@@ -35,11 +35,13 @@ function isVerifiedActiveCampaignSuccess(form: HTMLFormElement) {
 export function RegistrationForm() {
   const hostRef = useRef<HTMLDivElement>(null);
   const confirmedRef = useRef(false);
+  const pendingConfirmationRef = useRef<string | null>(null);
   const [status, setStatus] = useState<FormStatus>("loading");
   const [attempt, setAttempt] = useState(0);
 
   const retry = useCallback(() => {
     confirmedRef.current = false;
+    pendingConfirmationRef.current = null;
     setStatus("loading");
     setAttempt((current) => current + 1);
   }, []);
@@ -66,6 +68,18 @@ export function RegistrationForm() {
     let loadTimeout = 0;
     let injectionTimer = 0;
     const previousCallback = window._form_callback;
+
+    const rememberValidSubmission = (event: Event) => {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement) || !host.contains(form)) return;
+      if (!form.checkValidity()) return;
+
+      const confirmationId = createImssConfirmationId();
+      pendingConfirmationRef.current = confirmationId;
+      persistImssRegistrationConfirmation(confirmationId);
+    };
+
+    host.addEventListener("submit", rememberValidSubmission, true);
 
     const findInjectedForm = () =>
       host.querySelector<HTMLFormElement>("form") ??
@@ -106,7 +120,8 @@ export function RegistrationForm() {
       }
 
       confirmedRef.current = true;
-      const confirmationId = createImssConfirmationId();
+      const confirmationId =
+        pendingConfirmationRef.current ?? createImssConfirmationId();
       const persisted = persistImssRegistrationConfirmation(confirmationId);
 
       if (!persisted) trackConfirmedImssLead(confirmationId);
@@ -145,6 +160,7 @@ export function RegistrationForm() {
       observer.disconnect();
       window.clearTimeout(loadTimeout);
       window.clearTimeout(injectionTimer);
+      host.removeEventListener("submit", rememberValidSubmission, true);
       script.remove();
       host.replaceChildren();
       document.querySelectorAll<HTMLElement>(`._form_${FORM_ID}`).forEach((element) => {
