@@ -38,6 +38,8 @@ test("centralizes the approved context and renders one semantic heading", async 
   assert.equal(imssTopics[2].title, "Actualizaciones del SUA");
   assert.equal(imssTopics[3].title, "Cambios que impactan el cálculo de cuotas");
   assert.equal(imssCampaign.portrait.src, "/alfredo/DSC_5172-sin-fondo.webp");
+  assert.match(landingSource, /import alfredoPortrait from "\.\.\/\.\.\/\.\.\/public\/alfredo\/DSC_5172-sin-fondo\.webp"/);
+  assert.match(landingSource, /src=\{alfredoPortrait\}/);
   assert.match(landingSource, /<Image/);
   assert.match(landingSource, /\bpriority\s+unoptimized\b/);
   assert.equal((landingSource.match(/<h1\b/g) ?? []).length, 1);

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import alfredoPortrait from "../../../public/alfredo/DSC_5172-sin-fondo.webp";
 import { imssCampaign, imssHighlights, imssTopics } from "./config";
 import { CampaignTracking } from "./components/campaign-tracking";
 import { RegistrationForm } from "./components/registration-form";
@@ -62,7 +63,7 @@ export default function ImssActualizacionTotalLanding() {
 
           <figure className={styles.heroPortrait}>
             <Image
-              src={imssCampaign.portrait.src}
+              src={alfredoPortrait}
               alt={imssCampaign.portrait.alt}
               width={1024}
               height={1536}
