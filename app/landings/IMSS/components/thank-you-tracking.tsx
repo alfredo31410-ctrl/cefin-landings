@@ -19,8 +19,9 @@ export function ThankYouTracking() {
     trackMetaEvent("PageView");
 
     const confirmationId = consumeImssRegistrationConfirmation();
-    if (confirmationId) trackConfirmedImssLead(confirmationId);
+    if (!confirmationId) return;
 
+    trackConfirmedImssLead(confirmationId);
     trackImssCompleteRegistration(confirmationId);
   }, []);
 

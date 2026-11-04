@@ -88,13 +88,14 @@ test("tracks the verified lead and the thank-you conversion separately", async (
   assert.match(formSource, /persistImssRegistrationConfirmation/);
   assert.match(formSource, /window\.location\.assign\(getImssThankYouUrl\(\)\)/);
   assert.match(thankYouTrackingSource, /consumeImssRegistrationConfirmation/);
-  assert.match(thankYouTrackingSource, /if \(confirmationId\) trackConfirmedImssLead/);
+  assert.match(thankYouTrackingSource, /if \(!confirmationId\) return/);
   assert.match(thankYouTrackingSource, /trackConfirmedImssLead/);
   assert.match(thankYouTrackingSource, /trackImssCompleteRegistration\(confirmationId\)/);
   assert.match(adapterSource, /imssCampaign\.tracking\.conversionEvent/);
   assert.match(adapterSource, /status: "thank_you_page_viewed"/);
   assert.match(adapterSource, /COMPLETE_REGISTRATION_KEY/);
-  assert.doesNotMatch(adapterSource, /if \(storedEventId\) return/);
+  assert.match(adapterSource, /return false;/);
+  assert.match(adapterSource, /eventID: eventId/);
   assert.doesNotMatch(adapterSource, /localStorage/);
   assert.doesNotMatch(adapterSource, /fetch\(/);
 });

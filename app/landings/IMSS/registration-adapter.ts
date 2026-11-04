@@ -188,23 +188,21 @@ export function trackConfirmedImssLead(confirmationId: string) {
 }
 
 export function trackImssCompleteRegistration(
-  confirmationId: string | null,
+  confirmationId: string,
 ) {
-  let eventId = confirmationId
-    ? `${confirmationId}-complete-registration`
-    : `imss-complete-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  if (!confirmationId) return false;
+
+  const eventId = `${confirmationId}-complete-registration`;
 
   try {
-    const storedEventId = window.sessionStorage.getItem(
-      COMPLETE_REGISTRATION_KEY,
-    );
-    if (storedEventId) {
-      eventId = storedEventId;
-    } else {
-      window.sessionStorage.setItem(COMPLETE_REGISTRATION_KEY, eventId);
+    if (
+      window.sessionStorage.getItem(COMPLETE_REGISTRATION_KEY) ===
+      confirmationId
+    ) {
+      return false;
     }
   } catch {
-    // El evento de conversión no depende del almacenamiento del navegador.
+    // El identificador consumible sigue evitando duplicados por recarga.
   }
 
   trackMetaEvent(
@@ -220,6 +218,15 @@ export function trackImssCompleteRegistration(
     },
     { eventID: eventId },
   );
+
+  try {
+    window.sessionStorage.setItem(
+      COMPLETE_REGISTRATION_KEY,
+      confirmationId,
+    );
+  } catch {
+    // El evento ya fue encolado; no se bloquea la experiencia por storage.
+  }
 
   return true;
 }
