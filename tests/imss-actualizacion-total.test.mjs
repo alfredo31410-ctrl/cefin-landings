@@ -107,9 +107,10 @@ test("tracks the verified lead and the thank-you conversion separately", async (
 });
 
 test("provides a branded noindex thank-you route without trusting direct visits", async () => {
-  const [routeSource, pageSource, ctaSource, cssSource] = await Promise.all([
+  const [routeSource, pageSource, thanksSource, ctaSource, cssSource] = await Promise.all([
     readFile(new URL("gracias/page.tsx", routeDirectory), "utf8"),
     readFile(new URL("gracias/page.tsx", sourceDirectory), "utf8"),
+    readFile(new URL("thanks.tsx", sourceDirectory), "utf8"),
     readFile(new URL("components/whatsapp-reservation-cta.tsx", sourceDirectory), "utf8"),
     readFile(new URL("thanks.module.css", sourceDirectory), "utf8"),
   ]);
@@ -120,6 +121,12 @@ test("provides a branded noindex thank-you route without trusting direct visits"
   assert.match(pageSource, /ImssThankYouPage/);
   assert.match(ctaSource, /joinIntentEvent/);
   assert.doesNotMatch(ctaSource, /CompleteRegistration/);
+  assert.match(ctaSource, /variant\?: "primary" \| "header" \| "hero" \| "sticky"/);
+  assert.match(thanksSource, /variant="header"/);
+  assert.match(thanksSource, /variant="hero"/);
+  assert.match(thanksSource, /variant="sticky"/);
+  assert.match(cssSource, /\.mobileStickyWhatsappCta\s*\{[^}]*display:\s*none/s);
+  assert.match(cssSource, /@media \(max-width: 48rem\)[\s\S]*\.mobileStickyWhatsappCta\s*\{[^}]*position:\s*fixed/s);
   assert.match(cssSource, /prefers-reduced-motion: reduce/);
 
   const pageStyles = cssSource.match(/\.page\s*\{([^}]*)\}/)?.[1] ?? "";

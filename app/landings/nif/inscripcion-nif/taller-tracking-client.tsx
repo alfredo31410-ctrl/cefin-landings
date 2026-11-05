@@ -10,6 +10,7 @@ import {
 } from "@/lib/meta-pixel";
 
 const VIEW_CONTENT_KEY = "nifTallerViewContentSent";
+const TALLER_PRICE = 687;
 
 export function TallerTrackingClient() {
   useEffect(() => {
@@ -23,7 +24,7 @@ export function TallerTrackingClient() {
     trackMetaEvent("ViewContent", {
       content_name: "Taller Práctico de NIF",
       content_category: "Taller en vivo",
-      value: 587,
+      value: TALLER_PRICE,
       currency: "MXN",
     });
   }, []);
@@ -51,7 +52,7 @@ export function TallerTrackingClient() {
 export function trackTallerOfferClick() {
   trackMetaCustomEvent("OfferSectionClick", {
     content_name: "Taller Práctico de NIF",
-    value: 587,
+    value: TALLER_PRICE,
     currency: "MXN",
   });
 }
@@ -60,7 +61,7 @@ export function trackTallerCheckoutClick() {
   trackMetaEvent("InitiateCheckout", {
     content_name: "Taller Práctico de NIF",
     content_category: "Taller en vivo",
-    value: 587,
+    value: TALLER_PRICE,
     currency: "MXN",
   });
 }

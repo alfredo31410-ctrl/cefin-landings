@@ -89,7 +89,7 @@ export default function InscripcionNifPage() {
               <a className="nif-secondary-link" href="#programa">Ver la ruta de 5 días</a>
             </div>
             <p className="nif-presale-note">
-              <strong>Precio de preventa: $587 MXN.</strong> El precio subirá al terminar esta etapa.
+              <strong>Precio de preventa: $687 MXN.</strong> El precio subirá al terminar esta etapa.
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export default function InscripcionNifPage() {
 
           <div className="nif-inline-cta" data-reveal>
             <div>
-              <span>PREVENTA · $587 MXN · PRECIO PRÓXIMO A SUBIR</span>
+              <span>PREVENTA · $687 MXN · PRECIO PRÓXIMO A SUBIR</span>
               <strong>Aprende a sustentar cada decisión contable.</strong>
             </div>
             <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
@@ -201,7 +201,7 @@ export default function InscripcionNifPage() {
           <div className="nif-price-card" data-reveal>
             <span className="nif-presale-badge">Precio de preventa</span>
             <p>Taller Práctico de NIF</p>
-            <div className="nif-price"><span>$</span>587<small>MXN</small></div>
+            <div className="nif-price"><span>$</span>687<small>MXN</small></div>
             <CheckoutLink>INSCRIBIRME AHORA</CheckoutLink>
             <small>El precio subirá al terminar la preventa · Pago seguro por Hotmart.</small>
           </div>

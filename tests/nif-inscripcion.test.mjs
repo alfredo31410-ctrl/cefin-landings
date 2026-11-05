@@ -17,7 +17,7 @@ test("keeps the confirmed NIF workshop offer and Hotmart checkout", async () => 
   assert.match(source, /Taller Práctico de NIF/);
   assert.match(source, /23—27 NOV 2026/);
   assert.match(source, /11:00 A\. M\. CDMX/);
-  assert.match(source, /\$587|>587</);
+  assert.match(source, /\$687|>687</);
   assert.match(source, /Precio de preventa/);
   assert.match(source, /precio subirá/i);
   assert.match(
@@ -35,5 +35,7 @@ test("tracks checkout intent without firing a purchase", async () => {
   const source = await readFile(trackingPath, "utf8");
 
   assert.match(source, /"InitiateCheckout"/);
+  assert.match(source, /const TALLER_PRICE = 687/);
+  assert.doesNotMatch(source, /\b587\b/);
   assert.doesNotMatch(source, /trackMetaEvent\("Purchase"/);
 });

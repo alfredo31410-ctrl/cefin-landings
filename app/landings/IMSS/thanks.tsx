@@ -24,7 +24,11 @@ export default function ImssThankYouPage() {
           CEFIN
         </a>
         <p>Capacitación para contadores</p>
-        <span>Clase gratuita en vivo</span>
+        <WhatsAppReservationCta
+          href={imssCampaign.registration.whatsappGroupUrl}
+          label="Entrar al grupo"
+          variant="header"
+        />
       </header>
 
       <section className={styles.content} aria-labelledby="thank-you-title">
@@ -53,6 +57,12 @@ export default function ImssThankYouPage() {
             Para completar tu registro y reservar tu lugar, entra ahora al grupo
             oficial de WhatsApp de la clase.
           </p>
+
+          <WhatsAppReservationCta
+            href={imssCampaign.registration.whatsappGroupUrl}
+            label="Entrar al grupo y reservar mi lugar"
+            variant="hero"
+          />
 
           <div className={styles.actionCard}>
             <div className={styles.actionHeader}>
@@ -130,6 +140,12 @@ export default function ImssThankYouPage() {
           </div>
         </div>
       </section>
+
+      <WhatsAppReservationCta
+        href={imssCampaign.registration.whatsappGroupUrl}
+        label="Entrar al grupo de WhatsApp"
+        variant="sticky"
+      />
 
       <footer className={styles.footer}>
         <p>CEFIN · Formación práctica para profesionales contables.</p>

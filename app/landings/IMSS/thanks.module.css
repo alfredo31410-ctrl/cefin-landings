@@ -95,8 +95,7 @@
   text-decoration: none;
 }
 
-.header p,
-.header > span {
+.header p {
   margin: 0;
   font-size: 0.7rem;
   font-weight: 850;
@@ -106,11 +105,6 @@
 
 .header p {
   color: rgba(244, 240, 228, 0.68);
-}
-
-.header > span {
-  justify-self: end;
-  color: var(--lime);
 }
 
 .content {
@@ -351,6 +345,41 @@
   box-shadow: 0 1.25rem 3rem rgba(37, 211, 102, 0.4);
 }
 
+.headerWhatsappCta {
+  justify-self: end;
+  width: auto;
+  min-height: 2.8rem;
+  margin-top: 0;
+  border: 1px solid var(--lime);
+  border-radius: 999px;
+  background: var(--lime);
+  padding: 0.65rem 1rem;
+  color: var(--forest-deep);
+  font-size: 0.68rem;
+  box-shadow: 0 0.8rem 2rem rgba(216, 255, 70, 0.22);
+}
+
+.headerWhatsappCta:hover {
+  background: #e6ff84;
+  box-shadow: 0 1rem 2.6rem rgba(216, 255, 70, 0.32);
+}
+
+.heroWhatsappCta {
+  width: max-content;
+  max-width: 100%;
+  min-height: 4rem;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding-inline: 1.4rem;
+  box-shadow: 0 1.2rem 3rem rgba(37, 211, 102, 0.34);
+  animation: revealUp 650ms 390ms ease-out both;
+}
+
+.mobileStickyWhatsappCta {
+  display: none;
+}
+
 .whatsappCta span,
 .whatsappCta b {
   position: relative;
@@ -359,6 +388,13 @@
 
 .whatsappCta b {
   font-size: 1.15rem;
+}
+
+.whatsappCta:focus-visible,
+.brand:focus-visible,
+.footer a:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 4px;
 }
 
 .pendingCta {
@@ -700,6 +736,10 @@
 }
 
 @media (max-width: 48rem) {
+  .page {
+    padding-bottom: 5.25rem;
+  }
+
   .header,
   .content,
   .footer {
@@ -714,9 +754,34 @@
     display: none;
   }
 
-  .header > span {
-    max-width: 9rem;
-    text-align: right;
+  .headerWhatsappCta {
+    padding-inline: 0.85rem;
+    font-size: 0.62rem;
+  }
+
+  .heroWhatsappCta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mobileStickyWhatsappCta {
+    position: fixed;
+    right: 1rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    left: 1rem;
+    z-index: 40;
+    display: flex;
+    width: auto;
+    min-height: 3.75rem;
+    margin: 0;
+    border: 1px solid #efffb4;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--lime), #7cff70);
+    padding: 0.9rem 1.25rem;
+    color: var(--forest-deep);
+    font-size: 0.76rem;
+    box-shadow: 0 1.1rem 3rem rgba(0, 12, 9, 0.48), 0 0 0 0.2rem rgba(216, 255, 70, 0.14);
   }
 
   .content {
@@ -782,6 +847,7 @@
   .progressTrack span,
   .copy h1,
   .intro,
+  .heroWhatsappCta,
   .actionCard,
   .eventCard,
   .visual,
