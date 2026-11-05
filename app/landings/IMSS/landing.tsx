@@ -59,6 +59,11 @@ export default function ImssActualizacionTotalLanding() {
                 </div>
               </div>
             </div>
+
+            <a className={styles.heroCta} href={`#${imssCampaign.formAnchor}`}>
+              Quiero registrarme gratis
+              <ArrowIcon />
+            </a>
           </div>
 
           <figure className={styles.heroPortrait}>
@@ -93,6 +98,15 @@ export default function ImssActualizacionTotalLanding() {
           </aside>
         </section>
       </div>
+
+      <a
+        className={styles.mobileStickyCta}
+        href={`#${imssCampaign.formAnchor}`}
+        aria-label="Ir al formulario de registro gratuito"
+      >
+        Registrarme gratis
+        <ArrowIcon />
+      </a>
 
       <section className={styles.highlights} aria-label="Características de la clase">
         {imssHighlights.map((highlight, index) => (

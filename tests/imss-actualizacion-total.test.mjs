@@ -137,3 +137,16 @@ test("lets ActiveCampaign own all embedded form styles", async () => {
   assert.doesNotMatch(cssSource, /:global\(\._form_375\)/);
   assert.doesNotMatch(cssSource, /activeCampaignForm\s+:global/);
 });
+
+test("offers prominent registration calls to action without styling the embedded form", async () => {
+  const [landingSource, cssSource] = await Promise.all([
+    readFile(new URL("landing.tsx", sourceDirectory), "utf8"),
+    readFile(new URL("landing.module.css", sourceDirectory), "utf8"),
+  ]);
+
+  assert.match(landingSource, /className=\{styles\.heroCta\}/);
+  assert.match(landingSource, /className=\{styles\.mobileStickyCta\}/);
+  assert.match(landingSource, /Quiero registrarme gratis/);
+  assert.match(cssSource, /\.headerCta\s*\{[^}]*background:\s*var\(--lime\)/s);
+  assert.match(cssSource, /@media \(max-width: 48rem\)[\s\S]*\.mobileStickyCta\s*\{[^}]*position:\s*fixed/s);
+});
