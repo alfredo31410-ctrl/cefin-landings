@@ -121,6 +121,11 @@ test("provides a branded noindex thank-you route without trusting direct visits"
   assert.match(ctaSource, /joinIntentEvent/);
   assert.doesNotMatch(ctaSource, /CompleteRegistration/);
   assert.match(cssSource, /prefers-reduced-motion: reduce/);
+
+  const pageStyles = cssSource.match(/\.page\s*\{([^}]*)\}/)?.[1] ?? "";
+  assert.match(pageStyles, /overflow-x:\s*hidden/);
+  assert.match(pageStyles, /overflow-y:\s*visible/);
+  assert.doesNotMatch(pageStyles, /overflow:\s*hidden/);
 });
 
 test("lets ActiveCampaign own all embedded form styles", async () => {
