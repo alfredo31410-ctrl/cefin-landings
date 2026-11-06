@@ -1,6 +1,5 @@
 export const NIF_WHATSAPP_GROUP_URLS = {
-  openai: "https://chat.whatsapp.com/CFQawlPYLCN7Y9pCXUDFRD",
-  principal: "https://chat.whatsapp.com/KiqN6Lan6MkKo1kdYi1vRz",
+  principal: "https://chat.whatsapp.com/LMjKygnl3b4DlVRcjcMsTh",
 } as const;
 
 export const NIF_WHATSAPP_SELECTION_STORAGE_KEY =
@@ -30,15 +29,12 @@ function getStorage(storage: StorageLike | null | undefined) {
 }
 
 function isNifWhatsappGroup(value: unknown): value is NifWhatsappGroup {
-  return value === "openai" || value === "principal";
+  return value === "principal";
 }
 
 export function selectNifWhatsappGroup(search: string): NifWhatsappGroup {
-  const source = new URLSearchParams(search).get("utm_source");
-  const normalizedSource = source?.trim().toLowerCase();
-  return normalizedSource === "openai" || normalizedSource === "chatgpt_ads"
-    ? "openai"
-    : "principal";
+  void search;
+  return "principal";
 }
 
 export function captureNifWhatsappSelection(

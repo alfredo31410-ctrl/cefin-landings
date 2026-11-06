@@ -19,10 +19,10 @@ import {
 import styles from "./nif-landing.module.css";
 import { captureNifWhatsappSelection } from "./nif-whatsapp-routing";
 
-const ACTIVE_CAMPAIGN_FORM_ID = 369;
+const ACTIVE_CAMPAIGN_FORM_ID = 381;
 const FORM_CLASS = "_form_" + ACTIVE_CAMPAIGN_FORM_ID;
-const EVENT_DATE = "jueves 5 de noviembre";
-const EVENT_DATE_LABEL = "Jueves 5 de noviembre";
+const EVENT_DATE = "jueves 19 de noviembre";
+const EVENT_DATE_LABEL = "Jueves 19 de noviembre";
 const EVENT_TIME = "11:00 a. m.";
 
 const learningPoints = [
@@ -327,7 +327,7 @@ export function NifLandingClient() {
             <p className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-white/78 sm:text-xs">
               <span className="hidden md:inline">Clase gratuita en vivo</span>
               <span className="mx-2 hidden text-[#a78bfa] md:inline">·</span>
-              <span className="sm:hidden">Jueves 5 nov</span>
+              <span className="sm:hidden">Jueves 19 nov</span>
               <span className="hidden sm:inline">{EVENT_DATE_LABEL}</span>
               <span className="hidden sm:inline">
                 <span className="mx-2 text-[#a78bfa]">·</span>

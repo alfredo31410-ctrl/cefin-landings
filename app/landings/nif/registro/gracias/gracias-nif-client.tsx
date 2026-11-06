@@ -156,7 +156,7 @@ export default function GraciasNifClient() {
               <div className={styles.eventCard}>
                 <div>
                   <span>Fecha</span>
-                  <strong>Jueves 5 de noviembre</strong>
+                  <strong>Jueves 19 de noviembre</strong>
                 </div>
                 <div>
                   <span>Hora</span>

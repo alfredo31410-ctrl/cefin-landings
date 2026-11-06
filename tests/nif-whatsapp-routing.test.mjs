@@ -20,7 +20,13 @@ function createStorage() {
   };
 }
 
-test("routes utm_source=chatgpt_ads to the exclusive group and preserves it", () => {
+test("keeps the configured NIF WhatsApp destinations fixed", () => {
+  assert.deepEqual(NIF_WHATSAPP_GROUP_URLS, {
+    principal: "https://chat.whatsapp.com/LMjKygnl3b4DlVRcjcMsTh",
+  });
+});
+
+test("routes utm_source=chatgpt_ads to the principal group", () => {
   const storage = createStorage();
   const now = 1_000;
 
@@ -29,18 +35,18 @@ test("routes utm_source=chatgpt_ads to the exclusive group and preserves it", ()
       "?utm_source=chatgpt_ads&utm_campaign=campaign-123",
       { storage, now },
     ),
-    NIF_WHATSAPP_GROUP_URLS.openai,
+    NIF_WHATSAPP_GROUP_URLS.principal,
   );
   assert.equal(
     resolveNifWhatsappGroupUrl({ storage, now: now + 60_000 }),
-    NIF_WHATSAPP_GROUP_URLS.openai,
+    NIF_WHATSAPP_GROUP_URLS.principal,
   );
 });
 
-test("keeps utm_source=openai as a compatible OpenAI source", () => {
+test("routes the legacy utm_source=openai to the principal group", () => {
   assert.equal(
     selectNifWhatsappGroup("?utm_source=OpenAI"),
-    "openai",
+    "principal",
   );
 });
 
@@ -62,13 +68,13 @@ test("utm_campaign never changes the selected group", () => {
     selectNifWhatsappGroup(
       "?utm_source=chatgpt_ads&utm_campaign=first-campaign",
     ),
-    "openai",
+    "principal",
   );
   assert.equal(
     selectNifWhatsappGroup(
       "?utm_source=chatgpt_ads&utm_campaign=another-campaign",
     ),
-    "openai",
+    "principal",
   );
   assert.equal(
     selectNifWhatsappGroup("?utm_source=facebook&utm_campaign=openai"),
@@ -98,11 +104,31 @@ test("missing or invalid selections use the principal group", () => {
     resolveNifWhatsappGroupUrl({ storage: emptyStorage, now: 2 }),
     NIF_WHATSAPP_GROUP_URLS.principal,
   );
+  assert.equal(
+    emptyStorage.values.has(NIF_WHATSAPP_SELECTION_STORAGE_KEY),
+    false,
+  );
+
+  emptyStorage.setItem(
+    NIF_WHATSAPP_SELECTION_STORAGE_KEY,
+    JSON.stringify({ group: "openai", expiresAt: 10_000 }),
+  );
+  assert.equal(
+    resolveNifWhatsappGroupUrl({ storage: emptyStorage, now: 2 }),
+    NIF_WHATSAPP_GROUP_URLS.principal,
+  );
+  assert.equal(
+    emptyStorage.values.has(NIF_WHATSAPP_SELECTION_STORAGE_KEY),
+    false,
+  );
 });
 
-test("a new landing visit without UTMs replaces an old OpenAI origin", () => {
+test("a new landing visit without UTMs keeps the principal destination", () => {
   const storage = createStorage();
-  captureNifWhatsappSelection("?utm_source=openai", { storage, now: 1_000 });
+  captureNifWhatsappSelection("?utm_source=chatgpt_ads", {
+    storage,
+    now: 1_000,
+  });
 
   assert.equal(
     captureNifWhatsappSelection("", { storage, now: 2_000 }),
@@ -116,21 +142,27 @@ test("a new landing visit without UTMs replaces an old OpenAI origin", () => {
 
 test("reloading thanks keeps a valid selection", () => {
   const storage = createStorage();
-  captureNifWhatsappSelection("?utm_source=openai", { storage, now: 1_000 });
+  captureNifWhatsappSelection("?utm_source=chatgpt_ads", {
+    storage,
+    now: 1_000,
+  });
 
   assert.equal(
     resolveNifWhatsappGroupUrl({ storage, now: 2_000 }),
-    NIF_WHATSAPP_GROUP_URLS.openai,
+    NIF_WHATSAPP_GROUP_URLS.principal,
   );
   assert.equal(
     resolveNifWhatsappGroupUrl({ storage, now: 3_000 }),
-    NIF_WHATSAPP_GROUP_URLS.openai,
+    NIF_WHATSAPP_GROUP_URLS.principal,
   );
 });
 
 test("an expired origin falls back to principal and is removed", () => {
   const storage = createStorage();
-  captureNifWhatsappSelection("?utm_source=openai", { storage, now: 1_000 });
+  captureNifWhatsappSelection("?utm_source=chatgpt_ads", {
+    storage,
+    now: 1_000,
+  });
 
   assert.equal(
     resolveNifWhatsappGroupUrl({
@@ -211,8 +243,20 @@ test("only the NIF landing and its real thanks page consume the routing", async 
     ].map((path) => readFile(new URL(path, import.meta.url), "utf8")),
   );
 
+  assert.match(landingSource, /const ACTIVE_CAMPAIGN_FORM_ID = 381;/);
+  assert.match(
+    landingSource,
+    /const FORM_CLASS = "_form_" \+ ACTIVE_CAMPAIGN_FORM_ID/,
+  );
+  assert.match(
+    landingSource,
+    /activehosted\.com\/f\/embed\.php\?id=" \+\s*ACTIVE_CAMPAIGN_FORM_ID/,
+  );
   assert.match(landingSource, /captureNifWhatsappSelection/);
+  assert.match(landingSource, /jueves 19 de noviembre/);
+  assert.match(landingSource, /Jueves 19 de noviembre/);
   assert.match(thanksSource, /resolveNifWhatsappGroupUrl/);
+  assert.match(thanksSource, /Jueves 19 de noviembre/);
   assert.equal((thanksSource.match(/href=\{groupUrl\}/g) ?? []).length, 2);
   assert.match(
     confirmationSource,
