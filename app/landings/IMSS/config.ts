@@ -43,7 +43,7 @@ export const imssCampaign = {
       utm_content: "10",
       utm_term: "11",
     },
-    whatsappGroupUrl: "https://chat.whatsapp.com/BXhtpGGRt69EvABLjaUFqG",
+    whatsappGroupUrl: "https://chat.whatsapp.com/GU0Be4EFjyc9RWFsER5ukU",
     thankYouPath: "/landings/imss-actualizacion-total/gracias",
   },
   tracking: {
