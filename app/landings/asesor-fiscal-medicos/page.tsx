@@ -13,7 +13,7 @@ import { captureMedicosTraffic } from "../medicos/tracking";
    CONFIGURACIÓN RÁPIDA
    ========================================================================== */
 
-const ACTIVE_CAMPAIGN_FORM_ID = 319;
+const ACTIVE_CAMPAIGN_FORM_ID = 383;
 
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
@@ -27,7 +27,7 @@ const MARISOL_IMAGE_URL = `${ASSET_BASE}/medicos/Marisol-medicos.png`;
 const MARISOL_IMAGE_TABLET_URL = `${ASSET_BASE}/medicos/Marisol-medicos-1024.png`;
 const MARISOL_IMAGE_MOBILE_URL = `${ASSET_BASE}/medicos/Marisol-medicos-720.png`;
 
-const EVENT_DATE = "Lunes 17 de agosto";
+const EVENT_DATE = "Martes 17 de noviembre";
 const EVENT_TIME = "11:00 AM";
 const EVENT_TIMEZONE = "Hora CDMX";
 
@@ -1316,100 +1316,6 @@ export default function AsesorFiscalMedicosPage() {
               opacity: 1 !important;
               transform: none !important;
             }
-          }
-
-          /* ACTIVECAMPAIGN */
-          .ac-modal-wrapper .${FORM_CLASS} {
-            width: 100% !important;
-            max-width: 430px !important;
-            margin: 0 auto !important;
-            padding: 0 !important;
-            background: transparent !important;
-          }
-
-          .ac-modal-wrapper .${FORM_CLASS} form,
-          .ac-modal-wrapper .${FORM_CLASS} ._form-content,
-          .ac-modal-wrapper .${FORM_CLASS} ._form-body {
-            width: 100% !important;
-            max-width: 430px !important;
-            margin: 0 auto !important;
-            padding: 0 !important;
-            border: 0 !important;
-            background: transparent !important;
-            box-shadow: none !important;
-          }
-
-          .ac-modal-wrapper ._form-title,
-          .ac-modal-wrapper ._form-branding {
-            display: none !important;
-          }
-
-          .ac-modal-wrapper ._form_element,
-          .ac-modal-wrapper ._field-wrapper,
-          .ac-modal-wrapper ._button-wrapper {
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 0 14px !important;
-          }
-
-          .ac-modal-wrapper ._form-label {
-            display: block !important;
-            margin-bottom: 6px !important;
-            color: #1e293b !important;
-            font-size: 13px !important;
-            font-weight: 700 !important;
-          }
-
-          .ac-modal-wrapper input[type="text"],
-          .ac-modal-wrapper input[type="email"],
-          .ac-modal-wrapper input[type="tel"],
-          .ac-modal-wrapper select,
-          .ac-modal-wrapper textarea {
-            width: 100% !important;
-            padding: 14px 16px !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 10px !important;
-            outline: none !important;
-            background: #f8fafc !important;
-            color: #0f172a !important;
-            font-size: 15px !important;
-            box-shadow: none !important;
-          }
-
-          .ac-modal-wrapper input:focus,
-          .ac-modal-wrapper select:focus,
-          .ac-modal-wrapper textarea:focus {
-            border-color: #06b6d4 !important;
-            background: #ffffff !important;
-            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16) !important;
-          }
-
-          .ac-modal-wrapper ._submit,
-          .ac-modal-wrapper button[type="submit"] {
-            width: 100% !important;
-            padding: 16px 20px !important;
-            border: 0 !important;
-            border-radius: 10px !important;
-            background: #f59e0b !important;
-            color: #0f172a !important;
-            font-size: 15px !important;
-            font-weight: 900 !important;
-            text-transform: uppercase !important;
-            cursor: pointer !important;
-            transition:
-              transform 0.2s ease,
-              background 0.2s ease !important;
-          }
-
-          .ac-modal-wrapper ._submit:hover,
-          .ac-modal-wrapper button[type="submit"]:hover {
-            background: #fbbf24 !important;
-            transform: translateY(-1px) !important;
-          }
-
-          .ac-modal-wrapper p,
-          .ac-modal-wrapper label {
-            color: #475569 !important;
           }
 
           @media (max-width: 767px) {
