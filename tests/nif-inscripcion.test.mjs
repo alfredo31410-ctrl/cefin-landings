@@ -11,15 +11,17 @@ const trackingPath = new URL(
   import.meta.url,
 );
 
-test("keeps the confirmed NIF workshop offer and Hotmart checkout", async () => {
+test("keeps the NIF workshop checkout without showing a price", async () => {
   const source = await readFile(pagePath, "utf8");
 
   assert.match(source, /Taller Práctico de NIF/);
   assert.match(source, /23—27 NOV 2026/);
   assert.match(source, /11:00 A\. M\. CDMX/);
-  assert.match(source, /\$687|>687</);
-  assert.match(source, /Precio de preventa/);
-  assert.match(source, /precio subirá/i);
+  assert.doesNotMatch(source, /\$687|>687</);
+  assert.doesNotMatch(source, /Precio de preventa/i);
+  assert.doesNotMatch(source, /precio subirá/i);
+  assert.equal((source.match(/INSCRIBIRME AHORA/g) ?? []).length, 6);
+  assert.match(source, /className="nif-enrollment-card"/);
   assert.match(
     source,
     /src="https:\/\/cefin-landings-z9uk\.vercel\.app\/alfredo-nif\.png"/,

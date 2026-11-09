@@ -271,18 +271,6 @@ html:has(.nif-sale)::-webkit-scrollbar-thumb {
   margin-top: 34px;
 }
 
-.nif-presale-note {
-  max-width: 560px;
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.78rem;
-  line-height: 1.55;
-}
-
-.nif-presale-note strong {
-  color: var(--lavender);
-}
-
 .nif-secondary-link {
   padding: 15px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.55);
@@ -685,71 +673,19 @@ html:has(.nif-sale)::-webkit-scrollbar-thumb {
   line-height: 1.7;
 }
 
-.nif-price-card {
+.nif-enrollment-card {
   position: relative;
   display: grid;
   align-content: center;
-  min-height: 460px;
+  min-height: 240px;
   padding: 42px;
   border: 1px solid var(--line-light);
   background: var(--white);
   box-shadow: 24px 24px 0 var(--purple);
 }
 
-.nif-presale-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 12px 16px;
-  background: var(--purple);
-  color: var(--white);
-  font-size: 0.62rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.nif-price-card > p {
-  margin: 0;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.nif-price {
-  display: flex;
-  align-items: flex-start;
-  margin: 24px 0 32px;
-  font-family: var(--font-nif-heading), "Arial Narrow", sans-serif;
-  font-size: clamp(5rem, 9vw, 8rem);
-  line-height: 0.85;
-}
-
-.nif-price > span {
-  margin: 8px 4px 0 0;
-  color: var(--purple);
-  font-size: 2.3rem;
-}
-
-.nif-price small {
-  align-self: flex-end;
-  margin: 0 0 6px 8px;
-  font-family: var(--font-nif-body), Arial, Helvetica, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-}
-
-.nif-price-card .nif-cta {
+.nif-enrollment-card .nif-cta {
   width: 100%;
-}
-
-.nif-price-card > small {
-  margin-top: 16px;
-  color: rgba(8, 8, 10, 0.48);
-  font-size: 0.72rem;
-  text-align: center;
 }
 
 .nif-faq {
@@ -888,7 +824,7 @@ html:has(.nif-sale)::-webkit-scrollbar-thumb {
     top: auto;
   }
 
-  .nif-price-card {
+  .nif-enrollment-card {
     max-width: 620px;
   }
 }
@@ -1027,8 +963,8 @@ html:has(.nif-sale)::-webkit-scrollbar-thumb {
     padding: 32px 26px;
   }
 
-  .nif-price-card {
-    min-height: 410px;
+  .nif-enrollment-card {
+    min-height: 180px;
     padding: 32px 24px;
     box-shadow: 12px 12px 0 var(--purple);
   }
