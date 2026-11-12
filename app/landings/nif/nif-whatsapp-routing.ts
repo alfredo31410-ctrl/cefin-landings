@@ -1,5 +1,5 @@
 export const NIF_WHATSAPP_GROUP_URLS = {
-  principal: "https://chat.whatsapp.com/LMjKygnl3b4DlVRcjcMsTh",
+  principal: "https://chat.whatsapp.com/JbxBuQGjOIrFi3wG9K3wlO",
 } as const;
 
 export const NIF_WHATSAPP_SELECTION_STORAGE_KEY =
