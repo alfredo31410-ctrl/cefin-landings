@@ -15,7 +15,7 @@ import {
    ========================================================================== */
 
 // PEGA AQUÍ TU LINK REAL DEL GRUPO.
-const WHATSAPP_URL = "https://chat.whatsapp.com/HTQzTsnV5s6B1Mj0Cm8RbW";
+const WHATSAPP_URL = "https://chat.whatsapp.com/KkV1nipd8QMIonRkFhAUeU";
 
 const EVENT_DATE = "Martes 17 de noviembre";
 const EVENT_TIME = "11:00 AM";
