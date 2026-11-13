@@ -1,5 +1,4 @@
 import Image from "next/image";
-import alfredoHero from "@/public/alfredo/DSC_5172-sin-fondo.webp";
 import { ActiveCampaignForm } from "./activecampaign-form";
 import { LandingMotion } from "./landing-motion";
 import styles from "./reformas.module.css";
@@ -49,7 +48,7 @@ export default function ReformasPage() {
           <div className={styles.visual} aria-hidden="true">
             <div className={styles.year}>2027</div>
             <div className={styles.road} />
-            <Image className={styles.alfredoPhoto} src={alfredoHero} alt="" priority />
+            <Image className={styles.alfredoPhoto} src="/alfredo/DSC_5172-sin-fondo.webp" alt="" width={1046} height={1536} priority />
             <p>Impartido por el<br /><strong>Mtro. Alfredo Cobos</strong></p>
           </div>
         </div>
@@ -59,6 +58,7 @@ export default function ReformasPage() {
         <p className={styles.eyebrow}>Cambios Fiscales · Clase gratuita</p>
         <h2>La información fiscal del año pasado <span>ya no te alcanza</span> para 2027.</h2>
         <p className={styles.sectionIntro}>Entiende qué revisar, cómo interpretar los cambios y por dónde empezar antes del próximo ejercicio.</p>
+        <RegisterButton className={styles.problemCta} />
       </section>
 
       <section className={styles.agenda} id="temario">
@@ -78,11 +78,6 @@ export default function ReformasPage() {
           <h2>Prepárate antes de que tus clientes pregunten.</h2>
           <p>Déjanos tus datos para recibir la información de acceso a la clase.</p>
           <RegisterButton className={styles.registrationCta} />
-        </div>
-        <div className={styles.registrationPanel} data-reveal>
-          <p>Clase en vivo · 24 de noviembre · 10:00 AM CDMX</p>
-          <h3>Tu actualización empieza antes de enero.</h3>
-          <RegisterButton />
         </div>
       </section>
 

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import alfredo from "@/public/alfredo/DSC_5172-sin-fondo.webp";
 import styles from "./gracias.module.css";
 
 export const metadata = {
@@ -38,7 +37,7 @@ export default function ReformasGraciasPage() {
         </div>
         <aside className={styles.visual} aria-label="Mtro. Alfredo Cobos">
           <p>CAMBIOS<br />FISCALES</p>
-          <Image src={alfredo} alt="Mtro. Alfredo Cobos" priority className={styles.alfredo} />
+          <Image src="/alfredo/DSC_5172-sin-fondo.webp" alt="Mtro. Alfredo Cobos" width={1046} height={1536} priority className={styles.alfredo} />
           <div className={styles.instructor}><span>Tu instructor</span><strong>Mtro. Alfredo Cobos</strong></div>
         </aside>
       </section>
