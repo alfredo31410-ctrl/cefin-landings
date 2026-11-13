@@ -1,5 +1,6 @@
 import { ActiveCampaignForm } from "./activecampaign-form";
 import { LandingMotion } from "./landing-motion";
+import { ReformasPageViewTracking } from "./reformas-tracking";
 import styles from "./reformas.module.css";
 
 const topics = [
@@ -23,6 +24,7 @@ export default function ReformasPage() {
     <main className={styles.landing} id="reformas-landing">
       <style>{`@media (max-width:760px){.alfredo-mobile-tune{right:-20%!important;bottom:-10%!important;height:69%!important;filter:brightness(.42) saturate(.8) drop-shadow(-12px 8px 18px rgba(0,0,0,.55))!important;opacity:.78!important}}`}</style>
       <LandingMotion />
+      <ReformasPageViewTracking />
       <section className={styles.hero} data-parallax-hero>
         <div className={styles.heroAura} />
         <header className={styles.header}>
