@@ -32,7 +32,7 @@ export default function ReformasGraciasPage() {
             <div className={styles.stepPending}><b>2</b><p><small>Paso final</small><strong>Entrar al grupo de WhatsApp</strong></p></div>
           </section>
           <div className={styles.action} style={{ order: 3 }}>
-            <a href="https://chat.whatsapp.com/Jr9da8JwPXBIVf5Z3jumlG" target="_blank" rel="noopener noreferrer" className={`${styles.whatsappButton} whatsapp-live-link`}><span className={styles.whatsappIcon} aria-hidden="true">◔</span>Entrar al grupo de WhatsApp<span aria-hidden="true">→</span></a>
+            <a href="https://chat.whatsapp.com/Jr9da8JwPXBIVf5Z3jumlG" target="_blank" rel="noopener noreferrer" data-reformas-whatsapp-group className={`${styles.whatsappButton} whatsapp-live-link`}><span className={styles.whatsappIcon} aria-hidden="true">◔</span>Entrar al grupo de WhatsApp<span aria-hidden="true">→</span></a>
             <p className={styles.pending}>Se abrirá WhatsApp. Toca “Unirme al grupo” para asegurar tu acceso.</p>
           </div>
           <p className={styles.notice} style={{ order: 5 }}><strong>Importante:</strong> esta es la única vía para recibir el enlace de la clase, recordatorios y avisos importantes.</p>
