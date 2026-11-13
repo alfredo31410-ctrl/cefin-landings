@@ -48,7 +48,7 @@ export default function ReformasPage() {
             <div className={styles.year}>2027</div>
             <div className={styles.road} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.alfredoPhoto} src="/alfredo/DSC_5172-sin-fondo.webp" alt="" />
+            <img className={styles.alfredoPhoto} src="/alfredo.png" alt="" />
             <p>Impartido por el<br /><strong>Mtro. Alfredo Cobos</strong></p>
           </div>
         </div>

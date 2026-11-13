@@ -37,7 +37,7 @@ export default function ReformasGraciasPage() {
         <aside className={styles.visual} aria-label="Mtro. Alfredo Cobos">
           <p>CAMBIOS<br />FISCALES</p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/alfredo/DSC_5172-sin-fondo.webp" alt="Mtro. Alfredo Cobos" className={styles.alfredo} />
+          <img src="/alfredo.png" alt="Mtro. Alfredo Cobos" className={styles.alfredo} />
           <div className={styles.instructor}><span>Tu instructor</span><strong>Mtro. Alfredo Cobos</strong></div>
         </aside>
       </section>
