@@ -7,14 +7,15 @@ export const metadata = {
 
 export default function ReformasGraciasPage() {
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} gracias-mobile-tune`}>
+      <style>{`@media (max-width:620px){.gracias-mobile-tune .mobile-gracias-content{display:flex;flex-direction:column}.gracias-mobile-tune .mobile-gracias-content .steps{order:2}.gracias-mobile-tune .mobile-gracias-content .action{order:3}.gracias-mobile-tune .mobile-gracias-content .event{order:4;margin-top:30px}.gracias-mobile-tune .mobile-gracias-content .notice{order:5}.gracias-mobile-tune .mobile-gracias-visual{display:none!important}}`}</style>
       <div className={styles.orbit} aria-hidden="true" />
       <header className={styles.header}>
         <a href="/landings/reformas" className={styles.logo}>CEFIN<span>®</span></a>
         <span>Clase gratuita · En vivo</span>
       </header>
       <section className={styles.shell}>
-        <div className={styles.content}>
+        <div className={`${styles.content} mobile-gracias-content`}>
           <p className={styles.kicker}><i /> Registro recibido · Falta un paso</p>
           <h1>Tu acceso aún <em>no está completo.</em></h1>
           <p className={styles.lead}>Tus datos ya fueron registrados para la clase gratuita <strong>Cambios Fiscales</strong>. Para asegurar que recibas el acceso y los avisos, todavía debes entrar al grupo oficial de WhatsApp.</p>
@@ -34,7 +35,7 @@ export default function ReformasGraciasPage() {
           </div>
           <p className={styles.notice}><strong>Importante:</strong> esta es la única vía para recibir el enlace de la clase, recordatorios y avisos importantes.</p>
         </div>
-        <aside className={styles.visual} aria-label="Mtro. Alfredo Cobos">
+        <aside className={`${styles.visual} mobile-gracias-visual`} aria-label="Mtro. Alfredo Cobos">
           <p>CAMBIOS<br />FISCALES</p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/alfredo.png" alt="Mtro. Alfredo Cobos" className={styles.alfredo} />

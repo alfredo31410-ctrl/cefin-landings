@@ -21,6 +21,7 @@ function RegisterButton({ className = "" }: { className?: string }) {
 export default function ReformasPage() {
   return (
     <main className={styles.landing} id="reformas-landing">
+      <style>{`@media (max-width:760px){.alfredo-mobile-tune{right:-20%!important;bottom:-10%!important;height:69%!important;filter:brightness(.42) saturate(.8) drop-shadow(-12px 8px 18px rgba(0,0,0,.55))!important;opacity:.78!important}}`}</style>
       <LandingMotion />
       <section className={styles.hero} data-parallax-hero>
         <div className={styles.heroAura} />
@@ -48,7 +49,7 @@ export default function ReformasPage() {
             <div className={styles.year}>2027</div>
             <div className={styles.road} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.alfredoPhoto} src="/alfredo.png" alt="" />
+            <img className={`${styles.alfredoPhoto} alfredo-mobile-tune`} src="/alfredo.png" alt="" />
             <p>Impartido por el<br /><strong>Mtro. Alfredo Cobos</strong></p>
           </div>
         </div>
