@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ActiveCampaignForm } from "./activecampaign-form";
 import { LandingMotion } from "./landing-motion";
 import styles from "./reformas.module.css";
@@ -48,7 +47,8 @@ export default function ReformasPage() {
           <div className={styles.visual} aria-hidden="true">
             <div className={styles.year}>2027</div>
             <div className={styles.road} />
-            <Image className={styles.alfredoPhoto} src="/alfredo/DSC_5172-sin-fondo.webp" alt="" width={1046} height={1536} priority />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className={styles.alfredoPhoto} src="/alfredo/DSC_5172-sin-fondo.webp" alt="" />
             <p>Impartido por el<br /><strong>Mtro. Alfredo Cobos</strong></p>
           </div>
         </div>
