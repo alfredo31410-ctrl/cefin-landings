@@ -49,7 +49,7 @@ export default function ReformasInscripcionPage() {
             <h1 className="mt-4 [font-family:var(--font-reformas-display),Impact,sans-serif] text-[clamp(2.8rem,13vw,6.2rem)] font-extrabold leading-[.98]">No esperes a que tus clientes pregunten <em className="italic">para prepararte.</em></h1>
             <p className="mt-4 max-w-[570px] text-sm leading-relaxed text-white/90 sm:text-base">Convierte los cambios fiscales rumbo a <strong className="text-[#22e6fa]">2027</strong> en decisiones claras para ti y tus clientes.</p>
             <div className="my-5 flex max-w-[600px] flex-wrap border-y border-white/35">
-              {[['24','de noviembre'],['10:00 AM','Hora CDMX'],['En vivo','En línea']].map(([title, detail]) => <div key={title} className="mr-3 grid gap-1 border-r border-white/35 py-3 pr-3 last:border-0 sm:mr-5 sm:pr-5"><b className="text-sm">{title}</b><span className="text-[.68rem] text-white/75">{detail}</span></div>)}
+              {[["7, 8, 9, 10 y 11", "de diciembre"], ["11:00 a. m.", "Hora CDMX"], ["En vivo", "100% en línea"]].map(([title, detail]) => <div key={title} className="mr-3 grid gap-1 border-r border-white/35 py-3 pr-3 last:border-0 sm:mr-5 sm:pr-5"><b className="text-sm">{title}</b><span className="text-[.68rem] text-white/75">{detail}</span></div>)}
             </div>
             <CheckoutButton className="w-full sm:w-auto" />
             <p className="mt-3 text-[.7rem] text-white/60">Acceso seguro a través de Hotmart.</p>
