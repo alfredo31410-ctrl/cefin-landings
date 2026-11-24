@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const ACTIVE_CAMPAIGN_FORM_ID = 183;
+const ACTIVE_CAMPAIGN_FORM_ID = 403;
 const FORM_CLASS = `_form_${ACTIVE_CAMPAIGN_FORM_ID}`;
 
 export default function ResicoPersonasFisicasPage() {
@@ -293,7 +293,7 @@ export default function ResicoPersonasFisicasPage() {
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/50">
                       Fecha
                     </p>
-                    <p className="text-lg font-black text-white">28 de abril</p>
+                    <p className="text-lg font-black text-white">Martes 1 de diciembre</p>
                   </div>
                 </div>
 

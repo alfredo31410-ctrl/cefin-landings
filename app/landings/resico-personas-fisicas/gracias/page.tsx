@@ -15,7 +15,7 @@ export default function GraciasResicoPage() {
   useEffect(() => {
     document.title = "Registro completado | RESICO Personas Físicas | CEFIN";
 
-    trackMetaEvent("CompleteRegistration", {
+    trackMetaEvent("Lead", {
       content_name: "RESICO Personas Físicas | Registro completado",
       content_category: "Clase gratuita",
       status: "completed",
@@ -119,7 +119,7 @@ export default function GraciasResicoPage() {
                     Fecha
                   </p>
                   <p className="mt-1 text-xl font-black text-white">
-                    28 de abril
+                    Martes 1 de diciembre
                   </p>
                 </div>
 
