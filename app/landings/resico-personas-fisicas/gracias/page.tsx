@@ -10,10 +10,15 @@ import {
 } from "@/lib/meta-pixel";
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/FLIX0a5Ph0IEOxx7otDRE8";
+const LEAD_TRACKED_STORAGE_KEY = "cefin:resico-personas-fisicas:lead-tracked";
 
 export default function GraciasResicoPage() {
   useEffect(() => {
     document.title = "Registro completado | RESICO Personas Físicas | CEFIN";
+
+    if (window.sessionStorage.getItem(LEAD_TRACKED_STORAGE_KEY)) return;
+
+    window.sessionStorage.setItem(LEAD_TRACKED_STORAGE_KEY, "true");
 
     trackMetaEvent("Lead", {
       content_name: "RESICO Personas Físicas | Registro completado",
