@@ -9,7 +9,7 @@ import {
   trackMetaEvent,
 } from "@/lib/meta-pixel";
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/GyLEtrj13NQKkRzOzmmzbd";
+const WHATSAPP_URL = "https://chat.whatsapp.com/GMlJBw1zTJwF3d8uBHUKYg";
 const LEAD_TRACKED_STORAGE_KEY = "cefin:resico-personas-fisicas:lead-tracked";
 
 export default function GraciasResicoPage() {
