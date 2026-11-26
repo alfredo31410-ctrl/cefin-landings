@@ -22,7 +22,7 @@ export function ReformasGraciasTracking() {
       ) {
         window.sessionStorage.setItem(LEAD_SENT_KEY, "true");
         trackMetaEvent("Lead", {
-          content_name: "Cambios Fiscales",
+          content_name: "Maratón Actualización Fiscal 2027",
           content_category: "Clase gratuita en vivo",
         });
       }
@@ -44,7 +44,7 @@ export function ReformasGraciasTracking() {
 
         window.sessionStorage.setItem(WHATSAPP_INTENT_SENT_KEY, "true");
         trackMetaCustomEventImmediate("JoinWhatsAppGroup", {
-          content_name: "Cambios Fiscales",
+          content_name: "Maratón Actualización Fiscal 2027",
           content_category: "Grupo de WhatsApp",
           funnel_step: "whatsapp_group_click",
         });

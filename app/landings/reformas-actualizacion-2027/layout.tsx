@@ -14,9 +14,9 @@ const reformasBody = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Cambios Fiscales | Clase gratuita en vivo | CEFIN",
+  title: "Maratón Actualización Fiscal 2027 | CEFIN",
   description:
-    "Clase gratuita y en vivo para entender los cambios y reformas fiscales rumbo a 2027.",
+    "Maratón en línea y en vivo para entender los cambios fiscales rumbo a 2027.",
 };
 
 export default function ReformasLayout({ children }: Readonly<{ children: React.ReactNode }>) {

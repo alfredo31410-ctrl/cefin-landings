@@ -27,7 +27,7 @@ function CheckoutButton({ className = "" }: { className?: string }) {
 }
 
 export const metadata = {
-  title: "Cambios Fiscales 2027 | Actualización en vivo | CEFIN",
+  title: "Maratón Actualización Fiscal 2027 | CEFIN",
   description: "Prepárate para entender los cambios fiscales rumbo a 2027 y tomar mejores decisiones para tus clientes.",
 };
 
@@ -39,13 +39,13 @@ export default function ReformasInscripcionPage() {
       <section className="relative isolate mx-2 mt-2 min-h-[760px] overflow-hidden rounded-xl bg-[radial-gradient(circle_at_76%_24%,rgba(54,202,218,.36),transparent_24%),linear-gradient(118deg,#102939_0%,#0a3a53_47%,#041926_100%)] text-white sm:mx-3 sm:mt-3 sm:min-h-[calc(100svh-24px)] sm:rounded-2xl">
         <div className="pointer-events-none absolute -right-[14%] -top-[25%] h-[58rem] w-[58rem] rounded-full border border-cyan-100/25 shadow-[0_0_105px_35px_rgba(34,230,250,.13),inset_0_0_80px_rgba(34,230,250,.08)]" />
         <header className="relative z-20 flex items-center justify-between gap-3 px-5 py-5 sm:px-10 sm:py-7">
-          <a className="font-serif text-4xl tracking-wide" href="/landings/reformas">CEFIN<sup className="ml-1 font-sans text-[.55rem]">®</sup></a>
+          <a className="font-serif text-4xl tracking-wide" href="/landings/reformas-actualizacion-2027">CEFIN<sup className="ml-1 font-sans text-[.55rem]">®</sup></a>
           <CheckoutButton className="min-h-0 px-4 py-3 text-[.67rem] sm:px-5 sm:text-xs" />
         </header>
 
         <div className="absolute inset-0 z-10">
           <div className="absolute bottom-7 left-5 z-20 w-[calc(100%-40px)] max-w-[650px] sm:bottom-[clamp(38px,7vw,82px)] sm:left-[clamp(24px,7vw,110px)] sm:w-[min(650px,calc(100%-48px))]">
-            <p className="text-[.68rem] font-black uppercase tracking-[.17em] text-[#22e6fa]">Actualización en vivo · Cambios fiscales</p>
+            <p className="text-[.68rem] font-black uppercase tracking-[.17em] text-[#22e6fa]">Maratón Actualización Fiscal 2027 · En vivo</p>
             <h1 className="mt-4 [font-family:var(--font-reformas-display),Impact,sans-serif] text-[clamp(2.8rem,13vw,6.2rem)] font-extrabold leading-[.98]">No esperes a que tus clientes pregunten <em className="italic">para prepararte.</em></h1>
             <p className="mt-4 max-w-[570px] text-sm leading-relaxed text-white/90 sm:text-base">Convierte los cambios fiscales rumbo a <strong className="text-[#22e6fa]">2027</strong> en decisiones claras para ti y tus clientes.</p>
             <div className="my-5 flex max-w-[600px] flex-wrap border-y border-white/35">
@@ -81,7 +81,7 @@ export default function ReformasInscripcionPage() {
       </section>
 
       <section className="grid gap-8 bg-[linear-gradient(120deg,#087bdb,#22e6fa)] px-6 py-20 sm:px-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-14 lg:px-[max(26px,calc((100%-1120px)/2))]">
-        <div><p className="text-xs font-black uppercase tracking-[.17em] text-[#073a60]">Actualización Cambios Fiscales 2027</p><h2 className="mt-4 max-w-4xl [font-family:var(--font-reformas-display),Impact,sans-serif] text-[clamp(2.7rem,5vw,5rem)] font-extrabold leading-none">Prepárate hoy para responder con seguridad mañana.</h2><p className="mt-5 max-w-2xl leading-relaxed text-[#073a60]">Deja de esperar a que llegue la duda del cliente. Ten un marco claro para analizarla y actuar.</p></div>
+        <div><p className="text-xs font-black uppercase tracking-[.17em] text-[#073a60]">Maratón Actualización Fiscal 2027</p><h2 className="mt-4 max-w-4xl [font-family:var(--font-reformas-display),Impact,sans-serif] text-[clamp(2.7rem,5vw,5rem)] font-extrabold leading-none">Prepárate hoy para responder con seguridad mañana.</h2><p className="mt-5 max-w-2xl leading-relaxed text-[#073a60]">Deja de esperar a que llegue la duda del cliente. Ten un marco claro para analizarla y actuar.</p></div>
         <CheckoutButton className="w-full bg-[#06101a] text-white hover:bg-white hover:text-[#06101a] lg:w-auto" />
       </section>
 

@@ -34,15 +34,15 @@ export default function ReformasPage() {
 
         <div className={styles.heroGrid} id="inicio">
           <div className={styles.heroCopy}>
-            <p className={styles.kicker} data-hero-item>Clase gratuita · En vivo</p>
+            <p className={styles.kicker} data-hero-item>Maratón Actualización Fiscal 2027 · En vivo</p>
             <h1 data-hero-item>Hay contadores que esperan los cambios.<br /><em>Y otros que se preparan antes.</em></h1>
             <p className={styles.lead} data-hero-item>
               Prepárate desde hoy con una actualización en vivo sobre los cambios y reformas fiscales que debes conocer rumbo a <strong>2027.</strong>
             </p>
             <div className={styles.eventDetails} aria-label="Detalles del evento" data-hero-item>
-              <div><b>24</b><span>de noviembre</span></div>
-              <div><b>10:00 AM</b><span>Hora CDMX</span></div>
-              <div><b>En vivo</b><span>Gratuita · En línea</span></div>
+              <div><b>3</b><span>de diciembre</span></div>
+              <div><b>12:00 p. m.</b><span>Hora CDMX</span></div>
+              <div><b>En vivo</b><span>100% en línea</span></div>
             </div>
             <span className={styles.heroSign} data-hero-item>Actualízate y anticípate</span>
             <span data-hero-item><RegisterButton /></span>
@@ -58,7 +58,7 @@ export default function ReformasPage() {
       </section>
 
       <section className={styles.problem} data-reveal>
-        <p className={styles.eyebrow}>Cambios Fiscales · Clase gratuita</p>
+        <p className={styles.eyebrow}>Maratón Actualización Fiscal 2027</p>
         <h2>La información fiscal del año pasado <span>ya no te alcanza</span> para 2027.</h2>
         <p className={styles.sectionIntro}>Entiende qué revisar, cómo interpretar los cambios y por dónde empezar antes del próximo ejercicio.</p>
         <RegisterButton className={styles.problemCta} />
@@ -84,7 +84,7 @@ export default function ReformasPage() {
         </div>
       </section>
 
-      <section id="registro-modal" className={styles.modal} role="dialog" aria-modal="true" aria-label="Registro a Cambios Fiscales">
+      <section id="registro-modal" className={styles.modal} role="dialog" aria-modal="true" aria-label="Registro al Maratón Actualización Fiscal 2027">
         <a className={styles.modalBackdrop} href="#registro" aria-label="Cerrar formulario" />
         <div className={styles.modalCard}>
           <a className={styles.modalClose} href="#registro" aria-label="Cerrar formulario">×</a>

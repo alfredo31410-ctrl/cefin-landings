@@ -26,7 +26,7 @@ export function ReformasPageViewTracking() {
 
         window.sessionStorage.setItem(REGISTRATION_MODAL_SENT_KEY, "true");
         trackMetaCustomEventImmediate("OpenRegistrationModal", {
-          content_name: "Cambios Fiscales",
+          content_name: "Maratón Actualización Fiscal 2027",
           content_category: "Registro a clase gratuita",
         });
       } catch {
